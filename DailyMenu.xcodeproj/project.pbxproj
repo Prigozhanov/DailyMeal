@@ -1,0 +1,574 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2DEA9CC5598E87CCCC43E905 /* Pods_DailyMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7FE3223F8086AC92657BC6 /* Pods_DailyMenu.framework */; };
+		E7C6035F233D3ECA004686DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C6035E233D3ECA004686DB /* AppDelegate.swift */; };
+		E7C60363233D3ECA004686DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C60362233D3ECA004686DB /* ViewController.swift */; };
+		E7C60368233D3ECC004686DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7C60367233D3ECC004686DB /* Assets.xcassets */; };
+		E7C6036B233D3ECC004686DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7C60369233D3ECC004686DB /* LaunchScreen.storyboard */; };
+		E7C6038F233D5F5B004686DB /* DailyMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C6038E233D5F5B004686DB /* DailyMenuTests.swift */; };
+		E7C60398233D60C7004686DB /* fastlane in Resources */ = {isa = PBXBuildFile; fileRef = E7C60397233D60C7004686DB /* fastlane */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E7C60391233D5F5B004686DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7C60353233D3ECA004686DB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7C6035A233D3ECA004686DB;
+			remoteInfo = DailyMenu;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		75F490B44B3E77573DC08F59 /* Pods-DailyMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyMenu.release.xcconfig"; path = "Target Support Files/Pods-DailyMenu/Pods-DailyMenu.release.xcconfig"; sourceTree = "<group>"; };
+		8D7FE3223F8086AC92657BC6 /* Pods_DailyMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DailyMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7C6035B233D3ECA004686DB /* Daily Menu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Menu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7C6035E233D3ECA004686DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E7C60362233D3ECA004686DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E7C60367233D3ECC004686DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E7C6036A233D3ECC004686DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E7C6038C233D5F5B004686DB /* DailyMenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DailyMenuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7C6038E233D5F5B004686DB /* DailyMenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyMenuTests.swift; sourceTree = "<group>"; };
+		E7C60390233D5F5B004686DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E7C60396233D5FA3004686DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E7C60397233D60C7004686DB /* fastlane */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fastlane; sourceTree = SOURCE_ROOT; };
+		F6978153A996CCA2C94A5A5E /* Pods-DailyMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyMenu.debug.xcconfig"; path = "Target Support Files/Pods-DailyMenu/Pods-DailyMenu.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E7C60358233D3ECA004686DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2DEA9CC5598E87CCCC43E905 /* Pods_DailyMenu.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7C60389233D5F5B004686DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		22D096F87F0E8100F31DF346 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F6978153A996CCA2C94A5A5E /* Pods-DailyMenu.debug.xcconfig */,
+				75F490B44B3E77573DC08F59 /* Pods-DailyMenu.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E7C60352233D3ECA004686DB = {
+			isa = PBXGroup;
+			children = (
+				E7C60379233D57AD004686DB /* Source */,
+				E7C60378233D57A8004686DB /* Resource */,
+				E7C6035C233D3ECA004686DB /* Products */,
+				22D096F87F0E8100F31DF346 /* Pods */,
+				F8233BB71F6893F86D137C97 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		E7C6035C233D3ECA004686DB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E7C6035B233D3ECA004686DB /* Daily Menu.app */,
+				E7C6038C233D5F5B004686DB /* DailyMenuTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E7C6035D233D3ECA004686DB /* DailyMenu */ = {
+			isa = PBXGroup;
+			children = (
+				E7C60362233D3ECA004686DB /* ViewController.swift */,
+				E7C6035E233D3ECA004686DB /* AppDelegate.swift */,
+			);
+			path = DailyMenu;
+			sourceTree = "<group>";
+		};
+		E7C60378233D57A8004686DB /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				E7C60397233D60C7004686DB /* fastlane */,
+				E7C60367233D3ECC004686DB /* Assets.xcassets */,
+				E7C60396233D5FA3004686DB /* Info.plist */,
+				E7C60369233D3ECC004686DB /* LaunchScreen.storyboard */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		E7C60379233D57AD004686DB /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				E7C6035D233D3ECA004686DB /* DailyMenu */,
+				E7C6038D233D5F5B004686DB /* DailyMenuTests */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		E7C6038D233D5F5B004686DB /* DailyMenuTests */ = {
+			isa = PBXGroup;
+			children = (
+				E7C6038E233D5F5B004686DB /* DailyMenuTests.swift */,
+				E7C60390233D5F5B004686DB /* Info.plist */,
+			);
+			path = DailyMenuTests;
+			sourceTree = "<group>";
+		};
+		F8233BB71F6893F86D137C97 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8D7FE3223F8086AC92657BC6 /* Pods_DailyMenu.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E7C6035A233D3ECA004686DB /* DailyMenu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7C6036F233D3ECC004686DB /* Build configuration list for PBXNativeTarget "DailyMenu" */;
+			buildPhases = (
+				8588974FDC2B22E837D91D37 /* [CP] Check Pods Manifest.lock */,
+				E7C60357233D3ECA004686DB /* Sources */,
+				E7C60358233D3ECA004686DB /* Frameworks */,
+				E7C60359233D3ECA004686DB /* Resources */,
+				34688DBAB36DAB8BD01AF71E /* [CP] Embed Pods Frameworks */,
+				882D956BBA471D7A0C79F531 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DailyMenu;
+			productName = "daily-menu";
+			productReference = E7C6035B233D3ECA004686DB /* Daily Menu.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E7C6038B233D5F5B004686DB /* DailyMenuTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7C60393233D5F5B004686DB /* Build configuration list for PBXNativeTarget "DailyMenuTests" */;
+			buildPhases = (
+				E7C60388233D5F5B004686DB /* Sources */,
+				E7C60389233D5F5B004686DB /* Frameworks */,
+				E7C6038A233D5F5B004686DB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E7C60392233D5F5B004686DB /* PBXTargetDependency */,
+			);
+			name = DailyMenuTests;
+			productName = DailyMenuTests;
+			productReference = E7C6038C233D5F5B004686DB /* DailyMenuTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E7C60353233D3ECA004686DB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+				ORGANIZATIONNAME = epam;
+				TargetAttributes = {
+					E7C6035A233D3ECA004686DB = {
+						CreatedOnToolsVersion = 11.0;
+					};
+					E7C6038B233D5F5B004686DB = {
+						CreatedOnToolsVersion = 11.0;
+						TestTargetID = E7C6035A233D3ECA004686DB;
+					};
+				};
+			};
+			buildConfigurationList = E7C60356233D3ECA004686DB /* Build configuration list for PBXProject "DailyMenu" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E7C60352233D3ECA004686DB;
+			productRefGroup = E7C6035C233D3ECA004686DB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E7C6035A233D3ECA004686DB /* DailyMenu */,
+				E7C6038B233D5F5B004686DB /* DailyMenuTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E7C60359233D3ECA004686DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7C60398233D60C7004686DB /* fastlane in Resources */,
+				E7C6036B233D3ECC004686DB /* LaunchScreen.storyboard in Resources */,
+				E7C60368233D3ECC004686DB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7C6038A233D5F5B004686DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		34688DBAB36DAB8BD01AF71E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DailyMenu/Pods-DailyMenu-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DailyMenu/Pods-DailyMenu-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DailyMenu/Pods-DailyMenu-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8588974FDC2B22E837D91D37 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DailyMenu-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		882D956BBA471D7A0C79F531 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DailyMenu/Pods-DailyMenu-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DailyMenu/Pods-DailyMenu-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DailyMenu/Pods-DailyMenu-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E7C60357233D3ECA004686DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7C60363233D3ECA004686DB /* ViewController.swift in Sources */,
+				E7C6035F233D3ECA004686DB /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7C60388233D5F5B004686DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7C6038F233D5F5B004686DB /* DailyMenuTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E7C60392233D5F5B004686DB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E7C6035A233D3ECA004686DB /* DailyMenu */;
+			targetProxy = E7C60391233D5F5B004686DB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E7C60369233D3ECC004686DB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7C6036A233D3ECC004686DB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E7C6036D233D3ECC004686DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E7C6036E233D3ECC004686DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E7C60370233D3ECC004686DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6978153A996CCA2C94A5A5E /* Pods-DailyMenu.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 53APD5F9YQ;
+				INFOPLIST_FILE = Resource/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.epam.daily-menu";
+				PRODUCT_NAME = "Daily Menu";
+				PROVISIONING_PROFILE_SPECIFIER = "EPAM IN-HOUSE 4 Wildcard-revokable";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E7C60371233D3ECC004686DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 75F490B44B3E77573DC08F59 /* Pods-DailyMenu.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 53APD5F9YQ;
+				INFOPLIST_FILE = Resource/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.epam.daily-menu";
+				PRODUCT_NAME = "Daily Menu";
+				PROVISIONING_PROFILE_SPECIFIER = "EPAM IN-HOUSE 4 Wildcard-revokable";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E7C60394233D5F5B004686DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H7553T5T52;
+				INFOPLIST_FILE = DailyMenuTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.epam.DailyMenuTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Daily Menu.app/Daily Menu";
+			};
+			name = Debug;
+		};
+		E7C60395233D5F5B004686DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H7553T5T52;
+				INFOPLIST_FILE = DailyMenuTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.epam.DailyMenuTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Daily Menu.app/Daily Menu";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E7C60356233D3ECA004686DB /* Build configuration list for PBXProject "DailyMenu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7C6036D233D3ECC004686DB /* Debug */,
+				E7C6036E233D3ECC004686DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7C6036F233D3ECC004686DB /* Build configuration list for PBXNativeTarget "DailyMenu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7C60370233D3ECC004686DB /* Debug */,
+				E7C60371233D3ECC004686DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7C60393233D5F5B004686DB /* Build configuration list for PBXNativeTarget "DailyMenuTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7C60394233D5F5B004686DB /* Debug */,
+				E7C60395233D5F5B004686DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E7C60353233D3ECA004686DB /* Project object */;
+}

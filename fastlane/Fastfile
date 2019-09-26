@@ -1,0 +1,60 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+
+
+  desc "Run tests"
+  lane :tests do
+  run_tests(scheme: "")
+  end
+  
+  lane :build do
+# ensure_git_status_clean
+  build_number = get_build_number(xcodeproj: "DailyMenu.xcodeproj")
+  name = "DailyMenu-build_#{build_number}"
+  ipa_name = "#{name}.ipa"
+  
+  build_app(
+    scheme: "daily-menu",
+    workspace: "DailyMenu.xcworkspace",
+    output_directory: "./fastlane-builds",
+    output_name: "#{ipa_name}",
+    export_method: "enterprise",
+    skip_profile_detection: true,
+    export_options: {
+        provisioningProfiles: {
+        "com.epam.daily-menu" => "EPAM IN-HOUSE 4 Wildcard-revokable",
+        }
+    }
+  )
+  
+  appcenter_upload(
+      api_token: "8fecb69650ddbb0982bd4779e6dde9d7bab954a1",
+      owner_name: "uladzimir_pryhazhanau",
+      app_name: "DailyMenu",
+      ipa: "fastlane-builds/#{ipa_name}",
+      dsym: "fastlane-builds/#{name}.app.dSYM.zip",
+      destinations: "Collaborators",
+      mandatory_update: true,
+      notify_testers: true,
+      build_number: "#{build_number}"
+  )
+  
+  end
+
+end
