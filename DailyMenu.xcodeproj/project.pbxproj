@@ -8,6 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		2DEA9CC5598E87CCCC43E905 /* Pods_DailyMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7FE3223F8086AC92657BC6 /* Pods_DailyMenu.framework */; };
+		E71139AC2346A59100889AE2 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = E71139AB2346A59100889AE2 /* scripts */; };
+		E71139B52346AA1100889AE2 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139B32346AA1100889AE2 /* RegistrationViewModel.swift */; };
+		E71139B62346AA1100889AE2 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139B42346AA1100889AE2 /* RegistrationViewController.swift */; };
+		E71139CF2346AC7400889AE2 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139B82346AC7400889AE2 /* CheckoutViewController.swift */; };
+		E71139D02346AC7400889AE2 /* CheckoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139B92346AC7400889AE2 /* CheckoutViewModel.swift */; };
+		E71139D12346AC7400889AE2 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139BB2346AC7400889AE2 /* CartViewController.swift */; };
+		E71139D22346AC7400889AE2 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139BC2346AC7400889AE2 /* CartViewModel.swift */; };
+		E71139D32346AC7400889AE2 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139BE2346AC7400889AE2 /* HomeViewModel.swift */; };
+		E71139D42346AC7400889AE2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139BF2346AC7400889AE2 /* HomeViewController.swift */; };
+		E71139D52346AC7400889AE2 /* OrderPlacedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C12346AC7400889AE2 /* OrderPlacedViewController.swift */; };
+		E71139D62346AC7400889AE2 /* OrderPlacedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C22346AC7400889AE2 /* OrderPlacedViewModel.swift */; };
+		E71139D72346AC7400889AE2 /* OrderStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C42346AC7400889AE2 /* OrderStatusViewModel.swift */; };
+		E71139D82346AC7400889AE2 /* OrderStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C52346AC7400889AE2 /* OrderStatusViewController.swift */; };
+		E71139D92346AC7400889AE2 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C72346AC7400889AE2 /* LoginViewModel.swift */; };
+		E71139DA2346AC7400889AE2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C82346AC7400889AE2 /* LoginViewController.swift */; };
+		E71139DB2346AC7400889AE2 /* DeliveryLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139CA2346AC7400889AE2 /* DeliveryLocationViewController.swift */; };
+		E71139DC2346AC7400889AE2 /* DeliveryLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139CB2346AC7400889AE2 /* DeliveryLocationViewModel.swift */; };
+		E71139DD2346AC7400889AE2 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139CD2346AC7400889AE2 /* ItemViewModel.swift */; };
+		E71139DE2346AC7400889AE2 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139CE2346AC7400889AE2 /* ItemViewController.swift */; };
+		E71139E22346AC7D00889AE2 /* RestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139E02346AC7D00889AE2 /* RestaurantViewModel.swift */; };
+		E71139E32346AC7D00889AE2 /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139E12346AC7D00889AE2 /* RestaurantViewController.swift */; };
+		E71139E62346ACF300889AE2 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139E52346ACF300889AE2 /* NetworkClient.swift */; };
+		E71139E92346AD8C00889AE2 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139E82346AD8C00889AE2 /* Color.swift */; };
+		E71139EB2346AD9400889AE2 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139EA2346AD9400889AE2 /* Font.swift */; };
+		E71139EF2346AF0500889AE2 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139ED2346AF0500889AE2 /* SettingsViewModel.swift */; };
+		E71139F02346AF0500889AE2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139EE2346AF0500889AE2 /* SettingsViewController.swift */; };
+		E71139F42346AFE300889AE2 /* RestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139F22346AFE300889AE2 /* RestaurantsViewController.swift */; };
+		E71139F52346AFE300889AE2 /* RestaurantsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139F32346AFE300889AE2 /* RestaurantsViewModel.swift */; };
 		E7C6035F233D3ECA004686DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C6035E233D3ECA004686DB /* AppDelegate.swift */; };
 		E7C60363233D3ECA004686DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C60362233D3ECA004686DB /* ViewController.swift */; };
 		E7C60368233D3ECC004686DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7C60367233D3ECC004686DB /* Assets.xcassets */; };
@@ -29,6 +57,34 @@
 /* Begin PBXFileReference section */
 		75F490B44B3E77573DC08F59 /* Pods-DailyMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyMenu.release.xcconfig"; path = "Target Support Files/Pods-DailyMenu/Pods-DailyMenu.release.xcconfig"; sourceTree = "<group>"; };
 		8D7FE3223F8086AC92657BC6 /* Pods_DailyMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DailyMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E71139AB2346A59100889AE2 /* scripts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scripts; sourceTree = SOURCE_ROOT; };
+		E71139B32346AA1100889AE2 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		E71139B42346AA1100889AE2 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		E71139B82346AC7400889AE2 /* CheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
+		E71139B92346AC7400889AE2 /* CheckoutViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutViewModel.swift; sourceTree = "<group>"; };
+		E71139BB2346AC7400889AE2 /* CartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		E71139BC2346AC7400889AE2 /* CartViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
+		E71139BE2346AC7400889AE2 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		E71139BF2346AC7400889AE2 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		E71139C12346AC7400889AE2 /* OrderPlacedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPlacedViewController.swift; sourceTree = "<group>"; };
+		E71139C22346AC7400889AE2 /* OrderPlacedViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPlacedViewModel.swift; sourceTree = "<group>"; };
+		E71139C42346AC7400889AE2 /* OrderStatusViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderStatusViewModel.swift; sourceTree = "<group>"; };
+		E71139C52346AC7400889AE2 /* OrderStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderStatusViewController.swift; sourceTree = "<group>"; };
+		E71139C72346AC7400889AE2 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		E71139C82346AC7400889AE2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E71139CA2346AC7400889AE2 /* DeliveryLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryLocationViewController.swift; sourceTree = "<group>"; };
+		E71139CB2346AC7400889AE2 /* DeliveryLocationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryLocationViewModel.swift; sourceTree = "<group>"; };
+		E71139CD2346AC7400889AE2 /* ItemViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
+		E71139CE2346AC7400889AE2 /* ItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
+		E71139E02346AC7D00889AE2 /* RestaurantViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantViewModel.swift; sourceTree = "<group>"; };
+		E71139E12346AC7D00889AE2 /* RestaurantViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
+		E71139E52346ACF300889AE2 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		E71139E82346AD8C00889AE2 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		E71139EA2346AD9400889AE2 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		E71139ED2346AF0500889AE2 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		E71139EE2346AF0500889AE2 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		E71139F22346AFE300889AE2 /* RestaurantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantsViewController.swift; sourceTree = "<group>"; };
+		E71139F32346AFE300889AE2 /* RestaurantsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantsViewModel.swift; sourceTree = "<group>"; };
 		E7C6035B233D3ECA004686DB /* Daily Menu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Menu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7C6035E233D3ECA004686DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7C60362233D3ECA004686DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -70,11 +126,157 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		E71139A823469FAF00889AE2 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				E71139BD2346AC7400889AE2 /* Home */,
+				E71139F12346AFE300889AE2 /* Restaurants */,
+				E71139DF2346AC7D00889AE2 /* Restaurant */,
+				E71139CC2346AC7400889AE2 /* Item */,
+				E71139BA2346AC7400889AE2 /* Cart */,
+				E71139B72346AC7400889AE2 /* Checkout */,
+				E71139C92346AC7400889AE2 /* DeliveryLocation */,
+				E71139C62346AC7400889AE2 /* Login */,
+				E71139C02346AC7400889AE2 /* OrderPlaced */,
+				E71139C32346AC7400889AE2 /* OrderStatus */,
+				E71139B22346AA1100889AE2 /* Registration */,
+				E71139EC2346AF0500889AE2 /* Settings */,
+				E7C60362233D3ECA004686DB /* ViewController.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		E71139B22346AA1100889AE2 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				E71139B32346AA1100889AE2 /* RegistrationViewModel.swift */,
+				E71139B42346AA1100889AE2 /* RegistrationViewController.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		E71139B72346AC7400889AE2 /* Checkout */ = {
+			isa = PBXGroup;
+			children = (
+				E71139B82346AC7400889AE2 /* CheckoutViewController.swift */,
+				E71139B92346AC7400889AE2 /* CheckoutViewModel.swift */,
+			);
+			path = Checkout;
+			sourceTree = "<group>";
+		};
+		E71139BA2346AC7400889AE2 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				E71139BB2346AC7400889AE2 /* CartViewController.swift */,
+				E71139BC2346AC7400889AE2 /* CartViewModel.swift */,
+			);
+			path = Cart;
+			sourceTree = "<group>";
+		};
+		E71139BD2346AC7400889AE2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				E71139BE2346AC7400889AE2 /* HomeViewModel.swift */,
+				E71139BF2346AC7400889AE2 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		E71139C02346AC7400889AE2 /* OrderPlaced */ = {
+			isa = PBXGroup;
+			children = (
+				E71139C12346AC7400889AE2 /* OrderPlacedViewController.swift */,
+				E71139C22346AC7400889AE2 /* OrderPlacedViewModel.swift */,
+			);
+			path = OrderPlaced;
+			sourceTree = "<group>";
+		};
+		E71139C32346AC7400889AE2 /* OrderStatus */ = {
+			isa = PBXGroup;
+			children = (
+				E71139C42346AC7400889AE2 /* OrderStatusViewModel.swift */,
+				E71139C52346AC7400889AE2 /* OrderStatusViewController.swift */,
+			);
+			path = OrderStatus;
+			sourceTree = "<group>";
+		};
+		E71139C62346AC7400889AE2 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				E71139C72346AC7400889AE2 /* LoginViewModel.swift */,
+				E71139C82346AC7400889AE2 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		E71139C92346AC7400889AE2 /* DeliveryLocation */ = {
+			isa = PBXGroup;
+			children = (
+				E71139CA2346AC7400889AE2 /* DeliveryLocationViewController.swift */,
+				E71139CB2346AC7400889AE2 /* DeliveryLocationViewModel.swift */,
+			);
+			path = DeliveryLocation;
+			sourceTree = "<group>";
+		};
+		E71139CC2346AC7400889AE2 /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				E71139CD2346AC7400889AE2 /* ItemViewModel.swift */,
+				E71139CE2346AC7400889AE2 /* ItemViewController.swift */,
+			);
+			path = Item;
+			sourceTree = "<group>";
+		};
+		E71139DF2346AC7D00889AE2 /* Restaurant */ = {
+			isa = PBXGroup;
+			children = (
+				E71139E02346AC7D00889AE2 /* RestaurantViewModel.swift */,
+				E71139E12346AC7D00889AE2 /* RestaurantViewController.swift */,
+			);
+			path = Restaurant;
+			sourceTree = "<group>";
+		};
+		E71139E42346ACA500889AE2 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				E71139E52346ACF300889AE2 /* NetworkClient.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		E71139E72346AD7000889AE2 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				E71139E82346AD8C00889AE2 /* Color.swift */,
+				E71139EA2346AD9400889AE2 /* Font.swift */,
+			);
+			path = Style;
+			sourceTree = "<group>";
+		};
+		E71139EC2346AF0500889AE2 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				E71139ED2346AF0500889AE2 /* SettingsViewModel.swift */,
+				E71139EE2346AF0500889AE2 /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		E71139F12346AFE300889AE2 /* Restaurants */ = {
+			isa = PBXGroup;
+			children = (
+				E71139F22346AFE300889AE2 /* RestaurantsViewController.swift */,
+				E71139F32346AFE300889AE2 /* RestaurantsViewModel.swift */,
+			);
+			path = Restaurants;
+			sourceTree = "<group>";
+		};
 		E7C60352233D3ECA004686DB = {
 			isa = PBXGroup;
 			children = (
 				E7C60379233D57AD004686DB /* Source */,
 				E7C60378233D57A8004686DB /* Resource */,
+				E7C6038D233D5F5B004686DB /* DailyMenuTests */,
 				E7C6035C233D3ECA004686DB /* Products */,
 				22D096F87F0E8100F31DF346 /* Pods */,
 				F8233BB71F6893F86D137C97 /* Frameworks */,
@@ -90,18 +292,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E7C6035D233D3ECA004686DB /* DailyMenu */ = {
-			isa = PBXGroup;
-			children = (
-				E7C60362233D3ECA004686DB /* ViewController.swift */,
-				E7C6035E233D3ECA004686DB /* AppDelegate.swift */,
-			);
-			path = DailyMenu;
-			sourceTree = "<group>";
-		};
 		E7C60378233D57A8004686DB /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				E71139AB2346A59100889AE2 /* scripts */,
 				E7C60397233D60C7004686DB /* fastlane */,
 				E7C60367233D3ECC004686DB /* Assets.xcassets */,
 				E7C60396233D5FA3004686DB /* Info.plist */,
@@ -113,8 +307,10 @@
 		E7C60379233D57AD004686DB /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				E7C6035D233D3ECA004686DB /* DailyMenu */,
-				E7C6038D233D5F5B004686DB /* DailyMenuTests */,
+				E7C6035E233D3ECA004686DB /* AppDelegate.swift */,
+				E71139A823469FAF00889AE2 /* Screens */,
+				E71139E72346AD7000889AE2 /* Style */,
+				E71139E42346ACA500889AE2 /* Networking */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -223,6 +419,7 @@
 				E7C60398233D60C7004686DB /* fastlane in Resources */,
 				E7C6036B233D3ECC004686DB /* LaunchScreen.storyboard in Resources */,
 				E7C60368233D3ECC004686DB /* Assets.xcassets in Resources */,
+				E71139AC2346A59100889AE2 /* scripts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,8 +496,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E71139DB2346AC7400889AE2 /* DeliveryLocationViewController.swift in Sources */,
+				E71139D02346AC7400889AE2 /* CheckoutViewModel.swift in Sources */,
+				E71139D32346AC7400889AE2 /* HomeViewModel.swift in Sources */,
 				E7C60363233D3ECA004686DB /* ViewController.swift in Sources */,
+				E71139D12346AC7400889AE2 /* CartViewController.swift in Sources */,
+				E71139E92346AD8C00889AE2 /* Color.swift in Sources */,
+				E71139B52346AA1100889AE2 /* RegistrationViewModel.swift in Sources */,
+				E71139EB2346AD9400889AE2 /* Font.swift in Sources */,
+				E71139D82346AC7400889AE2 /* OrderStatusViewController.swift in Sources */,
+				E71139DC2346AC7400889AE2 /* DeliveryLocationViewModel.swift in Sources */,
+				E71139F52346AFE300889AE2 /* RestaurantsViewModel.swift in Sources */,
+				E71139D42346AC7400889AE2 /* HomeViewController.swift in Sources */,
+				E71139E32346AC7D00889AE2 /* RestaurantViewController.swift in Sources */,
+				E71139DD2346AC7400889AE2 /* ItemViewModel.swift in Sources */,
+				E71139D62346AC7400889AE2 /* OrderPlacedViewModel.swift in Sources */,
+				E71139D92346AC7400889AE2 /* LoginViewModel.swift in Sources */,
+				E71139D72346AC7400889AE2 /* OrderStatusViewModel.swift in Sources */,
+				E71139E22346AC7D00889AE2 /* RestaurantViewModel.swift in Sources */,
+				E71139D22346AC7400889AE2 /* CartViewModel.swift in Sources */,
+				E71139B62346AA1100889AE2 /* RegistrationViewController.swift in Sources */,
+				E71139DA2346AC7400889AE2 /* LoginViewController.swift in Sources */,
+				E71139CF2346AC7400889AE2 /* CheckoutViewController.swift in Sources */,
+				E71139F42346AFE300889AE2 /* RestaurantsViewController.swift in Sources */,
+				E71139EF2346AF0500889AE2 /* SettingsViewModel.swift in Sources */,
+				E71139DE2346AC7400889AE2 /* ItemViewController.swift in Sources */,
+				E71139D52346AC7400889AE2 /* OrderPlacedViewController.swift in Sources */,
+				E71139E62346ACF300889AE2 /* NetworkClient.swift in Sources */,
 				E7C6035F233D3ECA004686DB /* AppDelegate.swift in Sources */,
+				E71139F02346AF0500889AE2 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
