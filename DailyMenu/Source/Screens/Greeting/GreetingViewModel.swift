@@ -1,25 +1,25 @@
 //
-//  LoginViewModel.swift
+//  GreetingViewModel.swift
 //
 
 import Foundation
 
 //MARK: - View
-protocol LoginView: class {
+protocol GreetingView: class {
 
 }
 
 //MARK: - ViewModel
-protocol LoginViewModel {
+protocol GreetingViewModel {
 
-var view: LoginView? { get set }
+var view: GreetingView? { get set }
 
 }
 
 //MARK: - Implementation
-final class LoginViewModelImplementation: LoginViewModel {
+final class GreetingViewModelImplementation: GreetingViewModel {
 
-  weak var view: LoginView?
+  weak var view: GreetingView?
 
   init() {
   }

@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		2DEA9CC5598E87CCCC43E905 /* Pods_DailyMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7FE3223F8086AC92657BC6 /* Pods_DailyMenu.framework */; };
+		E7037352234FCA0300852B04 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E703734D234FCA0300852B04 /* SignUpViewController.swift */; };
+		E7037353234FCA0300852B04 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E703734E234FCA0300852B04 /* SignUpViewModel.swift */; };
+		E7037354234FCA0300852B04 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7037350234FCA0300852B04 /* LoginViewModel.swift */; };
+		E7037355234FCA0300852B04 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7037351234FCA0300852B04 /* LoginViewController.swift */; };
+		E7037359234FCDA000852B04 /* HugeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7037358234FCDA000852B04 /* HugeButton.swift */; };
+		E703735F234FD7E500852B04 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E703735E234FD7E500852B04 /* Color.swift */; };
+		E7037361234FE0D600852B04 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7037360234FE0D600852B04 /* UIButton.swift */; };
+		E7037363234FE85D00852B04 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7037362234FE85D00852B04 /* Design.swift */; };
 		E71139AC2346A59100889AE2 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = E71139AB2346A59100889AE2 /* scripts */; };
 		E71139B52346AA1100889AE2 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139B32346AA1100889AE2 /* RegistrationViewModel.swift */; };
 		E71139B62346AA1100889AE2 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139B42346AA1100889AE2 /* RegistrationViewController.swift */; };
@@ -21,8 +29,8 @@
 		E71139D62346AC7400889AE2 /* OrderPlacedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C22346AC7400889AE2 /* OrderPlacedViewModel.swift */; };
 		E71139D72346AC7400889AE2 /* OrderStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C42346AC7400889AE2 /* OrderStatusViewModel.swift */; };
 		E71139D82346AC7400889AE2 /* OrderStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C52346AC7400889AE2 /* OrderStatusViewController.swift */; };
-		E71139D92346AC7400889AE2 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C72346AC7400889AE2 /* LoginViewModel.swift */; };
-		E71139DA2346AC7400889AE2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C82346AC7400889AE2 /* LoginViewController.swift */; };
+		E71139D92346AC7400889AE2 /* GreetingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C72346AC7400889AE2 /* GreetingViewModel.swift */; };
+		E71139DA2346AC7400889AE2 /* GreetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C82346AC7400889AE2 /* GreetingViewController.swift */; };
 		E71139DB2346AC7400889AE2 /* DeliveryLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139CA2346AC7400889AE2 /* DeliveryLocationViewController.swift */; };
 		E71139DC2346AC7400889AE2 /* DeliveryLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139CB2346AC7400889AE2 /* DeliveryLocationViewModel.swift */; };
 		E71139DD2346AC7400889AE2 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139CD2346AC7400889AE2 /* ItemViewModel.swift */; };
@@ -30,14 +38,12 @@
 		E71139E22346AC7D00889AE2 /* RestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139E02346AC7D00889AE2 /* RestaurantViewModel.swift */; };
 		E71139E32346AC7D00889AE2 /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139E12346AC7D00889AE2 /* RestaurantViewController.swift */; };
 		E71139E62346ACF300889AE2 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139E52346ACF300889AE2 /* NetworkClient.swift */; };
-		E71139E92346AD8C00889AE2 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139E82346AD8C00889AE2 /* Color.swift */; };
 		E71139EB2346AD9400889AE2 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139EA2346AD9400889AE2 /* Font.swift */; };
 		E71139EF2346AF0500889AE2 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139ED2346AF0500889AE2 /* SettingsViewModel.swift */; };
 		E71139F02346AF0500889AE2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139EE2346AF0500889AE2 /* SettingsViewController.swift */; };
 		E71139F42346AFE300889AE2 /* RestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139F22346AFE300889AE2 /* RestaurantsViewController.swift */; };
 		E71139F52346AFE300889AE2 /* RestaurantsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139F32346AFE300889AE2 /* RestaurantsViewModel.swift */; };
 		E7C6035F233D3ECA004686DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C6035E233D3ECA004686DB /* AppDelegate.swift */; };
-		E7C60363233D3ECA004686DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C60362233D3ECA004686DB /* ViewController.swift */; };
 		E7C60368233D3ECC004686DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7C60367233D3ECC004686DB /* Assets.xcassets */; };
 		E7C6036B233D3ECC004686DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7C60369233D3ECC004686DB /* LaunchScreen.storyboard */; };
 		E7C6038F233D5F5B004686DB /* DailyMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C6038E233D5F5B004686DB /* DailyMenuTests.swift */; };
@@ -57,6 +63,14 @@
 /* Begin PBXFileReference section */
 		75F490B44B3E77573DC08F59 /* Pods-DailyMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyMenu.release.xcconfig"; path = "Target Support Files/Pods-DailyMenu/Pods-DailyMenu.release.xcconfig"; sourceTree = "<group>"; };
 		8D7FE3223F8086AC92657BC6 /* Pods_DailyMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DailyMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E703734D234FCA0300852B04 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		E703734E234FCA0300852B04 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		E7037350234FCA0300852B04 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		E7037351234FCA0300852B04 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E7037358234FCDA000852B04 /* HugeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HugeButton.swift; sourceTree = "<group>"; };
+		E703735E234FD7E500852B04 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		E7037360234FE0D600852B04 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		E7037362234FE85D00852B04 /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		E71139AB2346A59100889AE2 /* scripts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scripts; sourceTree = SOURCE_ROOT; };
 		E71139B32346AA1100889AE2 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		E71139B42346AA1100889AE2 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -70,8 +84,8 @@
 		E71139C22346AC7400889AE2 /* OrderPlacedViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPlacedViewModel.swift; sourceTree = "<group>"; };
 		E71139C42346AC7400889AE2 /* OrderStatusViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderStatusViewModel.swift; sourceTree = "<group>"; };
 		E71139C52346AC7400889AE2 /* OrderStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderStatusViewController.swift; sourceTree = "<group>"; };
-		E71139C72346AC7400889AE2 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		E71139C82346AC7400889AE2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E71139C72346AC7400889AE2 /* GreetingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreetingViewModel.swift; sourceTree = "<group>"; };
+		E71139C82346AC7400889AE2 /* GreetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreetingViewController.swift; sourceTree = "<group>"; };
 		E71139CA2346AC7400889AE2 /* DeliveryLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryLocationViewController.swift; sourceTree = "<group>"; };
 		E71139CB2346AC7400889AE2 /* DeliveryLocationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryLocationViewModel.swift; sourceTree = "<group>"; };
 		E71139CD2346AC7400889AE2 /* ItemViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
@@ -79,7 +93,6 @@
 		E71139E02346AC7D00889AE2 /* RestaurantViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantViewModel.swift; sourceTree = "<group>"; };
 		E71139E12346AC7D00889AE2 /* RestaurantViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
 		E71139E52346ACF300889AE2 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
-		E71139E82346AD8C00889AE2 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		E71139EA2346AD9400889AE2 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		E71139ED2346AF0500889AE2 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		E71139EE2346AF0500889AE2 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -87,7 +100,6 @@
 		E71139F32346AFE300889AE2 /* RestaurantsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantsViewModel.swift; sourceTree = "<group>"; };
 		E7C6035B233D3ECA004686DB /* Daily Menu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Menu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7C6035E233D3ECA004686DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E7C60362233D3ECA004686DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E7C60367233D3ECC004686DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7C6036A233D3ECC004686DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E7C6038C233D5F5B004686DB /* DailyMenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DailyMenuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +138,52 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		E7037349234FB54000852B04 /* DailyMenu */ = {
+			isa = PBXGroup;
+			children = (
+				E7C60379233D57AD004686DB /* Source */,
+				E7C60378233D57A8004686DB /* Resource */,
+			);
+			path = DailyMenu;
+			sourceTree = "<group>";
+		};
+		E703734C234FCA0300852B04 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				E703734D234FCA0300852B04 /* SignUpViewController.swift */,
+				E703734E234FCA0300852B04 /* SignUpViewModel.swift */,
+			);
+			name = SignUp;
+			path = Source/Screens/SignUp;
+			sourceTree = SOURCE_ROOT;
+		};
+		E703734F234FCA0300852B04 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				E7037350234FCA0300852B04 /* LoginViewModel.swift */,
+				E7037351234FCA0300852B04 /* LoginViewController.swift */,
+			);
+			name = Login;
+			path = Source/Screens/Login;
+			sourceTree = SOURCE_ROOT;
+		};
+		E7037357234FCCDC00852B04 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E7037358234FCDA000852B04 /* HugeButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E703735D234FD7C800852B04 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E703735E234FD7E500852B04 /* Color.swift */,
+				E7037360234FE0D600852B04 /* UIButton.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		E71139A823469FAF00889AE2 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,12 +194,11 @@
 				E71139BA2346AC7400889AE2 /* Cart */,
 				E71139B72346AC7400889AE2 /* Checkout */,
 				E71139C92346AC7400889AE2 /* DeliveryLocation */,
-				E71139C62346AC7400889AE2 /* Login */,
+				E71139C62346AC7400889AE2 /* Greeting */,
 				E71139C02346AC7400889AE2 /* OrderPlaced */,
 				E71139C32346AC7400889AE2 /* OrderStatus */,
 				E71139B22346AA1100889AE2 /* Registration */,
 				E71139EC2346AF0500889AE2 /* Settings */,
-				E7C60362233D3ECA004686DB /* ViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -200,13 +257,15 @@
 			path = OrderStatus;
 			sourceTree = "<group>";
 		};
-		E71139C62346AC7400889AE2 /* Login */ = {
+		E71139C62346AC7400889AE2 /* Greeting */ = {
 			isa = PBXGroup;
 			children = (
-				E71139C72346AC7400889AE2 /* LoginViewModel.swift */,
-				E71139C82346AC7400889AE2 /* LoginViewController.swift */,
+				E703734F234FCA0300852B04 /* Login */,
+				E703734C234FCA0300852B04 /* SignUp */,
+				E71139C72346AC7400889AE2 /* GreetingViewModel.swift */,
+				E71139C82346AC7400889AE2 /* GreetingViewController.swift */,
 			);
-			path = Login;
+			path = Greeting;
 			sourceTree = "<group>";
 		};
 		E71139C92346AC7400889AE2 /* DeliveryLocation */ = {
@@ -247,8 +306,8 @@
 		E71139E72346AD7000889AE2 /* Style */ = {
 			isa = PBXGroup;
 			children = (
-				E71139E82346AD8C00889AE2 /* Color.swift */,
 				E71139EA2346AD9400889AE2 /* Font.swift */,
+				E7037362234FE85D00852B04 /* Design.swift */,
 			);
 			path = Style;
 			sourceTree = "<group>";
@@ -274,8 +333,7 @@
 		E7C60352233D3ECA004686DB = {
 			isa = PBXGroup;
 			children = (
-				E7C60379233D57AD004686DB /* Source */,
-				E7C60378233D57A8004686DB /* Resource */,
+				E7037349234FB54000852B04 /* DailyMenu */,
 				E7C6038D233D5F5B004686DB /* DailyMenuTests */,
 				E7C6035C233D3ECA004686DB /* Products */,
 				22D096F87F0E8100F31DF346 /* Pods */,
@@ -310,6 +368,8 @@
 				E7C6035E233D3ECA004686DB /* AppDelegate.swift */,
 				E71139A823469FAF00889AE2 /* Screens */,
 				E71139E72346AD7000889AE2 /* Style */,
+				E703735D234FD7C800852B04 /* Extensions */,
+				E7037357234FCCDC00852B04 /* Views */,
 				E71139E42346ACA500889AE2 /* Networking */,
 			);
 			path = Source;
@@ -499,27 +559,33 @@
 				E71139DB2346AC7400889AE2 /* DeliveryLocationViewController.swift in Sources */,
 				E71139D02346AC7400889AE2 /* CheckoutViewModel.swift in Sources */,
 				E71139D32346AC7400889AE2 /* HomeViewModel.swift in Sources */,
-				E7C60363233D3ECA004686DB /* ViewController.swift in Sources */,
 				E71139D12346AC7400889AE2 /* CartViewController.swift in Sources */,
-				E71139E92346AD8C00889AE2 /* Color.swift in Sources */,
 				E71139B52346AA1100889AE2 /* RegistrationViewModel.swift in Sources */,
 				E71139EB2346AD9400889AE2 /* Font.swift in Sources */,
 				E71139D82346AC7400889AE2 /* OrderStatusViewController.swift in Sources */,
 				E71139DC2346AC7400889AE2 /* DeliveryLocationViewModel.swift in Sources */,
+				E7037359234FCDA000852B04 /* HugeButton.swift in Sources */,
 				E71139F52346AFE300889AE2 /* RestaurantsViewModel.swift in Sources */,
 				E71139D42346AC7400889AE2 /* HomeViewController.swift in Sources */,
 				E71139E32346AC7D00889AE2 /* RestaurantViewController.swift in Sources */,
+				E7037355234FCA0300852B04 /* LoginViewController.swift in Sources */,
 				E71139DD2346AC7400889AE2 /* ItemViewModel.swift in Sources */,
 				E71139D62346AC7400889AE2 /* OrderPlacedViewModel.swift in Sources */,
-				E71139D92346AC7400889AE2 /* LoginViewModel.swift in Sources */,
+				E71139D92346AC7400889AE2 /* GreetingViewModel.swift in Sources */,
 				E71139D72346AC7400889AE2 /* OrderStatusViewModel.swift in Sources */,
+				E7037361234FE0D600852B04 /* UIButton.swift in Sources */,
+				E7037352234FCA0300852B04 /* SignUpViewController.swift in Sources */,
+				E7037354234FCA0300852B04 /* LoginViewModel.swift in Sources */,
 				E71139E22346AC7D00889AE2 /* RestaurantViewModel.swift in Sources */,
+				E703735F234FD7E500852B04 /* Color.swift in Sources */,
 				E71139D22346AC7400889AE2 /* CartViewModel.swift in Sources */,
 				E71139B62346AA1100889AE2 /* RegistrationViewController.swift in Sources */,
-				E71139DA2346AC7400889AE2 /* LoginViewController.swift in Sources */,
+				E71139DA2346AC7400889AE2 /* GreetingViewController.swift in Sources */,
 				E71139CF2346AC7400889AE2 /* CheckoutViewController.swift in Sources */,
+				E7037353234FCA0300852B04 /* SignUpViewModel.swift in Sources */,
 				E71139F42346AFE300889AE2 /* RestaurantsViewController.swift in Sources */,
 				E71139EF2346AF0500889AE2 /* SettingsViewModel.swift in Sources */,
+				E7037363234FE85D00852B04 /* Design.swift in Sources */,
 				E71139DE2346AC7400889AE2 /* ItemViewController.swift in Sources */,
 				E71139D52346AC7400889AE2 /* OrderPlacedViewController.swift in Sources */,
 				E71139E62346ACF300889AE2 /* NetworkClient.swift in Sources */,
@@ -681,7 +747,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 53APD5F9YQ;
-				INFOPLIST_FILE = Resource/Info.plist;
+				INFOPLIST_FILE = DailyMenu/Resource/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -705,7 +771,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 53APD5F9YQ;
-				INFOPLIST_FILE = Resource/Info.plist;
+				INFOPLIST_FILE = DailyMenu/Resource/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

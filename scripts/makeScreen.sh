@@ -11,8 +11,6 @@ echo "//
 //  ${module_name}ViewController.swift
 //
 
-
-import Foundation
 import UIKit
 
 final class ${module_name}ViewController: UIViewController {
