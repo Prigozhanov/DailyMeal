@@ -8,7 +8,6 @@ target 'DailyMenu' do
   # Pods for DailyMenu
 
 pod 'SwiftGen'
-pod 'SwiftFormat/CLI'
 
 
 pod 'SnapKit'
