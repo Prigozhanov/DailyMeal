@@ -37,7 +37,7 @@ private extension AppDelegate {
     var exploreTab: UINavigationController {
           let vm = RestaurantsViewModelImplementation()
           let vc = RestaurantsViewController(viewModel: vm)
-          vc.tabBarItem.image = #imageLiteral(resourceName: "Tab-Explore-Inactive")
+          vc.tabBarItem.image = #imageLiteral(resourceName: "Tab-Explore-Active")
           vc.tabBarItem.title = "Explore"
           return UINavigationController(rootViewController: vc)
       }
@@ -45,7 +45,7 @@ private extension AppDelegate {
       var settingsTab: UINavigationController {
           let vm = SettingsViewModelImplementation()
           let vc = SettingsViewController(viewModel: vm)
-          vc.tabBarItem.image = #imageLiteral(resourceName: "Tab-Settings-Inactive")
+          vc.tabBarItem.image = #imageLiteral(resourceName: "Tab-Settings-Active")
           vc.tabBarItem.title = "Settings"
           return UINavigationController(rootViewController: vc)
       }
@@ -53,7 +53,7 @@ private extension AppDelegate {
       var cartTab: UINavigationController {
           let vm = CartViewModelImplementation()
           let vc = CartViewController(viewModel: vm)
-          vc.tabBarItem.image = #imageLiteral(resourceName: "Tab-Cart-Inactive")
+          vc.tabBarItem.image = #imageLiteral(resourceName: "Tab-Cart-Active")
           vc.tabBarItem.title = "Cart"
           return UINavigationController(rootViewController: vc)
       }
