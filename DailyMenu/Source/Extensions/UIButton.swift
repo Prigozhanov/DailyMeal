@@ -9,20 +9,29 @@
 import Foundation
 import UIKit
 
+var pointer = UnsafeRawPointer(bitPattern: 0)
+
 extension UIButton {
-    private func actionHandler(action:(() -> Void)? = nil) {
-        struct __ { static var action :(() -> Void)? }
-        if action != nil { __.action = action }
-        else { __.action?() }
-    }
-    
-    @objc private func triggerActionHandler() {
-        self.actionHandler()
-    }
-    
-    func actionHandler(controlEvents control :UIControl.Event, ForAction action:@escaping () -> Void) {
-        actionHandler(action: action)
+    func setActionHandler(controlEvents control :UIControl.Event, ForAction action: @escaping (UIButton) -> Void) {
+        let actionWrapper = ActionWrapper(action)
+        
+        objc_setAssociatedObject(self, &pointer, actionWrapper, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        
         removeTarget(self, action: nil, for: .allEvents)
-        addTarget(self, action: #selector(triggerActionHandler), for: control)
+        addTarget(self, action: #selector(invokeAction), for: control)
+    }
+    
+    @objc func invokeAction() {
+        if let obj = objc_getAssociatedObject(self, &pointer) as? ActionWrapper {
+            obj.action(self)
+        }
+    }
+}
+
+class ActionWrapper {
+    var action: (UIButton) -> Void
+    
+    init(_ action: @escaping (UIButton) -> Void) {
+        self.action = action
     }
 }

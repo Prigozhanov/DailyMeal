@@ -38,18 +38,18 @@ class Design {
     }
     
     class Button {
-        static func commonButton(_ text: String, action: @escaping () -> Void) -> UIButton {
+        static func commonButton(_ text: String, action: @escaping (UIButton) -> Void) -> UIButton {
             let button = UIButton()
             button.setTitle(text, for: .normal)
             button.setTitleColor(.d_commonBlue, for: .normal)
-            button.actionHandler(controlEvents: .touchUpInside, ForAction: action)
+            button.setActionHandler(controlEvents: .touchUpInside, ForAction: action)
             return button
         }
         
-        static func grayButton(_ text: String, action: @escaping () -> Void) -> UIButton {
+        static func grayButton(_ text: String, action: @escaping (UIButton) -> Void) -> UIButton {
             let button = UIButton()
             button.setAttributedTitle(NSAttributedString.init(string: text, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor.gray]), for: .normal)
-            button.actionHandler(controlEvents: .touchUpInside, ForAction: action)
+            button.setActionHandler(controlEvents: .touchUpInside, ForAction: action)
             return button
         }
     }

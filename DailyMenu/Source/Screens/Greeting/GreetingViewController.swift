@@ -9,7 +9,7 @@ final class GreetingViewController: UIViewController {
 
   private var viewModel: GreetingViewModel
 
-    lazy var signInButton = HugeButton(title: "Sign in") {
+    lazy var signInButton = HugeButton(title: "Sign in") { _ in
         self.show(LoginViewController(viewModel: LoginViewModelImplementation()), sender: nil)
     }
     
@@ -22,7 +22,7 @@ final class GreetingViewController: UIViewController {
             make.leading.top.bottom.equalTo(view)
         }
         
-        let signUpButton = Design.Button.commonButton("Sign up") {
+        let signUpButton = Design.Button.commonButton("Sign up") { _ in
             self.show(SignUpViewController(viewModel: SignUpViewModelImplementation()), sender: nil)
         }
         view.addSubview(signUpButton)
@@ -33,7 +33,7 @@ final class GreetingViewController: UIViewController {
         return view
     }()
     
-    lazy var skipButton = Design.Button.grayButton("Skip >") {
+    lazy var skipButton = Design.Button.grayButton("Skip >") { _ in
         self.dismiss(animated: true) {
         }
     }

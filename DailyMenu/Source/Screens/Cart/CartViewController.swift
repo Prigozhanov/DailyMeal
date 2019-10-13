@@ -22,6 +22,8 @@ final class CartViewController: UIViewController {
     super.viewDidLoad()
 
     viewModel.view = self
+    
+    view.backgroundColor = .white
   }
 }
 

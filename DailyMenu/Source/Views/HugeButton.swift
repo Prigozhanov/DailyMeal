@@ -12,7 +12,7 @@ import SnapKit
 class HugeButton: UIButton {
     required init?(coder: NSCoder) { fatalError() }
     
-    init(title: String, action: @escaping () -> Void) {
+    init(title: String, action: @escaping (UIButton) -> Void) {
         super.init(frame: .zero)
         layer.cornerRadius = 7
         snp.makeConstraints { (make) in
@@ -21,7 +21,7 @@ class HugeButton: UIButton {
         }
         backgroundColor = .d_commonBlue
         setTitle(title, for: .normal)
-        actionHandler(controlEvents: .touchUpInside, ForAction: action)
+        setActionHandler(controlEvents: .touchUpInside, ForAction: action)
     }
     
     
