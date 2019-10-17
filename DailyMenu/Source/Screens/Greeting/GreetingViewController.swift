@@ -9,31 +9,31 @@ final class GreetingViewController: UIViewController {
 
   private var viewModel: GreetingViewModel
 
-    lazy var signInButton = HugeButton(title: "Sign in") { _ in
+  lazy var signInButton = UIButton.makeHugeButton("Sign in") { _ in
         self.show(LoginViewController(viewModel: LoginViewModelImplementation()), sender: nil)
     }
     
     lazy var signUpRow: UIView = {
         let view = UIView()
 
-        let dontHaveAccountLabel = Design.Label.mediumText("Don't have an account?")
+        let dontHaveAccountLabel = UILabel.makeMediumText("Don't have an account?")
         view.addSubview(dontHaveAccountLabel)
         dontHaveAccountLabel.snp.makeConstraints { (make) in
             make.leading.top.bottom.equalTo(view)
         }
         
-        let signUpButton = Design.Button.commonButton("Sign up") { _ in
+        let signUpButton = UIButton.makeCommonButton("Sign up") { _ in
             self.show(SignUpViewController(viewModel: SignUpViewModelImplementation()), sender: nil)
         }
         view.addSubview(signUpButton)
         signUpButton.snp.makeConstraints { (make) in
             make.top.bottom.trailing.equalTo(view)
-            make.leading.equalTo(dontHaveAccountLabel.snp.trailing).offset(Design.Layout.commonMargin)
+            make.leading.equalTo(dontHaveAccountLabel.snp.trailing).offset(Layout.commonMargin)
         }
         return view
     }()
     
-    lazy var skipButton = Design.Button.grayButton("Skip >") { _ in
+  lazy var skipButton = UIButton.makeGrayButton("Skip >") { _ in
         self.dismiss(animated: true) {
         }
     }
@@ -60,7 +60,7 @@ final class GreetingViewController: UIViewController {
     
     view.addSubview(signUpRow)
     signUpRow.snp.makeConstraints { (make) in
-        make.top.equalTo(signInButton.snp.bottom).offset(Design.Layout.largeMargin)
+        make.top.equalTo(signInButton.snp.bottom).offset(Layout.largeMargin)
         make.centerX.equalTo(self.view)
     }
     
