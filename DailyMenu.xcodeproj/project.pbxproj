@@ -42,8 +42,10 @@
 		E71139F52346AFE300889AE2 /* RestaurantsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139F32346AFE300889AE2 /* RestaurantsViewModel.swift */; };
 		E768FC9B2353DD2B0042A696 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = E768FC9A2353DD2B0042A696 /* Common.swift */; };
 		E772FC7323591E4500B3D704 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E772FC7223591E4500B3D704 /* Color.swift */; };
-		E772FC7523591F9200B3D704 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E772FC7423591F9200B3D704 /* Assets.swift */; };
 		E779CDB4235B72FE0004E520 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779CDB3235B72FE0004E520 /* AppCoordinator.swift */; };
+		E779CDCC235B84D10004E520 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = E779CDCB235B84D10004E520 /* fonts */; };
+		E779CDD4235B87470004E520 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779CDD2235B87470004E520 /* Assets.swift */; };
+		E779CDD5235B87470004E520 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779CDD3235B87470004E520 /* Fonts.swift */; };
 		E7C6035F233D3ECA004686DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C6035E233D3ECA004686DB /* AppDelegate.swift */; };
 		E7C60368233D3ECC004686DB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7C60367233D3ECC004686DB /* Images.xcassets */; };
 		E7C6036B233D3ECC004686DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7C60369233D3ECC004686DB /* LaunchScreen.storyboard */; };
@@ -100,8 +102,10 @@
 		E71139F32346AFE300889AE2 /* RestaurantsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantsViewModel.swift; sourceTree = "<group>"; };
 		E768FC9A2353DD2B0042A696 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		E772FC7223591E4500B3D704 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Color.swift; path = ../../../../../../.Trash/Color.swift; sourceTree = "<group>"; };
-		E772FC7423591F9200B3D704 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		E779CDB3235B72FE0004E520 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		E779CDCB235B84D10004E520 /* fonts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fonts; sourceTree = SOURCE_ROOT; };
+		E779CDD2235B87470004E520 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		E779CDD3235B87470004E520 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		E7C6035B233D3ECA004686DB /* Daily Menu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Menu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7C6035E233D3ECA004686DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7C60367233D3ECC004686DB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -346,6 +350,15 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
+		E779CDD1235B86CF0004E520 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				E779CDD2235B87470004E520 /* Assets.swift */,
+				E779CDD3235B87470004E520 /* Fonts.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 		E7C60352233D3ECA004686DB = {
 			isa = PBXGroup;
 			children = (
@@ -369,9 +382,11 @@
 		E7C60378233D57A8004686DB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E779CDD1235B86CF0004E520 /* Generated */,
 				E7DFC6F023591B950003C46C /* Assets */,
 				E71139AB2346A59100889AE2 /* scripts */,
 				E7C60397233D60C7004686DB /* fastlane */,
+				E779CDCB235B84D10004E520 /* fonts */,
 				E7C60396233D5FA3004686DB /* Info.plist */,
 				E7C60369233D3ECC004686DB /* LaunchScreen.storyboard */,
 			);
@@ -404,7 +419,6 @@
 			children = (
 				E7C60367233D3ECC004686DB /* Images.xcassets */,
 				E7DFC6E723590EE80003C46C /* Colors.xcassets */,
-				E772FC7423591F9200B3D704 /* Assets.swift */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -424,13 +438,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E7C6036F233D3ECC004686DB /* Build configuration list for PBXNativeTarget "DailyMenu" */;
 			buildPhases = (
+				E7DFC6ED235919760003C46C /* SwiftGen */,
 				8588974FDC2B22E837D91D37 /* [CP] Check Pods Manifest.lock */,
 				E7C60357233D3ECA004686DB /* Sources */,
 				E7C60358233D3ECA004686DB /* Frameworks */,
 				E7C60359233D3ECA004686DB /* Resources */,
 				34688DBAB36DAB8BD01AF71E /* [CP] Embed Pods Frameworks */,
 				882D956BBA471D7A0C79F531 /* [CP] Copy Pods Resources */,
-				E7DFC6ED235919760003C46C /* SwiftGen */,
 			);
 			buildRules = (
 			);
@@ -505,6 +519,7 @@
 				E7C60398233D60C7004686DB /* fastlane in Resources */,
 				E7C6036B233D3ECC004686DB /* LaunchScreen.storyboard in Resources */,
 				E7DFC6E823590EE80003C46C /* Colors.xcassets in Resources */,
+				E779CDCC235B84D10004E520 /* fonts in Resources */,
 				E7C60368233D3ECC004686DB /* Images.xcassets in Resources */,
 				E71139AC2346A59100889AE2 /* scripts in Resources */,
 			);
@@ -592,7 +607,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$PODS_ROOT/SwiftGen/bin/swiftgen xcassets -t swift4 -o ${SRCROOT}/DailyMenu/Resources/Assets/Assets.swift ${SRCROOT}/DailyMenu/Resources/Assets/Images.xcassets\n";
+			shellScript = "$PODS_ROOT/SwiftGen/bin/swiftgen xcassets -t swift4 -o ${SRCROOT}/DailyMenu/Resources/Generated/Assets.swift ${SRCROOT}/DailyMenu/Resources/Assets/Images.xcassets\n\n$PODS_ROOT/SwiftGen/bin/swiftgen fonts -t swift4 -o ${SRCROOT}/DailyMenu/Resources/Generated/Fonts.swift ${SRCROOT}/fonts/Poppins\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -631,12 +646,13 @@
 				E71139EF2346AF0500889AE2 /* SettingsViewModel.swift in Sources */,
 				E7DFC6E02358FE030003C46C /* UIKit.swift in Sources */,
 				E7037363234FE85D00852B04 /* Layout.swift in Sources */,
-				E772FC7523591F9200B3D704 /* Assets.swift in Sources */,
+				E779CDD4235B87470004E520 /* Assets.swift in Sources */,
 				E71139DE2346AC7400889AE2 /* ItemViewController.swift in Sources */,
 				E71139D52346AC7400889AE2 /* OrderPlacedViewController.swift in Sources */,
 				E768FC9B2353DD2B0042A696 /* Common.swift in Sources */,
 				E71139E62346ACF300889AE2 /* NetworkClient.swift in Sources */,
 				E7C6035F233D3ECA004686DB /* AppDelegate.swift in Sources */,
+				E779CDD5235B87470004E520 /* Fonts.swift in Sources */,
 				E71139F02346AF0500889AE2 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
