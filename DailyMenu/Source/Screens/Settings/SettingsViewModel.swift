@@ -1,5 +1,6 @@
 //
 //  SettingsViewModel.swift
+//  Daily Menu
 //
 
 import Foundation

@@ -1,9 +1,8 @@
 //
 //  SettingsViewController.swift
+//  Daily Menu
 //
 
-
-import Foundation
 import UIKit
 
 final class SettingsViewController: UIViewController {
@@ -23,6 +22,7 @@ final class SettingsViewController: UIViewController {
 
     viewModel.view = self
   }
+
 }
 
 //MARK: -  SettingsView

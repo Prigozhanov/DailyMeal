@@ -1,9 +1,9 @@
 //
 //  CartViewController.swift
+//  Daily Menu
 //
 
 
-import Foundation
 import UIKit
 
 final class CartViewController: UIViewController {
@@ -25,6 +25,7 @@ final class CartViewController: UIViewController {
     
     view.backgroundColor = .white
   }
+
 }
 
 //MARK: -  CartView

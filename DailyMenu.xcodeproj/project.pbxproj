@@ -171,13 +171,6 @@
 			path = Source/Screens/Login;
 			sourceTree = SOURCE_ROOT;
 		};
-		E7037357234FCCDC00852B04 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		E703735D234FD7C800852B04 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +335,14 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		E779CDB2235B6E670004E520 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				E7C6035E233D3ECA004686DB /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
 		E7C60352233D3ECA004686DB = {
 			isa = PBXGroup;
 			children = (
@@ -377,11 +378,10 @@
 		E7C60379233D57AD004686DB /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				E7C6035E233D3ECA004686DB /* AppDelegate.swift */,
+				E779CDB2235B6E670004E520 /* Application */,
 				E71139A823469FAF00889AE2 /* Screens */,
 				E71139E72346AD7000889AE2 /* Style */,
 				E703735D234FD7C800852B04 /* Extensions */,
-				E7037357234FCCDC00852B04 /* Views */,
 				E71139E42346ACA500889AE2 /* Networking */,
 			);
 			path = Source;

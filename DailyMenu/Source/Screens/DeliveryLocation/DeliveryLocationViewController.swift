@@ -1,9 +1,9 @@
 //
 //  DeliveryLocationViewController.swift
+//  Daily Menu
 //
 
 
-import Foundation
 import UIKit
 
 final class DeliveryLocationViewController: UIViewController {
@@ -23,6 +23,7 @@ final class DeliveryLocationViewController: UIViewController {
 
     viewModel.view = self
   }
+
 }
 
 //MARK: -  DeliveryLocationView

@@ -1,5 +1,6 @@
 //
 //  GreetingViewController.swift
+//  Daily Menu
 //
 
 import UIKit
@@ -70,6 +71,7 @@ final class GreetingViewController: UIViewController {
         make.centerX.equalTo(self.view)
     }
   }
+
 }
 
 //MARK: -  GreetingView

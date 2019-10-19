@@ -1,5 +1,6 @@
 //
 //  SignUpViewController.swift
+//  Daily Menu
 //
 
 import UIKit

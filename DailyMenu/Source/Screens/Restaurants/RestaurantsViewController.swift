@@ -1,9 +1,9 @@
 //
 //  RestaurantsViewController.swift
+//  Daily Menu
 //
 
 
-import Foundation
 import UIKit
 
 final class RestaurantsViewController: UIViewController {
@@ -25,6 +25,7 @@ final class RestaurantsViewController: UIViewController {
     
     viewModel.view = self
   }
+
 }
 
 //MARK: -  RestaurantsView

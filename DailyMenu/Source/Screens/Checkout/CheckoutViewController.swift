@@ -1,9 +1,9 @@
 //
 //  CheckoutViewController.swift
+//  Daily Menu
 //
 
 
-import Foundation
 import UIKit
 
 final class CheckoutViewController: UIViewController {
@@ -23,6 +23,7 @@ final class CheckoutViewController: UIViewController {
 
     viewModel.view = self
   }
+
 }
 
 //MARK: -  CheckoutView

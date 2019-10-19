@@ -1,9 +1,9 @@
 //
 //  ItemViewController.swift
+//  Daily Menu
 //
 
 
-import Foundation
 import UIKit
 
 final class ItemViewController: UIViewController {
@@ -23,6 +23,7 @@ final class ItemViewController: UIViewController {
 
     viewModel.view = self
   }
+
 }
 
 //MARK: -  ItemView

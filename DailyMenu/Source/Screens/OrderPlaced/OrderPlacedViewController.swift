@@ -1,9 +1,9 @@
 //
 //  OrderPlacedViewController.swift
+//  Daily Menu
 //
 
 
-import Foundation
 import UIKit
 
 final class OrderPlacedViewController: UIViewController {
@@ -23,6 +23,7 @@ final class OrderPlacedViewController: UIViewController {
 
     viewModel.view = self
   }
+
 }
 
 //MARK: -  OrderPlacedView

@@ -1,5 +1,6 @@
 //
 //  RegistrationViewController.swift
+//  Daily Menu
 //
 
 
@@ -23,6 +24,7 @@ final class RegistrationViewController: UIViewController {
 
     viewModel.view = self
   }
+
 }
 
 //MARK: -  RegistrationView

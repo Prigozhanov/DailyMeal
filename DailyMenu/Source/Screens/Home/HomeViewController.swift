@@ -1,9 +1,9 @@
 //
 //  HomeViewController.swift
+//  Daily Menu
 //
 
 
-import Foundation
 import UIKit
 
 final class HomeViewController: UIViewController {
@@ -23,6 +23,7 @@ final class HomeViewController: UIViewController {
 
     viewModel.view = self
   }
+
 }
 
 //MARK: -  HomeView
