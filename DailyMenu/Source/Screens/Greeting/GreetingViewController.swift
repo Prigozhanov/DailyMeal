@@ -10,8 +10,8 @@ final class GreetingViewController: UIViewController {
 
   private var viewModel: GreetingViewModel
 
-  lazy var signInButton = UIButton.makeHugeButton("Sign in") { _ in
-        self.show(LoginViewController(viewModel: LoginViewModelImplementation()), sender: nil)
+  lazy var signInButton = UIButton.makeHugeButton("Sign in") { [weak self] _ in
+        self?.show(LoginViewController(viewModel: LoginViewModelImplementation()), sender: nil)
     }
     
     lazy var signUpRow: UIView = {
@@ -23,8 +23,8 @@ final class GreetingViewController: UIViewController {
             make.leading.top.bottom.equalTo(view)
         }
         
-        let signUpButton = UIButton.makeCommonButton("Sign up") { _ in
-            self.show(SignUpViewController(viewModel: SignUpViewModelImplementation()), sender: nil)
+        let signUpButton = UIButton.makeCommonButton("Sign up") { [weak self] _ in
+            self?.show(SignUpViewController(viewModel: SignUpViewModelImplementation()), sender: nil)
         }
         view.addSubview(signUpButton)
         signUpButton.snp.makeConstraints { (make) in
@@ -34,9 +34,8 @@ final class GreetingViewController: UIViewController {
         return view
     }()
     
-  lazy var skipButton = UIButton.makeGrayButton("Skip >") { _ in
-        self.dismiss(animated: true) {
-        }
+  lazy var skipButton = UIButton.makeGrayButton("Skip >") { [weak self] _ in
+        self?.dismiss(animated: true)
     }
     
   init(viewModel: GreetingViewModel) {

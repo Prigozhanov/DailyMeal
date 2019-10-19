@@ -6,7 +6,7 @@
 
 import UIKit
 
-var pointer = NSObject()
+fileprivate var pointer = NSObject()
 
 extension UIButton {
   func setActionHandler(controlEvents control :UIControl.Event, ForAction action: @escaping (UIButton) -> Void) {

@@ -42,7 +42,16 @@ extension UIButton {
   
   static func makeGrayButton(_ text: String, action: @escaping (UIButton) -> Void) -> UIButton {
     let button = UIButton()
-    button.setAttributedTitle(NSAttributedString.init(string: text, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor.gray]), for: .normal)
+    button.setAttributedTitle(
+      NSAttributedString(
+        string: text,
+        attributes: [
+          .font : UIFont.systemFont(ofSize: 13),
+          .foregroundColor: UIColor.gray
+        ]
+      ),
+      for: .normal
+    )
     button.setActionHandler(controlEvents: .touchUpInside, ForAction: action)
     return button
   }
