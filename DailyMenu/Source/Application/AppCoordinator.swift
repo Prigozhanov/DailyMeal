@@ -39,7 +39,7 @@ private extension AppCoordinator {
   var exploreTab: UINavigationController {
     let vm = RestaurantsViewModelImplementation()
     let vc = RestaurantsViewController(viewModel: vm)
-    vc.tabBarItem.image = Asset.tabExploreInactive.image
+    vc.tabBarItem.image = Images.tabExploreInactive.image
     vc.tabBarItem.title = "Explore"
     return UINavigationController(rootViewController: vc)
   }
@@ -47,7 +47,7 @@ private extension AppCoordinator {
   var settingsTab: UINavigationController {
     let vm = SettingsViewModelImplementation()
     let vc = SettingsViewController(viewModel: vm)
-    vc.tabBarItem.image = Asset.tabSettingsInactive.image
+    vc.tabBarItem.image = Images.tabSettingsInactive.image
     vc.tabBarItem.title = "Settings"
     return UINavigationController(rootViewController: vc)
   }
@@ -55,7 +55,7 @@ private extension AppCoordinator {
   var cartTab: UINavigationController {
     let vm = CartViewModelImplementation()
     let vc = CartViewController(viewModel: vm)
-    vc.tabBarItem.image = Asset.tabCartInactive.image
+    vc.tabBarItem.image = Images.tabCartInactive.image
     vc.tabBarItem.title = "Cart"
     return UINavigationController(rootViewController: vc)
   }
