@@ -58,15 +58,16 @@ extension RestaurantCell: ConfigurableCell {
     
     containerView.frame = contentView.frame
     contentView.addSubview(containerView)
-    containerView.setRoundCorners(15)
     containerView.backgroundColor = Colors.white.color
-    containerView.setShadow()
+    containerView.setRoundCorners(15)
+    containerView.setShadow(offset: CGSize(width: 0, height: 3.0), opacity: 0.2, radius: 10)
     containerView.snp.makeConstraints {
       $0.edges.equalToSuperview().inset(edgeInsets)
       $0.height.equalTo(RestaurantCell.estimatedHeight ?? 0)
     }
     
     restaurantImageView = UIImageView(image: Images.restaurentImagePlaceholder.image)
+    restaurantImageView.setRoundCorners(15, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
     containerView.addSubview(restaurantImageView)
     restaurantImageView.snp.makeConstraints {
       $0.top.equalToSuperview()
@@ -122,8 +123,6 @@ extension RestaurantCell: ConfigurableCell {
       $0.top.equalTo(deliveryFeeValue.snp.bottom)
       $0.trailing.equalToSuperview()
     }
-    
-    
   }
   
 }
