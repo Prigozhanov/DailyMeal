@@ -51,6 +51,10 @@
 		E7C6036B233D3ECC004686DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7C60369233D3ECC004686DB /* LaunchScreen.storyboard */; };
 		E7C6038F233D5F5B004686DB /* DailyMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C6038E233D5F5B004686DB /* DailyMenuTests.swift */; };
 		E7C60398233D60C7004686DB /* fastlane in Resources */ = {isa = PBXBuildFile; fileRef = E7C60397233D60C7004686DB /* fastlane */; };
+		E7CA1FFF23648212004AA1FC /* restaurants.json in Resources */ = {isa = PBXBuildFile; fileRef = E7CA1FFE23648212004AA1FC /* restaurants.json */; };
+		E7CA20012364850C004AA1FC /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CA20002364850C004AA1FC /* Models.swift */; };
+		E7CA200523649FA2004AA1FC /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CA200423649FA2004AA1FC /* RestaurantCell.swift */; };
+		E7CA200A236601EC004AA1FC /* FontFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CA2009236601EC004AA1FC /* FontFamily.swift */; };
 		E7DFC6E02358FE030003C46C /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DFC6DF2358FE030003C46C /* UIKit.swift */; };
 		E7DFC6E823590EE80003C46C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7DFC6E723590EE80003C46C /* Colors.xcassets */; };
 /* End PBXBuildFile section */
@@ -115,6 +119,10 @@
 		E7C60390233D5F5B004686DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7C60396233D5FA3004686DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7C60397233D60C7004686DB /* fastlane */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fastlane; sourceTree = SOURCE_ROOT; };
+		E7CA1FFE23648212004AA1FC /* restaurants.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = restaurants.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
+		E7CA20002364850C004AA1FC /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		E7CA200423649FA2004AA1FC /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCell.swift; sourceTree = "<group>"; };
+		E7CA2009236601EC004AA1FC /* FontFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontFamily.swift; sourceTree = "<group>"; };
 		E7DFC6DF2358FE030003C46C /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
 		E7DFC6E723590EE80003C46C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		F6978153A996CCA2C94A5A5E /* Pods-DailyMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyMenu.debug.xcconfig"; path = "Target Support Files/Pods-DailyMenu/Pods-DailyMenu.debug.xcconfig"; sourceTree = "<group>"; };
@@ -183,6 +191,7 @@
 				E772FC76235920AC00B3D704 /* UI */,
 				E772FC7223591E4500B3D704 /* Color.swift */,
 				E768FC9A2353DD2B0042A696 /* Common.swift */,
+				E7CA2009236601EC004AA1FC /* FontFamily.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -302,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				E71139E52346ACF300889AE2 /* NetworkClient.swift */,
+				E7CA20002364850C004AA1FC /* Models.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -389,6 +399,7 @@
 				E779CDCB235B84D10004E520 /* fonts */,
 				E7C60396233D5FA3004686DB /* Info.plist */,
 				E7C60369233D3ECC004686DB /* LaunchScreen.storyboard */,
+				E7CA1FFE23648212004AA1FC /* restaurants.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -398,9 +409,11 @@
 			children = (
 				E779CDB2235B6E670004E520 /* Application */,
 				E71139A823469FAF00889AE2 /* Screens */,
+				E7CA200223649F77004AA1FC /* Cells */,
 				E71139E72346AD7000889AE2 /* Style */,
 				E703735D234FD7C800852B04 /* Extensions */,
 				E71139E42346ACA500889AE2 /* Networking */,
+				E7CA20062366019C004AA1FC /* Support Files */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -412,6 +425,21 @@
 				E7C60390233D5F5B004686DB /* Info.plist */,
 			);
 			path = DailyMenuTests;
+			sourceTree = "<group>";
+		};
+		E7CA200223649F77004AA1FC /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E7CA200423649FA2004AA1FC /* RestaurantCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		E7CA20062366019C004AA1FC /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Support Files";
 			sourceTree = "<group>";
 		};
 		E7DFC6F023591B950003C46C /* Assets */ = {
@@ -438,8 +466,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E7C6036F233D3ECC004686DB /* Build configuration list for PBXNativeTarget "DailyMenu" */;
 			buildPhases = (
-				E7DFC6ED235919760003C46C /* SwiftGen */,
 				8588974FDC2B22E837D91D37 /* [CP] Check Pods Manifest.lock */,
+				E7DFC6ED235919760003C46C /* SwiftGen */,
 				E7C60357233D3ECA004686DB /* Sources */,
 				E7C60358233D3ECA004686DB /* Frameworks */,
 				E7C60359233D3ECA004686DB /* Resources */,
@@ -522,6 +550,7 @@
 				E779CDCC235B84D10004E520 /* fonts in Resources */,
 				E7C60368233D3ECC004686DB /* Images.xcassets in Resources */,
 				E71139AC2346A59100889AE2 /* scripts in Resources */,
+				E7CA1FFF23648212004AA1FC /* restaurants.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,6 +645,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7CA200523649FA2004AA1FC /* RestaurantCell.swift in Sources */,
 				E71139DB2346AC7400889AE2 /* DeliveryLocationViewController.swift in Sources */,
 				E779CDB4235B72FE0004E520 /* AppCoordinator.swift in Sources */,
 				E779CDDB235CE9380004E520 /* Assets.swift in Sources */,
@@ -643,6 +673,7 @@
 				E71139DA2346AC7400889AE2 /* GreetingViewController.swift in Sources */,
 				E71139CF2346AC7400889AE2 /* CheckoutViewController.swift in Sources */,
 				E7037353234FCA0300852B04 /* SignUpViewModel.swift in Sources */,
+				E7CA20012364850C004AA1FC /* Models.swift in Sources */,
 				E71139F42346AFE300889AE2 /* RestaurantsViewController.swift in Sources */,
 				E71139EF2346AF0500889AE2 /* SettingsViewModel.swift in Sources */,
 				E7DFC6E02358FE030003C46C /* UIKit.swift in Sources */,
@@ -651,6 +682,7 @@
 				E71139D52346AC7400889AE2 /* OrderPlacedViewController.swift in Sources */,
 				E768FC9B2353DD2B0042A696 /* Common.swift in Sources */,
 				E71139E62346ACF300889AE2 /* NetworkClient.swift in Sources */,
+				E7CA200A236601EC004AA1FC /* FontFamily.swift in Sources */,
 				E7C6035F233D3ECA004686DB /* AppDelegate.swift in Sources */,
 				E779CDD5235B87470004E520 /* Fonts.swift in Sources */,
 				E71139F02346AF0500889AE2 /* SettingsViewController.swift in Sources */,
@@ -737,7 +769,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -791,7 +823,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -811,7 +843,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 53APD5F9YQ;
 				INFOPLIST_FILE = DailyMenu/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -835,7 +867,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 53APD5F9YQ;
 				INFOPLIST_FILE = DailyMenu/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
