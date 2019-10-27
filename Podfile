@@ -1,6 +1,8 @@
 # Uncomment the next line to define a global platform for your project
 
-platform :ios, '10.0'
+platform :ios, '11.0'
+
+pod 'SwiftGen'
 
 target 'DailyMenu' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -8,9 +10,7 @@ target 'DailyMenu' do
 
   # Pods for DailyMenu
 
-pod 'SwiftGen'
-
-
+pod 'TableKit'
 pod 'SnapKit'
 pod 'AppCenter'
 pod 'AppCenter/Distribute'
