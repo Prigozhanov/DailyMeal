@@ -20,7 +20,11 @@
 internal enum Asset {
   internal enum Colors {
     internal static let background = ColorAsset(name: "background")
+    internal static let black = ColorAsset(name: "black")
     internal static let blue = ColorAsset(name: "blue")
+    internal static let lightGray = ColorAsset(name: "light_gray")
+    internal static let transparent = ColorAsset(name: "transparent")
+    internal static let white = ColorAsset(name: "white")
   }
   internal enum Images {
     internal static let iconBack = ImageAsset(name: "icon_Back")
@@ -44,6 +48,9 @@ internal enum Asset {
     internal static let iconSearch = ImageAsset(name: "icon_search")
     internal static let iconStarFull = ImageAsset(name: "icon_star_full")
     internal static let iconStarHalf = ImageAsset(name: "icon_star_half")
+    internal static let ratePlaceholder = ImageAsset(name: "rate_placeholder")
+    internal static let restaurantLogoPlaceholder = ImageAsset(name: "restaurant_logo_placeholder")
+    internal static let restaurentImagePlaceholder = ImageAsset(name: "restaurent_image_placeholder")
     internal static let tabCartActive = ImageAsset(name: "tab_cart_active")
     internal static let tabCartInactive = ImageAsset(name: "tab_cart_inactive")
     internal static let tabExploreActive = ImageAsset(name: "tab_explore-active")
