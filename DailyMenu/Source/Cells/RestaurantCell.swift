@@ -18,14 +18,6 @@ class RestaurantCell: UITableViewCell {
   
   private let edgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
   
-  var containerView = UIView(frame: .zero)
-  var restaurantInfoView: UIView! = UIView(frame: .zero)
-  
-  var restaurantImageView: UIImageView!
-  var restaurantNameLabel: UILabel!
-  var restaurantLogoImageView: UIImageView!
-  var restaurantRateView: UIImageView!
-  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: .default, reuseIdentifier: nil)
   }
@@ -33,12 +25,10 @@ class RestaurantCell: UITableViewCell {
   required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
   
   override func prepareForReuse() {
-    restaurantImageView?.removeFromSuperview()
-    restaurantNameLabel?.removeFromSuperview()
-    restaurantLogoImageView?.removeFromSuperview()
-    restaurantRateView?.removeFromSuperview()
-    containerView.removeFromSuperview()
-    super.prepareForReuse()
+      for subview in contentView.subviews {
+          subview.removeFromSuperview()
+      }
+      super.prepareForReuse()
   }
   
 }
@@ -50,6 +40,15 @@ extension RestaurantCell: ConfigurableCell {
   }
   
   func configure(with item: RestaurantCellItem) {
+
+    let containerView = UIView(frame: .zero)
+    let restaurantInfoView: UIView = UIView(frame: .zero)
+    
+    var restaurantImageView: UIImageView
+    var restaurantNameLabel: UILabel
+    var restaurantLogoImageView: UIImageView
+    var restaurantRateView: UIImageView
+    
     selectionStyle = .none
     contentView.backgroundColor = Colors.lightGray.color
     
@@ -57,7 +56,7 @@ extension RestaurantCell: ConfigurableCell {
     contentView.addSubview(containerView)
     containerView.backgroundColor = Colors.white.color
     containerView.setRoundCorners(15)
-    containerView.setShadow(offset: CGSize(width: 0, height: 3.0), opacity: 0.2, radius: 10)
+    containerView.setShadow(offset: CGSize(width: 0, height: 3.0), opacity: 0.1, radius: 15)
     containerView.snp.makeConstraints {
       $0.edges.equalToSuperview().inset(edgeInsets)
       $0.height.equalTo(RestaurantCell.estimatedHeight ?? 0)
