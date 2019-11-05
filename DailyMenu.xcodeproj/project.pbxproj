@@ -40,11 +40,10 @@
 		E71139F02346AF0500889AE2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139EE2346AF0500889AE2 /* SettingsViewController.swift */; };
 		E71139F42346AFE300889AE2 /* RestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139F22346AFE300889AE2 /* RestaurantsViewController.swift */; };
 		E71139F52346AFE300889AE2 /* RestaurantsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139F32346AFE300889AE2 /* RestaurantsViewModel.swift */; };
+		E750CB422370CB8F00029AEC /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750CB412370CB8F00029AEC /* Fonts.swift */; };
 		E768FC9B2353DD2B0042A696 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = E768FC9A2353DD2B0042A696 /* Common.swift */; };
-		E772FC7323591E4500B3D704 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E772FC7223591E4500B3D704 /* Color.swift */; };
 		E779CDB4235B72FE0004E520 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779CDB3235B72FE0004E520 /* AppCoordinator.swift */; };
 		E779CDCC235B84D10004E520 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = E779CDCB235B84D10004E520 /* fonts */; };
-		E779CDD5235B87470004E520 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779CDD3235B87470004E520 /* Fonts.swift */; };
 		E779CDDB235CE9380004E520 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779CDDA235CE9380004E520 /* Assets.swift */; };
 		E7C6035F233D3ECA004686DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C6035E233D3ECA004686DB /* AppDelegate.swift */; };
 		E7C60368233D3ECC004686DB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7C60367233D3ECC004686DB /* Images.xcassets */; };
@@ -104,11 +103,10 @@
 		E71139EE2346AF0500889AE2 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E71139F22346AFE300889AE2 /* RestaurantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantsViewController.swift; sourceTree = "<group>"; };
 		E71139F32346AFE300889AE2 /* RestaurantsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantsViewModel.swift; sourceTree = "<group>"; };
+		E750CB412370CB8F00029AEC /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fonts.swift; path = fonts/Poppins/Fonts.swift; sourceTree = SOURCE_ROOT; };
 		E768FC9A2353DD2B0042A696 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
-		E772FC7223591E4500B3D704 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Color.swift; path = ../../../../../../.Trash/Color.swift; sourceTree = "<group>"; };
 		E779CDB3235B72FE0004E520 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		E779CDCB235B84D10004E520 /* fonts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fonts; sourceTree = SOURCE_ROOT; };
-		E779CDD3235B87470004E520 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		E779CDDA235CE9380004E520 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		E7C6035B233D3ECA004686DB /* Daily Menu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Menu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7C6035E233D3ECA004686DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -189,7 +187,6 @@
 			isa = PBXGroup;
 			children = (
 				E772FC76235920AC00B3D704 /* UI */,
-				E772FC7223591E4500B3D704 /* Color.swift */,
 				E768FC9A2353DD2B0042A696 /* Common.swift */,
 				E7CA2009236601EC004AA1FC /* FontFamily.swift */,
 			);
@@ -364,7 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				E779CDDA235CE9380004E520 /* Assets.swift */,
-				E779CDD3235B87470004E520 /* Fonts.swift */,
+				E750CB412370CB8F00029AEC /* Fonts.swift */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -636,7 +633,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$PODS_ROOT/SwiftGen/bin/swiftgen xcassets -t swift4 -o ${SRCROOT}/DailyMenu/Resources/Generated/Assets.swift ${SRCROOT}/DailyMenu/Resources/Assets/\n\n$PODS_ROOT/SwiftGen/bin/swiftgen fonts -t swift4 -o ${SRCROOT}/DailyMenu/Resources/Generated/Fonts.swift ${SRCROOT}/fonts/Poppins\n";
+			shellScript = "$PODS_ROOT/SwiftGen/bin/swiftgen xcassets -t swift4 -o ${SRCROOT}/DailyMenu/Resources/Generated/Assets.swift ${SRCROOT}/DailyMenu/Resources/Assets/\n\n$PODS_ROOT/SwiftGen/bin/swiftgen fonts -t swift4 -o ${SRCROOT}/fonts/Poppins/Fonts.swift ${SRCROOT}/fonts/Poppins\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -657,13 +654,13 @@
 				E71139DC2346AC7400889AE2 /* DeliveryLocationViewModel.swift in Sources */,
 				E71139F52346AFE300889AE2 /* RestaurantsViewModel.swift in Sources */,
 				E71139D42346AC7400889AE2 /* HomeViewController.swift in Sources */,
-				E772FC7323591E4500B3D704 /* Color.swift in Sources */,
 				E71139E32346AC7D00889AE2 /* RestaurantViewController.swift in Sources */,
 				E7037355234FCA0300852B04 /* LoginViewController.swift in Sources */,
 				E71139DD2346AC7400889AE2 /* ItemViewModel.swift in Sources */,
 				E71139D62346AC7400889AE2 /* OrderPlacedViewModel.swift in Sources */,
 				E71139D92346AC7400889AE2 /* GreetingViewModel.swift in Sources */,
 				E71139D72346AC7400889AE2 /* OrderStatusViewModel.swift in Sources */,
+				E750CB422370CB8F00029AEC /* Fonts.swift in Sources */,
 				E7037361234FE0D600852B04 /* UIButton.swift in Sources */,
 				E7037352234FCA0300852B04 /* SignUpViewController.swift in Sources */,
 				E7037354234FCA0300852B04 /* LoginViewModel.swift in Sources */,
@@ -684,7 +681,6 @@
 				E71139E62346ACF300889AE2 /* NetworkClient.swift in Sources */,
 				E7CA200A236601EC004AA1FC /* FontFamily.swift in Sources */,
 				E7C6035F233D3ECA004686DB /* AppDelegate.swift in Sources */,
-				E779CDD5235B87470004E520 /* Fonts.swift in Sources */,
 				E71139F02346AF0500889AE2 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

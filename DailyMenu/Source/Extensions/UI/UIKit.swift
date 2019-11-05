@@ -1,7 +1,5 @@
-//
-//  UIKit.swift
-//  DailyMenu
-//
+//  Created by Uladzimir Pryhazhanau
+//  2019
 
 
 import UIKit
@@ -53,9 +51,11 @@ extension UILabel {
     label.font = UIFont.systemFont(ofSize: 19)
     return label
   }
+  
 }
 
 extension UIButton {
+  
   static func makeCommonButton(_ text: String, action: @escaping (UIButton) -> Void) -> UIButton {
     let button = UIButton()
     button.setTitle(text, for: .normal)
@@ -64,23 +64,25 @@ extension UIButton {
     return button
   }
   
-  static func makeGrayButton(_ text: String, action: @escaping (UIButton) -> Void) -> UIButton {
-    let button = UIButton()
-    button.setAttributedTitle(
-      NSAttributedString(
-        string: text,
-        attributes: [
-          .font : UIFont.systemFont(ofSize: 13),
-          .foregroundColor: UIColor.gray
-        ]
-      ),
-      for: .normal
-    )
+  static func makeCustomButton(
+    title: String?,
+    backgroundColor: UIColor! = .clear,
+    titleColor: UIColor! = Colors.black.color,
+    cornerRadius: CGFloat! = 0,
+    font: UIFont? = FontFamily.regular,
+    action: @escaping (UIButton) -> Void
+  ) -> UIButton {
+    let button = UIButton(frame: .zero)
+    button.setTitle(title, for: .normal)
+    button.setTitleColor(titleColor, for: .normal)
+    button.backgroundColor = backgroundColor
+    button.layer.cornerRadius = cornerRadius
+    button.titleLabel?.font = font
     button.setActionHandler(controlEvents: .touchUpInside, ForAction: action)
     return button
   }
   
-  static func makeHugeButton(_ text: String, action: @escaping (UIButton) -> Void) -> UIButton {
+  static func makeActionButton(_ text: String, action: @escaping (UIButton) -> Void) -> UIButton {
     let button = UIButton()
     button.layer.cornerRadius = Layout.cornerRadius
     button.snp.makeConstraints { (make) in
@@ -92,7 +94,9 @@ extension UIButton {
     button.setActionHandler(controlEvents: .touchUpInside, ForAction: action)
     return button
   }
+  
 }
+
 extension UIInputView {
   static func makeCommonInput(_ placeholder: String? = "") -> UIInputView {
     let input = UIInputView(frame: .zero)
@@ -105,6 +109,7 @@ extension UIInputView {
 }
 
 extension UIStackView {
+  
   static func makeHorizontalStack() -> UIStackView {
     let stack = UIStackView()
     stack.distribution = .fillEqually
