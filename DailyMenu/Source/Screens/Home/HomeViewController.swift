@@ -1,9 +1,8 @@
-//
-//  HomeViewController.swift
+//  Created by Vladimir on 11/5/19.
+//  Copyright © 2019 epam. All rights reserved.
 //
 
 
-import Foundation
 import UIKit
 
 final class HomeViewController: UIViewController {
@@ -23,6 +22,7 @@ final class HomeViewController: UIViewController {
 
     viewModel.view = self
   }
+
 }
 
 //MARK: -  HomeView

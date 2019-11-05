@@ -1,9 +1,8 @@
-//
-//  CartViewController.swift
+//  Created by Vladimir on 11/5/19.
+//  Copyright © 2019 epam. All rights reserved.
 //
 
 
-import Foundation
 import UIKit
 
 final class CartViewController: UIViewController {
@@ -22,7 +21,10 @@ final class CartViewController: UIViewController {
     super.viewDidLoad()
 
     viewModel.view = self
+    
+    view.backgroundColor = .white
   }
+
 }
 
 //MARK: -  CartView

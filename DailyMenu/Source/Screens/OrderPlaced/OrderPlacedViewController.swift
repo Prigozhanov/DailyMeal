@@ -1,9 +1,8 @@
-//
-//  OrderPlacedViewController.swift
+//  Created by Vladimir on 11/5/19.
+//  Copyright © 2019 epam. All rights reserved.
 //
 
 
-import Foundation
 import UIKit
 
 final class OrderPlacedViewController: UIViewController {
@@ -23,6 +22,7 @@ final class OrderPlacedViewController: UIViewController {
 
     viewModel.view = self
   }
+
 }
 
 //MARK: -  OrderPlacedView

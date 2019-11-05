@@ -30,6 +30,7 @@ final class ${module_name}ViewController: UIViewController {
 
     viewModel.view = self
   }
+
 }
 
 //MARK: -  ${module_name}View

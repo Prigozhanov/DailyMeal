@@ -1,6 +1,7 @@
+//  Created by Vladimir on 11/5/19.
+//  Copyright © 2019 epam. All rights reserved.
 //
-//  LoginViewController.swift
-//
+
 
 import UIKit
 
@@ -22,6 +23,19 @@ final class LoginViewController: UIViewController {
     viewModel.view = self
     
     self.view.backgroundColor = .white
+    
+    let stack = UIStackView.makeVerticalStack()
+    view.addSubview(stack)
+    stack.snp.makeConstraints { (make) in
+        make.center.equalTo(self.view)
+        make.leading.equalTo(self.view).offset(50)
+        make.trailing.equalTo(self.view).offset(-50)
+        make.height.equalTo(150)
+    }
+    stack.alignment = .fill
+    stack.spacing = 40
+    stack.addArrangedSubview(UIInputView.makeCommonInput("+1"))
+    stack.addArrangedSubview(UIInputView.makeCommonInput("Password"))
   }
 }
 

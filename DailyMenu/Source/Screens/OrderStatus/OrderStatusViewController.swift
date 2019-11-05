@@ -1,9 +1,8 @@
-//
-//  OrderStatusViewController.swift
+//  Created by Vladimir on 11/5/19.
+//  Copyright © 2019 epam. All rights reserved.
 //
 
 
-import Foundation
 import UIKit
 
 final class OrderStatusViewController: UIViewController {

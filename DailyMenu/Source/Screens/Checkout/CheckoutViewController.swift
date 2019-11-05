@@ -1,9 +1,8 @@
-//
-//  CheckoutViewController.swift
+//  Created by Vladimir on 11/5/19.
+//  Copyright © 2019 epam. All rights reserved.
 //
 
 
-import Foundation
 import UIKit
 
 final class CheckoutViewController: UIViewController {
@@ -23,6 +22,7 @@ final class CheckoutViewController: UIViewController {
 
     viewModel.view = self
   }
+
 }
 
 //MARK: -  CheckoutView

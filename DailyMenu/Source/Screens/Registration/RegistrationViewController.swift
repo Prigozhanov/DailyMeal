@@ -1,5 +1,5 @@
-//
-//  RegistrationViewController.swift
+//  Created by Vladimir on 11/5/19.
+//  Copyright © 2019 epam. All rights reserved.
 //
 
 
@@ -23,6 +23,7 @@ final class RegistrationViewController: UIViewController {
 
     viewModel.view = self
   }
+
 }
 
 //MARK: -  RegistrationView
