@@ -1,17 +1,17 @@
-//
-//  FontFamily.swift
-//  DailyMenu
-//
-//  Created by Vladimir on 10/27/19.
-//  Copyright © 2019 epam. All rights reserved.
-//
+//  Created by Uladzimir Pryhazhanau
+//  2019
+
 
 import UIKit
 
 extension FontFamily {
   
-  public static var hugeBoldFont: UIFont? {
+  public static var hugeBold: UIFont? {
     return Poppins.bold.font(size: 35)
+  }
+  
+  public static var regular: UIFont? {
+    return Poppins.regular.font(size: 15)
   }
   
 }

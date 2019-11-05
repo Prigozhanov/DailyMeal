@@ -1,10 +1,6 @@
-//
-//  RestaurantCell.swift
-//  DailyMenu
-//
-//  Created by Vladimir on 10/26/19.
-//  Copyright © 2019 epam. All rights reserved.
-//
+//  Created by Uladzimir Pryhazhanau
+//  2019
+
 
 import Foundation
 import TableKit
@@ -94,7 +90,7 @@ extension RestaurantCell: ConfigurableCell {
     
     restaurantNameLabel = UILabel.makeLargeText(item.name)
     restaurantInfoView.addSubview(restaurantNameLabel)
-    restaurantNameLabel.font = FontFamily.hugeBoldFont
+    restaurantNameLabel.font = FontFamily.hugeBold
     restaurantNameLabel.snp.makeConstraints {
       $0.top.equalToSuperview()
       $0.leading.equalTo(restaurantLogoImageView.snp.trailing).offset(20)

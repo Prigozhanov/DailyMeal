@@ -1,7 +1,5 @@
-//
-//  OrderPlacedViewController.swift
-//  Daily Menu
-//
+//  Created by Uladzimir Pryhazhanau
+//  2019
 
 
 import UIKit
