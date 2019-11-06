@@ -28,6 +28,18 @@ internal enum Asset {
     internal static let white = ColorAsset(name: "white")
   }
   internal enum Images {
+    internal static let iconBurger = ImageAsset(name: "icon_burger")
+    internal static let iconChicken = ImageAsset(name: "icon_chicken")
+    internal static let iconDesert = ImageAsset(name: "icon_desert")
+    internal static let iconFries = ImageAsset(name: "icon_fries")
+    internal static let iconHotdog = ImageAsset(name: "icon_hotdog")
+    internal static let iconLobstar = ImageAsset(name: "icon_lobstar")
+    internal static let iconPizza = ImageAsset(name: "icon_pizza")
+    internal static let iconSanwich = ImageAsset(name: "icon_sanwich")
+    internal static let iconSteak = ImageAsset(name: "icon_steak")
+    internal static let iconSushi = ImageAsset(name: "icon_sushi")
+    internal static let iconTaco = ImageAsset(name: "icon_taco")
+    internal static let imagePastry = ImageAsset(name: "image_pastry")
     internal static let iconBack = ImageAsset(name: "icon_Back")
     internal static let iconArrowDown = ImageAsset(name: "icon_arrow_down")
     internal static let iconCheck = ImageAsset(name: "icon_check")
