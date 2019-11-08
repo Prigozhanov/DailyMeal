@@ -27,4 +27,9 @@ extension UIView {
     layer.shadowRadius = radius
   }
   
+  func setBorder(width: CGFloat, color: CGColor) {
+    layer.borderColor = color
+    layer.borderWidth = width
+  }
+  
 }

@@ -15,6 +15,8 @@ protocol RestaurantsViewModel {
   var view: RestaurantsView? { get set }
   
   var restaurants: [Restaurant] { get }
+  
+  var filterDidSelected: Bool { get set }
 }
 
 //MARK: - Implementation
@@ -23,6 +25,8 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
   weak var view: RestaurantsView?
   
   var restaurants: [Restaurant] = []
+  
+  var filterDidSelected: Bool = false
   
   init() {
     let path = Bundle.main.path(forResource: "restaurants", ofType: "json")
