@@ -33,7 +33,7 @@ internal enum Asset {
     internal static let iconDeserts = ImageAsset(name: "icon_deserts")
     internal static let iconFries = ImageAsset(name: "icon_fries")
     internal static let iconHotdog = ImageAsset(name: "icon_hotdog")
-    internal static let iconLobastar = ImageAsset(name: "icon_lobastar")
+    internal static let iconLobstar = ImageAsset(name: "icon_lobstar")
     internal static let iconPastry = ImageAsset(name: "icon_pastry")
     internal static let iconPizza = ImageAsset(name: "icon_pizza")
     internal static let iconSandwich = ImageAsset(name: "icon_sandwich")
