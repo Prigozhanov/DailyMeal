@@ -4,3 +4,7 @@
 //
 
 import Foundation
+
+enum FoodCategory: String {
+    case Burger, Chicken, Desert, Fries, Hotdog, Lobastar, Pizza, Sandwich, Steak, Sushi, Taco, Pastry
+}

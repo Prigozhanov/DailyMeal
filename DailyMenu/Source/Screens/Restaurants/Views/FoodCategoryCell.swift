@@ -5,17 +5,21 @@
 
 import UIKit
 
-class RestaurantsFilterCell: BaseCollectionCell {
+class FoodCategoryCell: BaseCollectionCell {
     
     struct Item {
         let image: UIImage
-        let title: String
+        let category: FoodCategory
         let subtitle: String
     }
     
     enum State {
         case normal, selected, outOfFocus
     }
+    
+    private var state: State = .normal
+    
+    var category: FoodCategory!
     
     private let cardView: UIView = {
         let view = UIView()
@@ -34,14 +38,12 @@ class RestaurantsFilterCell: BaseCollectionCell {
     private let filterNameLabel = UILabel.makeSmallText()
 
     private let restaurantCountLabel: UILabel = {
-        let label = UILabel.makeSmallText("{count} Restaurants")
+        let label = UILabel.makeExtraSmallText("{count} Restaurants")
         label.textColor = Colors.gray.color
         return label
     }()
     
     private let borderView = UIView()
-    
-    private var state: State = .normal
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -88,9 +90,9 @@ class RestaurantsFilterCell: BaseCollectionCell {
     
     func configure(with item: Item) {
         imageView.image = item.image
-        filterNameLabel.text = item.title
+        filterNameLabel.text = item.category.rawValue
         restaurantCountLabel.text = item.subtitle
-        
+        category = item.category
         if isSelected {
             setState(.selected)
         } else {
@@ -101,15 +103,16 @@ class RestaurantsFilterCell: BaseCollectionCell {
     func setState(_ state: State) {
         switch state {
         case .normal:
-            borderView.isHidden = true
+            borderView.alpha = 0
             filterNameLabel.textColor = Colors.black.color
             cardView.alpha = 1
         case .selected:
             borderView.isHidden = false
+            borderView.alpha = 1
             filterNameLabel.textColor = Colors.blue.color
             cardView.alpha = 1
         case .outOfFocus:
-            borderView.isHidden = true
+            borderView.alpha = 0
             filterNameLabel.textColor = Colors.black.color
             cardView.alpha = 0.5
         }
