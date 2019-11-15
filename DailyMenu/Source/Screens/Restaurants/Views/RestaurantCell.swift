@@ -17,7 +17,7 @@ class RestaurantCell: BaseTableCell {
     typealias CellData = RestaurantCellItem
     
     
-    private let deliveryFeeLabel = UILabel.makeMediumText()
+    private let deliveryFeeValueLabel = UILabel.makeMediumText()
     private var restaurantNameLabel = UILabel.makeMediumText()
      
     private let edgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
@@ -95,9 +95,9 @@ class RestaurantCell: BaseTableCell {
             $0.leading.equalTo(restaurantLogoImageView.snp.trailing).offset(20)
         }
         
-        deliveryFeeLabel.textColor = Colors.blue.color
-        restaurantInfoView.addSubview(deliveryFeeLabel)
-        deliveryFeeLabel.snp.makeConstraints {
+        deliveryFeeValueLabel.textColor = Colors.blue.color
+        restaurantInfoView.addSubview(deliveryFeeValueLabel)
+        deliveryFeeValueLabel.snp.makeConstraints {
             $0.trailing.equalToSuperview()
             $0.top.equalToSuperview()
         }
@@ -105,7 +105,7 @@ class RestaurantCell: BaseTableCell {
         let deliveryFeeLabel = UILabel.makeSmallText("Delivery fee")
         restaurantInfoView.addSubview(deliveryFeeLabel)
         deliveryFeeLabel.snp.makeConstraints {
-            $0.top.equalTo(deliveryFeeLabel.snp.bottom)
+            $0.top.equalTo(deliveryFeeValueLabel.snp.bottom)
             $0.trailing.equalToSuperview()
         }
     }
@@ -120,7 +120,7 @@ extension RestaurantCell: ConfigurableCell {
     
     func configure(with item: RestaurantCellItem) {
         restaurantNameLabel.text = item.name.uppercased()
-        deliveryFeeLabel.text = "BYN \(item.deliveryFee)"
+        deliveryFeeValueLabel.text = "BYN \(item.deliveryFee)"
     }
     
     
