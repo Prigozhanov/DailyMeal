@@ -1,9 +1,9 @@
-//  Created by Vladimir on 11/5/19.
+//
+//  Created by Vladimir on 11/14/19.
 //  Copyright © 2019 epam. All rights reserved.
 //
 
 import UIKit
-
 
 extension UIInputView {
   static func makeCommonInput(_ placeholder: String? = "") -> UIInputView {

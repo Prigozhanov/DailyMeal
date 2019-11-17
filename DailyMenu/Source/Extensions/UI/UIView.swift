@@ -1,9 +1,9 @@
-//  Created by Vladimir on 11/5/19.
+//
+//  Created by Vladimir on 11/14/19.
 //  Copyright © 2019 epam. All rights reserved.
 //
 
 import UIKit
-
 
 extension UIView {
   
@@ -25,6 +25,11 @@ extension UIView {
     layer.shadowOffset = offset
     layer.shadowOpacity = opacity
     layer.shadowRadius = radius
+  }
+  
+  func setBorder(width: CGFloat, color: CGColor) {
+    layer.borderColor = color
+    layer.borderWidth = width
   }
   
 }

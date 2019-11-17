@@ -1,7 +1,7 @@
-//  Created by Vladimir on 11/5/19.
+//
+//  Created by Vladimir on 11/14/19.
 //  Copyright © 2019 epam. All rights reserved.
 //
-
 
 import UIKit
 import SnapKit
@@ -27,7 +27,8 @@ final class GreetingViewController: UIViewController {
     let signUpButton = UIButton.makeCustomButton(
       title: "Sign up",
       titleColor: Colors.blue.color,
-      cornerRadius: 5
+      cornerRadius: 5,
+      font: FontFamily.semibold
     ) { [weak self] button in
       self?.show(SignUpViewController(viewModel: SignUpViewModelImplementation()), sender: nil)
     }
@@ -40,7 +41,7 @@ final class GreetingViewController: UIViewController {
     return view
   }()
   
-  lazy var skipButton = UIButton.makeCustomButton(title: "Skip >", titleColor: Colors.gray.color) { [weak self] _ in
+    lazy var skipButton = UIButton.makeCustomButton(title: "Skip >", titleColor: Colors.gray.color, font: FontFamily.light) { [weak self] _ in
       self?.dismiss(animated: true)
     }
   
