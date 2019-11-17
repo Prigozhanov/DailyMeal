@@ -6,16 +6,15 @@
 import Foundation
 import TableKit
 
-struct RestaurantCellItem {
-    let name: String
-    let rate: String
-    let deliveryFee: String
-}
-
 class RestaurantCell: BaseTableCell {
-    
-    typealias CellData = RestaurantCellItem
-    
+        
+    struct Item {
+        let name: String
+        let rate: String
+        let deliveryFee: String
+    }
+
+    typealias CellData = RestaurantCell.Item
     
     private let deliveryFeeValueLabel = UILabel.makeMediumText()
     private var restaurantNameLabel = UILabel.makeMediumText()
@@ -118,7 +117,7 @@ extension RestaurantCell: ConfigurableCell {
         return 300
     }
     
-    func configure(with item: RestaurantCellItem) {
+    func configure(with item: RestaurantCell.Item) {
         restaurantNameLabel.text = item.name.uppercased()
         deliveryFeeValueLabel.text = "BYN \(item.deliveryFee)"
     }

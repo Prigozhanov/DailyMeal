@@ -5,7 +5,6 @@
 
 import UIKit
 
-
 extension UIInputView {
   static func makeCommonInput(_ placeholder: String? = "") -> UIInputView {
     let input = UIInputView(frame: .zero)

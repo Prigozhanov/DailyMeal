@@ -6,5 +6,5 @@
 import Foundation
 
 enum FoodCategory: String {
-    case Burger, Chicken, Desert, Fries, Hotdog, Lobastar, Pizza, Sandwich, Steak, Sushi, Taco, Pastry
+    case burger, chicken, desert, fries, hotdog, lobastar, pizza, sandwich, steak, sushi, taco, pastry
 }

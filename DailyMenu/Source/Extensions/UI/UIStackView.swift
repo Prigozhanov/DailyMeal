@@ -5,7 +5,6 @@
 
 import UIKit
 
-
 extension UIStackView {
   
   static func makeHorizontalStack() -> UIStackView {

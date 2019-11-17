@@ -5,7 +5,6 @@
 
 import UIKit
 
-
 extension UILabel {
     
     static func makeExtraSmallText(_ text: String? = nil) -> UILabel {

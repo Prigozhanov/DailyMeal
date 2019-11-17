@@ -20,6 +20,7 @@ protocol RestaurantsViewModel {
     var filterDidSelected: Bool { get set }
     
     var foodCategory: FoodCategory? { get set }
+    
 }
 
 //MARK: - Implementation

@@ -9,12 +9,36 @@ import SnapKit
 
 final class RestaurantsViewController: UIViewController {
     
+    private let filterCellIdentifier = "FilterCell"
+    
     private var viewModel: RestaurantsViewModel
     
-    private var tableView: UITableView!
-    private var tableDirector: TableDirector!
-    private var collectionView: UICollectionView!
-    private var searchView: UIView!
+    private var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = Colors.lightGray.color
+        
+        tableView.separatorStyle = .none
+        tableView.estimatedSectionHeaderHeight = 0
+        tableView.estimatedSectionFooterHeight = 0
+        return tableView
+    }()
+    
+    private lazy var tableDirector: TableDirector = TableDirector(tableView: self.tableView, shouldUsePrototypeCellHeightCalculation: true)
+    
+    private lazy var collectionView: UICollectionView = {
+        let collectionViewFlow = UICollectionViewLayout()
+        let collectionViewFlowLayout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 100), collectionViewLayout: collectionViewFlow)
+        collectionViewFlowLayout.scrollDirection = .horizontal
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        collectionView.backgroundColor = Colors.lightGray.color
+        collectionView.collectionViewLayout = collectionViewFlowLayout
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(FoodCategoryCell.self, forCellWithReuseIdentifier: self.filterCellIdentifier)
+        return collectionView
+    }()
     
     init(viewModel: RestaurantsViewModel) {
         self.viewModel = viewModel
@@ -26,27 +50,11 @@ final class RestaurantsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .white
         
         viewModel.view = self
         
-        setupFilterCollectionView()
-        setupTableView()
-        
-        //    viewModel.onCategoryUpdate = {
-        //
-        //    }
-        
-    }
-    
-    func makeRowForRestaurant(restaurant: Restaurant) -> TableRow<RestaurantCell>{
-        let row = TableRow<RestaurantCell>(item: RestaurantCellItem(name: restaurant.alias, rate: restaurant.rate, deliveryFee: "2.00"))
-        return row
-    }
-    
-    func setupTableView() {
-        tableView = UITableView()
-        tableView.backgroundColor = Colors.lightGray.color
         self.view.addSubview(tableView)
         tableView.snp.makeConstraints {
             $0.leading.equalToSuperview()
@@ -55,33 +63,14 @@ final class RestaurantsViewController: UIViewController {
             $0.top.equalToSuperview()
         }
         
-        tableView.separatorStyle = .none
-        tableView.estimatedSectionHeaderHeight = 0
-        tableView.estimatedSectionFooterHeight = 0
-        
-        tableDirector = TableDirector(tableView: tableView, shouldUsePrototypeCellHeightCalculation: true)
-        
-        let rows = viewModel.restaurants.map { makeRowForRestaurant(restaurant: $0) }
+        let rows = viewModel.restaurants.map {
+            TableRow<RestaurantCell>(item: RestaurantCell.Item(name: $0.alias, rate: $0.rate, deliveryFee: "2.00"))
+        }
         let section = TableSection(headerView: collectionView, footerView: nil)
         section.append(rows: rows)
         
-        
         tableDirector.append(section: section)
         tableDirector.reload()
-    }
-    
-    func setupFilterCollectionView() {
-        let collectionViewFlow = UICollectionViewLayout()
-        let collectionViewFlowLayout = UICollectionViewFlowLayout()
-        collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 100), collectionViewLayout: collectionViewFlow)
-        collectionViewFlowLayout.scrollDirection = .horizontal
-        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        collectionView.backgroundColor = Colors.lightGray.color
-        collectionView.collectionViewLayout = collectionViewFlowLayout
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(FoodCategoryCell.self, forCellWithReuseIdentifier: "FilterCell")
     }
     
 }
@@ -100,19 +89,18 @@ extension RestaurantsViewController: UICollectionViewDataSource {
     
     private var categoryItems: [(image: UIImage, category: FoodCategory)] {
         return [
-            (image: Images.FilterIcons.burger.image, .Burger),
-            (image: Images.FilterIcons.chicken.image, .Chicken),
-            (image: Images.FilterIcons.deserts.image, .Desert),
-            (image: Images.FilterIcons.fries.image, .Fries),
-            (image: Images.FilterIcons.hotdog.image, .Hotdog),
-            (image: Images.FilterIcons.lobstar.image, .Lobastar),
-            (image: Images.FilterIcons.pizza.image, .Pizza),
-            (image: Images.FilterIcons.sandwich.image, .Sandwich),
-            (image: Images.FilterIcons.steak.image, .Steak),
-            (image: Images.FilterIcons.sushi.image, .Sushi),
-            (image: Images.FilterIcons.taco.image, .Taco),
-            (image: Images.FilterIcons.pastry.image, .Pastry),
-            
+            (image: Images.FilterIcons.burger.image, .burger),
+            (image: Images.FilterIcons.chicken.image, .chicken),
+            (image: Images.FilterIcons.deserts.image, .desert),
+            (image: Images.FilterIcons.fries.image, .fries),
+            (image: Images.FilterIcons.hotdog.image, .hotdog),
+            (image: Images.FilterIcons.lobstar.image, .lobastar),
+            (image: Images.FilterIcons.pizza.image, .pizza),
+            (image: Images.FilterIcons.sandwich.image, .sandwich),
+            (image: Images.FilterIcons.steak.image, .steak),
+            (image: Images.FilterIcons.sushi.image, .sushi),
+            (image: Images.FilterIcons.taco.image, .taco),
+            (image: Images.FilterIcons.pastry.image, .pastry)
         ]
     }
     
@@ -123,7 +111,7 @@ extension RestaurantsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let filterItem = categoryItems[indexPath.item]
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilterCell", for: indexPath) as! FoodCategoryCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: filterCellIdentifier, for: indexPath) as! FoodCategoryCell
         
         let item = FoodCategoryCell.Item(image: filterItem.image, category: filterItem.category, subtitle: "10 Restaurants")
         cell.configure(with: item)
@@ -159,13 +147,10 @@ extension RestaurantsViewController: UICollectionViewDelegate {
         
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? FoodCategoryCell else { return }
-            UIView.transition(with: cell.contentView, duration: 0.3, options: .transitionCrossDissolve, animations: {
-                cell.setState(.outOfFocus)
-            })
+            cell.setState(.outOfFocus, animated: true)
+            
         }
-        UIView.transition(with: cell.contentView, duration: 0.3, options: .transitionCrossDissolve, animations: {
-            cell.setState(.selected)
-        })
+        cell.setState(.selected, animated: true)
         
     }
     

@@ -36,7 +36,7 @@ class FoodCategoryCell: BaseCollectionCell {
     }()
     
     private let filterNameLabel = UILabel.makeSmallText()
-
+    
     private let restaurantCountLabel: UILabel = {
         let label = UILabel.makeExtraSmallText("{count} Restaurants")
         label.textColor = Colors.gray.color
@@ -57,7 +57,7 @@ class FoodCategoryCell: BaseCollectionCell {
     
     override func setup() {
         backgroundColor = Colors.lightGray.color
-       
+        
         contentView.addSubview(cardView)
         cardView.snp.makeConstraints { $0.edges.equalToSuperview() }
         
@@ -74,7 +74,7 @@ class FoodCategoryCell: BaseCollectionCell {
             $0.leading.equalTo(imageView.snp.trailing).offset(Layout.commonMargin)
             $0.top.equalTo(Layout.largeMargin)
         }
-            
+        
         cardView.addSubview(restaurantCountLabel)
         restaurantCountLabel.snp.makeConstraints {
             $0.leading.equalTo(imageView.snp.trailing).offset(Layout.commonMargin)
@@ -100,22 +100,24 @@ class FoodCategoryCell: BaseCollectionCell {
         }
     }
     
-    func setState(_ state: State) {
-        switch state {
-        case .normal:
-            borderView.alpha = 0
-            filterNameLabel.textColor = Colors.black.color
-            cardView.alpha = 1
-        case .selected:
-            borderView.isHidden = false
-            borderView.alpha = 1
-            filterNameLabel.textColor = Colors.blue.color
-            cardView.alpha = 1
-        case .outOfFocus:
-            borderView.alpha = 0
-            filterNameLabel.textColor = Colors.black.color
-            cardView.alpha = 0.5
-        }
+    func setState(_ state: State, animated: Bool? = false) {
+        UIView.transition(with: contentView, duration: animated == true ? 0.3 : 0, options: .transitionCrossDissolve, animations: { [weak self] in
+            switch state {
+            case .normal:
+                self?.borderView.alpha = 0
+                self?.filterNameLabel.textColor = Colors.black.color
+                self?.cardView.alpha = 1
+            case .selected:
+                self?.borderView.isHidden = false
+                self?.borderView.alpha = 1
+                self?.filterNameLabel.textColor = Colors.blue.color
+                self?.cardView.alpha = 1
+            case .outOfFocus:
+                self?.borderView.alpha = 0
+                self?.filterNameLabel.textColor = Colors.black.color
+                self?.cardView.alpha = 0.5
+            }
+        })
     }
     
 }
