@@ -66,6 +66,7 @@
 		E7604578237E984700BF252E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7604574237E984700BF252E /* LoginViewModel.swift */; };
 		E7604579237E984700BF252E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7604575237E984700BF252E /* LoginViewController.swift */; };
 		E768FC9B2353DD2B0042A696 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = E768FC9A2353DD2B0042A696 /* Common.swift */; };
+		E76A67412385DBA6001FEF9B /* RestaurantsSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76A67402385DBA6001FEF9B /* RestaurantsSearchView.swift */; };
 		E779CDB4235B72FE0004E520 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779CDB3235B72FE0004E520 /* AppCoordinator.swift */; };
 		E779CDDB235CE9380004E520 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779CDDA235CE9380004E520 /* Assets.swift */; };
 		E7988BD923799A5600F0E8BD /* BaseCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7988BD823799A5600F0E8BD /* BaseCollectionCell.swift */; };
@@ -153,6 +154,7 @@
 		E7604574237E984700BF252E /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E7604575237E984700BF252E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E768FC9A2353DD2B0042A696 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		E76A67402385DBA6001FEF9B /* RestaurantsSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchView.swift; sourceTree = "<group>"; };
 		E779CDB3235B72FE0004E520 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		E779CDDA235CE9380004E520 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		E7988BD823799A5600F0E8BD /* BaseCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionCell.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 			children = (
 				E7CA200423649FA2004AA1FC /* RestaurantCell.swift */,
 				E7A942342375BDDB00450D78 /* FoodCategoryCell.swift */,
+				E76A67402385DBA6001FEF9B /* RestaurantsSearchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -781,6 +784,7 @@
 				E7037361234FE0D600852B04 /* UIButton.swift in Sources */,
 				E71139E22346AC7D00889AE2 /* RestaurantViewModel.swift in Sources */,
 				E71139D22346AC7400889AE2 /* CartViewModel.swift in Sources */,
+				E76A67412385DBA6001FEF9B /* RestaurantsSearchView.swift in Sources */,
 				E71139B62346AA1100889AE2 /* RegistrationViewController.swift in Sources */,
 				E71139DA2346AC7400889AE2 /* GreetingViewController.swift in Sources */,
 				E718691D237DC00300059766 /* BaseTableCell.swift in Sources */,
@@ -952,8 +956,8 @@
 			baseConfigurationReference = F6978153A996CCA2C94A5A5E /* Pods-DailyMenu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 53APD5F9YQ;
 				INFOPLIST_FILE = DailyMenu/Resources/Info.plist;
@@ -965,7 +969,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.epam.daily-menu";
 				PRODUCT_NAME = "Daily Menu";
-				PROVISIONING_PROFILE_SPECIFIER = "EPAM IN-HOUSE 4 Wildcard-revokable";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -976,8 +980,8 @@
 			baseConfigurationReference = 75F490B44B3E77573DC08F59 /* Pods-DailyMenu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 53APD5F9YQ;
 				INFOPLIST_FILE = DailyMenu/Resources/Info.plist;
@@ -989,7 +993,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.epam.daily-menu";
 				PRODUCT_NAME = "Daily Menu";
-				PROVISIONING_PROFILE_SPECIFIER = "EPAM IN-HOUSE 4 Wildcard-revokable";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -56,7 +56,7 @@ class FoodCategoryCell: BaseCollectionCell {
     }
     
     override func setup() {
-        backgroundColor = Colors.lightGray.color
+        backgroundColor = Colors.commonBackground.color
         
         contentView.addSubview(cardView)
         cardView.snp.makeConstraints { $0.edges.equalToSuperview() }

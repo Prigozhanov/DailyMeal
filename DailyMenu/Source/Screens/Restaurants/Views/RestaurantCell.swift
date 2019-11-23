@@ -37,7 +37,7 @@ class RestaurantCell: BaseTableCell {
         var restaurantRateView: UIImageView
         
         selectionStyle = .none
-        contentView.backgroundColor = Colors.lightGray.color
+        contentView.backgroundColor = Colors.commonBackground.color
         
         containerView.frame = contentView.frame
         contentView.addSubview(containerView)
