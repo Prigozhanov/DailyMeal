@@ -95,6 +95,7 @@ final class RestaurantsViewController: UIViewController {
             $0.edges.equalToSuperview()
         }
         tableView.contentInset = UIEdgeInsets(top: 150, left: 0, bottom: 0, right: 0)
+        tableView.scrollIndicatorInsets = tableView.contentInset
         tableView.setContentOffset(CGPoint(x: 0, y: -150), animated: false)
         
         view.addSubview(headerView)
@@ -244,8 +245,12 @@ extension RestaurantsViewController: UIScrollViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         lastScrollOffset = 0
         isDrugging = false
+        if tableView.contentOffset.y < view.safeAreaInsets.top {
+            openHeader()
+            return
+        }
         
-        if  isHeaderAllowToOpen ||
+        if isHeaderAllowToOpen ||
             isHeaderAllowToOpen, lastScrollDirection == .down {
             openHeader()
         } else if lastScrollDirection == .up,
