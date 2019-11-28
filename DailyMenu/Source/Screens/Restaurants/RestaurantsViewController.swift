@@ -26,17 +26,17 @@ final class RestaurantsViewController: UIViewController {
     private lazy var headerView: UIView = {
         let view = UIView()
         view.backgroundColor = Colors.commonBackground.color
-        view.addSubview(self.categoryCollectionView)
-        self.categoryCollectionView.snp.makeConstraints {
+        view.addSubview(categoryCollectionView)
+        categoryCollectionView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalToSuperview().inset(10)
             $0.height.equalTo(60)
         }
         
-        view.addSubview(self.searchView)
-        self.searchView.snp.makeConstraints {
+        view.addSubview(searchView)
+        searchView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
-            $0.top.equalTo(self.categoryCollectionView.snp.bottom).offset(10)
+            $0.top.equalTo(categoryCollectionView.snp.bottom).offset(10)
         }
         return view
     }()
@@ -52,13 +52,13 @@ final class RestaurantsViewController: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(FoodCategoryCell.self, forCellWithReuseIdentifier: self.filterCellIdentifier)
+        collectionView.register(FoodCategoryCell.self, forCellWithReuseIdentifier: filterCellIdentifier)
         return collectionView
     }()
     
     private lazy var searchView = RestaurantsSearchView()
     
-    private lazy var tableDirector: TableDirector = TableDirector(tableView: self.tableView, scrollDelegate: self, shouldUsePrototypeCellHeightCalculation: true)
+    private lazy var tableDirector: TableDirector = TableDirector(tableView: tableView, scrollDelegate: self, shouldUsePrototypeCellHeightCalculation: true)
     
     init(viewModel: RestaurantsViewModel) {
         self.viewModel = viewModel
@@ -299,14 +299,14 @@ extension RestaurantsViewController: UIScrollViewDelegate {
     }
     
     private func openHeader() {
-        self.headerViewTopConstraint?.constant = self.headerViewBottomBorder! - view.safeAreaInsets.top
+        headerViewTopConstraint?.constant = headerViewBottomBorder! - view.safeAreaInsets.top
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: { [unowned self] in
             self.view.layoutIfNeeded()
         })
     }
     
     private func closeHeader() {
-        self.headerViewTopConstraint?.constant = self.headerViewUpperBorder! - view.safeAreaInsets.top
+        headerViewTopConstraint?.constant = headerViewUpperBorder! - view.safeAreaInsets.top
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: { [unowned self] in
             self.view.layoutIfNeeded()
         })
