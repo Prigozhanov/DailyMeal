@@ -33,6 +33,7 @@ private extension AppCoordinator {
       exploreTab,
       settingsTab
     ]
+    tabbar.selectedIndex = 1
     return tabbar
   }
   
