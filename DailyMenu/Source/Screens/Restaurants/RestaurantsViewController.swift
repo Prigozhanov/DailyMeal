@@ -25,6 +25,27 @@ final class RestaurantsViewController: UIViewController {
     
     private lazy var headerView: UIView = {
         let view = UIView()
+        let label = UILabel.makeLargeText("What would you like to eat?")
+        label.numberOfLines = 2
+        label.font = FontFamily.Poppins.bold.font(size: 24)
+        label.textColor = Colors.charcoal.color
+        view.addSubview(label)
+        label.snp.makeConstraints {
+            $0.leading.top.equalToSuperview().inset(Layout.largeMargin)
+            $0.width.equalTo(200)
+        }
+        
+        let notificationButton = UIButton.makeCommonButton { _ in }
+        notificationButton.setImage(Images.Icons.notification.image, for: .normal)
+        view.addSubview(notificationButton)
+        notificationButton.snp.makeConstraints {
+            $0.trailing.top.equalToSuperview().inset(Layout.largeMargin)
+        }
+        return view
+    }()
+    
+    private lazy var filterView: UIView = {
+        let view = UIView()
         view.backgroundColor = Colors.commonBackground.color
         view.addSubview(categoryCollectionView)
         categoryCollectionView.snp.makeConstraints {
@@ -84,7 +105,7 @@ final class RestaurantsViewController: UIViewController {
         navigationItem.title = "What would you like to eat"
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        view.backgroundColor = .white
+        view.backgroundColor = Colors.commonBackground.color
         
         viewModel.view = self
         
@@ -94,25 +115,25 @@ final class RestaurantsViewController: UIViewController {
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        tableView.contentInset = UIEdgeInsets(top: 150, left: 0, bottom: 0, right: 0)
-        tableView.scrollIndicatorInsets = tableView.contentInset
-        tableView.setContentOffset(CGPoint(x: 0, y: -150), animated: false)
+        
+        view.addSubview(filterView)
+        filterView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(150)
+        }
         
         view.addSubview(headerView)
         headerView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(150)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.height.lessThanOrEqualTo(100)
         }
-        headerViewTopConstraint = headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-        headerViewTopConstraint?.isActive = true
+        headerView.backgroundColor = Colors.commonBackground.color
         
-        let topView = UIView()
-        view.addSubview(topView)
-        topView.snp.makeConstraints {
-            $0.leading.top.trailing.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top)
-        }
-        topView.backgroundColor = Colors.commonBackground.color
+        
+        
+        headerViewTopConstraint = filterView.topAnchor.constraint(equalTo: headerView.bottomAnchor)
+        headerViewTopConstraint?.isActive = true
         
         let rows = viewModel.restaurants.map {
             TableRow<RestaurantCell>(item: RestaurantCell.Item(name: $0.alias, rate: $0.rate, deliveryFee: "2.00"))
@@ -124,9 +145,16 @@ final class RestaurantsViewController: UIViewController {
         tableDirector.reload()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.contentInset = UIEdgeInsets(top: headerView.frame.height + filterView.frame.height - view.safeAreaInsets.top, left: 0, bottom: 0, right: 0)
+        tableView.scrollIndicatorInsets = tableView.contentInset
+        tableView.setContentOffset(CGPoint(x: 0, y: -(tableView.contentInset.top + view.safeAreaInsets.top)), animated: false)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
-        headerViewUpperBorder = view.safeAreaInsets.top - headerView.frame.height
-        headerViewBottomBorder = view.safeAreaInsets.top
+        headerViewUpperBorder = headerView.frame.height - filterView.frame.height
+        headerViewBottomBorder = headerView.frame.height
         
     }
     
@@ -222,15 +250,15 @@ extension RestaurantsViewController: UIScrollViewDelegate {
     }
     
     private var headerTopPosition: CGFloat {
-        return headerView.frame.minY
+        return filterView.frame.minY
     }
     
     private var headerBottomPosition: CGFloat {
-        return headerView.frame.maxY
+        return filterView.frame.maxY
     }
     
     private var headerMiddlePosition: CGFloat {
-        return headerView.frame.midY
+        return filterView.frame.midY
     }
     
     private var isHeaderAllowToOpen: Bool {
@@ -245,15 +273,12 @@ extension RestaurantsViewController: UIScrollViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         lastScrollOffset = 0
         isDrugging = false
-        if tableView.contentOffset.y < view.safeAreaInsets.top {
+        if tableView.contentOffset.y < -headerView.frame.height {
             openHeader()
             return
         }
         
-        if isHeaderAllowToOpen ||
-            isHeaderAllowToOpen, lastScrollDirection == .down {
-            openHeader()
-        } else if lastScrollDirection == .up,
+        if lastScrollDirection == .up,
             (lastScrollValue >= 5 || !isHeaderAllowToOpen) {
             closeHeader()
         } else {
@@ -279,16 +304,16 @@ extension RestaurantsViewController: UIScrollViewDelegate {
                 scrollValue > 0,
                 isDrugging {
                 headerViewTopConstraint?.constant += scrollValue
-                headerView.layoutIfNeeded()
+                filterView.layoutIfNeeded()
             }
         case .up:
             scrollValue = offsetYValue - lastScrollOffset
             if let border = headerViewUpperBorder,
-                headerView.frame.minY >= border,
+                filterView.frame.minY >= border,
                 scrollValue > 0,
                 isDrugging {
                 headerViewTopConstraint?.constant -= scrollValue
-                headerView.layoutIfNeeded()
+                filterView.layoutIfNeeded()
             }
         default:
             return
@@ -299,15 +324,15 @@ extension RestaurantsViewController: UIScrollViewDelegate {
     }
     
     private func openHeader() {
-        headerViewTopConstraint?.constant = headerViewBottomBorder! - view.safeAreaInsets.top
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: { [unowned self] in
+        headerViewTopConstraint?.constant = headerViewBottomBorder! - headerView.frame.height
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { [unowned self] in
             self.view.layoutIfNeeded()
         })
     }
     
     private func closeHeader() {
-        headerViewTopConstraint?.constant = headerViewUpperBorder! - view.safeAreaInsets.top
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: { [unowned self] in
+        headerViewTopConstraint?.constant = headerViewUpperBorder! - headerView.frame.height
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { [unowned self] in
             self.view.layoutIfNeeded()
         })
     }

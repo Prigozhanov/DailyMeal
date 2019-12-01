@@ -34,7 +34,7 @@ class ActionWrapper {
 
 extension UIButton {
   
-  static func makeCommonButton(_ text: String, action: @escaping (UIButton) -> Void) -> UIButton {
+  static func makeCommonButton(_ text: String? = nil, action: @escaping (UIButton) -> Void) -> UIButton {
     let button = UIButton()
     button.setTitle(text, for: .normal)
     button.setTitleColor(Colors.blue.color, for: .normal)

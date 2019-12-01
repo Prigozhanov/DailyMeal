@@ -65,6 +65,7 @@
 		E7604577237E984700BF252E /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7604572237E984700BF252E /* SignUpViewModel.swift */; };
 		E7604578237E984700BF252E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7604574237E984700BF252E /* LoginViewModel.swift */; };
 		E7604579237E984700BF252E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7604575237E984700BF252E /* LoginViewController.swift */; };
+		E76664462393536E0039E59B /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76664452393536E0039E59B /* UIApplication.swift */; };
 		E768FC9B2353DD2B0042A696 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = E768FC9A2353DD2B0042A696 /* Common.swift */; };
 		E76A67412385DBA6001FEF9B /* RestaurantsSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76A67402385DBA6001FEF9B /* RestaurantsSearchView.swift */; };
 		E779CDB4235B72FE0004E520 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779CDB3235B72FE0004E520 /* AppCoordinator.swift */; };
@@ -153,6 +154,7 @@
 		E7604572237E984700BF252E /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		E7604574237E984700BF252E /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E7604575237E984700BF252E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E76664452393536E0039E59B /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		E768FC9A2353DD2B0042A696 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		E76A67402385DBA6001FEF9B /* RestaurantsSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchView.swift; sourceTree = "<group>"; };
 		E779CDB3235B72FE0004E520 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 				E74832032371CA8100216927 /* UIInputView.swift */,
 				E74832052371CBB200216927 /* UIView.swift */,
 				E74832072371CBD400216927 /* UIStackView.swift */,
+				E76664452393536E0039E59B /* UIApplication.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -764,6 +767,7 @@
 				E779CDDB235CE9380004E520 /* Assets.swift in Sources */,
 				E71139D02346AC7400889AE2 /* CheckoutViewModel.swift in Sources */,
 				E71139D32346AC7400889AE2 /* HomeViewModel.swift in Sources */,
+				E76664462393536E0039E59B /* UIApplication.swift in Sources */,
 				E71139D12346AC7400889AE2 /* CartViewController.swift in Sources */,
 				E71139B52346AA1100889AE2 /* RegistrationViewModel.swift in Sources */,
 				E71139D82346AC7400889AE2 /* OrderStatusViewController.swift in Sources */,

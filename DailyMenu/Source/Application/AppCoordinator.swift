@@ -17,6 +17,8 @@ class AppCoordinator {
     window.rootViewController = makeRootViewController()
     window.makeKeyAndVisible()
     
+    UIApplication.shared.statusBar?.backgroundColor = Colors.commonBackground.color
+    
     showGreeting()
     
     return true
