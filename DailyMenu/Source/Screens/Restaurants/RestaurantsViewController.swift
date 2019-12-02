@@ -17,11 +17,11 @@ final class RestaurantsViewController: UIViewController {
     private var lastScrollDirection: ScrollDirection!
     private var lastScrollValue: CGFloat = 0
     
-    private var headerViewUpperBorder: CGFloat!
-    private var headerViewBottomBorder: CGFloat!
+    private var filterBarUpperBorder: CGFloat!
+    private var filterBarBottomBorder: CGFloat!
     
     private var isDrugging: Bool = false
-    private var headerViewTopConstraint: NSLayoutConstraint?
+    private var filterBarTopConstraint: NSLayoutConstraint?
     
     private lazy var headerView: UIView = {
         let view = UIView()
@@ -44,7 +44,7 @@ final class RestaurantsViewController: UIViewController {
         return view
     }()
     
-    private lazy var filterView: UIView = {
+    private lazy var filterBar: UIView = {
         let view = UIView()
         view.backgroundColor = Colors.commonBackground.color
         view.addSubview(categoryCollectionView)
@@ -102,9 +102,6 @@ final class RestaurantsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "What would you like to eat"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
         view.backgroundColor = Colors.commonBackground.color
         
         viewModel.view = self
@@ -113,11 +110,12 @@ final class RestaurantsViewController: UIViewController {
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
         }
         
-        view.addSubview(filterView)
-        filterView.snp.makeConstraints {
+        view.addSubview(filterBar)
+        filterBar.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(150)
         }
@@ -129,11 +127,12 @@ final class RestaurantsViewController: UIViewController {
             $0.height.lessThanOrEqualTo(100)
         }
         headerView.backgroundColor = Colors.commonBackground.color
+        filterBarTopConstraint = filterBar.topAnchor.constraint(equalTo: headerView.bottomAnchor)
+        filterBarTopConstraint?.isActive = true
         
-        
-        
-        headerViewTopConstraint = filterView.topAnchor.constraint(equalTo: headerView.bottomAnchor)
-        headerViewTopConstraint?.isActive = true
+        let statusBarBackground = UIView(frame: UIApplication.shared.statusBarFrame)
+        statusBarBackground.backgroundColor = Colors.commonBackground.color
+        view.addSubview(statusBarBackground)
         
         let rows = viewModel.restaurants.map {
             TableRow<RestaurantCell>(item: RestaurantCell.Item(name: $0.alias, rate: $0.rate, deliveryFee: "2.00"))
@@ -141,20 +140,18 @@ final class RestaurantsViewController: UIViewController {
         let section = TableSection()
         section.append(rows: rows)
         
+        tableView.contentInset = UIEdgeInsets(top: 250, left: 0, bottom: 0, right: 0)
+        tableView.scrollIndicatorInsets = tableView.contentInset
+        tableView.setContentOffset(CGPoint(x: 0, y: -250), animated: false)
+        
         tableDirector.append(section: section)
         tableDirector.reload()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.contentInset = UIEdgeInsets(top: headerView.frame.height + filterView.frame.height - view.safeAreaInsets.top, left: 0, bottom: 0, right: 0)
-        tableView.scrollIndicatorInsets = tableView.contentInset
-        tableView.setContentOffset(CGPoint(x: 0, y: -(tableView.contentInset.top + view.safeAreaInsets.top)), animated: false)
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
-        headerViewUpperBorder = headerView.frame.height - filterView.frame.height
-        headerViewBottomBorder = headerView.frame.height
+        super.viewDidAppear(animated)
+        filterBarUpperBorder = headerView.frame.height - filterBar.frame.height + view.safeAreaInsets.top
+        filterBarBottomBorder = headerView.frame.height + view.safeAreaInsets.top
         
     }
     
@@ -249,20 +246,16 @@ extension RestaurantsViewController: UIScrollViewDelegate {
         case up, down
     }
     
-    private var headerTopPosition: CGFloat {
-        return filterView.frame.minY
+    private var filterBarTopPosition: CGFloat {
+        return filterBar.frame.minY
     }
     
-    private var headerBottomPosition: CGFloat {
-        return filterView.frame.maxY
-    }
-    
-    private var headerMiddlePosition: CGFloat {
-        return filterView.frame.midY
+    private var filterBarBottomPosition: CGFloat {
+        return filterBar.frame.maxY
     }
     
     private var isHeaderAllowToOpen: Bool {
-        return headerMiddlePosition > headerViewBottomBorder
+        return filterBar.frame.midY > filterBarBottomBorder
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -274,64 +267,65 @@ extension RestaurantsViewController: UIScrollViewDelegate {
         lastScrollOffset = 0
         isDrugging = false
         if tableView.contentOffset.y < -headerView.frame.height {
-            openHeader()
+            openFilterBar()
             return
         }
         
         if lastScrollDirection == .up,
             (lastScrollValue >= 5 || !isHeaderAllowToOpen) {
-            closeHeader()
+            closeFilterBar()
         } else {
-            openHeader()
+            openFilterBar()
         }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetYValue = scrollView.contentOffset.y
-        var scrollValue: CGFloat
-        
         lastScrollDirection = lastScrollOffset > offsetYValue ? .down : .up
-        
+        moveFilterBar(by: offsetYValue, direction: lastScrollDirection)
+        lastScrollOffset = offsetYValue
+    }
+    
+    private func moveFilterBar(by offset: CGFloat, direction: ScrollDirection) {
+        var scrollValue: CGFloat
         switch lastScrollDirection {
         case .down:
-            scrollValue = lastScrollOffset - offsetYValue
+            scrollValue = lastScrollOffset - offset
             
-            if let headerViewBottomBorder = headerViewBottomBorder, scrollValue > headerViewBottomBorder - headerTopPosition {
-                scrollValue = headerViewBottomBorder - headerTopPosition
+            if let filterBarBottomBorder = filterBarBottomBorder, scrollValue > filterBarBottomBorder - filterBarTopPosition {
+                scrollValue = filterBarBottomBorder - filterBarTopPosition
             }
-            if let border = headerViewBottomBorder,
-                headerTopPosition <= border,
+            if let border = filterBarBottomBorder,
+                filterBarTopPosition <= border,
                 scrollValue > 0,
                 isDrugging {
-                headerViewTopConstraint?.constant += scrollValue
-                filterView.layoutIfNeeded()
+                filterBarTopConstraint?.constant += scrollValue
+                filterBar.layoutIfNeeded()
             }
         case .up:
-            scrollValue = offsetYValue - lastScrollOffset
-            if let border = headerViewUpperBorder,
-                filterView.frame.minY >= border,
+            scrollValue = offset - lastScrollOffset
+            if let border = filterBarUpperBorder,
+                filterBar.frame.minY >= border,
                 scrollValue > 0,
                 isDrugging {
-                headerViewTopConstraint?.constant -= scrollValue
-                filterView.layoutIfNeeded()
+                filterBarTopConstraint?.constant -= scrollValue
+                filterBar.layoutIfNeeded()
             }
         default:
             return
         }
-
         lastScrollValue = scrollValue
-        lastScrollOffset = offsetYValue
     }
     
-    private func openHeader() {
-        headerViewTopConstraint?.constant = headerViewBottomBorder! - headerView.frame.height
+    private func openFilterBar() {
+        filterBarTopConstraint?.constant = 0
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { [unowned self] in
             self.view.layoutIfNeeded()
         })
     }
     
-    private func closeHeader() {
-        headerViewTopConstraint?.constant = headerViewUpperBorder! - headerView.frame.height
+    private func closeFilterBar() {
+        filterBarTopConstraint?.constant = -filterBar.frame.height
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { [unowned self] in
             self.view.layoutIfNeeded()
         })
