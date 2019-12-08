@@ -17,7 +17,7 @@ extension FontFamily {
     }
     
     public static var semibold: UIFont? {
-        return Poppins.semiBold.font(size: 15)
+        return Poppins.semiBold.font(size: 14)
     }
     
     public static var regular: UIFont? {
@@ -33,7 +33,11 @@ extension FontFamily {
     }
     
     public static var largeRegular: UIFont? {
-        return Poppins.regular.font(size: 19)
+        return Poppins.regular.font(size: 18)
+    }
+    
+    public static var smallMedium: UIFont? {
+        return Poppins.medium.font(size: 12)
     }
     
 }

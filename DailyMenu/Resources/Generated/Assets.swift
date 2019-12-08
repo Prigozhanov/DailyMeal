@@ -25,7 +25,9 @@ internal enum Asset {
     internal static let charcoal = ColorAsset(name: "charcoal")
     internal static let commonBackground = ColorAsset(name: "common_background")
     internal static let gray = ColorAsset(name: "gray")
+    internal static let lightBlue = ColorAsset(name: "light_blue")
     internal static let lightGray = ColorAsset(name: "light_gray")
+    internal static let smoke = ColorAsset(name: "smoke")
     internal static let transparent = ColorAsset(name: "transparent")
     internal static let white = ColorAsset(name: "white")
   }
@@ -66,6 +68,7 @@ internal enum Asset {
       internal static let starFull = ImageAsset(name: "Icons/star_full")
       internal static let starHalf = ImageAsset(name: "Icons/star_half")
     }
+    internal static let foodItemPlaceholder = ImageAsset(name: "food_item_placeholder")
     internal static let ratePlaceholder = ImageAsset(name: "rate_placeholder")
     internal static let restaurantLogoPlaceholder = ImageAsset(name: "restaurant_logo_placeholder")
     internal static let restaurentImagePlaceholder = ImageAsset(name: "restaurent_image_placeholder")

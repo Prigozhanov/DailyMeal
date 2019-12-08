@@ -51,21 +51,20 @@ final class RestaurantsViewController: UIViewController {
         categoryCollectionView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalToSuperview().inset(10)
-            $0.height.equalTo(60)
+            $0.height.equalTo(80)
         }
         
         view.addSubview(searchView)
         searchView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
-            $0.top.equalTo(categoryCollectionView.snp.bottom).offset(10)
+            $0.top.equalTo(categoryCollectionView.snp.bottom)
         }
         return view
     }()
     
     private lazy var categoryCollectionView: UICollectionView = {
-        let collectionViewFlow = UICollectionViewLayout()
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 100), collectionViewLayout: collectionViewFlow)
+        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 100), collectionViewLayout: collectionViewFlowLayout)
         collectionViewFlowLayout.scrollDirection = .horizontal
         collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         collectionView.backgroundColor = Colors.commonBackground.color
@@ -134,8 +133,13 @@ final class RestaurantsViewController: UIViewController {
         statusBarBackground.backgroundColor = Colors.commonBackground.color
         view.addSubview(statusBarBackground)
         
-        let rows = viewModel.restaurants.map {
-            TableRow<RestaurantCell>(item: RestaurantCell.Item(name: $0.alias, rate: $0.rate, deliveryFee: "2.00"))
+        let rows = viewModel.restaurants.enumerated().map { [weak self] (index, item) -> TableRow<RestaurantCell> in
+            let row = TableRow<RestaurantCell>(item: viewModel.restaurants[index])
+                .on(.click) { [weak self] cell in
+                    let vc = RestaurantViewController(viewModel: RestaurantViewModelImplementation(restaurant: cell.item))
+                    self?.navigationController?.pushViewController(vc, animated: true)
+            }
+            return row
         }
         let section = TableSection()
         section.append(rows: rows)
@@ -211,7 +215,7 @@ extension RestaurantsViewController: UICollectionViewDataSource {
 extension RestaurantsViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 170, height: 60)
+        return CGSize(width: 170, height: 80)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -234,7 +238,6 @@ extension RestaurantsViewController: UICollectionViewDelegate {
             
         }
         cell.setState(.selected, animated: true)
-        
     }
     
 }

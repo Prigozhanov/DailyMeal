@@ -17,7 +17,7 @@ class AppCoordinator {
     window.rootViewController = makeRootViewController()
     window.makeKeyAndVisible()
     
-    showGreeting()
+//    showGreeting()
     
     return true
   }

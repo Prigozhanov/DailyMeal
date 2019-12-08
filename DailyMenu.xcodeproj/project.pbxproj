@@ -70,6 +70,8 @@
 		E779CDB4235B72FE0004E520 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779CDB3235B72FE0004E520 /* AppCoordinator.swift */; };
 		E779CDDB235CE9380004E520 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779CDDA235CE9380004E520 /* Assets.swift */; };
 		E7988BD923799A5600F0E8BD /* BaseCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7988BD823799A5600F0E8BD /* BaseCollectionCell.swift */; };
+		E79FD751239D399900038933 /* CollectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79FD750239D399900038933 /* CollectionHeaderCell.swift */; };
+		E79FD753239D39C300038933 /* FoodItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79FD752239D39C300038933 /* FoodItemCell.swift */; };
 		E7A942352375BDDB00450D78 /* FoodCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A942342375BDDB00450D78 /* FoodCategoryCell.swift */; };
 		E7C6035F233D3ECA004686DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C6035E233D3ECA004686DB /* AppDelegate.swift */; };
 		E7C60368233D3ECC004686DB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7C60367233D3ECC004686DB /* Images.xcassets */; };
@@ -158,6 +160,8 @@
 		E779CDB3235B72FE0004E520 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		E779CDDA235CE9380004E520 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		E7988BD823799A5600F0E8BD /* BaseCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionCell.swift; sourceTree = "<group>"; };
+		E79FD750239D399900038933 /* CollectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeaderCell.swift; sourceTree = "<group>"; };
+		E79FD752239D39C300038933 /* FoodItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemCell.swift; sourceTree = "<group>"; };
 		E7A942342375BDDB00450D78 /* FoodCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategoryCell.swift; sourceTree = "<group>"; };
 		E7C6035B233D3ECA004686DB /* Daily Menu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Menu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7C6035E233D3ECA004686DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -328,8 +332,9 @@
 		E71139DF2346AC7D00889AE2 /* Restaurant */ = {
 			isa = PBXGroup;
 			children = (
-				E71139E02346AC7D00889AE2 /* RestaurantViewModel.swift */,
+				E79FD74F239D398200038933 /* Cells */,
 				E71139E12346AC7D00889AE2 /* RestaurantViewController.swift */,
+				E71139E02346AC7D00889AE2 /* RestaurantViewModel.swift */,
 			);
 			path = Restaurant;
 			sourceTree = "<group>";
@@ -458,6 +463,15 @@
 				E779CDDA235CE9380004E520 /* Assets.swift */,
 			);
 			path = Generated;
+			sourceTree = "<group>";
+		};
+		E79FD74F239D398200038933 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E79FD750239D399900038933 /* CollectionHeaderCell.swift */,
+				E79FD752239D39C300038933 /* FoodItemCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		E7C60352233D3ECA004686DB = {
@@ -777,6 +791,7 @@
 				E71139DD2346AC7400889AE2 /* ItemViewModel.swift in Sources */,
 				E71139D62346AC7400889AE2 /* OrderPlacedViewModel.swift in Sources */,
 				E74831FC2371C71C00216927 /* UILabel.swift in Sources */,
+				E79FD751239D399900038933 /* CollectionHeaderCell.swift in Sources */,
 				E71139D92346AC7400889AE2 /* GreetingViewModel.swift in Sources */,
 				E71139D72346AC7400889AE2 /* OrderStatusViewModel.swift in Sources */,
 				E7604577237E984700BF252E /* SignUpViewModel.swift in Sources */,
@@ -787,6 +802,7 @@
 				E76A67412385DBA6001FEF9B /* RestaurantsSearchView.swift in Sources */,
 				E71139B62346AA1100889AE2 /* RegistrationViewController.swift in Sources */,
 				E71139DA2346AC7400889AE2 /* GreetingViewController.swift in Sources */,
+				E79FD753239D39C300038933 /* FoodItemCell.swift in Sources */,
 				E718691D237DC00300059766 /* BaseTableCell.swift in Sources */,
 				E71139CF2346AC7400889AE2 /* CheckoutViewController.swift in Sources */,
 				E7CA20012364850C004AA1FC /* Models.swift in Sources */,

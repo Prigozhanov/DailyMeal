@@ -7,25 +7,26 @@ import Foundation
 import TableKit
 
 class RestaurantCell: BaseTableCell {
-        
-    struct Item {
-        let name: String
-        let rate: String
-        let deliveryFee: String
-    }
 
-    typealias CellData = RestaurantCell.Item
+    typealias CellData = Restaurant
     
-    private let deliveryFeeValueLabel = UILabel.makeMediumText()
-    private var restaurantNameLabel = UILabel.makeMediumText()
-     
+    private let deliveryFeeValueLabel: UILabel = {
+        let label = UILabel.makeMediumText()
+        label.textColor = Colors.blue.color
+        label.font = FontFamily.smallMedium
+        return label
+    }()
+    private var restaurantNameLabel = UILabel.makeLargeText()
+    
+    var restaurant: Restaurant?
+    
     private let edgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: nil)
     }
     
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init?(coder: NSCoder) { fatalError() }
     
     override func setup() {
         let shadowView = UIView(frame: .zero)
@@ -79,7 +80,7 @@ class RestaurantCell: BaseTableCell {
         }
         
         restaurantInfoView.addSubview(restaurantNameLabel)
-        restaurantNameLabel.font = FontFamily.bold
+        restaurantNameLabel.font = FontFamily.semibold
         restaurantNameLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.equalTo(restaurantLogoImageView.snp.trailing).offset(20)
@@ -94,7 +95,6 @@ class RestaurantCell: BaseTableCell {
             $0.leading.equalTo(restaurantLogoImageView.snp.trailing).offset(20)
         }
         
-        deliveryFeeValueLabel.textColor = Colors.blue.color
         restaurantInfoView.addSubview(deliveryFeeValueLabel)
         deliveryFeeValueLabel.snp.makeConstraints {
             $0.trailing.equalToSuperview()
@@ -117,10 +117,9 @@ extension RestaurantCell: ConfigurableCell {
         return 300
     }
     
-    func configure(with item: RestaurantCell.Item) {
-        restaurantNameLabel.text = item.name.uppercased()
-        deliveryFeeValueLabel.text = "BYN \(item.deliveryFee)"
+    func configure(with item: Restaurant) {
+        restaurantNameLabel.text = item.label
+        deliveryFeeValueLabel.text = "BYN \(item.restDeliveryFee)"
     }
-    
     
 }
