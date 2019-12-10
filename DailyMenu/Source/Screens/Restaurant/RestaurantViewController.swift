@@ -14,6 +14,11 @@ final class RestaurantViewController: UIViewController {
     
     private var viewModel: RestaurantViewModel
     
+    private var collectionViewTopPoint: CGPoint = .zero
+    private var userScrollInitiated = false
+    
+    private var statusBarStyle: UIStatusBarStyle
+    
     private var navigationBarBackground = UIImageView(image: Images.restaurentImagePlaceholder.image)
     
     private lazy var navigationBarControls: UIView = {
@@ -48,19 +53,23 @@ final class RestaurantViewController: UIViewController {
         collectionView.backgroundColor = Colors.commonBackground.color
         collectionView.delegate = self
         collectionView.dataSource = self
+        
         collectionView.register(CollectionHeaderCell.self, forCellWithReuseIdentifier: headerId)
         collectionView.register(FoodItemCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeaderId)
+        collectionView.register(SectionHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeaderId)
+        
+        collectionView.contentInset = UIEdgeInsets(top: 100, left: 0, bottom: 0, right: 0)
         collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         return collectionView
     }()
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return self.statusBarStyle
     }
     
     init(viewModel: RestaurantViewModel) {
         self.viewModel = viewModel
+        statusBarStyle = .lightContent
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -75,22 +84,24 @@ final class RestaurantViewController: UIViewController {
         view.backgroundColor = Colors.commonBackground.color
         
         view.addSubview(navigationBarBackground)
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+        }
+        collectionView.backgroundColor = .clear
+        
         view.addSubview(navigationBarControls)
         navigationBarControls.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.height.equalTo(100)
         }
-        view.addSubview(collectionView)
-        collectionView.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalToSuperview()
-            $0.top.equalTo(navigationBarControls.snp.bottom)
-        }
-        collectionView.backgroundColor = .clear
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionViewTopPoint = collectionView.contentOffset
     }
     
     override func viewDidLayoutSubviews() {
@@ -103,10 +114,11 @@ final class RestaurantViewController: UIViewController {
         addGradeintToHeader()
     }
     
+    private let gradientLayer = CAGradientLayer()
     private func addGradeintToHeader() {
-        let gradientLayer = CAGradientLayer()
+        gradientLayer.removeFromSuperlayer()
         let colors = [Colors.black.color.cgColor, UIColor.clear.cgColor]
-        let locations: [NSNumber] = [-2, 1]
+        let locations: [NSNumber] = [-0.4, 1]
         gradientLayer.colors = colors
         gradientLayer.locations = locations
         gradientLayer.frame = navigationBarBackground.frame
@@ -131,26 +143,23 @@ extension RestaurantViewController: UICollectionViewDelegate {
 }
 
 extension RestaurantViewController: UICollectionViewDataSource {
-    var dummy: [String] {
+    var dummy: [String: Array<String>] {
         return [
-            "WAWA",
-            "WAWA",
-            "WAWA",
-            "WAWA",
-            "WAWA",
-            "WAWA"
+            "Dummy section 1": Array<String>(repeating: "Burger", count: 5),
+            "Dummy section 2": Array<String>(repeating: "Pastry", count: 3),
+            "Dummy section 3": Array<String>(repeating: "Pizza", count: 2)
         ]
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return dummy.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
             return 1
         } else {
-            return dummy.count
+            return dummy[Array(dummy.keys)[section - 1]]?.count ?? 0
         }
     }
     
@@ -168,22 +177,11 @@ extension RestaurantViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if indexPath.section > 0 {
-            let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeaderId, for: indexPath)
-            
-            let label = UILabel.makeLargeText("Section 1")
-            sectionHeader.addSubview(label)
-            label.font = FontFamily.Poppins.semiBold.font(size: 22)
-            label.snp.makeConstraints {
-                $0.top.bottom.equalToSuperview().inset(Layout.largeMargin)
-                $0.leading.equalTo(Layout.largeMargin * 2)
-            }
-            
-            let itemsCount = UILabel.makeSmallText("\(dummy.count) items")
-            sectionHeader.addSubview(itemsCount)
-            itemsCount.snp.makeConstraints {
-                $0.centerY.equalTo(label.snp.centerY)
-                $0.leading.equalTo(label.snp.trailing).offset(Layout.largeMargin)
-            }
+            let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeaderId, for: indexPath) as! SectionHeaderCell
+            sectionHeader.configure(
+                section: Array(dummy.keys)[indexPath.section - 1],
+                itemsCount: dummy[Array(dummy.keys)[indexPath.section - 1]]?.count ?? 0
+            )
             return sectionHeader
         }
         return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeaderId, for: indexPath)
@@ -209,4 +207,34 @@ extension RestaurantViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
+}
+
+extension RestaurantViewController: UIScrollViewDelegate {
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        userScrollInitiated = true
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetYValue = scrollView.contentOffset.y
+        let alphaValue = offsetYValue / (collectionViewTopPoint.y / 2)
+        
+        if userScrollInitiated, abs(collectionViewTopPoint.y) - offsetYValue > 0 {
+            updateNavigationBarAppearance(alphaValue)
+            updateStatusBarAppearance(alphaValue)
+        }
+       
+    }
+    
+    private func updateNavigationBarAppearance(_ alpha: CGFloat) {
+        navigationBarBackground.alpha = alpha
+        navigationBarControls.alpha = alpha
+        navigationBarControls.isHidden = alpha <= 0.3
+    }
+    
+    private func updateStatusBarAppearance(_ alpha: CGFloat) {
+        statusBarStyle = alpha <= 0.5 ? .default : .lightContent
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
 }
