@@ -5,7 +5,7 @@
 
 import UIKit
 
-class CollectionHeaderCell: UICollectionViewCell {
+class CollectionHeaderCell: UIView {
     
     private var item: Restaurant?
     
@@ -46,7 +46,7 @@ class CollectionHeaderCell: UICollectionViewCell {
     
     private func setup() {
         let view = UIView()
-        contentView.addSubview(view)
+        addSubview(view)
         view.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.top.bottom.equalToSuperview()

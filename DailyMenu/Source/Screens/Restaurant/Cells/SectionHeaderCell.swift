@@ -5,7 +5,7 @@
 
 import UIKit
 
-class SectionHeaderCell: UICollectionViewCell {
+class SectionHeaderCell: UIView {
     
     private let sectionLabel: UILabel = {
         let label = UILabel.makeLargeText()
@@ -26,13 +26,13 @@ class SectionHeaderCell: UICollectionViewCell {
     }
     
     private func setup() {
-        contentView.addSubview(sectionLabel)
+        addSubview(sectionLabel)
         sectionLabel.snp.makeConstraints {
             $0.top.bottom.equalToSuperview().inset(Layout.largeMargin)
             $0.leading.equalTo(Layout.largeMargin * 2)
         }
 
-        contentView.addSubview(itemsCountLabel)
+        addSubview(itemsCountLabel)
         itemsCountLabel.snp.makeConstraints {
             $0.bottom.equalTo(sectionLabel.snp.bottom)
             $0.leading.equalTo(sectionLabel.snp.trailing).offset(Layout.largeMargin)
@@ -41,7 +41,7 @@ class SectionHeaderCell: UICollectionViewCell {
     
     func configure(section: String, itemsCount: Int) {
         sectionLabel.text = section
-        itemsCountLabel.text = "\(itemsCount) items"
+        itemsCountLabel.text = itemsCount == 1 ? "\(itemsCount) item" : "\(itemsCount) items"
     }
     
 }

@@ -3,8 +3,7 @@
 //  Copyright © 2019 epam. All rights reserved.
 //
 
-import UIKit
-import TableKit
+import CollectionKit
 
 final class RestaurantViewController: UIViewController {
     
@@ -19,7 +18,13 @@ final class RestaurantViewController: UIViewController {
     
     private var statusBarStyle: UIStatusBarStyle
     
-    private var navigationBarBackground = UIImageView(image: Images.restaurentImagePlaceholder.image)
+    private var navigationBarBackground: UIImageView = {
+        let image = UIImageView(image: Images.restaurentImagePlaceholder.image)
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
+        return image
+    }()
+    private var navigationBarBackgroundHeightConstraint: NSLayoutConstraint?
     
     private lazy var navigationBarControls: UIView = {
         let view = UIView()
@@ -46,22 +51,73 @@ final class RestaurantViewController: UIViewController {
         return view
     }()
     
-    private lazy var collectionView: UICollectionView = {
-        let collectionViewFlowLayout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
-        collectionViewFlowLayout.scrollDirection = .vertical
+    private lazy var collectionView: CollectionView = {
+        let collectionView = CollectionView(provider: sectionHeaderProvider)
         collectionView.backgroundColor = Colors.commonBackground.color
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        collectionView.register(CollectionHeaderCell.self, forCellWithReuseIdentifier: headerId)
-        collectionView.register(FoodItemCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.register(SectionHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeaderId)
-        
         collectionView.contentInset = UIEdgeInsets(top: 100, left: 0, bottom: 0, right: 0)
-        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        collectionView.delegate = self
         return collectionView
     }()
+    
+    private lazy var headerDataSource = ArrayDataSource(data: [self.viewModel.restaurant])
+    private lazy var headerViewSource = ClosureViewSource(viewUpdater: { (view: CollectionHeaderCell, data: Restaurant, index: Int) in
+        view.configure(with: data)
+    })
+    private lazy var headerSizeSource = { (index: Int, data: Restaurant, collectionSize: CGSize) -> CGSize in
+        return CGSize(width: self.collectionView.frame.width, height: 160)
+    }
+    
+    private lazy var headerProvider = BasicProvider(
+        dataSource: headerDataSource,
+        viewSource: headerViewSource,
+        sizeSource: headerSizeSource
+    )
+    
+    private let itemViewSource = ClosureViewSource(viewUpdater: { (view: FoodItemCell, data: FoodItemCell.Item, index: Int) in
+        view.configure(with: data)
+    })
+    private lazy var itemSizeSource = { (index: Int, data: FoodItemCell.Item, collectionSize: CGSize) -> CGSize in
+        return CGSize(width: self.collectionView.frame.width, height: 100)
+    }
+    
+    private lazy var sectionHeaderProvider: ComposedHeaderProvider<SectionHeaderCell> = {
+        let provider = ComposedHeaderProvider(
+            headerViewSource: { (view: SectionHeaderCell, data, index) in
+                view.configure(section: "Dummy section \(index)", itemsCount: data.section.numberOfItems)
+                if index == 0 {
+                    view.isHidden = true
+                }
+        },
+            headerSizeSource: { (index, data, maxSize) -> CGSize in
+                if index == 0 {
+                    return .zero
+                }
+                return CGSize(width: maxSize.width, height: 50)
+        },
+            sections: sections
+        )
+        
+        provider.isSticky = false
+        provider.layout = FlowLayout(spacing: 10)
+        return provider
+    }()
+    
+    private lazy var sections: [Provider] = [
+        headerProvider,
+        makeItemsSection([
+            FoodItemCell.Item(title: "Pastry", description: "Lorem ipsum dolor sit amet, consectetuer adipiscin", price: "2.00"),
+            FoodItemCell.Item(title: "Pastry", description: "Lorem ipsum dolor sit amet, consectetuer adipiscin", price: "2.00"),
+            FoodItemCell.Item(title: "Pastry", description: "Lorem ipsum dolor sit amet, consectetuer adipiscin", price: "2.00")
+        ]),
+        makeItemsSection([
+            FoodItemCell.Item(title: "Pastry", description: "Lorem ipsum dolor sit amet, consectetuer adipiscin", price: "2.00"),
+        ]),
+        makeItemsSection([
+            FoodItemCell.Item(title: "Pastry", description: "Lorem ipsum dolor sit amet, consectetuer adipiscin", price: "5.00"),
+            FoodItemCell.Item(title: "Pastry", description: "Lorem ipsum dolor sit amet, consectetuer adipiscin", price: "5.00"),
+            FoodItemCell.Item(title: "Pastry", description: "Lorem ipsum dolor sit amet, consectetuer adipiscin", price: "5.00")
+        ])
+    ]
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return self.statusBarStyle
@@ -104,14 +160,33 @@ final class RestaurantViewController: UIViewController {
         collectionViewTopPoint = collectionView.contentOffset
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationBarBackgroundHeightConstraint = navigationBarBackground.heightAnchor.constraint(equalToConstant: 150 + (UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0))
+        navigationBarBackgroundHeightConstraint?.isActive = true
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         navigationBarBackground.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
-            $0.height.equalTo(150 + view.safeAreaInsets.top)
         }
-        view.layoutIfNeeded()
+        
         addGradeintToHeader()
+    }
+    
+    private func makeItemsSection(_ items: [FoodItemCell.Item]) -> BasicProvider<FoodItemCell.Item, FoodItemCell> {
+        let itemDataSource = ArrayDataSource(data: items)
+        
+        let itemsProvider = BasicProvider(
+            dataSource: itemDataSource,
+            viewSource: itemViewSource,
+            sizeSource: itemSizeSource
+        )
+        itemsProvider.layout = FlowLayout(spacing: 20)
+        return itemsProvider
     }
     
     private let gradientLayer = CAGradientLayer()
@@ -137,78 +212,6 @@ private extension RestaurantViewController {
     
 }
 
-extension RestaurantViewController: UICollectionViewDelegate {
-    
-    
-}
-
-extension RestaurantViewController: UICollectionViewDataSource {
-    var dummy: [String: Array<String>] {
-        return [
-            "Dummy section 1": Array<String>(repeating: "Burger", count: 5),
-            "Dummy section 2": Array<String>(repeating: "Pastry", count: 3),
-            "Dummy section 3": Array<String>(repeating: "Pizza", count: 2)
-        ]
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return dummy.count + 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        } else {
-            return dummy[Array(dummy.keys)[section - 1]]?.count ?? 0
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: headerId, for: indexPath) as! CollectionHeaderCell
-            cell.configure(with: viewModel.restaurant)
-            return cell
-        } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FoodItemCell
-            cell.configure(with: FoodItemCell.Item(title: "Pastry", description: "Portland ugh fashion axe Hel vetica, Echo Parketica, Echo Park", price: "15.00"))
-            return cell
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if indexPath.section > 0 {
-            let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeaderId, for: indexPath) as! SectionHeaderCell
-            sectionHeader.configure(
-                section: Array(dummy.keys)[indexPath.section - 1],
-                itemsCount: dummy[Array(dummy.keys)[indexPath.section - 1]]?.count ?? 0
-            )
-            return sectionHeader
-        }
-        return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeaderId, for: indexPath)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if section > 0 {
-            return CGSize(width: collectionView.frame.width, height: 50)
-        }
-        return .zero
-    }
-}
-
-extension RestaurantViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.section == 0 {
-            return CGSize(width: collectionView.frame.width, height: 160)
-        } else {
-            return CGSize(width: collectionView.frame.width, height: 100)
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
-    }
-}
-
 extension RestaurantViewController: UIScrollViewDelegate {
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -218,12 +221,18 @@ extension RestaurantViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetYValue = scrollView.contentOffset.y
         let alphaValue = offsetYValue / (collectionViewTopPoint.y / 2)
-        
-        if userScrollInitiated, abs(collectionViewTopPoint.y) - offsetYValue > 0 {
-            updateNavigationBarAppearance(alphaValue)
-            updateStatusBarAppearance(alphaValue)
+        let heightValue = view.safeAreaInsets.top + 150 - (offsetYValue - collectionViewTopPoint.y)
+        print(heightValue)
+        if userScrollInitiated {
+            if abs(collectionViewTopPoint.y) - offsetYValue > 0 {
+                updateNavigationBarAppearance(alphaValue)
+                updateStatusBarAppearance(alphaValue)
+            }
+            
+            if heightValue > 0 {
+                navigationBarBackgroundHeightConstraint?.constant = heightValue
+            }
         }
-       
     }
     
     private func updateNavigationBarAppearance(_ alpha: CGFloat) {

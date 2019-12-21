@@ -5,7 +5,7 @@
 
 import UIKit
 
-class FoodItemCell: UICollectionViewCell {
+class FoodItemCell: UIView {
     struct Item {
         let title: String
         let description: String
@@ -43,7 +43,7 @@ class FoodItemCell: UICollectionViewCell {
     
     private func setup() {
         let view = UIView()
-        contentView.addSubview(view)
+        addSubview(view)
         view.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.top.bottom.equalToSuperview()
