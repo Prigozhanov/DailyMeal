@@ -11,6 +11,7 @@ target 'DailyMenu' do
   # Pods for DailyMenu
 
 pod 'TableKit'
+pod "CollectionKit"
 pod 'SnapKit'
 pod 'AppCenter'
 pod 'AppCenter/Distribute'

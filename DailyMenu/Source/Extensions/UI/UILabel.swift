@@ -11,6 +11,7 @@ extension UILabel {
         let label = UILabel()
         label.text = text
         label.font = FontFamily.extraSmallRegular
+        label.textColor = Colors.charcoal.color
         return label
     }
     
@@ -18,6 +19,7 @@ extension UILabel {
         let label = UILabel()
         label.text = text
         label.font = FontFamily.smallRegular
+        label.textColor = Colors.charcoal.color
         return label
     }
     
@@ -25,6 +27,7 @@ extension UILabel {
         let label = UILabel()
         label.text = text
         label.font = FontFamily.regular
+        label.textColor = Colors.charcoal.color
         return label
         
     }
@@ -33,6 +36,15 @@ extension UILabel {
         let label = UILabel()
         label.text = text
         label.font = FontFamily.largeRegular
+        label.textColor = Colors.charcoal.color
+        return label
+    }
+    
+    static func makeNavigationTitle(_ text: String? = nil) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.font = FontFamily.semibold
+        label.textColor = Colors.charcoal.color
         return label
     }
     

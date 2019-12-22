@@ -25,7 +25,7 @@ class FoodCategoryCell: BaseCollectionCell {
         let view = UIView()
         view.backgroundColor = Colors.white.color
         view.setRoundCorners(10)
-        view.setShadow(offset: CGSize(width: 0, height: 4.0), opacity: 0.03, radius: 5)
+        view.setShadow(offset: CGSize(width: 0, height: 4.0), opacity: 0.1, radius: 5)
         return view
     }()
     
@@ -59,7 +59,10 @@ class FoodCategoryCell: BaseCollectionCell {
         backgroundColor = Colors.commonBackground.color
         
         contentView.addSubview(cardView)
-        cardView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        cardView.snp.makeConstraints {
+            $0.leading.trailing.top.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(20)
+        }
         
         cardView.addSubview(imageView)
         imageView.snp.makeConstraints {
@@ -83,7 +86,10 @@ class FoodCategoryCell: BaseCollectionCell {
         }
         
         contentView.addSubview(borderView)
-        borderView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        borderView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(20)
+        }
         borderView.setRoundCorners(cardView.layer.cornerRadius)
         borderView.setBorder(width: 1, color: Colors.blue.color.cgColor)
     }
