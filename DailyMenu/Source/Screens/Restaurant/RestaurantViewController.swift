@@ -7,16 +7,11 @@ import CollectionKit
 
 final class RestaurantViewController: UIViewController {
     
-    let cellId = "ItemCell"
-    let headerId = "HeaderCell"
-    let sectionHeaderId = "SectionHeader"
-    
     private var viewModel: RestaurantViewModel
     
     private var collectionViewTopPoint: CGPoint = .zero
     private var userScrollInitiated = false
     
-    private var statusBarStyle: UIStatusBarStyle
     
     private var navigationBarBackground: UIImageView = {
         let image = UIImageView(image: Images.restaurentImagePlaceholder.image)
@@ -26,30 +21,7 @@ final class RestaurantViewController: UIViewController {
     }()
     private var navigationBarBackgroundHeightConstraint: NSLayoutConstraint?
     
-    private lazy var navigationBarControls: UIView = {
-        let view = UIView()
-        let backButton = UIButton.makeBackButton(self)
-        view.addSubview(backButton)
-        backButton.snp.makeConstraints {
-            $0.top.leading.equalToSuperview().inset(Layout.largeMargin)
-            $0.size.equalTo(44)
-        }
-        let notificationButton = UIButton.makeNotificationButton()
-        view.addSubview(notificationButton)
-        notificationButton.snp.makeConstraints {
-            $0.top.trailing.equalToSuperview().inset(Layout.largeMargin)
-            $0.size.equalTo(44)
-        }
-        
-        let title = UILabel.makeNavigationTitle("Restaurant")
-        title.textColor = Colors.white.color
-        view.addSubview(title)
-        title.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalTo(notificationButton.snp.centerY)
-        }
-        return view
-    }()
+    private var navigationBarControls = NavigationBarControls()
     
     private lazy var collectionView: CollectionView = {
         let collectionView = CollectionView(provider: sectionHeaderProvider)
@@ -120,12 +92,11 @@ final class RestaurantViewController: UIViewController {
     ]
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return self.statusBarStyle
+        return navigationBarControls.isHidden ? .default : .lightContent
     }
     
     init(viewModel: RestaurantViewModel) {
         self.viewModel = viewModel
-        statusBarStyle = .lightContent
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -225,25 +196,15 @@ extension RestaurantViewController: UIScrollViewDelegate {
         print(heightValue)
         if userScrollInitiated {
             if abs(collectionViewTopPoint.y) - offsetYValue > 0 {
-                updateNavigationBarAppearance(alphaValue)
-                updateStatusBarAppearance(alphaValue)
+                navigationBarBackground.alpha = alphaValue
+                navigationBarControls.alpha = alphaValue
+                navigationBarControls.isHidden = alphaValue <= 0.3
+                setNeedsStatusBarAppearanceUpdate()
             }
-            
             if heightValue > 0 {
                 navigationBarBackgroundHeightConstraint?.constant = heightValue
             }
         }
-    }
-    
-    private func updateNavigationBarAppearance(_ alpha: CGFloat) {
-        navigationBarBackground.alpha = alpha
-        navigationBarControls.alpha = alpha
-        navigationBarControls.isHidden = alpha <= 0.3
-    }
-    
-    private func updateStatusBarAppearance(_ alpha: CGFloat) {
-        statusBarStyle = alpha <= 0.5 ? .default : .lightContent
-        setNeedsStatusBarAppearanceUpdate()
     }
     
 }

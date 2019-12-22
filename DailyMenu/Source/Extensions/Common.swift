@@ -8,6 +8,14 @@ import UIKit
 typealias Colors = Asset.Colors
 typealias Images = Asset.Images
 
+extension UIResponder {
+    
+    var parentViewController: UIViewController? {
+        return next as? UIViewController ?? next?.parentViewController
+    }
+
+}
+
 extension CGFloat {
     
   static var onePixel: CGFloat {
