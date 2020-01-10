@@ -37,28 +37,28 @@ private extension AppCoordinator {
         return tabbar
     }
     
-    var exploreTab: UINavigationController {
+    var exploreTab: NavigationController {
         let vm = RestaurantsViewModelImplementation()
         let vc = RestaurantsViewController(viewModel: vm)
         vc.tabBarItem.image = Images.tabExploreInactive.image
         vc.tabBarItem.title = "Explore"
-        return UINavigationController(rootViewController: vc)
+        return NavigationController(rootViewController: vc)
     }
     
-    var settingsTab: UINavigationController {
+    var settingsTab: NavigationController {
         let vm = SettingsViewModelImplementation()
         let vc = SettingsViewController(viewModel: vm)
         vc.tabBarItem.image = Images.tabSettingsInactive.image
         vc.tabBarItem.title = "Settings"
-        return UINavigationController(rootViewController: vc)
+        return NavigationController(rootViewController: vc)
     }
     
-    var cartTab: UINavigationController {
+    var cartTab: NavigationController {
         let vm = CartViewModelImplementation()
         let vc = CartViewController(viewModel: vm)
         vc.tabBarItem.image = Images.tabCartInactive.image
         vc.tabBarItem.title = "Cart"
-        return UINavigationController(rootViewController: vc)
+        return NavigationController(rootViewController: vc)
     }
     
     func showGreeting() {

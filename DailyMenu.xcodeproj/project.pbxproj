@@ -85,6 +85,7 @@
 		E7CA200A236601EC004AA1FC /* FontFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CA2009236601EC004AA1FC /* FontFamily.swift */; };
 		E7D722EF23A033CF007F096C /* SectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D722EE23A033CF007F096C /* SectionHeaderCell.swift */; };
 		E7DFC6E823590EE80003C46C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7DFC6E723590EE80003C46C /* Colors.xcassets */; };
+		E7E04A3A23C8A8BB0045A381 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E04A3923C8A8BB0045A381 /* NavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -181,6 +182,7 @@
 		E7CA2009236601EC004AA1FC /* FontFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontFamily.swift; sourceTree = "<group>"; };
 		E7D722EE23A033CF007F096C /* SectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderCell.swift; sourceTree = "<group>"; };
 		E7DFC6E723590EE80003C46C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		E7E04A3923C8A8BB0045A381 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		F6978153A996CCA2C94A5A5E /* Pods-DailyMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyMenu.debug.xcconfig"; path = "Target Support Files/Pods-DailyMenu/Pods-DailyMenu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -227,6 +229,7 @@
 				E772FC76235920AC00B3D704 /* UI */,
 				E768FC9A2353DD2B0042A696 /* Common.swift */,
 				E7CA2009236601EC004AA1FC /* FontFamily.swift */,
+				E7E04A3923C8A8BB0045A381 /* NavigationController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -810,6 +813,7 @@
 				E71CDC4123AEE4870059505A /* NavigationBarControls.swift in Sources */,
 				E71139D92346AC7400889AE2 /* GreetingViewModel.swift in Sources */,
 				E71139D72346AC7400889AE2 /* OrderStatusViewModel.swift in Sources */,
+				E7E04A3A23C8A8BB0045A381 /* NavigationController.swift in Sources */,
 				E7604577237E984700BF252E /* SignUpViewModel.swift in Sources */,
 				E7604576237E984700BF252E /* SignUpViewController.swift in Sources */,
 				E7037361234FE0D600852B04 /* UIButton.swift in Sources */,
