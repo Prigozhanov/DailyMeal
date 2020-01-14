@@ -27,7 +27,7 @@ class FoodItemCell: UIView {
         return label
     }()
     
-    private let price: UILabel = {
+    private let priceLabel: UILabel = {
         let label = UILabel.makeMediumText()
         label.textColor = Colors.blue.color
         label.font = FontFamily.semibold
@@ -77,8 +77,8 @@ class FoodItemCell: UIView {
             $0.top.equalToSuperview().inset(Layout.largeMargin)
         }
         
-        view.addSubview(price)
-        price.snp.makeConstraints {
+        view.addSubview(priceLabel)
+        priceLabel.snp.makeConstraints {
             $0.top.trailing.equalToSuperview().inset(Layout.largeMargin)
             $0.centerY.equalTo(foodTitle.snp.centerY)
         }
@@ -94,7 +94,7 @@ class FoodItemCell: UIView {
     func configure(with item: Item) {
         foodTitle.text = item.title
         foodDescription.text = item.description
-        price.text = "BYN \(item.price)"
+        priceLabel.text = Formatter.Currency.toString(Double(item.price))
     }
     
 }

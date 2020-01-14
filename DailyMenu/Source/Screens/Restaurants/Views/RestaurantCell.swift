@@ -119,7 +119,7 @@ extension RestaurantCell: ConfigurableCell {
     
     func configure(with item: Restaurant) {
         restaurantNameLabel.text = item.label
-        deliveryFeeValueLabel.text = "BYN \(item.restDeliveryFee)"
+        deliveryFeeValueLabel.text = Formatter.Currency.toString(Double(item.restDeliveryFee))
     }
     
 }

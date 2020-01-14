@@ -54,8 +54,7 @@ private extension AppCoordinator {
     }
     
     var cartTab: NavigationController {
-        let vm = CartViewModelImplementation()
-        let vc = CartViewController(viewModel: vm)
+        let vc = CartViewController()
         vc.tabBarItem.image = Images.tabCartInactive.image
         vc.tabBarItem.title = "Cart"
         return NavigationController(rootViewController: vc)

@@ -67,9 +67,13 @@ extension UIButton {
             make.height.equalTo(50)
             make.width.equalTo(300)
         }
-        button.backgroundColor = Colors.blue.color
         button.setTitle(text, for: .normal)
         button.setActionHandler(controlEvents: .touchUpInside, ForAction: action)
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [Colors.blue.color.cgColor, Colors.lightBlue.color.cgColor]
+        gradientLayer.locations = [0, 1]
+        button.layer.addSublayer(gradientLayer)
         return button
     }
     
@@ -86,6 +90,12 @@ extension UIButton {
         }
         button.setImage(Images.Icons.back.image.withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = Colors.white.color
+        return button
+    }
+    
+    static func makeImageButton(image: UIImage, action: @escaping (UIButton) -> Void) -> UIButton {
+        let button = UIButton.makeCommonButton(action: action)
+        button.setImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
         return button
     }
     

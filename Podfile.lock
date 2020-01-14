@@ -1,4 +1,5 @@
 PODS:
+  - AloeStackView (1.2.0)
   - AppCenter (2.3.0):
     - AppCenter/Analytics (= 2.3.0)
     - AppCenter/Crashes (= 2.3.0)
@@ -17,6 +18,7 @@ PODS:
   - TableKit (2.9.0)
 
 DEPENDENCIES:
+  - AloeStackView
   - AppCenter
   - AppCenter/Distribute
   - CollectionKit
@@ -31,15 +33,17 @@ SPEC REPOS:
     - SwiftGen
     - TableKit
   trunk:
+    - AloeStackView
     - CollectionKit
 
 SPEC CHECKSUMS:
+  AloeStackView: 8a4ce0efa08128dd78d538372f60c76c224034bb
   AppCenter: 9784d2fc998c9bd0b8fbaf4fb9ed69526d12ce1a
   CollectionKit: 8f01e7629185bb81072c4aa734d105df5c2d1c8b
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftGen: f872ca75cbd17bf7103c17f13dcfa0d9a15667b0
   TableKit: 2271557382915c5d8f25883044047a8568ab6400
 
-PODFILE CHECKSUM: f1718d776e2b508ee3ea6977f651896eda839232
+PODFILE CHECKSUM: a5c2a35ee104ec2903497adc19ee498a50e99619
 
 COCOAPODS: 1.8.4

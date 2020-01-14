@@ -8,3 +8,7 @@ import Foundation
 enum FoodCategory: String {
     case burger, chicken, desert, fries, hotdog, lobastar, pizza, sandwich, steak, sushi, taco, pastry
 }
+
+enum FoodOptions: String {
+    case cheese = "Cheese", petty = "Petty", hot = "Hot" 
+}

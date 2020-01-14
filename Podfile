@@ -16,5 +16,6 @@ pod 'SnapKit'
 pod 'AppCenter'
 pod 'AppCenter/Distribute'
 pod 'TableKit'
+pod 'AloeStackView'
 
 end

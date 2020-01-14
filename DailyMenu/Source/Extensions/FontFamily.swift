@@ -21,7 +21,7 @@ extension FontFamily {
     }
     
     public static var regular: UIFont? {
-        return Poppins.regular.font(size: 15)
+        return Poppins.regular.font(size: 14)
     }
     
     public static var smallRegular: UIFont? {

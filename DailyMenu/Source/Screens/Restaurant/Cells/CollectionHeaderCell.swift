@@ -140,9 +140,9 @@ class CollectionHeaderCell: UIView {
     
     func configure(with item: Restaurant) {
         restaurantNameLabel.text = item.label
-        minOrderValueLabel.text = "BYN \(item.minAmountOrder)"
         distanceValueLabel.text = "\(item.distance) km away"
         deliveryTimeValueLabel.text = "\(item.orderDelayFirst) minutes delivery time"
+        minOrderValueLabel.text = Formatter.Currency.toString(Double(item.minAmountOrder))
     }
     
 }
