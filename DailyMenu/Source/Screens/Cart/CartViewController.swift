@@ -218,6 +218,7 @@ final class CartViewController: UIViewController {
         let itemImage = UIImageView(image: Images.foodItemPlaceholder.image)
         view.addSubview(itemImage)
         itemImage.setRoundCorners(Layout.cornerRadius)
+        itemImage.contentMode = .scaleAspectFit
         itemImage.snp.makeConstraints {
             $0.top.bottom.equalToSuperview().inset(Layout.commonInset)
             $0.leading.equalTo(counter.snp.trailing).offset(Layout.largeMargin)
