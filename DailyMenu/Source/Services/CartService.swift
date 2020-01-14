@@ -27,7 +27,7 @@ public final class CartServiceImplementation: CartService {
     
     public var cartTotal: Double {
         return items.reduce(0.0) { (res, item: CartItem) -> Double in
-            res + item.price
+            res + item.price * Double(item.count)
         }
     }
     
@@ -35,7 +35,7 @@ public final class CartServiceImplementation: CartService {
     
     public var deliveryPrice: Double = 0.0
     
-    public var promoDiscount: Double = -9.99
+    public var promoDiscount: Double = 0.0
     
     public var subtotal: Double {
         return cartTotal + tax + deliveryPrice + promoDiscount
@@ -51,19 +51,21 @@ public final class CartServiceImplementation: CartService {
         }
     }
     
-    public var items: [CartItem] = [CartItem.dummy, CartItem.dummy1, CartItem.dummy1, CartItem.dummy1]
+    public var items: [CartItem] = [CartItem.dummy, CartItem.dummy1]
 }
 
 
 public class CartItem: Comparable, Equatable {
     var name: String
     var price: Double
+    var count: Int
     var options: [FoodOptions]
     
-    init(name: String, price: Double, options: [FoodOptions]) {
+    init(name: String, price: Double, options: [FoodOptions], count: Int = 1) {
         self.name = name
         self.price = price
         self.options = options
+        self.count = count
     }
     
     public static func < (lhs: CartItem, rhs: CartItem) -> Bool {
@@ -77,7 +79,7 @@ public class CartItem: Comparable, Equatable {
     }
     
     static var dummy: CartItem {
-        return CartItem(name: "Dummy Pizza", price: 42.99, options: [.cheese, .petty])
+        return CartItem(name: "Dummy Pizza", price: 42.99, options: [.cheese, .petty], count: 3)
     }
     
     static var dummy1: CartItem {

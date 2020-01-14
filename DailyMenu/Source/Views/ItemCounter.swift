@@ -63,6 +63,9 @@ class ItemCounter: UIView {
     
     required init?(coder: NSCoder) { fatalError() }
     
-    
+    func updateValue(_ value: Int) {
+        self.value = value
+        self.valueLabel.text = String(value)
+    }
     
 }

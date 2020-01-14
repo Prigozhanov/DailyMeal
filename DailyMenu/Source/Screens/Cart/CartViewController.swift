@@ -67,15 +67,17 @@ final class CartViewController: UIViewController {
     
     private lazy var promocodeApplyButton: UIButton = {
         let button = UIButton.makeActionButton("Apply") { _ in
-            
+            // TODO
         }
         button.titleLabel?.font = FontFamily.Poppins.medium.font(size: 14)
         return button
     }()
     
+    private var calculationRows: [UIView] = []
+    
     private lazy var proceedActionButton: UIButton = {
-        let button = UIButton.makeActionButton("Proceed to Checkout") { (_) in
-            
+        let button = UIButton.makeActionButton("Proceed to Checkout") { [weak self] _ in
+            // TODO
         }
         button.titleLabel?.font = FontFamily.semibold
         return button
@@ -103,7 +105,17 @@ final class CartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupScreen()
+        reloadScreen()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        Style.addBlueGradient(promocodeApplyButton)
+        Style.addBlueGradient(proceedActionButton)
+    }
+    
+    private func setupScreen() {
         Style.addBlueCorner(self)
         
         view.backgroundColor = Colors.commonBackground.color
@@ -114,46 +126,65 @@ final class CartViewController: UIViewController {
             $0.bottom.leading.trailing.equalToSuperview()
             $0.top.equalTo(view.snp_topMargin)
         }
-        
-        reloadScreen()
     }
     
     private func reloadScreen() {
         aloeStackView.removeAllRows()
+        setupTitleRow()
+        setupItemsRows()
+        setupPromoRow()
+        setupCalculationsRows()
+        setupCheckoutRow()
+    }
+    
+    func reloadCalculationsRows() {
+        aloeStackView.removeRows(calculationRows)
+        aloeStackView.removeRow(separator)
+        calculationRows = []
+        setupCalculationsRows()
+    }
+    
+    private func setupTitleRow() {
         aloeStackView.addRow(titleRow)
-        
-        if cartSerivce.items.isEmpty {
-            aloeStackView.addRow(emptyCartRow)
-            emptyCartRow.snp.makeConstraints { $0.height.equalTo(100) }
-        } else {
-            aloeStackView.addRows(cartSerivce.items.map({ item -> UIView in
-                makeItemRow(item)
-            }))
-            if let lastRow = aloeStackView.lastRow {
-                aloeStackView.setInset(forRow: lastRow, inset: UIEdgeInsets(top: 0, left: 15, bottom: 30, right: 15))
-            }
+    }
+    
+    private func setupItemsRows() {
+        aloeStackView.addRow(emptyCartRow)
+        aloeStackView.setInset(forRow: emptyCartRow, inset: UIEdgeInsets(top: 50, left: 0, bottom: 50, right: 0))
+        if !cartSerivce.items.isEmpty {
+            aloeStackView.hideRow(emptyCartRow)
         }
         
+        aloeStackView.addRows(cartSerivce.items.map({ item -> UIView in
+            makeItemRow(item)
+        }))
+        if let lastRow = aloeStackView.lastRow {
+            aloeStackView.setInset(forRow: lastRow, inset: UIEdgeInsets(top: 0, left: 15, bottom: 30, right: 15))
+        }
+    }
+    
+    private func setupPromoRow() {
         aloeStackView.addRow(promocodeRow)
+    }
+    
+    private func setupCalculationsRows() {
+        let cartTotalRow = makeTitleValueRow(title: "Cart total", value: Formatter.Currency.toString(cartSerivce.cartTotal))
+        let taxRow = makeTitleValueRow(title: "Tax", value: Formatter.Currency.toString(cartSerivce.tax))
+        let deliveryRow = makeTitleValueRow(title: "Delivery", value: Formatter.Currency.toString(cartSerivce.deliveryPrice))
+        let promoDiscauntRow = makeTitleValueRow(title: "Promo discaunt", value: Formatter.Currency.toString(cartSerivce.promoDiscount))
+        let subtotalRow = makeTitleValueRow(title: "Subtotal", value: Formatter.Currency.toString(cartSerivce.subtotal), largeValueTitle: true)
         
-        aloeStackView.addRow(makeTitleValueRow(title: "Cart total", value: Formatter.Currency.toString(cartSerivce.cartTotal)))
-        aloeStackView.addRow(makeTitleValueRow(title: "Tax", value: Formatter.Currency.toString(cartSerivce.tax)))
-        aloeStackView.addRow(makeTitleValueRow(title: "Delivery", value: Formatter.Currency.toString(cartSerivce.deliveryPrice)))
-        aloeStackView.addRow(makeTitleValueRow(title: "Promo discaunt", value: Formatter.Currency.toString(cartSerivce.promoDiscount)))
-        aloeStackView.addRow(separator)
+        calculationRows.append(contentsOf: [cartTotalRow, taxRow, deliveryRow, promoDiscauntRow, subtotalRow])
+        aloeStackView.insertRows(calculationRows, after: promocodeRow)
+        aloeStackView.insertRow(separator, before: subtotalRow)
         separator.snp.makeConstraints { $0.height.equalTo(1) }
-        aloeStackView.addRow(makeTitleValueRow(title: "Subtotal", value: Formatter.Currency.toString(cartSerivce.subtotal), largeValueTitle: true))
-        
+    }
+    
+    private func setupCheckoutRow() {
         aloeStackView.addRow(proceedActionButton)
         if let lastRow = aloeStackView.lastRow {
             aloeStackView.setInset(forRow: lastRow, inset: UIEdgeInsets(top: 10, left: 45, bottom: 30, right: 45))
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        Style.addBlueGradient(promocodeApplyButton)
-        Style.addBlueGradient(proceedActionButton)
     }
     
     private func makeItemRow(_ item: CartItem) -> UIView {
@@ -162,9 +193,11 @@ final class CartViewController: UIViewController {
         view.setRoundCorners(Layout.cornerRadius)
         view.setShadow(offset: CGSize(width: 0, height: 5.0), opacity: 0.05, radius: 20)
         view.snp.makeConstraints { $0.height.equalTo(100) }
-        let counter = ItemCounter { (value) in
-            print(value)
+        let counter = ItemCounter { [weak self] value in
+            item.count = value
+            self?.reloadCalculationsRows()
         }
+        counter.updateValue(item.count)
         view.addSubview(counter)
         counter.snp.makeConstraints {
             $0.top.leading.bottom.equalToSuperview().inset(Layout.commonInset)
@@ -215,7 +248,11 @@ final class CartViewController: UIViewController {
         removeButton.imageEdgeInsets = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
         removeButton.setActionHandler(controlEvents: .touchUpInside) { [weak self] _ in
             self?.cartSerivce.removeItem(item: item)
-            self?.reloadScreen()
+            self?.reloadCalculationsRows()
+            self?.aloeStackView.removeRow(view, animated: true)
+            if let self = self, self.cartSerivce.items.isEmpty {
+                self.aloeStackView.showRow(self.emptyCartRow, animated: true)
+            }
         }
         view.addSubview(removeButton)
         removeButton.snp.makeConstraints {
@@ -293,6 +330,7 @@ final class CartViewController: UIViewController {
         
         return view
     }
+    
     
 }
 
