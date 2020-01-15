@@ -130,6 +130,7 @@ final class CartViewController: UIViewController {
     
     private func reloadScreen() {
         aloeStackView.removeAllRows()
+        calculationRows = []
         setupTitleRow()
         setupItemsRows()
         setupPromoRow()
