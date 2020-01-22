@@ -5,9 +5,9 @@
 
 import Foundation
 
-class Formatter {
+enum Formatter {
     
-    struct Currency {
+    enum Currency {
         static func toString(_ value: Double?) -> String {
             guard let value = value else {
                 return "Error"

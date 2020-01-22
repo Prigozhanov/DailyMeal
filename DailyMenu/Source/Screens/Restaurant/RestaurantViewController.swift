@@ -23,19 +23,26 @@ final class RestaurantViewController: UIViewController {
     
     private var navigationBarControls = NavigationBarControls()
     
-    private lazy var collectionView: CollectionView = { [weak self] in
+    private lazy var collectionView: CollectionView = {
         let collectionView = CollectionView(provider: sectionHeaderProvider)
         collectionView.backgroundColor = Colors.commonBackground.color
         collectionView.contentInset = UIEdgeInsets(top: 100, left: 0, bottom: 0, right: 0)
         collectionView.delegate = self
         return collectionView
-    }()
+        }()
     
-    private lazy var headerDataSource = ArrayDataSource(data: [self.viewModel.restaurant])
-    private lazy var headerViewSource = ClosureViewSource(viewUpdater: { (view: CollectionHeaderCell, data: Restaurant, index: Int) in
+    private lazy var headerDataSource = ArrayDataSource(data: [
+        CollectionHeaderCell.Item(
+            label: self.viewModel.restaurant.label,
+            distance: self.viewModel.restaurant.distance,
+            orderDelay: self.viewModel.restaurant.orderDelayFirst,
+            minOrderPrice: Formatter.Currency.toString(Double(self.viewModel.restaurant.minAmountOrder))
+        )
+    ])
+    private lazy var headerViewSource = ClosureViewSource(viewUpdater: { (view: CollectionHeaderCell, data: CollectionHeaderCell.Item, index: Int) in
         view.configure(with: data)
     })
-    private lazy var headerSizeSource = { [weak self] (index: Int, data: Restaurant, collectionSize: CGSize) -> CGSize in
+    private lazy var headerSizeSource = { [weak self] (index: Int, data: CollectionHeaderCell.Item, collectionSize: CGSize) -> CGSize in
         return CGSize(width: self?.collectionView.frame.width ?? 0, height: 160)
     }
     

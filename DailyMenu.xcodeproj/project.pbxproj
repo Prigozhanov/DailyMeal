@@ -69,9 +69,14 @@
 		E76A67412385DBA6001FEF9B /* RestaurantsSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76A67402385DBA6001FEF9B /* RestaurantsSearchView.swift */; };
 		E779CDB4235B72FE0004E520 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779CDB3235B72FE0004E520 /* AppCoordinator.swift */; };
 		E779CDDB235CE9380004E520 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779CDDA235CE9380004E520 /* Assets.swift */; };
+		E78B605123D8D6DD00389EE2 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78B605023D8D6DD00389EE2 /* GradientView.swift */; };
+		E78C382F23D760D400335887 /* CartItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78C382E23D760D400335887 /* CartItemView.swift */; };
+		E7926C6723D8C3D800768405 /* CartTitleValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7926C6623D8C3D800768405 /* CartTitleValueView.swift */; };
+		E7926C6923D8C40600768405 /* CartPromocodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7926C6823D8C40600768405 /* CartPromocodeView.swift */; };
 		E7988BD923799A5600F0E8BD /* BaseCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7988BD823799A5600F0E8BD /* BaseCollectionCell.swift */; };
 		E79FD751239D399900038933 /* CollectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79FD750239D399900038933 /* CollectionHeaderCell.swift */; };
 		E79FD753239D39C300038933 /* FoodItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79FD752239D39C300038933 /* FoodItemCell.swift */; };
+		E7A4458723DA2F70003519E5 /* FoodOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4458623DA2F70003519E5 /* FoodOptionCell.swift */; };
 		E7A942352375BDDB00450D78 /* FoodCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A942342375BDDB00450D78 /* FoodCategoryCell.swift */; };
 		E7C6035F233D3ECA004686DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C6035E233D3ECA004686DB /* AppDelegate.swift */; };
 		E7C60368233D3ECC004686DB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7C60367233D3ECC004686DB /* Images.xcassets */; };
@@ -166,9 +171,14 @@
 		E76A67402385DBA6001FEF9B /* RestaurantsSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchView.swift; sourceTree = "<group>"; };
 		E779CDB3235B72FE0004E520 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		E779CDDA235CE9380004E520 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		E78B605023D8D6DD00389EE2 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		E78C382E23D760D400335887 /* CartItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemView.swift; sourceTree = "<group>"; };
+		E7926C6623D8C3D800768405 /* CartTitleValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTitleValueView.swift; sourceTree = "<group>"; };
+		E7926C6823D8C40600768405 /* CartPromocodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartPromocodeView.swift; sourceTree = "<group>"; };
 		E7988BD823799A5600F0E8BD /* BaseCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionCell.swift; sourceTree = "<group>"; };
 		E79FD750239D399900038933 /* CollectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeaderCell.swift; sourceTree = "<group>"; };
 		E79FD752239D39C300038933 /* FoodItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemCell.swift; sourceTree = "<group>"; };
+		E7A4458623DA2F70003519E5 /* FoodOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodOptionCell.swift; sourceTree = "<group>"; };
 		E7A942342375BDDB00450D78 /* FoodCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategoryCell.swift; sourceTree = "<group>"; };
 		E7C6035B233D3ECA004686DB /* Daily Menu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Menu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7C6035E233D3ECA004686DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -282,6 +292,7 @@
 		E71139BA2346AC7400889AE2 /* Cart */ = {
 			isa = PBXGroup;
 			children = (
+				E7926C6523D8C3AC00768405 /* Views */,
 				E71139BB2346AC7400889AE2 /* CartViewController.swift */,
 			);
 			path = Cart;
@@ -431,6 +442,7 @@
 			children = (
 				E71CDC4023AEE4870059505A /* NavigationBarControls.swift */,
 				E7E04A3B23C8B9870045A381 /* ItemCounter.swift */,
+				E78B605023D8D6DD00389EE2 /* GradientView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -488,6 +500,17 @@
 				E779CDDA235CE9380004E520 /* Assets.swift */,
 			);
 			path = Generated;
+			sourceTree = "<group>";
+		};
+		E7926C6523D8C3AC00768405 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E7A4458623DA2F70003519E5 /* FoodOptionCell.swift */,
+				E78C382E23D760D400335887 /* CartItemView.swift */,
+				E7926C6623D8C3D800768405 /* CartTitleValueView.swift */,
+				E7926C6823D8C40600768405 /* CartPromocodeView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		E79FD74F239D398200038933 /* Cells */ = {
@@ -818,17 +841,20 @@
 				E7E04A5D23CCAEB20045A381 /* CartService.swift in Sources */,
 				E71139D02346AC7400889AE2 /* CheckoutViewModel.swift in Sources */,
 				E71139D32346AC7400889AE2 /* HomeViewModel.swift in Sources */,
+				E78B605123D8D6DD00389EE2 /* GradientView.swift in Sources */,
 				E71139D12346AC7400889AE2 /* CartViewController.swift in Sources */,
 				E71139B52346AA1100889AE2 /* RegistrationViewModel.swift in Sources */,
 				E71139D82346AC7400889AE2 /* OrderStatusViewController.swift in Sources */,
 				E718698C237DCC1400059766 /* Fonts.swift in Sources */,
 				E71139DC2346AC7400889AE2 /* DeliveryLocationViewModel.swift in Sources */,
+				E7926C6923D8C40600768405 /* CartPromocodeView.swift in Sources */,
 				E71139F52346AFE300889AE2 /* RestaurantsViewModel.swift in Sources */,
 				E71139D42346AC7400889AE2 /* HomeViewController.swift in Sources */,
 				E7E04A5823CCADB40045A381 /* AppContext.swift in Sources */,
 				E7988BD923799A5600F0E8BD /* BaseCollectionCell.swift in Sources */,
 				E71139E32346AC7D00889AE2 /* RestaurantViewController.swift in Sources */,
 				E718699A237DEE5000059766 /* Category.swift in Sources */,
+				E7926C6723D8C3D800768405 /* CartTitleValueView.swift in Sources */,
 				E71139DD2346AC7400889AE2 /* ItemViewModel.swift in Sources */,
 				E71139D62346AC7400889AE2 /* OrderPlacedViewModel.swift in Sources */,
 				E74831FC2371C71C00216927 /* UILabel.swift in Sources */,
@@ -842,11 +868,13 @@
 				E7E04A3C23C8B9870045A381 /* ItemCounter.swift in Sources */,
 				E7037361234FE0D600852B04 /* UIButton.swift in Sources */,
 				E71139E22346AC7D00889AE2 /* RestaurantViewModel.swift in Sources */,
+				E78C382F23D760D400335887 /* CartItemView.swift in Sources */,
 				E76A67412385DBA6001FEF9B /* RestaurantsSearchView.swift in Sources */,
 				E71139B62346AA1100889AE2 /* RegistrationViewController.swift in Sources */,
 				E71139DA2346AC7400889AE2 /* GreetingViewController.swift in Sources */,
 				E79FD753239D39C300038933 /* FoodItemCell.swift in Sources */,
 				E7E04A5F23CD4AE20045A381 /* Formatter.swift in Sources */,
+				E7A4458723DA2F70003519E5 /* FoodOptionCell.swift in Sources */,
 				E718691D237DC00300059766 /* BaseTableCell.swift in Sources */,
 				E71139CF2346AC7400889AE2 /* CheckoutViewController.swift in Sources */,
 				E7CA20012364850C004AA1FC /* Models.swift in Sources */,

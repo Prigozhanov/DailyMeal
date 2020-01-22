@@ -10,7 +10,7 @@ public protocol CartServiceHolder {
 }
 
 public protocol CartService {
-    var items: [CartItem] { get }
+    var items: [String: CartItem] { get }
     
     var cartTotal: Double { get }
     var tax: Double { get }
@@ -21,12 +21,13 @@ public protocol CartService {
     
     func addItem(item: CartItem)
     func removeItem(item: CartItem)
+    func removeOption(option: FoodOption, atIndex index: Int, fromItem item: CartItem)
 }
 
 public final class CartServiceImplementation: CartService {
     
     public var cartTotal: Double {
-        return items.reduce(0.0) { (res, item: CartItem) -> Double in
+        return items.values.reduce(0.0) { (res, item: CartItem) -> Double in
             res + item.price * Double(item.count)
         }
     }
@@ -46,22 +47,26 @@ public final class CartServiceImplementation: CartService {
     }
     
     public func removeItem(item: CartItem) {
-        items.removeAll { (localItem) -> Bool in
-            item == localItem
-        }
+        items.removeValue(forKey: item.id)
     }
     
-    public var items: [CartItem] = [CartItem.dummy, CartItem.dummy1]
+    public func removeOption(option: FoodOption, atIndex index: Int, fromItem item: CartItem) {
+        items[item.id]?.options.remove(at: index)
+    }
+    
+    public var items: [String: CartItem] = [CartItem.dummy.id: CartItem.dummy, CartItem.dummy1.id: CartItem.dummy1]
 }
 
 
 public class CartItem: Comparable, Equatable {
+    var id: String
     var name: String
     var price: Double
     var count: Int
-    var options: [FoodOptions]
+    var options: [FoodOption]
     
-    init(name: String, price: Double, options: [FoodOptions], count: Int = 1) {
+    init(id: String, name: String, price: Double, options: [FoodOption], count: Int = 1) {
+        self.id = id
         self.name = name
         self.price = price
         self.options = options
@@ -73,16 +78,21 @@ public class CartItem: Comparable, Equatable {
     }
     
     public static func == (lhs: CartItem, rhs: CartItem) -> Bool {
-        return lhs.name == rhs.name &&
+        return lhs.id == rhs.id &&
+            lhs.name == rhs.name &&
             lhs.price == rhs.price &&
             lhs.options == rhs.options
     }
     
+    public func removeOption(at index: Int) {
+        options.remove(at: index)
+    }
+    
     static var dummy: CartItem {
-        return CartItem(name: "Dummy Pizza", price: 42.99, options: [.cheese, .petty], count: 3)
+        return CartItem(id: "1", name: "Dummy Pizza", price: 42.99, options: [.cheese, .petty], count: 3)
     }
     
     static var dummy1: CartItem {
-        return CartItem(name: "Dummy Pastry", price: 42.99, options: [.cheese, .petty, .hot])
+        return CartItem(id: "2", name: "Dummy Pastry", price: 42.99, options: [.cheese, .petty, .hot, .petty])
     }
 }

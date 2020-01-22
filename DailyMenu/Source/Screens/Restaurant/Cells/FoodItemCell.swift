@@ -15,7 +15,7 @@ class FoodItemCell: UIView {
     var item: Item?
     
     private let foodTitle: UILabel = {
-        let label = UILabel.makeMediumText()
+        let label = UILabel.makeText()
         label.font = FontFamily.semibold
         return label
     }()
@@ -28,7 +28,7 @@ class FoodItemCell: UIView {
     }()
     
     private let priceLabel: UILabel = {
-        let label = UILabel.makeMediumText()
+        let label = UILabel.makeText()
         label.textColor = Colors.blue.color
         label.font = FontFamily.semibold
         return label

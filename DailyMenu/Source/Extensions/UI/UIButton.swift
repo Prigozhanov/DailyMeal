@@ -69,11 +69,6 @@ extension UIButton {
         }
         button.setTitle(text, for: .normal)
         button.setActionHandler(controlEvents: .touchUpInside, ForAction: action)
-        
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [Colors.blue.color.cgColor, Colors.lightBlue.color.cgColor]
-        gradientLayer.locations = [0, 1]
-        button.layer.addSublayer(gradientLayer)
         return button
     }
     

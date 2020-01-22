@@ -17,13 +17,7 @@ class Style {
     }
     
     static func addBlueGradient(_ view: UIView) {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [Colors.blue.color.cgColor, Colors.blue2.color.cgColor]
-        gradientLayer.startPoint = CGPoint(x: 0, y: 1)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
-        gradientLayer.frame = view.bounds
-        view.layer.insertSublayer(gradientLayer, at: 0)
-        view.clipsToBounds = true
+        view.insertSubview(GradientView(parentView: view), at: 0)
     }
     
 }

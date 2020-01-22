@@ -6,14 +6,10 @@
 import UIKit
 
 class ItemCounter: UIView {
+    
     private var value = 1
     
     let valueLabel = UILabel()
-    
-    private var border: UIView = {
-        let border = UIView()
-        return border
-    }()
     
     init(valueChanged: @escaping (Int) -> ()) {
         super.init(frame: .zero)
