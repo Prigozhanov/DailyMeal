@@ -8,6 +8,10 @@ import UIKit
 typealias Colors = Asset.Colors
 typealias Images = Asset.Images
 
+typealias VoidClosure = () -> ()
+typealias BoolClosure = (Bool) -> ()
+typealias IntClosure = (Int) -> ()
+
 extension UIResponder {
     
     var parentViewController: UIViewController? {

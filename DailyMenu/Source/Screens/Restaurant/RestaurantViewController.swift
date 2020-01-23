@@ -29,14 +29,21 @@ final class RestaurantViewController: UIViewController {
         collectionView.contentInset = UIEdgeInsets(top: 100, left: 0, bottom: 0, right: 0)
         collectionView.delegate = self
         return collectionView
-    }()
+        }()
     
-    private lazy var headerDataSource = ArrayDataSource(data: [self.viewModel.restaurant])
-    private lazy var headerViewSource = ClosureViewSource(viewUpdater: { (view: CollectionHeaderCell, data: Restaurant, index: Int) in
+    private lazy var headerDataSource = ArrayDataSource(data: [
+        CollectionHeaderCell.Item(
+            label: self.viewModel.restaurant.label,
+            distance: self.viewModel.restaurant.distance,
+            orderDelay: self.viewModel.restaurant.orderDelayFirst,
+            minOrderPrice: Formatter.Currency.toString(Double(self.viewModel.restaurant.minAmountOrder))
+        )
+    ])
+    private lazy var headerViewSource = ClosureViewSource(viewUpdater: { (view: CollectionHeaderCell, data: CollectionHeaderCell.Item, index: Int) in
         view.configure(with: data)
     })
-    private lazy var headerSizeSource = { (index: Int, data: Restaurant, collectionSize: CGSize) -> CGSize in
-        return CGSize(width: self.collectionView.frame.width, height: 160)
+    private lazy var headerSizeSource = { [weak self] (index: Int, data: CollectionHeaderCell.Item, collectionSize: CGSize) -> CGSize in
+        return CGSize(width: self?.collectionView.frame.width ?? 0, height: 160)
     }
     
     private lazy var headerProvider = BasicProvider(
@@ -48,8 +55,8 @@ final class RestaurantViewController: UIViewController {
     private let itemViewSource = ClosureViewSource(viewUpdater: { (view: FoodItemCell, data: FoodItemCell.Item, index: Int) in
         view.configure(with: data)
     })
-    private lazy var itemSizeSource = { (index: Int, data: FoodItemCell.Item, collectionSize: CGSize) -> CGSize in
-        return CGSize(width: self.collectionView.frame.width, height: 100)
+    private lazy var itemSizeSource = { [weak self] (index: Int, data: FoodItemCell.Item, collectionSize: CGSize) -> CGSize in
+        return CGSize(width: self?.collectionView.frame.width ?? 0, height: 100)
     }
     
     private lazy var sectionHeaderProvider: ComposedHeaderProvider<SectionHeaderCell> = {
@@ -193,7 +200,6 @@ extension RestaurantViewController: UIScrollViewDelegate {
         let offsetYValue = scrollView.contentOffset.y
         let alphaValue = offsetYValue / (collectionViewTopPoint.y / 2)
         let heightValue = view.safeAreaInsets.top + 150 - (offsetYValue - collectionViewTopPoint.y)
-        print(heightValue)
         if userScrollInitiated {
             if abs(collectionViewTopPoint.y) - offsetYValue > 0 {
                 navigationBarBackground.alpha = alphaValue

@@ -7,31 +7,37 @@ import UIKit
 
 class CollectionHeaderCell: UIView {
     
-    private var item: Restaurant?
+    public struct Item {
+        public let label: String
+        public let distance: Double
+        public let orderDelay: Int
+        public let minOrderPrice: String
+    }
+    
+    private var item: Item?
     
     private let restaurantNameLabel: UILabel = {
-        let label = UILabel.makeLargeText()
+        let label = UILabel.makeText()
         label.font = FontFamily.bold
-        label.textColor = Colors.charcoal.color
         return label
     }()
     
     private let minOrderValueLabel: UILabel = {
-        let label = UILabel.makeMediumText()
+        let label = UILabel.makeText()
         label.textColor = Colors.blue.color
         label.font = FontFamily.smallMedium
         return label
     }()
     
     private let distanceValueLabel: UILabel = {
-        let label = UILabel.makeSmallText()
+        let label = UILabel.makeText()
         label.textColor = Colors.smoke.color
         label.font = FontFamily.Poppins.medium.font(size: 10)
         return label
     }()
     
     private let deliveryTimeValueLabel: UILabel = {
-        let label = UILabel.makeSmallText()
+        let label = UILabel.makeText()
         label.textColor = Colors.smoke.color
         label.font = FontFamily.Poppins.medium.font(size: 10)
         return label
@@ -138,11 +144,11 @@ class CollectionHeaderCell: UIView {
         
     }
     
-    func configure(with item: Restaurant) {
+    func configure(with item: Item) {
         restaurantNameLabel.text = item.label
-        minOrderValueLabel.text = "BYN \(item.minAmountOrder)"
         distanceValueLabel.text = "\(item.distance) km away"
-        deliveryTimeValueLabel.text = "\(item.orderDelayFirst) minutes delivery time"
+        deliveryTimeValueLabel.text = "\(item.orderDelay) minutes delivery time"
+        minOrderValueLabel.text = item.minOrderPrice
     }
     
 }

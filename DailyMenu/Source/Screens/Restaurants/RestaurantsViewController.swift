@@ -25,7 +25,7 @@ final class RestaurantsViewController: UIViewController {
     
     private lazy var headerView: UIView = {
         let view = UIView()
-        let label = UILabel.makeLargeText("What would you like to eat?")
+        let label = UILabel.makeText("What would you like to eat?")
         label.numberOfLines = 2
         label.font = FontFamily.Poppins.bold.font(size: 24)
         label.textColor = Colors.charcoal.color

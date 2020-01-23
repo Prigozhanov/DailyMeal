@@ -11,12 +11,12 @@ class RestaurantCell: BaseTableCell {
     typealias CellData = Restaurant
     
     private let deliveryFeeValueLabel: UILabel = {
-        let label = UILabel.makeMediumText()
+        let label = UILabel.makeText()
         label.textColor = Colors.blue.color
         label.font = FontFamily.smallMedium
         return label
     }()
-    private var restaurantNameLabel = UILabel.makeLargeText()
+    private var restaurantNameLabel = UILabel.makeText()
     
     var restaurant: Restaurant?
     
@@ -119,7 +119,7 @@ extension RestaurantCell: ConfigurableCell {
     
     func configure(with item: Restaurant) {
         restaurantNameLabel.text = item.label
-        deliveryFeeValueLabel.text = "BYN \(item.restDeliveryFee)"
+        deliveryFeeValueLabel.text = Formatter.Currency.toString(Double(item.restDeliveryFee))
     }
     
 }

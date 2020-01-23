@@ -7,6 +7,14 @@ import UIKit
 
 extension UILabel {
     
+    static func makeText(_ text: String? = nil) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.font = FontFamily.smallMedium
+        label.textColor = Colors.charcoal.color
+        return label
+    }
+    
     static func makeExtraSmallText(_ text: String? = nil) -> UILabel {
         let label = UILabel()
         label.text = text

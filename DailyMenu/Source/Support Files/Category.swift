@@ -5,6 +5,10 @@
 
 import Foundation
 
-enum FoodCategory: String {
+public enum FoodCategory: String {
     case burger, chicken, desert, fries, hotdog, lobastar, pizza, sandwich, steak, sushi, taco, pastry
+}
+
+public enum FoodOption: String {
+    case cheese = "Cheese", petty = "Petty", hot = "Hot" 
 }

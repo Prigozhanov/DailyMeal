@@ -32,4 +32,11 @@ extension UIView {
         layer.borderWidth = width
     }
     
+    static func makeSeparator() -> UIView {
+        let view = UIView()
+        view.backgroundColor = Colors.lightGray.color
+        view.snp.makeConstraints { $0.height.equalTo(1) }
+        return view
+    }
+    
 }
