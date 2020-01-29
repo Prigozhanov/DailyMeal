@@ -39,4 +39,14 @@ extension UIView {
         return view
     }
     
+    func tapAnimation() {
+        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn, animations: { [weak self] in
+            self?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        }) { _ in
+            UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseOut, animations: { [weak self] in
+                self?.transform = .identity
+            }, completion: nil)
+        }
+    }
+    
 }

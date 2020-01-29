@@ -36,6 +36,9 @@ class NavigationBarControls: UIView {
             $0.top.leading.equalToSuperview().inset(Layout.largeMargin)
             $0.size.equalTo(44)
         }
+        snp.makeConstraints {
+            $0.height.equalTo(100)
+        }
     }
     
 }

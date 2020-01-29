@@ -14,21 +14,22 @@ class CartItemView: UIView {
     
     private var item: CartItem
     
-    private lazy var optionsDataSource = ArrayDataSource(data: self.item.options)
+    private lazy var optionsDataSource = ArrayDataSource(data: self.item.options.filter { $0.applied })
     private lazy var optionsCollectionProvider = BasicProvider(
         dataSource: optionsDataSource,
-        viewSource: ClosureViewSource(viewUpdater: { [weak self] (view: FoodOptionCell, data: FoodOption, index: Int) in
+        viewSource: ClosureViewSource(viewUpdater: { [weak self] (view: FoodOptionCell, data: CartItem.Option, index: Int) in
             view.configure(with: FoodOptionCell.Item(option: data, onRemoveOption: { [weak self] (_) in
                 guard let self = self else { return }
-                self.item.removeOption(at: index)
+                data.applied = false
                 self.optionsDataSource.data.remove(at: index)
                 self.optionsDataSource.reloadData()
+                AppDelegate.shared.context.cartService.view?.reloadCalculationsRows()
             }))
         }),
-        sizeSource: { [weak self] (index: Int, data: FoodOption, collectionSize: CGSize) -> CGSize in
+        sizeSource: { [weak self] (index: Int, data: CartItem.Option, collectionSize: CGSize) -> CGSize in
             guard let self = self else { return .zero }
             return CGSize(
-                width: NSString(string: data.rawValue)
+                width: NSString(string: data.option.rawValue)
                     .size(withAttributes: [
                         NSAttributedString.Key.font : FontFamily.Poppins.regular.font(size: 11)!
                     ])
@@ -68,7 +69,7 @@ class CartItemView: UIView {
         setRoundCorners(Layout.cornerRadius)
         setShadow(offset: CGSize(width: 0, height: 5.0), opacity: 0.05, radius: 20)
         snp.makeConstraints { $0.height.equalTo(100) }
-        let counter = ItemCounter { [weak self] value in
+        let counter = ItemCounter(axis: .veritcal) { [weak self] value in
             self?.item.count = value
             self?.onChangeCount(value)
         }

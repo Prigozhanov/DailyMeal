@@ -63,6 +63,7 @@ extension UIButton {
     static func makeActionButton(_ text: String, action: @escaping (UIButton) -> Void) -> UIButton {
         let button = UIButton()
         button.layer.cornerRadius = Layout.cornerRadius
+        button.titleLabel?.font = FontFamily.Poppins.medium.font(size: 14)
         button.snp.makeConstraints { (make) in
             make.height.equalTo(50)
             make.width.equalTo(300)
