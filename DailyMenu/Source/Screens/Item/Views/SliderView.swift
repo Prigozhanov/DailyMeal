@@ -28,7 +28,7 @@ class SliderView: UIView {
     }()
     
     private lazy var sliderView: UISlider = {
-       let slider = UISlider()
+        let slider = UISlider()
         slider.minimumValue = 0
         slider.setThumbImage(Images.Icons.thumb.image, for: .normal)
         slider.tintColor = Colors.blue.color

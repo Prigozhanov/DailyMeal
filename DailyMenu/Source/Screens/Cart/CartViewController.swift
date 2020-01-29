@@ -85,7 +85,8 @@ final class CartViewController: UIViewController {
         
         view.addSubview(aloeStackView)
         aloeStackView.snp.makeConstraints {
-            $0.bottom.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
         }
     }
