@@ -39,14 +39,31 @@ extension UIView {
         return view
     }
     
-    func tapAnimation() {
+    func tapAnimation(completion: VoidClosure? = nil) {
         UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn, animations: { [weak self] in
             self?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
         }) { _ in
             UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseOut, animations: { [weak self] in
                 self?.transform = .identity
-            }, completion: nil)
+                }, completion: { _ in completion?() })
         }
+    }
+    
+    func startRotating(duration: CFTimeInterval = 1, repeatCount: Float = Float.infinity, clockwise: Bool = true) {
+        if layer.animation(forKey: "transform.rotation.z") != nil { return }
+        
+        let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
+        let direction = clockwise ? 1.0 : -1.0
+        rotation.fromValue = NSNumber(value: 0)
+        rotation.toValue = NSNumber(value: .pi * 2 * direction)
+        rotation.duration = duration
+        rotation.isCumulative = true
+        rotation.repeatCount = repeatCount
+        layer.add(rotation, forKey: "transform.rotation.z")
+    }
+    
+    func stopRotating() {
+        layer.removeAnimation(forKey: "transform.rotation.z")
     }
     
 }

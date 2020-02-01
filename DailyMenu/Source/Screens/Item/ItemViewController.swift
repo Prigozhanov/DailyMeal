@@ -11,12 +11,13 @@ final class ItemViewController: UIViewController {
     
     private var stackViewInsets = UIEdgeInsets(top: 130, left: 0, bottom: 0, right: 0)
     private lazy var scrollDelegate: StretchScrollDelegate = StretchScrollDelegate(view: navigationBarBackground) { [weak self] shouldBeAppeared in
-        self?.navigationBarControls.isHidden = !shouldBeAppeared
+        self?.navigationBarControls.alpha = !shouldBeAppeared ? 0 : 1
+        self?.navigationBarControls.isUserInteractionEnabled = shouldBeAppeared
         self?.setNeedsStatusBarAppearanceUpdate()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return navigationBarControls.isHidden ? .default : .lightContent
+        return navigationBarBackground.alpha < 0.3 ? .default : .lightContent
     }
     
     private lazy var stackView: AloeStackView = {
@@ -47,7 +48,7 @@ final class ItemViewController: UIViewController {
     private lazy var addOnsView = AddOnsView(itemViewModel: viewModel)
     
     private var totalLabel: UILabel = {
-       let label = UILabel.makeSmallText("Total")
+        let label = UILabel.makeSmallText("Total")
         label.textAlignment = .center
         return label
     }()
@@ -62,9 +63,12 @@ final class ItemViewController: UIViewController {
     }()
     
     private lazy var addToCartButton = UIButton.makeActionButton("Add to Cart") { [weak self] view in
-        view.tapAnimation()
         guard let self = self, let item = self.viewModel.item.copy() as? CartItem else { return }
         self.viewModel.cartService.addItem(item: item)
+        view.tapAnimation { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
     }
     
     init(viewModel: ItemViewModel) {
@@ -112,9 +116,9 @@ final class ItemViewController: UIViewController {
         
         navigationBarBackground.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
-//            $0.height.equalTo(150 + (UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0))
+            //            $0.height.equalTo(150 + (UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0))
         }
-    
+        
         stackView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.layoutMarginsGuide.snp.bottom)

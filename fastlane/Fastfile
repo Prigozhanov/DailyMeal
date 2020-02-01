@@ -38,7 +38,7 @@ platform :ios do
     skip_profile_detection: true,
     export_options: {
         provisioningProfiles: {
-        "com.epam.daily-menu" => "EPAM IN-HOUSE 4 Wildcard-revokable",
+        "com.epam.daily-menu" => "EPAM IN-HOUSE 5 Wildcard-revokable",
         }
     }
   )

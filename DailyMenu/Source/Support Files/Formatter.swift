@@ -12,7 +12,14 @@ enum Formatter {
             guard let value = value else {
                 return "Error"
             }
-            return value < 0 ? String(format: "- $%.2f", abs(value)) : String(format: "$%.2f", value)
+            return value < 0 ? String(format: "- BYN %.2f", abs(value)) : String(format: "BYN %.2f", value)
+        }
+        
+        static func fromString(_ string: String?) -> Double? {
+            guard let string = string else {
+                return nil
+            }
+            return Double(string)
         }
     }
     

@@ -76,6 +76,7 @@ internal enum Asset {
     internal static let ratePlaceholder = ImageAsset(name: "rate_placeholder")
     internal static let restaurantLogoPlaceholder = ImageAsset(name: "restaurant_logo_placeholder")
     internal static let restaurentImagePlaceholder = ImageAsset(name: "restaurent_image_placeholder")
+    internal static let spinner = ImageAsset(name: "spinner")
     internal static let tabCartActive = ImageAsset(name: "tab_cart_active")
     internal static let tabCartInactive = ImageAsset(name: "tab_cart_inactive")
     internal static let tabExploreActive = ImageAsset(name: "tab_explore-active")

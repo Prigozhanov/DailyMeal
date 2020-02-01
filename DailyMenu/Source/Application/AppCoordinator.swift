@@ -9,14 +9,16 @@ class AppCoordinator {
     
     let window: UIWindow
     
+    private let tabBarController: UITabBarController = UITabBarController()
+    
     init(_ window: UIWindow) {
         self.window = window
     }
     
     func registerApplication() -> Bool {
-        window.rootViewController = makeRootViewController()
+        window.rootViewController = tabBarController
         window.makeKeyAndVisible()
-        
+        configureRootViewController()
         //    showGreeting()
         
         return true
@@ -26,19 +28,17 @@ class AppCoordinator {
 
 private extension AppCoordinator {
     
-    func makeRootViewController() -> UIViewController {
+    func configureRootViewController() {
 //        let vc = ItemViewController(viewModel: ItemViewModelImplementation(item: .dummy))
 //        let nav = NavigationController(rootViewController: vc)
 //        return vc
-        
-        let tabbar = UITabBarController()
-        tabbar.viewControllers = [
+    
+        tabBarController.viewControllers = [
             cartTab,
             exploreTab,
             settingsTab
         ]
-        tabbar.selectedIndex = 1
-        return tabbar
+        tabBarController.selectedIndex = 1
     }
     
     var exploreTab: NavigationController {

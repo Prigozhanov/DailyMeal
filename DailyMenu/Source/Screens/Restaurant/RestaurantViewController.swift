@@ -10,7 +10,8 @@ final class RestaurantViewController: UIViewController {
     private var viewModel: RestaurantViewModel
     
     private lazy var scrollDelegate: StretchScrollDelegate = StretchScrollDelegate(view: navigationBarBackground) { [weak self] shouldBeAppeared in
-        self?.navigationBarControls.isHidden = !shouldBeAppeared
+        self?.navigationBarControls.alpha = !shouldBeAppeared ? 0 : 1
+        self?.navigationBarControls.isUserInteractionEnabled = shouldBeAppeared
         self?.setNeedsStatusBarAppearanceUpdate()
     }
     
@@ -25,19 +26,21 @@ final class RestaurantViewController: UIViewController {
     private var navigationBarControls = NavigationBarControls()
     
     private lazy var collectionView: CollectionView = {
-        let collectionView = CollectionView(provider: sectionHeaderProvider)
+        let collectionView = CollectionView(provider: composedSectionProvider)
         collectionView.backgroundColor = Colors.commonBackground.color
         collectionView.contentInset = UIEdgeInsets(top: 100, left: 0, bottom: 0, right: 0)
         collectionView.delegate = scrollDelegate
         return collectionView
         }()
     
+    
     private lazy var headerDataSource = ArrayDataSource(data: [
         CollectionHeaderCell.Item(
-            label: self.viewModel.restaurant.label,
+            label: self.viewModel.restaurant.chain_label,
             distance: self.viewModel.restaurant.distance,
             orderDelay: self.viewModel.restaurant.orderDelayFirst,
-            minOrderPrice: Formatter.Currency.toString(Double(self.viewModel.restaurant.minAmountOrder))
+            minOrderPrice: Formatter.Currency.toString(Double(self.viewModel.restaurant.min_amount_order!)),
+            imageURL: self.viewModel.restaurant.src.orEmpty
         )
     ])
     private lazy var headerViewSource = ClosureViewSource(viewUpdater: { (view: CollectionHeaderCell, data: CollectionHeaderCell.Item, index: Int) in
@@ -54,7 +57,11 @@ final class RestaurantViewController: UIViewController {
     )
     
     private lazy var itemViewSource = ClosureViewSource(viewUpdater: { (view: FoodItemCell, data: CartItem, index: Int) in
-        view.configure(with: FoodItemCell.Item(title: data.name, description: "", price: Formatter.Currency.toString(data.price)))
+        view.configure(with: FoodItemCell.Item(
+            title: data.name,
+            description: data.description.orEmpty.withRemovedHtmlTags,
+            price: Formatter.Currency.toString(data.price),
+            imageURL: data.imageURL.orEmpty))
         view.addGestureRecognizer(BlockTap(action: { [weak self] _ in
             let vm = ItemViewModelImplementation(item: data)
             let vc = ItemViewController(viewModel: vm)
@@ -62,13 +69,13 @@ final class RestaurantViewController: UIViewController {
         }))
     })
     private lazy var itemSizeSource = { [weak self] (index: Int, data: CartItem, collectionSize: CGSize) -> CGSize in
-        return CGSize(width: self?.collectionView.frame.width ?? 0, height: 100)
+        return CGSize(width: self?.collectionView.frame.width ?? 0, height: 120)
     }
     
-    private lazy var sectionHeaderProvider: ComposedHeaderProvider<SectionHeaderCell> = {
+    private lazy var composedSectionProvider: ComposedHeaderProvider<SectionHeaderCell> = {
         let provider = ComposedHeaderProvider(
             headerViewSource: { (view: SectionHeaderCell, data, index) in
-                view.configure(section: "Dummy section \(index)", itemsCount: data.section.numberOfItems)
+                view.configure(section: "Section \(index)", itemsCount: data.section.numberOfItems)
                 if index == 0 {
                     view.isHidden = true
                 }
@@ -77,7 +84,7 @@ final class RestaurantViewController: UIViewController {
                 if index == 0 {
                     return .zero
                 }
-                return CGSize(width: maxSize.width, height: 50)
+                return CGSize(width: maxSize.width, height: 60)
         },
             sections: sections
         )
@@ -87,16 +94,15 @@ final class RestaurantViewController: UIViewController {
         return provider
     }()
     
-    private lazy var sections: [Provider] = [
-        headerProvider,
-        makeItemsSection(viewModel.items),
-        makeItemsSection(viewModel.items),
-        makeItemsSection(viewModel.items),
-        makeItemsSection(viewModel.items)
-    ]
+    private var sections: [Provider] {
+        return [
+            headerProvider,
+            makeItemsSection(viewModel.items)
+        ]
+    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return navigationBarControls.isHidden ? .default : .lightContent
+        return navigationBarBackground.alpha < 0.3 ? .default : .lightContent
     }
     
     init(viewModel: RestaurantViewModel) {
@@ -140,6 +146,10 @@ final class RestaurantViewController: UIViewController {
         Style.addBlackGradient(navigationBarBackground)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        viewModel.loadMenu()
+    }
+    
     private func makeItemsSection(_ items: [CartItem]) -> BasicProvider<CartItem, FoodItemCell> {
         let itemDataSource = ArrayDataSource(data: items)
         
@@ -156,7 +166,10 @@ final class RestaurantViewController: UIViewController {
 
 //MARK: -  RestaurantView
 extension RestaurantViewController: RestaurantView {
-    
+    func reloadItems() {
+        composedSectionProvider.sections = sections
+        composedSectionProvider.reloadData()
+    }
 }
 
 //MARK: -  Private

@@ -17,5 +17,6 @@ pod 'AppCenter'
 pod 'AppCenter/Distribute'
 pod 'TableKit'
 pod 'AloeStackView'
+pod 'SDWebImage'
 
 end

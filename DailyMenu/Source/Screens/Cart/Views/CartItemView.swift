@@ -65,42 +65,44 @@ class CartItemView: UIView {
     required init?(coder: NSCoder) { fatalError() }
     
     public func setup() {
-        backgroundColor = Colors.white.color
-        setRoundCorners(Layout.cornerRadius)
-        setShadow(offset: CGSize(width: 0, height: 5.0), opacity: 0.05, radius: 20)
-        snp.makeConstraints { $0.height.equalTo(100) }
+        let cardView = CardView(shadowSize: .medium, customInsets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+        addSubview(cardView)
+        cardView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.height.equalTo(100)
+        }
         let counter = ItemCounter(axis: .veritcal) { [weak self] value in
             self?.item.count = value
             self?.onChangeCount(value)
         }
+        
         counter.updateValue(item.count)
-        addSubview(counter)
+        cardView.contentView.addSubview(counter)
         counter.snp.makeConstraints {
             $0.top.leading.bottom.equalToSuperview().inset(Layout.commonInset)
             $0.width.equalTo(50)
         }
         
-        let shadow = UIView()
-        addSubview(shadow)
-        shadow.setRoundCorners(Layout.cornerRadius)
-        shadow.setShadow(offset: CGSize(width: 0, height: 5), opacity: 0.1, radius: 10)
-        shadow.backgroundColor = .white
-        shadow.snp.makeConstraints { [weak self] in
+        let imageCardView = CardView(shadowSize: .small, customInsets: .zero)
+        cardView.contentView.addSubview(imageCardView)
+        imageCardView.snp.makeConstraints {
             $0.top.bottom.equalToSuperview().inset(Layout.commonInset)
-            $0.leading.equalTo(counter.snp.trailing).offset(Layout.largeMargin)
-            $0.size.equalTo(self?.snp.height ?? 0).inset(Layout.commonInset)
+            $0.leading.equalTo(counter.snp.trailing).offset(Layout.commonMargin)
+            $0.size.equalTo(counter.snp.height)
         }
         
-        addSubview(itemImage)
-        itemImage.snp.makeConstraints { [weak self] in
-            $0.top.bottom.equalToSuperview().inset(Layout.commonInset)
-            $0.leading.equalTo(counter.snp.trailing).offset(Layout.largeMargin)
-            $0.size.equalTo(self?.snp.height ?? 0).inset(Layout.commonInset)
+        imageCardView.contentView.addSubview(itemImage)
+        itemImage.contentMode = .scaleAspectFit
+        itemImage.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        if let url = URL(string: item.imageURL.orEmpty) {
+             itemImage.sd_setImage(with: url)
         }
         
         let itemNameLabel = UILabel.makeText(item.name)
         itemNameLabel.font = FontFamily.semibold
-        addSubview(itemNameLabel)
+        cardView.contentView.addSubview(itemNameLabel)
         itemNameLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(Layout.commonInset)
             $0.leading.equalTo(itemImage.snp.trailing).offset(Layout.largeMargin)
@@ -109,7 +111,7 @@ class CartItemView: UIView {
         let itemPrice = UILabel.makeText(Formatter.Currency.toString(item.price))
         itemPrice.font = FontFamily.semibold
         itemPrice.textColor = Colors.blue.color
-        addSubview(itemPrice)
+        cardView.contentView.addSubview(itemPrice)
         itemPrice.snp.makeConstraints {
             $0.top.equalTo(itemNameLabel.snp.bottom).offset(Layout.commonMargin)
             $0.leading.equalTo(itemNameLabel)
@@ -123,14 +125,14 @@ class CartItemView: UIView {
         removeButton.setActionHandler(controlEvents: .touchUpInside) { [unowned self] _ in
             self.onRemoveItem(self)
         }
-        addSubview(removeButton)
+        cardView.contentView.addSubview(removeButton)
         removeButton.snp.makeConstraints {
             $0.top.trailing.equalToSuperview().inset(Layout.commonInset)
             $0.leading.equalTo(itemNameLabel.snp.trailing)
             $0.size.equalTo(18)
         }
         
-        addSubview(optionsCollection)
+        cardView.contentView.addSubview(optionsCollection)
         optionsCollection.snp.makeConstraints {
             $0.top.equalTo(itemPrice.snp.bottom)
             $0.trailing.equalToSuperview().inset(Layout.commonInset)

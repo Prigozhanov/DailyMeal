@@ -15,7 +15,8 @@ class CartPromocodeView: UIView {
         return field
     }()
     
-    private lazy var applyButton = UIButton.makeActionButton("Apply") { [weak self] _ in
+    private lazy var applyButton = UIButton.makeActionButton("Apply") { [weak self] button in
+        button.tapAnimation()
         self?.onApplyPromocode()
     }
     

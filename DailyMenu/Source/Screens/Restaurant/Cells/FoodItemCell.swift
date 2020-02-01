@@ -10,12 +10,14 @@ class FoodItemCell: UIView {
         let title: String
         let description: String
         let price: String
+        let imageURL: String
     }
     
     var item: Item?
     
     private let foodTitle: UILabel = {
         let label = UILabel.makeText()
+        label.numberOfLines = 3
         label.font = FontFamily.semibold
         return label
     }()
@@ -23,7 +25,7 @@ class FoodItemCell: UIView {
     private let foodDescription: UILabel = {
         let label = UILabel.makeExtraSmallText()
         label.textColor = Colors.gray.color
-        label.numberOfLines = 3
+        label.numberOfLines = 5
         return label
     }()
     
@@ -34,6 +36,12 @@ class FoodItemCell: UIView {
         return label
     }()
     
+    private let foodImage: UIImageView = {
+        let view = UIImageView(image: Images.foodItemPlaceholder.image)
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setup()
@@ -42,52 +50,42 @@ class FoodItemCell: UIView {
     required init?(coder: NSCoder) { fatalError() }
     
     private func setup() {
-        let view = UIView()
-        addSubview(view)
-        view.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.top.bottom.equalToSuperview()
-        }
-        view.setRoundCorners(Layout.cornerRadius)
-        view.setShadow(offset: CGSize(width: 0, height: 4.0), opacity: 0.07, radius: 10)
-        view.backgroundColor = Colors.white.color
+        let cardView = CardView(shadowSize: .medium, customInsets: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
         
-        let shadow = UIView()
-        view.addSubview(shadow)
-        shadow.snp.makeConstraints {
-            $0.top.leading.bottom.equalToSuperview().inset(Layout.largeMargin)
-            $0.size.equalTo(view.snp.height).inset(Layout.largeMargin)
-        }
-        shadow.setRoundCorners(Layout.cornerRadius)
-        shadow.setShadow(offset: CGSize(width: 0, height: 5), opacity: 0.1, radius: 10)
-        shadow.backgroundColor = .white
+        addSubview(cardView)
+        cardView.snp.makeConstraints { $0.edges.equalToSuperview() }
         
-        let foodImage = UIImageView(image: Images.foodItemPlaceholder.image)
-        view.addSubview(foodImage)
+        cardView.contentView.addSubview(foodImage)
         foodImage.snp.makeConstraints {
             $0.top.leading.bottom.equalToSuperview().inset(Layout.largeMargin)
-            $0.size.equalTo(view.snp.height).inset(Layout.largeMargin)
+            $0.size.equalTo(cardView.contentView.snp.height).inset(Layout.largeMargin)
         }
         foodImage.contentMode = .scaleAspectFit
         foodImage.setRoundCorners(Layout.cornerRadius)
         
-        view.addSubview(foodTitle)
+        cardView.contentView.addSubview(foodTitle)
         foodTitle.snp.makeConstraints {
             $0.leading.equalTo(foodImage.snp.trailing).offset(Layout.largeMargin)
             $0.top.equalToSuperview().inset(Layout.largeMargin)
         }
         
-        view.addSubview(priceLabel)
+        cardView.contentView.addSubview(priceLabel)
+        priceLabel.textAlignment = .right
         priceLabel.snp.makeConstraints {
             $0.top.trailing.equalToSuperview().inset(Layout.largeMargin)
-            $0.centerY.equalTo(foodTitle.snp.centerY)
+            $0.trailing.equalToSuperview().inset(Layout.commonInset)
+            $0.leading.equalTo(foodTitle.snp.trailing).offset(Layout.commonMargin)
         }
+        priceLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+
         
-        view.addSubview(foodDescription)
+        cardView.contentView.addSubview(foodDescription)
+        
         foodDescription.snp.makeConstraints {
             $0.leading.equalTo(foodImage.snp.trailing).offset(Layout.largeMargin)
-            $0.top.equalTo(foodTitle).offset(Layout.commonMargin)
-            $0.bottom.trailing.equalToSuperview().inset(Layout.largeMargin)
+            $0.top.equalTo(foodTitle.snp.bottom).offset(Layout.commonMargin)
+            $0.trailing.equalToSuperview().inset(Layout.commonInset)
+            $0.bottom.lessThanOrEqualTo(cardView.snp.bottom)
         }
     }
     
@@ -95,6 +93,11 @@ class FoodItemCell: UIView {
         foodTitle.text = item.title
         foodDescription.text = item.description
         priceLabel.text = item.price
+        if let url = URL(string: item.imageURL) {
+            foodImage.sd_setImage(with: url)
+        }
+        
+        layoutSubviews()
     }
     
 }

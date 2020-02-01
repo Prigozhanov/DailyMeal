@@ -51,7 +51,7 @@ final class RestaurantsViewController: UIViewController {
         categoryCollectionView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalToSuperview().inset(10)
-            $0.height.equalTo(80)
+            $0.height.equalTo(90)
         }
         
         view.addSubview(searchView)
@@ -76,9 +76,9 @@ final class RestaurantsViewController: UIViewController {
         return collectionView
     }()
     
-    private lazy var searchView = RestaurantsSearchView()
+    private lazy var searchView = RestaurantsSearchView(viewModel: viewModel)
     
-    private lazy var tableDirector: TableDirector = TableDirector(tableView: tableView, scrollDelegate: self, shouldUsePrototypeCellHeightCalculation: true)
+    private lazy var tableDirector: TableDirector = TableDirector(tableView: tableView, scrollDelegate: self)
     
     init(viewModel: RestaurantsViewModel) {
         self.viewModel = viewModel
@@ -133,23 +133,10 @@ final class RestaurantsViewController: UIViewController {
         statusBarBackground.backgroundColor = Colors.commonBackground.color
         view.addSubview(statusBarBackground)
         
-        let rows = viewModel.restaurants.enumerated().map { [weak self] (index, item) -> TableRow<RestaurantCell> in
-            let row = TableRow<RestaurantCell>(item: viewModel.restaurants[index])
-                .on(.click) { [weak self] cell in
-                    let vc = RestaurantViewController(viewModel: RestaurantViewModelImplementation(restaurant: cell.item))
-                    self?.navigationController?.pushViewController(vc, animated: true)
-            }
-            return row
-        }
-        let section = TableSection()
-        section.append(rows: rows)
         
         tableView.contentInset = UIEdgeInsets(top: 250, left: 0, bottom: 0, right: 0)
         tableView.scrollIndicatorInsets = tableView.contentInset
         tableView.setContentOffset(CGPoint(x: 0, y: -250), animated: false)
-        
-        tableDirector.append(section: section)
-        tableDirector.reload()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -163,7 +150,39 @@ final class RestaurantsViewController: UIViewController {
 
 //MARK: -  RestaurantsView
 extension RestaurantsViewController: RestaurantsView {
-    
+    func reloadScreen() {
+        tableDirector.clear()
+        var rows: [TableRow<RestaurantCell>]
+        if !viewModel.isFiltering {
+        rows = viewModel
+            .pagedRestaurants
+            .enumerated()
+            .map { [weak self] (index, item) -> TableRow<RestaurantCell> in
+                let row = TableRow<RestaurantCell>(item: viewModel.restaurants[index])
+                    .on(.click) { [weak self] cell in
+                        let vc = RestaurantViewController(viewModel: RestaurantViewModelImplementation(restaurant: cell.item))
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                }
+                return row
+            }
+        } else {
+           rows = viewModel
+            .filteredRestaurants
+            .enumerated()
+            .map { [weak self] (index, item) -> TableRow<RestaurantCell> in
+                let row = TableRow<RestaurantCell>(item: viewModel.filteredRestaurants[index])
+                    .on(.click) { [weak self] cell in
+                        let vc = RestaurantViewController(viewModel: RestaurantViewModelImplementation(restaurant: cell.item))
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                }
+                return row
+            }
+        }
+        let section = TableSection()
+        tableDirector.append(section: section)
+        section.append(rows: rows)
+        tableDirector.reload()
+    }
 }
 
 //MARK: -  Private
@@ -215,7 +234,7 @@ extension RestaurantsViewController: UICollectionViewDataSource {
 extension RestaurantsViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 170, height: 80)
+        return CGSize(width: 170, height: 50)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -287,6 +306,10 @@ extension RestaurantsViewController: UIScrollViewDelegate {
         lastScrollDirection = lastScrollOffset > offsetYValue ? .down : .up
         moveFilterBar(by: offsetYValue, direction: lastScrollDirection)
         lastScrollOffset = offsetYValue
+        
+        if scrollView.contentSize.height > scrollView.bounds.size.height, (scrollView.contentSize.height - scrollView.contentOffset.y) < scrollView.bounds.size.height {
+            viewModel.showMoreRestaurants()
+        }
     }
     
     private func moveFilterBar(by offset: CGFloat, direction: ScrollDirection) {

@@ -4,14 +4,16 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CollectionHeaderCell: UIView {
     
     public struct Item {
-        public let label: String
-        public let distance: Double
-        public let orderDelay: Int
-        public let minOrderPrice: String
+        public let label: String?
+        public let distance: Double?
+        public let orderDelay: Int?
+        public let minOrderPrice: String?
+        public let imageURL: String
     }
     
     private var item: Item?
@@ -43,6 +45,12 @@ class CollectionHeaderCell: UIView {
         return label
     }()
     
+    let restaurantLogo: UIImageView = {
+        let view = UIImageView(image: Images.restaurantLogoPlaceholder.image)
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setup()
@@ -61,8 +69,6 @@ class CollectionHeaderCell: UIView {
         view.setShadow(offset: CGSize(width: 0, height: 4.0), opacity: 0.07, radius: 10)
         view.backgroundColor = .white
         
-        
-        let restaurantLogo = UIImageView(image: Images.restaurantLogoPlaceholder.image)
         view.addSubview(restaurantLogo)
         restaurantLogo.snp.makeConstraints {
             $0.top.leading.equalToSuperview().inset(Layout.largeMargin)
@@ -146,9 +152,13 @@ class CollectionHeaderCell: UIView {
     
     func configure(with item: Item) {
         restaurantNameLabel.text = item.label
-        distanceValueLabel.text = "\(item.distance) km away"
-        deliveryTimeValueLabel.text = "\(item.orderDelay) minutes delivery time"
+        distanceValueLabel.text = "\(item.distance ?? 0) km away"
+        deliveryTimeValueLabel.text = "\(item.orderDelay ?? 0) minutes delivery time"
         minOrderValueLabel.text = item.minOrderPrice
+        if let url = URL(string: item.imageURL) {
+            restaurantLogo.sd_setImage(with: url)
+        }
+        
     }
     
 }

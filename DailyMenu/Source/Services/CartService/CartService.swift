@@ -17,7 +17,7 @@ public protocol CartService {
     
     var view: CartView? { get set }
     
-    var items: [String: CartItem] { get }
+    var items: [Int: CartItem] { get }
     
     var cartTotal: Double { get }
     var tax: Double { get }
@@ -51,6 +51,8 @@ public final class CartServiceImplementation: CartService {
     public var subtotal: Double {
         return cartTotal + tax + deliveryPrice + promoDiscount
     }
+
+    public var items: [Int: CartItem] = [:]
     
     public func addItem(item: CartItem) {
         items[item.id] = item
@@ -63,6 +65,4 @@ public final class CartServiceImplementation: CartService {
     public func removeOption(option: CartItem.Option, atIndex index: Int, fromItem item: CartItem) {
         items[item.id]?.options.remove(at: index)
     }
-    
-    public var items: [String: CartItem] = [:]
 }

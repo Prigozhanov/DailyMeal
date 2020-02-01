@@ -7,7 +7,7 @@ import Foundation
 import TableKit
 
 class RestaurantCell: BaseTableCell {
-
+    
     typealias CellData = Restaurant
     
     private let deliveryFeeValueLabel: UILabel = {
@@ -18,9 +18,21 @@ class RestaurantCell: BaseTableCell {
     }()
     private var restaurantNameLabel = UILabel.makeText()
     
-    var restaurant: Restaurant?
+    private var restaurantLogoImageView: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
     
-    private let edgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+    
+    private var restaurantDescriptionLabel: UILabel = {
+        let label = UILabel.makeExtraSmallText()
+        label.numberOfLines = 3
+        label.textColor = Colors.gray.color
+        return label
+    }()
+    
+    var restaurant: Restaurant?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: nil)
@@ -30,32 +42,28 @@ class RestaurantCell: BaseTableCell {
     
     override func setup() {
         let shadowView = UIView(frame: .zero)
-        let containerView = UIView(frame: .zero)
+        let cardView = CardView(shadowSize: .medium, customInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
         let restaurantInfoView: UIView = UIView(frame: .zero)
         
         var restaurantImageView: UIImageView
-        var restaurantLogoImageView: UIImageView
         var restaurantRateView: UIImageView
         
         selectionStyle = .none
         contentView.backgroundColor = Colors.commonBackground.color
         
-        containerView.frame = contentView.frame
-        contentView.addSubview(containerView)
-        containerView.backgroundColor = Colors.white.color
-        containerView.setRoundCorners(15)
-        containerView.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(edgeInsets)
-            $0.height.equalTo(RestaurantCell.estimatedHeight ?? 0)
+        contentView.addSubview(cardView)
+        cardView.contentView.setRoundCorners(15)
+        cardView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
         
-        containerView.addSubview(shadowView)
-        shadowView.frame = containerView.frame
-        containerView.setShadow(offset: CGSize(width: 0, height: 3.0), opacity: 0.1, radius: 15)
+        cardView.contentView.addSubview(shadowView)
+        shadowView.frame = cardView.contentView.frame
+        cardView.contentView.setShadow(offset: CGSize(width: 0, height: 3.0), opacity: 0.1, radius: 15)
         
         restaurantImageView = UIImageView(image: Images.restaurentImagePlaceholder.image)
         restaurantImageView.setRoundCorners(15, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
-        containerView.addSubview(restaurantImageView)
+        cardView.contentView.addSubview(restaurantImageView)
         restaurantImageView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.trailing.equalToSuperview()
@@ -63,20 +71,24 @@ class RestaurantCell: BaseTableCell {
             $0.height.equalTo(150)
         }
         
-        containerView.addSubview(restaurantInfoView)
+        cardView.contentView.addSubview(restaurantInfoView)
         restaurantInfoView.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
-            $0.top.equalTo(restaurantImageView.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().inset(Layout.commonInset)
+            $0.trailing.equalToSuperview().inset(Layout.commonInset)
+            $0.top.equalTo(restaurantImageView.snp.bottom).offset(Layout.commonMargin)
         }
         
-        restaurantLogoImageView = UIImageView(image: Images.restaurantLogoPlaceholder.image)
-        restaurantInfoView.addSubview(restaurantLogoImageView)
-        restaurantLogoImageView.snp.makeConstraints {
+        let restaurantLogoCard = CardView(shadowSize: .small, customInsets: .zero)
+        restaurantInfoView.addSubview(restaurantLogoCard)
+        restaurantLogoCard.snp.makeConstraints {
             $0.leading.equalToSuperview()
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
             $0.size.equalTo(50)
+        }
+        restaurantLogoCard.contentView.addSubview(restaurantLogoImageView)
+        restaurantLogoImageView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
         
         restaurantInfoView.addSubview(restaurantNameLabel)
@@ -107,19 +119,37 @@ class RestaurantCell: BaseTableCell {
             $0.top.equalTo(deliveryFeeValueLabel.snp.bottom)
             $0.trailing.equalToSuperview()
         }
+        
+        cardView.contentView.addSubview(restaurantDescriptionLabel)
+        restaurantDescriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(restaurantInfoView.snp.bottom).offset(Layout.commonMargin)
+            $0.leading.trailing.equalToSuperview().inset(Layout.commonInset)
+            $0.height.lessThanOrEqualTo(50)
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.layoutIfNeeded()
     }
     
 }
 
 extension RestaurantCell: ConfigurableCell {
     
-    static var estimatedHeight: CGFloat? {
+    static var defaultHeight: CGFloat? {
         return 300
     }
     
     func configure(with item: Restaurant) {
-        restaurantNameLabel.text = item.label
-        deliveryFeeValueLabel.text = Formatter.Currency.toString(Double(item.restDeliveryFee))
+        restaurantNameLabel.text = item.chain_label
+        deliveryFeeValueLabel.text = Formatter.Currency.toString(Double(item.rest_delivery_fee.orEmpty))
+        restaurantDescriptionLabel.text = item.description
+        AppDelegate.shared.context.networkService.loadImage(link: item.src) { [weak self] (data) in
+            if let image = UIImage(data: data) {
+                self?.restaurantLogoImageView.image = image
+            }
+        }
     }
     
 }

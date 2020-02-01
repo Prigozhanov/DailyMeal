@@ -46,7 +46,8 @@ final class CartViewController: UIViewController {
     
     private var calculationRows: [UIView] = []
     
-    private lazy var proceedActionButton = UIButton.makeActionButton("Proceed to Checkout") { [weak self] _ in
+    private lazy var proceedActionButton = UIButton.makeActionButton("Proceed to Checkout") { [weak self] button in
+        button.tapAnimation()
         // TODO
     }
     

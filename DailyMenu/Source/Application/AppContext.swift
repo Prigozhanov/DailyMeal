@@ -5,12 +5,16 @@
 
 import Foundation
 
-class AppContext: CartServiceHolder {
+typealias AppContextProtocol = CartServiceHolder & NetworkServiceHolder
+
+class AppContext: AppContextProtocol {
     
+    var networkService: NetworkService
     var cartService: CartService
     
     init() {
         self.cartService = CartServiceImplementation()
+        self.networkService = NetworkServiceImplementation()
     }
     
 }
