@@ -11,6 +11,7 @@ class ItemHeaderView: UIView {
     
     let itemTitleLabel: UILabel = {
         let label = UILabel.makeText()
+        label.numberOfLines = 3
         label.font = FontFamily.Poppins.semiBold.font(size: 16)
         return label
     }()
@@ -36,12 +37,12 @@ class ItemHeaderView: UIView {
         
         super.init(frame: .height(120))
         
-        let cardView = CardView(shadowSize: .medium)
+        let cardView = CardView(shadowSize: .medium, customInsets: UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 10))
         addSubview(cardView)
         cardView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(Layout.commonInset)
+            $0.edges.equalToSuperview()
         }
+        
         cardView.contentView.addSubview(itemTitleLabel)
         itemTitleLabel.text = title
         itemTitleLabel.snp.makeConstraints {
@@ -52,15 +53,20 @@ class ItemHeaderView: UIView {
         cardView.contentView.addSubview(itemPriceLabel)
         itemPriceLabel.text = price
         itemPriceLabel.snp.makeConstraints {
-            $0.leading.bottom.equalToSuperview().inset(Layout.commonInset)
+            $0.leading.equalToSuperview().inset(Layout.commonInset)
+            $0.bottom.lessThanOrEqualToSuperview().inset(Layout.commonInset)
             $0.top.equalTo(itemTitleLabel.snp.bottom).offset(Layout.commonMargin)
         }
         
         cardView.contentView.addSubview(itemCounter)
         itemCounter.snp.makeConstraints {
-            $0.top.trailing.bottom.equalToSuperview().inset(Layout.commonInset)
+            $0.leading.equalTo(itemTitleLabel.snp.trailing).offset(Layout.commonMargin)
+            $0.trailing.top.equalToSuperview().inset(Layout.commonInset)
             $0.width.equalTo(100)
+            $0.height.equalTo(50)
         }
+        itemCounter.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        
     }
     
     required init?(coder: NSCoder) { fatalError() }

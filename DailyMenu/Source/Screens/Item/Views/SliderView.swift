@@ -47,7 +47,8 @@ class SliderView: UIView {
         addSubview(titleLabel)
         titleLabel.text = title
         titleLabel.snp.makeConstraints {
-            $0.leading.top.trailing.equalToSuperview().inset(Layout.commonInset)
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(Layout.commonInset)
         }
         
         addSubview(valuesStack)

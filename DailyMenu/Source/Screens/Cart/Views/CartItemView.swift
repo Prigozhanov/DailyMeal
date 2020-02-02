@@ -79,7 +79,7 @@ class CartItemView: UIView {
         counter.updateValue(item.count)
         cardView.contentView.addSubview(counter)
         counter.snp.makeConstraints {
-            $0.top.leading.bottom.equalToSuperview().inset(Layout.commonInset)
+            $0.top.bottom.leading.equalToSuperview().inset(Layout.commonInset)
             $0.width.equalTo(50)
         }
         
@@ -90,17 +90,19 @@ class CartItemView: UIView {
             $0.leading.equalTo(counter.snp.trailing).offset(Layout.commonMargin)
             $0.size.equalTo(counter.snp.height)
         }
-        
-        imageCardView.contentView.addSubview(itemImage)
+        cardView.contentView.addSubview(itemImage)
         itemImage.contentMode = .scaleAspectFit
         itemImage.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.bottom.equalToSuperview().inset(Layout.commonInset)
+            $0.leading.equalTo(counter.snp.trailing).offset(Layout.commonMargin)
+            $0.size.equalTo(counter.snp.height)
         }
         if let url = URL(string: item.imageURL.orEmpty) {
              itemImage.sd_setImage(with: url)
         }
         
         let itemNameLabel = UILabel.makeText(item.name)
+        itemNameLabel.numberOfLines = 2
         itemNameLabel.font = FontFamily.semibold
         cardView.contentView.addSubview(itemNameLabel)
         itemNameLabel.snp.makeConstraints {
@@ -115,6 +117,7 @@ class CartItemView: UIView {
         itemPrice.snp.makeConstraints {
             $0.top.equalTo(itemNameLabel.snp.bottom).offset(Layout.commonMargin)
             $0.leading.equalTo(itemNameLabel)
+            $0.bottom.equalToSuperview().inset(Layout.commonInset)
         }
         
         let removeButton = UIButton()

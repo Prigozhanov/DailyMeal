@@ -9,10 +9,10 @@ import SDWebImage
 class CollectionHeaderCell: UIView {
     
     public struct Item {
-        public let label: String?
-        public let distance: Double?
-        public let orderDelay: Int?
-        public let minOrderPrice: String?
+        public let label: String
+        public let distance: String
+        public let orderDelay: String
+        public let minOrderPrice: String
         public let imageURL: String
     }
     
@@ -152,8 +152,8 @@ class CollectionHeaderCell: UIView {
     
     func configure(with item: Item) {
         restaurantNameLabel.text = item.label
-        distanceValueLabel.text = "\(item.distance ?? 0) km away"
-        deliveryTimeValueLabel.text = "\(item.orderDelay ?? 0) minutes delivery time"
+        distanceValueLabel.text = item.distance
+        deliveryTimeValueLabel.text = item.orderDelay
         minOrderValueLabel.text = item.minOrderPrice
         if let url = URL(string: item.imageURL) {
             restaurantLogo.sd_setImage(with: url)

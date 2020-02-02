@@ -28,13 +28,13 @@ class SectionHeaderCell: UIView {
     private func setup() {
         addSubview(sectionLabel)
         sectionLabel.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(Layout.largeMargin)
-            $0.leading.equalTo(Layout.largeMargin * 2)
+            $0.leading.equalToSuperview().inset(Layout.largeMargin * 2)
+            $0.bottom.equalToSuperview().inset(Layout.commonInset)
         }
 
         addSubview(itemsCountLabel)
         itemsCountLabel.snp.makeConstraints {
-            $0.bottom.equalTo(sectionLabel.snp.bottom)
+            $0.bottom.equalTo(sectionLabel.snp.bottom).inset(4)
             $0.leading.equalTo(sectionLabel.snp.trailing).offset(Layout.largeMargin)
         }
     }

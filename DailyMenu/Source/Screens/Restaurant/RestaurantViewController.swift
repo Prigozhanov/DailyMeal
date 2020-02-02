@@ -34,23 +34,24 @@ final class RestaurantViewController: UIViewController {
         }()
     
     
-    private lazy var headerDataSource = ArrayDataSource(data: [
-        CollectionHeaderCell.Item(
-            label: self.viewModel.restaurant.chain_label,
-            distance: self.viewModel.restaurant.distance,
-            orderDelay: self.viewModel.restaurant.orderDelayFirst,
-            minOrderPrice: Formatter.Currency.toString(Double(self.viewModel.restaurant.min_amount_order!)),
-            imageURL: self.viewModel.restaurant.src.orEmpty
-        )
+    private lazy var headerDataSource = ArrayDataSource<Restaurant>(data: [
+        self.viewModel.restaurant
     ])
-    private lazy var headerViewSource = ClosureViewSource(viewUpdater: { (view: CollectionHeaderCell, data: CollectionHeaderCell.Item, index: Int) in
-        view.configure(with: data)
+    private lazy var headerViewSource = ClosureViewSource<Restaurant, CollectionHeaderCell>(viewUpdater: { (view: CollectionHeaderCell, data: Restaurant, index: Int) in
+        let item = CollectionHeaderCell.Item(
+            label: data.chain_label.orEmpty,
+            distance: "\(Formatter.Distance.toString(data.distance ?? 0)) away",
+            orderDelay: "\(data.orderDelayFirst ?? 0) minutes delivery time",
+            minOrderPrice: Formatter.Currency.toString(Double(data.min_amount_order ?? 0)),
+            imageURL: data.src.orEmpty
+        )
+        view.configure(with: item)
     })
-    private lazy var headerSizeSource = { [weak self] (index: Int, data: CollectionHeaderCell.Item, collectionSize: CGSize) -> CGSize in
+    private lazy var headerSizeSource = { [weak self] (index: Int, data: Restaurant, collectionSize: CGSize) -> CGSize in
         return CGSize(width: self?.collectionView.frame.width ?? 0, height: 160)
     }
     
-    private lazy var headerProvider = BasicProvider(
+    private lazy var headerProvider = BasicProvider<Restaurant, CollectionHeaderCell>(
         dataSource: headerDataSource,
         viewSource: headerViewSource,
         sizeSource: headerSizeSource
@@ -74,10 +75,14 @@ final class RestaurantViewController: UIViewController {
     
     private lazy var composedSectionProvider: ComposedHeaderProvider<SectionHeaderCell> = {
         let provider = ComposedHeaderProvider(
-            headerViewSource: { (view: SectionHeaderCell, data, index) in
-                view.configure(section: "Section \(index)", itemsCount: data.section.numberOfItems)
-                if index == 0 {
+            headerViewSource: { [weak self] (view: SectionHeaderCell, data, index) in
+                guard let self = self else { return }
+                guard index != 0 else {
                     view.isHidden = true
+                    return
+                }
+                if !self.viewModel.categories.isEmpty, index > 0 {
+                    view.configure(section: self.viewModel.categories[index - 1].label.orEmpty, itemsCount: data.section.numberOfItems)
                 }
         },
             headerSizeSource: { (index, data, maxSize) -> CGSize in
@@ -95,10 +100,12 @@ final class RestaurantViewController: UIViewController {
     }()
     
     private var sections: [Provider] {
-        return [
-            headerProvider,
-            makeItemsSection(viewModel.items)
-        ]
+        var sections: [Provider] = viewModel.categories.map { makeItemsSection(viewModel.getItemsByCategory($0)) }
+        if sections.isEmpty {
+            sections.append( makeItemsSection(viewModel.items) )
+        }
+        sections.insert(headerProvider, at: 0)
+        return sections
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

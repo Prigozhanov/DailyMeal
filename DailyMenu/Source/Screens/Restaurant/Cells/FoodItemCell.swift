@@ -55,6 +55,12 @@ class FoodItemCell: UIView {
         addSubview(cardView)
         cardView.snp.makeConstraints { $0.edges.equalToSuperview() }
         
+        let itemImageShadow = CardView(shadowSize: .small, customInsets: .zero)
+        cardView.contentView.addSubview(itemImageShadow)
+        itemImageShadow.snp.makeConstraints {
+            $0.top.leading.bottom.equalToSuperview().inset(Layout.largeMargin)
+            $0.size.equalTo(cardView.contentView.snp.height).inset(Layout.largeMargin)
+        }
         cardView.contentView.addSubview(foodImage)
         foodImage.snp.makeConstraints {
             $0.top.leading.bottom.equalToSuperview().inset(Layout.largeMargin)
@@ -68,6 +74,7 @@ class FoodItemCell: UIView {
             $0.leading.equalTo(foodImage.snp.trailing).offset(Layout.largeMargin)
             $0.top.equalToSuperview().inset(Layout.largeMargin)
         }
+        
         
         cardView.contentView.addSubview(priceLabel)
         priceLabel.textAlignment = .right

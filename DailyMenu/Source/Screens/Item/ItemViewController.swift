@@ -29,6 +29,7 @@ final class ItemViewController: UIViewController {
         stack.contentInset = stackViewInsets
         stack.contentOffset = CGPoint(x: 0, y: -90)
         stack.delegate = scrollDelegate
+        stack.alwaysBounceVertical = true
         return stack
     }()
     
@@ -87,7 +88,12 @@ final class ItemViewController: UIViewController {
         view.backgroundColor = Colors.commonBackground.color
         
         view.addSubview(navigationBarBackground)
+        navigationBarBackground.snp.makeConstraints {
+            $0.leading.top.trailing.equalToSuperview()
+        }
+        
         view.addSubview(stackView)
+        stackView.snp.makeConstraints { $0.edges.equalToSuperview() }
         view.addSubview(navigationBarControls)
         navigationBarControls.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
@@ -101,6 +107,7 @@ final class ItemViewController: UIViewController {
         stackView.addRow(totalLabel)
         stackView.addRow(totalValueLabel)
         stackView.addRow(addToCartButton)
+        addToCartButton.snp.makeConstraints { $0.height.equalTo(50) }
         
         stackView.setInset(forRow: totalLabel, inset: UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0))
         stackView.setInset(forRow: addToCartButton, inset: UIEdgeInsets(top: 30, left: 30, bottom: 50, right: 30))
@@ -114,12 +121,7 @@ final class ItemViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        navigationBarBackground.snp.makeConstraints {
-            $0.leading.top.trailing.equalToSuperview()
-            //            $0.height.equalTo(150 + (UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0))
-        }
-        
-        stackView.snp.makeConstraints {
+        stackView.snp.remakeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.layoutMarginsGuide.snp.bottom)
         }

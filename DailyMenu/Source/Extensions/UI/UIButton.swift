@@ -64,10 +64,6 @@ extension UIButton {
         let button = UIButton()
         button.layer.cornerRadius = Layout.cornerRadius
         button.titleLabel?.font = FontFamily.Poppins.medium.font(size: 14)
-        button.snp.makeConstraints { (make) in
-            make.height.equalTo(50)
-            make.width.equalTo(300)
-        }
         button.setTitle(text, for: .normal)
         button.setActionHandler(controlEvents: .touchUpInside, ForAction: action)
         return button

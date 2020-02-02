@@ -152,6 +152,7 @@ final class CartViewController: UIViewController {
     
     private func setupCheckoutRow() {
         aloeStackView.addRow(proceedActionButton)
+        proceedActionButton.snp.makeConstraints { $0.height.equalTo(50) }
         if let lastRow = aloeStackView.lastRow {
             aloeStackView.setInset(forRow: lastRow, inset: UIEdgeInsets(top: 10, left: 45, bottom: 30, right: 45))
         }
