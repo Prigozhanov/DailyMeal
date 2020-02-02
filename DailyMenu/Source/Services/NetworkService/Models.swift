@@ -28,7 +28,7 @@ public struct ResponseWrapper<Response: Codable>: Codable {
     
     public init(from decoder: Decoder) {
         let values = try? decoder.container(keyedBy: DynamicKey.self)
-        if let key = values?.allKeys.first {
+        if let key = values?.allKeys.first(where: { $0.stringValue != "success" }) {
             data = try? values?.decode(Response.self, forKey: key)
         }
     }

@@ -7,14 +7,19 @@ import Foundation
 
 public final class NetworkClient {
     
-    public enum Error: Swift.Error {
+    public enum Error: String, Swift.Error {
         case unknownError
+        case parsingError
+        case missingData
     }
     
     private let session: URLSession
     
+    private var sessionQueue: OperationQueue
+    
     init() {
-        session = URLSession(configuration: .default)
+        sessionQueue = OperationQueue()
+        session = URLSession(configuration: .default, delegate: nil, delegateQueue: sessionQueue)
     }
     
     public func send<Response: Codable>(request: Request<Response>, completion: @escaping (Result<Response, Error>) -> Void) {
@@ -32,37 +37,32 @@ public final class NetworkClient {
                 }
             }
             
+            let failureClosure: (Error) -> Void = { error in
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
+            
             switch response.statusCode {
             case 200 ..< 300:
                 do {
                     let jsonDecoder = JSONDecoder()
                     guard let data = data else {
+                        failureClosure(Error.missingData)
                         return
                     }
                     let jsonResponse = try jsonDecoder.decode(Response.self, from: data)
                     successClosure(jsonResponse)
+                    print(jsonResponse)
                 } catch {
-                    print(error)
+                    failureClosure(Error.parsingError)
                 }
             default:
-                
-                break
+                failureClosure(Error.unknownError)
             }
         }
         
         task.resume()
-    }
-    
-    public func loadImage(link: String?, completion: @escaping (Data) -> Void) {
-        guard let link = link else { return }
-        let task = session.dataTask(with: URL(string: link)!, completionHandler: { (data, response, eror) in
-            guard let data = data else { return }
-            DispatchQueue.main.async {
-                completion(data)
-            }
-        })
-        task.resume()
-        
     }
     
 }
