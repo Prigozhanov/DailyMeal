@@ -40,12 +40,12 @@ public class Requests {
                                      ]))
     }
     
-    static func restaurantCategories(id: String) -> Request<Category> {
+    static func restaurantCategories(id: Int) -> Request<ResponseWrapper<[Category]>> {
         //https://v2.menu.by/api/get-restaurant-menu-categories?rest=84&lng=7
-        return Request<Category>(method: .GET,
+        return Request<ResponseWrapper<[Category]>>(method: .GET,
                                  baseUrlString: baseUrlString,
                                  path: "get-restaurant-menu-categories",
-                                 params: .query(["rest" : id, "lng": "7"]))
+                                 params: .query(["rest" : "\(id)", "lng": "7"]))
     }
     
     static func restaurantMenu(id: Int) -> Request<ResponseWrapper<[Product]>> {

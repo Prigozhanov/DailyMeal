@@ -21,16 +21,18 @@ class DynamicKey: CodingKey {
     }
 }
 
+// To handle response with single json key
 public struct ResponseWrapper<Response: Codable>: Codable {
     
     public var data: Response?
     
     public init(from decoder: Decoder) {
         let values = try? decoder.container(keyedBy: DynamicKey.self)
-        values?.allKeys.forEach { key in
+        if let key = values?.allKeys.first {
             data = try? values?.decode(Response.self, forKey: key)
         }
     }
+    
 }
 
 // MARK: Menu

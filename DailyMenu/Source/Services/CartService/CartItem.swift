@@ -7,6 +7,8 @@ import Foundation
 
 public class CartItem: Comparable, Equatable, NSCopying {
     var id: Int
+    var categoryId: Int
+    var restaurantId: Int
     var name: String
     var price: Double
     var description: String?
@@ -26,8 +28,10 @@ public class CartItem: Comparable, Equatable, NSCopying {
         }
     }
     
-    init(id: Int, name: String, price: Double, description: String?, imageURL: String?, options: [Option], count: Int = 1) {
+    init(id: Int, categoryId: Int, restaurantId: Int, name: String, price: Double, description: String?, imageURL: String?, options: [Option], count: Int = 1) {
         self.id = id
+        self.categoryId = categoryId
+        self.restaurantId = restaurantId
         self.name = name
         self.price = price
         self.description = description
@@ -37,15 +41,15 @@ public class CartItem: Comparable, Equatable, NSCopying {
     }
     
     public func copy(with zone: NSZone? = nil) -> Any {
-        return CartItem(id: self.id, name: self.name, price: self.price, description: self.description, imageURL: self.imageURL, options: self.options.map { $0.copy() as! Option }, count: self.count)
+        return CartItem(id: self.id, categoryId: self.categoryId, restaurantId: self.restaurantId, name: self.name, price: self.price, description: self.description, imageURL: self.imageURL, options: self.options.map { $0.copy() as! Option }, count: self.count)
     }
     
     static var dummy: CartItem {
-        return CartItem(id: 1, name: "Dummy Pizza", price: 42.99, description: "Dummy", imageURL: nil, options: [Option(option: .cheese, price: 5, applied: true), Option(option: .hot, price: 1.99, applied: true)], count: 3)
+        return CartItem(id: 1, categoryId: 0, restaurantId: 0, name: "Dummy Pizzaummy Pizzaummy Pizzaummy Pizzaummy Pizzaummy Pizzaummy Pizza", price: 42.99, description: "Dummy", imageURL: nil, options: [Option(option: .cheese, price: 5, applied: true), Option(option: .hot, price: 1.99, applied: true)], count: 3)
     }
     
     static var empty: CartItem {
-        return CartItem(id: -1, name: "", price: 0, description: "", imageURL: nil, options: [])
+        return CartItem(id: -1, categoryId: -1, restaurantId: -1, name: "", price: 0, description: "", imageURL: nil, options: [])
     }
     
     public static func < (lhs: CartItem, rhs: CartItem) -> Bool {
@@ -57,6 +61,18 @@ public class CartItem: Comparable, Equatable, NSCopying {
             lhs.name == rhs.name &&
             lhs.price == rhs.price &&
             lhs.options == rhs.options
+    }
+    
+    static func fromProduct(_ product: Product) -> CartItem? {
+        if let id = product.id,
+            let categoryId = product.restaurantMenuCategories,
+            let restaurantId = product.restID,
+            let name = product.label,
+            let stringPrice = product.price,
+            let price = Double(stringPrice) {
+            return CartItem(id: id, categoryId: categoryId, restaurantId: restaurantId, name: name, price: price, description: product.content, imageURL: product.src, options: [])
+        }
+        return nil
     }
     
     public class Option: Comparable, Equatable, NSCopying {

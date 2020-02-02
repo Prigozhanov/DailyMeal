@@ -23,4 +23,12 @@ enum Formatter {
         }
     }
     
+    enum Distance {
+        
+        static func toString(_ value: Double) -> String {
+            return String(format: "%.1f km", value)
+        }
+        
+    }
+    
 }

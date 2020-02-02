@@ -19,7 +19,11 @@ protocol RestaurantViewModel {
     
     var items: [CartItem] { get }
     
+    var categories: [Category] { get }
+    
+    func getItemsByCategory(_ category: Category) -> [CartItem]
     func loadMenu()
+    func loadCategories()
 }
 
 //MARK: - Implementation
@@ -36,16 +40,23 @@ final class RestaurantViewModelImplementation: RestaurantViewModel {
             return []
         }
         return products.map {
-            guard let id = $0.id, let name = $0.label,let price = Formatter.Currency.fromString($0.price) else { return .empty }
-            return CartItem(id: id, name: name, price: price, description: $0.content, imageURL: $0.src, options: [])
-            
+            if let item = CartItem.fromProduct($0) {
+                return item
+            }
+            return .empty
         }
     }
     
     var products: [Product]?
     
+    var categories: [Category] = []
+    
     init(restaurant: Restaurant) {
         self.restaurant = restaurant
+    }
+    
+    func getItemsByCategory(_ category: Category) -> [CartItem] {
+        return items.filter { $0.categoryId == category.restaurantMenuCategories }
     }
     
     func loadMenu() {
@@ -62,8 +73,30 @@ final class RestaurantViewModelImplementation: RestaurantViewModel {
                     return
                 }
                 self?.products = products
+                self?.loadCategories()
+            case let .failure(error):
+                print(error.localizedDescription)
+                break // TODO
+            }
+        })
+    }
+    
+    func loadCategories() {
+        guard let id = restaurant.id else {
+            return
+        }
+        let req = Requests.restaurantCategories(id: id)
+        LoadingIndicator.show()
+        context?.networkService.send(request: req, comletion: { [weak self] result in
+            LoadingIndicator.hide()
+            switch result {
+            case let .success(response):
+                if let categories = response.data {
+                    self?.categories = categories
+                }
                 self?.view?.reloadItems()
-            case .failure:
+            case let .failure(error):
+                print(error.localizedDescription)
                 break // TODO
             }
         })
