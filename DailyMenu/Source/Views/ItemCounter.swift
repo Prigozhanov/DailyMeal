@@ -7,11 +7,15 @@ import UIKit
 
 class ItemCounter: UIView {
     
+    enum Axis {
+        case veritcal, horizontal
+    }
+    
     private var value = 1
     
     let valueLabel = UILabel()
     
-    init(valueChanged: @escaping (Int) -> ()) {
+    init(axis: Axis, valueChanged: @escaping (Int) -> ()) {
         super.init(frame: .zero)
         
         let plusButton = UIButton()
@@ -24,15 +28,26 @@ class ItemCounter: UIView {
         }
         addSubview(plusButton)
         plusButton.snp.makeConstraints {
-            $0.leading.top.trailing.equalToSuperview()
+            switch axis {
+            case .horizontal:
+                $0.trailing.top.bottom.equalToSuperview()
+            case .veritcal:
+                $0.leading.top.trailing.equalToSuperview()
+            }
         }
         
         addSubview(valueLabel)
         valueLabel.text = String(value)
         valueLabel.textAlignment = .center
         valueLabel.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.top.equalTo(plusButton.snp.bottom)
+            switch axis {
+            case .horizontal:
+                $0.top.bottom.equalToSuperview()
+                $0.trailing.equalTo(plusButton.snp.leading)
+            case .veritcal:
+                $0.leading.trailing.equalToSuperview()
+                $0.top.equalTo(plusButton.snp.bottom)
+            }
         }
         
         let minusButton = UIButton()
@@ -48,9 +63,16 @@ class ItemCounter: UIView {
         }
         addSubview(minusButton)
         minusButton.snp.makeConstraints {
-            $0.leading.bottom.trailing.equalToSuperview()
-            $0.top.equalTo(valueLabel.snp.bottom)
-            $0.height.equalTo(plusButton.snp.height)
+            switch axis {
+            case .horizontal:
+                $0.top.bottom.leading.equalToSuperview()
+                $0.trailing.equalTo(valueLabel.snp.leading)
+                $0.width.equalTo(plusButton.snp.width)
+            case .veritcal:
+                $0.leading.bottom.trailing.equalToSuperview()
+                $0.top.equalTo(valueLabel.snp.bottom)
+                $0.height.equalTo(plusButton.snp.height)
+            }
         }
         
         setBorder(width: 1, color: Colors.lightGray.color.cgColor)

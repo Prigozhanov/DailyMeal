@@ -27,3 +27,15 @@ extension CGFloat {
   }
     
 }
+
+extension CGRect {
+    
+    static func height(_ value: CGFloat) -> CGRect {
+        return CGRect(x: 0, y: 0, width: 0, height: value)
+    }
+    
+    static func width(_ value: CGFloat) -> CGRect {
+        return CGRect(x: 0, y: 0, width: value, height: 0)
+    }
+    
+}

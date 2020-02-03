@@ -10,5 +10,5 @@ public enum FoodCategory: String {
 }
 
 public enum FoodOption: String {
-    case cheese = "Cheese", petty = "Petty", hot = "Hot" 
+    case cheese = "Cheese", petty = "Petty", hot = "Hot", dummy = "Dummy"
 }

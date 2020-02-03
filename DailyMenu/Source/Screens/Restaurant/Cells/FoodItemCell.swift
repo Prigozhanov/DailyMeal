@@ -94,7 +94,7 @@ class FoodItemCell: UIView {
     func configure(with item: Item) {
         foodTitle.text = item.title
         foodDescription.text = item.description
-        priceLabel.text = Formatter.Currency.toString(Double(item.price))
+        priceLabel.text = item.price
     }
     
 }

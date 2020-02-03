@@ -15,13 +15,9 @@ class CartPromocodeView: UIView {
         return field
     }()
     
-    private lazy var applyButton: UIButton = {
-        let button = UIButton.makeActionButton("Apply") { [weak self] _ in
-            self?.onApplyPromocode()
-        }
-        button.titleLabel?.font = FontFamily.Poppins.medium.font(size: 14)
-        return button
-    }()
+    private lazy var applyButton = UIButton.makeActionButton("Apply") { [weak self] _ in
+        self?.onApplyPromocode()
+    }
     
     init(onApplyPromocode: @escaping VoidClosure){
         self.onApplyPromocode = onApplyPromocode

@@ -27,6 +27,10 @@ class AppCoordinator {
 private extension AppCoordinator {
     
     func makeRootViewController() -> UIViewController {
+//        let vc = ItemViewController(viewModel: ItemViewModelImplementation(item: .dummy))
+//        let nav = NavigationController(rootViewController: vc)
+//        return vc
+        
         let tabbar = UITabBarController()
         tabbar.viewControllers = [
             cartTab,

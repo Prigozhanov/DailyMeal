@@ -17,7 +17,36 @@ class Style {
     }
     
     static func addBlueGradient(_ view: UIView) {
-        view.insertSubview(GradientView(parentView: view), at: 0)
+        if let gradient = view.subviews.first(where: { $0 is GradientView }) {
+            gradient.removeFromSuperview()
+        }
+        view.insertSubview(
+            GradientView(parentView: view,
+                         colors: [Colors.blue.color.cgColor, Colors.blue2.color.cgColor],
+                         direction: .points(CGPoint(x: 0, y: 1), CGPoint(x: 1, y: 0))),
+            at: 0)
+    }
+    
+    static func addBlackGradient(_ view: UIView) {
+        if let gradient = view.subviews.first(where: { $0 is GradientView }) {
+            gradient.removeFromSuperview()
+        }
+        view.insertSubview(
+            GradientView(parentView: view,
+                         colors: [Colors.black.color.cgColor, UIColor.clear.cgColor],
+                         direction: .custom([-1, 0.8])),
+            at: 0)
+    }
+    
+    static func addWhiteGradient(_ view: UIView) {
+        if let gradient = view.subviews.first(where: { $0 is GradientView }) {
+            gradient.removeFromSuperview()
+        }
+        view.insertSubview(
+            GradientView(parentView: view,
+                         colors: [UIColor.clear.cgColor, Colors.white.color.cgColor],
+                         direction: .custom([0, 1])),
+            at: 0)
     }
     
 }

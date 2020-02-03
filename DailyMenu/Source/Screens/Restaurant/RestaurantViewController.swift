@@ -9,9 +9,10 @@ final class RestaurantViewController: UIViewController {
     
     private var viewModel: RestaurantViewModel
     
-    private var collectionViewTopPoint: CGPoint = .zero
-    private var userScrollInitiated = false
-    
+    private lazy var scrollDelegate: StretchScrollDelegate = StretchScrollDelegate(view: navigationBarBackground) { [weak self] shouldBeAppeared in
+        self?.navigationBarControls.isHidden = !shouldBeAppeared
+        self?.setNeedsStatusBarAppearanceUpdate()
+    }
     
     private var navigationBarBackground: UIImageView = {
         let image = UIImageView(image: Images.restaurentImagePlaceholder.image)
@@ -27,7 +28,7 @@ final class RestaurantViewController: UIViewController {
         let collectionView = CollectionView(provider: sectionHeaderProvider)
         collectionView.backgroundColor = Colors.commonBackground.color
         collectionView.contentInset = UIEdgeInsets(top: 100, left: 0, bottom: 0, right: 0)
-        collectionView.delegate = self
+        collectionView.delegate = scrollDelegate
         return collectionView
         }()
     
@@ -52,10 +53,15 @@ final class RestaurantViewController: UIViewController {
         sizeSource: headerSizeSource
     )
     
-    private let itemViewSource = ClosureViewSource(viewUpdater: { (view: FoodItemCell, data: FoodItemCell.Item, index: Int) in
-        view.configure(with: data)
+    private lazy var itemViewSource = ClosureViewSource(viewUpdater: { (view: FoodItemCell, data: CartItem, index: Int) in
+        view.configure(with: FoodItemCell.Item(title: data.name, description: "", price: Formatter.Currency.toString(data.price)))
+        view.addGestureRecognizer(BlockTap(action: { [weak self] _ in
+            let vm = ItemViewModelImplementation(item: data)
+            let vc = ItemViewController(viewModel: vm)
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }))
     })
-    private lazy var itemSizeSource = { [weak self] (index: Int, data: FoodItemCell.Item, collectionSize: CGSize) -> CGSize in
+    private lazy var itemSizeSource = { [weak self] (index: Int, data: CartItem, collectionSize: CGSize) -> CGSize in
         return CGSize(width: self?.collectionView.frame.width ?? 0, height: 100)
     }
     
@@ -83,19 +89,10 @@ final class RestaurantViewController: UIViewController {
     
     private lazy var sections: [Provider] = [
         headerProvider,
-        makeItemsSection([
-            FoodItemCell.Item(title: "Pastry", description: "Lorem ipsum dolor sit amet, consectetuer adipiscin", price: "2.00"),
-            FoodItemCell.Item(title: "Pastry", description: "Lorem ipsum dolor sit amet, consectetuer adipiscin", price: "2.00"),
-            FoodItemCell.Item(title: "Pastry", description: "Lorem ipsum dolor sit amet, consectetuer adipiscin", price: "2.00")
-        ]),
-        makeItemsSection([
-            FoodItemCell.Item(title: "Pastry", description: "Lorem ipsum dolor sit amet, consectetuer adipiscin", price: "2.00"),
-        ]),
-        makeItemsSection([
-            FoodItemCell.Item(title: "Pastry", description: "Lorem ipsum dolor sit amet, consectetuer adipiscin", price: "5.00"),
-            FoodItemCell.Item(title: "Pastry", description: "Lorem ipsum dolor sit amet, consectetuer adipiscin", price: "5.00"),
-            FoodItemCell.Item(title: "Pastry", description: "Lorem ipsum dolor sit amet, consectetuer adipiscin", price: "5.00")
-        ])
+        makeItemsSection(viewModel.items),
+        makeItemsSection(viewModel.items),
+        makeItemsSection(viewModel.items),
+        makeItemsSection(viewModel.items)
     ]
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -118,6 +115,10 @@ final class RestaurantViewController: UIViewController {
         view.backgroundColor = Colors.commonBackground.color
         
         view.addSubview(navigationBarBackground)
+        navigationBarBackground.snp.makeConstraints {
+            $0.leading.top.trailing.equalToSuperview()
+        }
+        
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
@@ -133,29 +134,13 @@ final class RestaurantViewController: UIViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        collectionViewTopPoint = collectionView.contentOffset
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationBarBackgroundHeightConstraint = navigationBarBackground.heightAnchor.constraint(equalToConstant: 150 + (UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0))
-        navigationBarBackgroundHeightConstraint?.isActive = true
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        navigationBarBackground.snp.makeConstraints {
-            $0.leading.top.trailing.equalToSuperview()
-        }
-        
-        addGradeintToHeader()
+        Style.addBlackGradient(navigationBarBackground)
     }
     
-    private func makeItemsSection(_ items: [FoodItemCell.Item]) -> BasicProvider<FoodItemCell.Item, FoodItemCell> {
+    private func makeItemsSection(_ items: [CartItem]) -> BasicProvider<CartItem, FoodItemCell> {
         let itemDataSource = ArrayDataSource(data: items)
         
         let itemsProvider = BasicProvider(
@@ -167,17 +152,6 @@ final class RestaurantViewController: UIViewController {
         return itemsProvider
     }
     
-    private let gradientLayer = CAGradientLayer()
-    private func addGradeintToHeader() {
-        gradientLayer.removeFromSuperlayer()
-        let colors = [Colors.black.color.cgColor, UIColor.clear.cgColor]
-        let locations: [NSNumber] = [-0.4, 1]
-        gradientLayer.colors = colors
-        gradientLayer.locations = locations
-        gradientLayer.frame = navigationBarBackground.frame
-        navigationBarBackground.layer.addSublayer(gradientLayer)
-    }
-    
 }
 
 //MARK: -  RestaurantView
@@ -187,30 +161,4 @@ extension RestaurantViewController: RestaurantView {
 
 //MARK: -  Private
 private extension RestaurantViewController {
-    
-}
-
-extension RestaurantViewController: UIScrollViewDelegate {
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        userScrollInitiated = true
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetYValue = scrollView.contentOffset.y
-        let alphaValue = offsetYValue / (collectionViewTopPoint.y / 2)
-        let heightValue = view.safeAreaInsets.top + 150 - (offsetYValue - collectionViewTopPoint.y)
-        if userScrollInitiated {
-            if abs(collectionViewTopPoint.y) - offsetYValue > 0 {
-                navigationBarBackground.alpha = alphaValue
-                navigationBarControls.alpha = alphaValue
-                navigationBarControls.isHidden = alphaValue <= 0.3
-                setNeedsStatusBarAppearanceUpdate()
-            }
-            if heightValue > 0 {
-                navigationBarBackgroundHeightConstraint?.constant = heightValue
-            }
-        }
-    }
-    
 }

@@ -46,18 +46,16 @@ final class CartViewController: UIViewController {
     
     private var calculationRows: [UIView] = []
     
-    private lazy var proceedActionButton: UIButton = {
-        let button = UIButton.makeActionButton("Proceed to Checkout") { [weak self] _ in
-            // TODO
-        }
-        button.titleLabel?.font = FontFamily.semibold
-        return button
-    }()
+    private lazy var proceedActionButton = UIButton.makeActionButton("Proceed to Checkout") { [weak self] _ in
+        // TODO
+    }
     
     private lazy var separator = UIView.makeSeparator()
     
     init() {
         super.init(nibName: nil, bundle: nil)
+        
+        cartSerivce.view = self
     }
     
     required init?(coder aDecoder: NSCoder) { fatalError() }
@@ -65,6 +63,11 @@ final class CartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScreen()
+        reloadScreen()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         reloadScreen()
     }
     
@@ -82,7 +85,8 @@ final class CartViewController: UIViewController {
         
         view.addSubview(aloeStackView)
         aloeStackView.snp.makeConstraints {
-            $0.bottom.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
         }
     }
@@ -96,12 +100,6 @@ final class CartViewController: UIViewController {
         setupPromoRow()
         setupCalculationsRows()
         setupCheckoutRow()
-    }
-    
-    func reloadCalculationsRows() {
-        aloeStackView.removeRows(calculationRows)
-        calculationRows = []
-        setupCalculationsRows()
     }
     
     private func setupTitleRow() {
@@ -165,4 +163,13 @@ private extension CartViewController {
     
 }
 
+extension CartViewController: CartView {
+    
+    func reloadCalculationsRows() {
+        aloeStackView.removeRows(calculationRows)
+        calculationRows = []
+        setupCalculationsRows()
+    }
+    
+}
 

@@ -64,7 +64,7 @@ final class RestaurantsViewController: UIViewController {
     
     private lazy var categoryCollectionView: UICollectionView = {
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 100), collectionViewLayout: collectionViewFlowLayout)
+        let collectionView = UICollectionView(frame: .height(100), collectionViewLayout: collectionViewFlowLayout)
         collectionViewFlowLayout.scrollDirection = .horizontal
         collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         collectionView.backgroundColor = Colors.commonBackground.color
