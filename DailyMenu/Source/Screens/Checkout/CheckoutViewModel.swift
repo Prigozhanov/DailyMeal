@@ -7,24 +7,28 @@ import Foundation
 
 //MARK: - View
 protocol CheckoutView: class {
-
+    
 }
 
 //MARK: - ViewModel
 protocol CheckoutViewModel {
-
-var view: CheckoutView? { get set }
-
+    
+    var view: CheckoutView? { get set }
+    
+    var paymentMethod: PaymentMethod? { get set }
+    
 }
 
 //MARK: - Implementation
 final class CheckoutViewModelImplementation: CheckoutViewModel {
-
-  weak var view: CheckoutView?
-
-  init() {
-  }
-
+    
+    weak var view: CheckoutView?
+    
+    var paymentMethod: PaymentMethod?
+    
+    init() {
+    }
+    
 }
 
 

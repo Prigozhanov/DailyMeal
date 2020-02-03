@@ -5,14 +5,18 @@
 
 import UIKit
 
-class AddOnView: UIView {
+class OptionView: UIView {
     
-    private let itemViewModel: ItemViewModel
-    private let option: CartItem.Option
-    private var isSelected: Bool
+    struct Item {
+        var option: Option
+        let onSelectOption: (Option) -> Void
+        var isSelected: Bool
+    }
+    
+    private var item: Item
     
     private lazy var checkMarkImageView: UIImageView = {
-        let view = UIImageView(image: isSelected ? Images.Icons.checkmarkChecked.image : Images.Icons.checkmarkNotMarked.image)
+        let view = UIImageView(image: item.isSelected ? Images.Icons.checkmarkChecked.image : Images.Icons.checkmarkNotMarked.image)
         view.contentMode = .scaleAspectFit
         return view
     }()
@@ -25,10 +29,8 @@ class AddOnView: UIView {
     
     private var priceLabel = UILabel.makeSmallText()
     
-    init(option: CartItem.Option, itemViewModel: ItemViewModel) {
-        self.itemViewModel = itemViewModel
-        self.option = option
-        self.isSelected = option.applied
+    init(item: Item) {
+        self.item = item
         
         super.init(frame: .height(60))
         
@@ -50,29 +52,29 @@ class AddOnView: UIView {
             $0.size.equalTo(15)
         }
         cardView.contentView.addSubview(titleLabel)
-        titleLabel.text = option.option.rawValue
+        titleLabel.text = item.option.label
         titleLabel.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
             $0.leading.equalTo(checkMarkImageView.snp.trailing).offset(Layout.commonMargin)
         }
-        cardView.contentView.addSubview(priceLabel)
-        priceLabel.text = Formatter.Currency.toString(option.price)
-        priceLabel.snp.makeConstraints {
-            $0.top.bottom.trailing.equalToSuperview().inset(Layout.commonInset)
-        }
+//        cardView.contentView.addSubview(priceLabel)
+//        priceLabel.text = Formatter.Currency.toString(item.option.p)
+//        priceLabel.snp.makeConstraints {
+//            $0.top.bottom.trailing.equalToSuperview().inset(Layout.commonInset)
+//        }
         
         cardView.addGestureRecognizer(BlockTap(action: { [unowned self] _ in
             self.setSelected()
-            self.itemViewModel.view?.reloadTotalLabelView()
+            item.onSelectOption(item.option)
         }))
     }
     
     required init?(coder: NSCoder) { fatalError() }
     
     private func setSelected() {
-        isSelected = !isSelected
-        option.applied = isSelected
-        if isSelected {
+        item.isSelected = !item.isSelected
+        item.option.active = item.isSelected ? 1 : 0
+        if item.isSelected {
             checkMarkImageView.image = Images.Icons.checkmarkChecked.image
         } else {
            checkMarkImageView.image = Images.Icons.checkmarkNotMarked.image

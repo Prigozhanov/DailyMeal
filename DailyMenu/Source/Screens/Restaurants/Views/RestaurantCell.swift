@@ -10,6 +10,8 @@ class RestaurantCell: BaseTableCell {
     
     typealias CellData = Restaurant
     
+    var categories: [FoodCategory] = []
+    
     private let deliveryFeeValueLabel: UILabel = {
         let label = UILabel.makeText()
         label.textColor = Colors.blue.color
@@ -21,6 +23,13 @@ class RestaurantCell: BaseTableCell {
     private var restaurantLogoImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFit
+        return view
+    }()
+    
+    
+    var restaurantImageView: UIImageView = {
+        let view = UIImageView(image: Images.restaurentImagePlaceholder.image)
+        view.setRoundCorners(15, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
         return view
     }()
     
@@ -45,7 +54,6 @@ class RestaurantCell: BaseTableCell {
         let cardView = CardView(shadowSize: .medium, customInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
         let restaurantInfoView: UIView = UIView(frame: .zero)
         
-        var restaurantImageView: UIImageView
         var restaurantRateView: UIImageView
         
         selectionStyle = .none
@@ -61,8 +69,6 @@ class RestaurantCell: BaseTableCell {
         shadowView.frame = cardView.contentView.frame
         cardView.contentView.setShadow(offset: CGSize(width: 0, height: 3.0), opacity: 0.1, radius: 15)
         
-        restaurantImageView = UIImageView(image: Images.restaurentImagePlaceholder.image)
-        restaurantImageView.setRoundCorners(15, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
         cardView.contentView.addSubview(restaurantImageView)
         restaurantImageView.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -142,13 +148,11 @@ extension RestaurantCell: ConfigurableCell {
     }
     
     func configure(with item: Restaurant) {
-        restaurantNameLabel.text = item.chain_label
-        deliveryFeeValueLabel.text = Formatter.Currency.toString(Double(item.rest_delivery_fee.orEmpty))
-        restaurantDescriptionLabel.text = item.description
-        AppDelegate.shared.context.networkService.loadImage(link: item.src) { [weak self] (data) in
-            if let image = UIImage(data: data) {
-                self?.restaurantLogoImageView.image = image
-            }
+        restaurantNameLabel.text = item.chainLabel
+        deliveryFeeValueLabel.text = Formatter.Currency.toString(Double(item.restDeliveryFee))
+        restaurantDescriptionLabel.text = item.restaurantDescription
+        if let url = URL(string: item.src) {
+            self.restaurantLogoImageView.sd_setImage(with: url)
         }
     }
     

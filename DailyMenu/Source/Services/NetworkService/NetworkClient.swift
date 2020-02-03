@@ -55,6 +55,7 @@ public final class NetworkClient {
                     successClosure(jsonResponse)
                     print(jsonResponse)
                 } catch {
+                    print(error)
                     failureClosure(Error.parsingError)
                 }
             default:

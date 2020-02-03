@@ -7,6 +7,11 @@ import UIKit
 
 class SectionHeaderCell: UIView {
     
+    struct Item {
+        let section: String
+        let itemsCount: Int
+    }
+    
     private let sectionLabel: UILabel = {
         let label = UILabel.makeLargeText()
         label.font = FontFamily.Poppins.semiBold.font(size: 22)
@@ -39,9 +44,9 @@ class SectionHeaderCell: UIView {
         }
     }
     
-    func configure(section: String, itemsCount: Int) {
-        sectionLabel.text = section
-        itemsCountLabel.text = itemsCount == 1 ? "\(itemsCount) item" : "\(itemsCount) items"
+    func configure(item: Item) {
+        sectionLabel.text = item.section
+        itemsCountLabel.text = item.itemsCount == 1 ? "\(item.itemsCount) item" : "\(item.itemsCount) items"
     }
     
 }

@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class StretchScrollDelegate: NSObject, UIScrollViewDelegate {
     
@@ -11,15 +12,30 @@ final class StretchScrollDelegate: NSObject, UIScrollViewDelegate {
     
     private let view: UIView
     
-    private let onViewPrefferedToBeAppeared: BoolClosure
+    private let onViewPrefferedToBeVisible: BoolClosure
     
-    private let heightConstraint: NSLayoutConstraint
+    private var heightConstraint: Constraint?
     
-    init(view: UIView, onViewPrefferedToBeAppeared: @escaping BoolClosure) {
+    init(view: UIView, onViewPrefferedToBeVisible: @escaping BoolClosure) {
         self.view = view
-        self.onViewPrefferedToBeAppeared = onViewPrefferedToBeAppeared
-        self.heightConstraint = view.heightAnchor.constraint(equalToConstant: 150 + (UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0))
-        self.heightConstraint.isActive = true
+        self.onViewPrefferedToBeVisible = onViewPrefferedToBeVisible
+        
+        guard let superview = view.superview else {
+            return
+        }
+        
+        let supportingLayoutGuide = UILayoutGuide()
+        superview.addLayoutGuide(supportingLayoutGuide)
+        supportingLayoutGuide.snp.makeConstraints {
+            $0.leading.top.trailing.equalToSuperview()
+            $0.bottom.equalTo(superview.safeAreaLayoutGuide.snp.top)
+        }
+        
+        var heightConstraint: Constraint?
+        view.snp.makeConstraints {
+            heightConstraint = $0.height.equalTo(supportingLayoutGuide).offset(150).constraint
+        }
+        self.heightConstraint = heightConstraint
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -31,20 +47,20 @@ final class StretchScrollDelegate: NSObject, UIScrollViewDelegate {
         let alphaValue = 1.0 - CGFloat(1.0 * CGFloat(scrollView.contentInset.top * CGFloat(CGFloat(scrollView.contentInset.top - abs(offsetYValue)) / 100.0 / 100.0)))
         if userScrollInitiated {
             if offsetYValue < 0 {
-                if abs(scrollView.contentInset.top) - offsetYValue > 0{
+                if abs(scrollView.adjustedContentInset.top) - offsetYValue > 0 {
                     view.alpha = alphaValue
                     UIView.animate(withDuration: 0.5) { [weak self] in
-                        self?.onViewPrefferedToBeAppeared(alphaValue >= 0.3)
+                        self?.onViewPrefferedToBeVisible(alphaValue >= 0.3)
                     }
                 }
-                let stretchHeightValue = abs(offsetYValue) - scrollView.contentInset.top
+                let stretchHeightValue = abs(offsetYValue) - scrollView.adjustedContentInset.top
                 if stretchHeightValue > -30 {
-                    heightConstraint.constant = stretchHeightValue + 150 + view.safeAreaInsets.top
+                    heightConstraint?.update(offset: stretchHeightValue + 150)
                 }
             } else {
                 view.alpha = 0
                 UIView.animate(withDuration: 0.5) { [weak self] in
-                    self?.onViewPrefferedToBeAppeared(false)
+                    self?.onViewPrefferedToBeVisible(false)
                 }
             }
         }

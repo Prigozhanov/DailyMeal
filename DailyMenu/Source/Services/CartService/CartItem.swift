@@ -18,7 +18,7 @@ public class CartItem: Comparable, Equatable, NSCopying {
     
     var overallPrice: Double {
         get {
-            return self.price + self.appliedOptionsPrice
+            return price + appliedOptionsPrice
         }
     }
     
@@ -45,7 +45,7 @@ public class CartItem: Comparable, Equatable, NSCopying {
     }
     
     static var dummy: CartItem {
-        return CartItem(id: 1, categoryId: 0, restaurantId: 0, name: "Dummy Pizzaummy Pizzaummy Pizzaummy Pizzaummy Pizzaummy Pizzaummy Pizza", price: 42.99, description: "Dummy", imageURL: nil, options: [Option(option: .cheese, price: 5, applied: true), Option(option: .hot, price: 1.99, applied: true)], count: 3)
+        return CartItem(id: 1, categoryId: 0, restaurantId: 0, name: "Dummy Pizza", price: 42.99, description: "Dummy", imageURL: nil, options: [Option(option: .cheese, price: 5, applied: true), Option(option: .hot, price: 1.99, applied: true), Option(option: .hot, price: 1.99, applied: true), Option(option: .hot, price: 1.99, applied: true), Option(option: .hot, price: 1.99, applied: true)], count: 3)
     }
     
     static var empty: CartItem {
@@ -63,16 +63,9 @@ public class CartItem: Comparable, Equatable, NSCopying {
             lhs.options == rhs.options
     }
     
-    static func fromProduct(_ product: Product) -> CartItem? {
-        if let id = product.id,
-            let categoryId = product.restaurantMenuCategories,
-            let restaurantId = product.restID,
-            let name = product.label,
-            let stringPrice = product.price,
-            let price = Double(stringPrice) {
-            return CartItem(id: id, categoryId: categoryId, restaurantId: restaurantId, name: name, price: price, description: product.content, imageURL: product.src, options: [])
-        }
-        return nil
+    static func fromProduct(_ product: Product, count: Int = 1) -> CartItem? {
+        guard let price = Double(product.price) else { return nil }
+        return CartItem(id: product.id, categoryId: product.restaurantMenuCategories, restaurantId: product.restID, name: product.label, price: price, description: product.content, imageURL: product.src, options: [], count: count)
     }
     
     public class Option: Comparable, Equatable, NSCopying {

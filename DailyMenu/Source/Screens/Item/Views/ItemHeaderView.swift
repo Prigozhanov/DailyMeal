@@ -7,7 +7,14 @@ import UIKit
 
 class ItemHeaderView: UIView {
     
-    let itemViewModel: ItemViewModel
+    struct Item {
+        let title: String
+        let price: String
+        let count: Int = 1
+        let onChangeCount: IntClosure
+    }
+    
+    private var item: Item
     
     let itemTitleLabel: UILabel = {
         let label = UILabel.makeText()
@@ -24,16 +31,13 @@ class ItemHeaderView: UIView {
     }()
     
     private lazy var itemCounter: ItemCounter = {
-        let counter = ItemCounter(axis: .horizontal) { [weak self] (value) in
-            self?.itemViewModel.item.count = value
-            self?.itemViewModel.view?.reloadTotalLabelView()
-        }
-        counter.updateValue(itemViewModel.item.count)
+        let counter = ItemCounter(axis: .horizontal, valueChanged: item.onChangeCount)
+        counter.updateValue(item.count)
         return counter
     }()
     
-    init(title: String, price: String, count: Int = 1, itemViewModel: ItemViewModel) {
-        self.itemViewModel = itemViewModel
+    init(item: Item) {
+        self.item = item
         
         super.init(frame: .height(120))
         
@@ -44,14 +48,14 @@ class ItemHeaderView: UIView {
         }
         
         cardView.contentView.addSubview(itemTitleLabel)
-        itemTitleLabel.text = title
+        itemTitleLabel.text = item.title
         itemTitleLabel.snp.makeConstraints {
             $0.leading.top.equalToSuperview().inset(Layout.commonInset)
         }
         itemTitleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
         
         cardView.contentView.addSubview(itemPriceLabel)
-        itemPriceLabel.text = price
+        itemPriceLabel.text = item.price
         itemPriceLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(Layout.commonInset)
             $0.bottom.lessThanOrEqualToSuperview().inset(Layout.commonInset)
@@ -70,8 +74,5 @@ class ItemHeaderView: UIView {
     }
     
     required init?(coder: NSCoder) { fatalError() }
-    
-    
-    
     
 }

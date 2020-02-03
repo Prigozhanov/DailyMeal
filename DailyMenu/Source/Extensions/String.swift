@@ -15,6 +15,13 @@ extension String {
         return self.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
     }
     
-    
+    var onlyLetters: String {
+        return filter({
+            "a" ... "z" ~= $0 ||
+            "A" ... "Z" ~= $0 ||
+            "а" ... "я" ~= $0 ||
+            "А" ... "Я" ~= $0
+        })
+    }
     
 }

@@ -9,7 +9,6 @@ final class ItemViewController: UIViewController {
     
     private var viewModel: ItemViewModel
     
-    private var stackViewInsets = UIEdgeInsets(top: 130, left: 0, bottom: 0, right: 0)
     private lazy var scrollDelegate: StretchScrollDelegate = StretchScrollDelegate(view: navigationBarBackground) { [weak self] shouldBeAppeared in
         self?.navigationBarControls.alpha = !shouldBeAppeared ? 0 : 1
         self?.navigationBarControls.isUserInteractionEnabled = shouldBeAppeared
@@ -26,10 +25,11 @@ final class ItemViewController: UIViewController {
         stack.separatorInset = .zero
         stack.rowInset = .zero
         stack.backgroundColor = .clear
-        stack.contentInset = stackViewInsets
+        stack.contentInset = UIEdgeInsets(top: 130, left: 0, bottom: 0, right: 0)
         stack.contentOffset = CGPoint(x: 0, y: -90)
         stack.delegate = scrollDelegate
         stack.alwaysBounceVertical = true
+        stack.contentInsetAdjustmentBehavior = .automatic
         return stack
     }()
     
@@ -40,13 +40,22 @@ final class ItemViewController: UIViewController {
         return image
     }()
     
-    private var navigationBarControls = NavigationBarControls()
+    private lazy var navigationBarControls = NavigationBarControls(title: viewModel.restaurant.chainLabel)
     
-    private lazy var itemHeader = ItemHeaderView(title: viewModel.item.name, price: Formatter.Currency.toString(viewModel.item.price), itemViewModel: self.viewModel)
+    private lazy var itemHeader = ItemHeaderView(item: ItemHeaderView.Item(
+        title: viewModel.item.label,
+        price: Formatter.Currency.toString(viewModel.item.price),
+        onChangeCount: { [weak self] value in
+            self?.viewModel.count = value
+            self?.updateTotalValue()
+        }
+    ))
     
     private lazy var sliderView = SliderView(title: "Spicy Level", sliderValues: ["Regular", "Spicy", "Naga"]) // TODO
     
-    private lazy var addOnsView = AddOnsView(itemViewModel: viewModel)
+    private lazy var optionsStackView = OptionsStackView(item: OptionsStackView.Item(options: self.viewModel.item.options ?? [], onSelectOption: { option in
+        //TODO
+    }))
     
     private var totalLabel: UILabel = {
         let label = UILabel.makeSmallText("Total")
@@ -59,12 +68,12 @@ final class ItemViewController: UIViewController {
         label.textColor = Colors.blue.color
         label.textAlignment = .center
         label.font = FontFamily.Poppins.medium.font(size: 36)
-        label.text = Formatter.Currency.toString(viewModel.item.overallPrice * Double(viewModel.item.count))
+        label.text = Formatter.Currency.toString((Double(viewModel.item.price) ?? 0.0) * Double(viewModel.count)) //FIXME: price calculation
         return label
     }()
     
     private lazy var addToCartButton = UIButton.makeActionButton("Add to Cart") { [weak self] view in
-        guard let self = self, let item = self.viewModel.item.copy() as? CartItem else { return }
+        guard let self = self, let item = CartItem.fromProduct(self.viewModel.item, count: self.viewModel.count) else { return }
         self.viewModel.cartService.addItem(item: item)
         view.tapAnimation { [weak self] in
             self?.navigationController?.popViewController(animated: true)
@@ -85,32 +94,7 @@ final class ItemViewController: UIViewController {
         
         viewModel.view = self
         
-        view.backgroundColor = Colors.commonBackground.color
-        
-        view.addSubview(navigationBarBackground)
-        navigationBarBackground.snp.makeConstraints {
-            $0.leading.top.trailing.equalToSuperview()
-        }
-        
-        view.addSubview(stackView)
-        stackView.snp.makeConstraints { $0.edges.equalToSuperview() }
-        view.addSubview(navigationBarControls)
-        navigationBarControls.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            $0.height.equalTo(100)
-        }
-        
-        stackView.addRow(itemHeader)
-        stackView.addRow(sliderView)
-        stackView.addRow(addOnsView)
-        stackView.addRow(totalLabel)
-        stackView.addRow(totalValueLabel)
-        stackView.addRow(addToCartButton)
-        addToCartButton.snp.makeConstraints { $0.height.equalTo(50) }
-        
-        stackView.setInset(forRow: totalLabel, inset: UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0))
-        stackView.setInset(forRow: addToCartButton, inset: UIEdgeInsets(top: 30, left: 30, bottom: 50, right: 30))
+        setupScreen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -120,20 +104,52 @@ final class ItemViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        Style.addBlueGradient(addToCartButton)
+    }
+    
+    private func setupScreen() {
+        view.backgroundColor = Colors.commonBackground.color
         
-        stackView.snp.remakeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(view.layoutMarginsGuide.snp.bottom)
+        view.addSubview(navigationBarBackground)
+        if let url = URL(string: viewModel.item.src) {
+            navigationBarBackground.sd_setImage(with: url)
+        }
+        navigationBarBackground.snp.makeConstraints {
+            $0.leading.top.trailing.equalToSuperview()
         }
         
-        Style.addBlueGradient(addToCartButton)
+        view.addSubview(stackView)
+        stackView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        view.addSubview(navigationBarControls)
+        navigationBarControls.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.height.equalTo(100)
+        }
+        
+        setupStackView()
+    }
+    
+    private func setupStackView() {
+        stackView.addRow(itemHeader)
+        stackView.addRow(sliderView)
+        stackView.addRow(optionsStackView)
+        stackView.addRow(totalLabel)
+        stackView.addRow(totalValueLabel)
+        stackView.addRow(addToCartButton)
+        addToCartButton.snp.makeConstraints { $0.height.equalTo(50) }
+        
+        stackView.setInset(forRow: totalLabel, inset: UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0))
+        stackView.setInset(forRow: addToCartButton, inset: UIEdgeInsets(top: 30, left: 30, bottom: 50, right: 30))
     }
 }
 
 //MARK: -  ItemView
 extension ItemViewController: ItemView {
-    func reloadTotalLabelView() {
-        totalValueLabel.text = Formatter.Currency.toString(viewModel.item.overallPrice * Double(viewModel.item.count))
+    func updateTotalValue() {
+        totalValueLabel.text = Formatter.Currency.toString((Double(viewModel.item.price) ?? 0) * Double(viewModel.count)) //FIXME: price calculation
     }
 }
 

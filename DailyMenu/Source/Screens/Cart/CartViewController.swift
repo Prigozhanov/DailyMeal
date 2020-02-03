@@ -40,15 +40,20 @@ final class CartViewController: UIViewController {
     
     private var itemRows: [CartItemView] = []
     
-    private lazy var promocodeView = CartPromocodeView {
+    private lazy var promocodeView = CartPromocodeView { _ in 
         //TODO
     }
     
     private var calculationRows: [UIView] = []
     
     private lazy var proceedActionButton = UIButton.makeActionButton("Proceed to Checkout") { [weak self] button in
+        let vm = CheckoutViewModelImplementation()
+        let vc = CheckoutViewController(viewModel: vm)
+        let navigation = UINavigationController(rootViewController: vc)
+        navigation.setNavigationBarHidden(true, animated: false)
+        navigation.modalPresentationStyle = .overCurrentContext
         button.tapAnimation()
-        // TODO
+        UIApplication.topViewController?.show(navigation, sender: nil)
     }
     
     private lazy var separator = UIView.makeSeparator()
@@ -117,17 +122,21 @@ final class CartViewController: UIViewController {
     
     private func setupItemsRows() {
         itemRows = cartSerivce.items.values.map({ item -> CartItemView in
-            let view = CartItemView(item: item, onRemoveItem: { [weak self] itemView in
-                self?.cartSerivce.removeItem(item: item)
-                self?.reloadCalculationsRows()
-                self?.aloeStackView.removeRow(itemView, animated: true)
-                if let self = self, self.cartSerivce.items.isEmpty {
-                    self.aloeStackView.showRow(self.emptyCartRow, animated: true)
-                }
-            }) { [weak self] value in
-                self?.reloadCalculationsRows()
-            }
-            return view
+            CartItemView(item: CartItemView.Item(
+                cartItem: item,
+                onRemoveItem: { [weak self] (itemView) in
+                    self?.cartSerivce.removeItem(item: item)
+                    self?.reloadCalculationsRows()
+                    self?.aloeStackView.removeRow(itemView, animated: true)
+                    if let self = self, self.cartSerivce.items.isEmpty {
+                        self.aloeStackView.showRow(self.emptyCartRow, animated: true)
+                    }
+                    
+                },
+                onChangeCount: { [weak self] (value) in
+                    self?.reloadCalculationsRows()
+            })
+            )
         })
         aloeStackView.addRows(itemRows)
         if let lastRow = itemRows.last {
@@ -140,11 +149,11 @@ final class CartViewController: UIViewController {
     }
     
     private func setupCalculationsRows() {
-        let cartTotalRow = CartTitleValueView(title: "Cart total", value: Formatter.Currency.toString(cartSerivce.cartTotal))
-        let taxRow = CartTitleValueView(title: "Tax", value: Formatter.Currency.toString(cartSerivce.tax))
-        let deliveryRow = CartTitleValueView(title: "Delivery", value: Formatter.Currency.toString(cartSerivce.deliveryPrice))
-        let promoDiscauntRow = CartTitleValueView(title: "Promo discaunt", value: Formatter.Currency.toString(cartSerivce.promoDiscount))
-        let subtotalRow = CartTitleValueView(title: "Subtotal", value: Formatter.Currency.toString(cartSerivce.subtotal), preferesLargeValueLabel: true)
+        let cartTotalRow = CartTitleValueView(item: CartTitleValueView.Item(title: "Cart total", value: Formatter.Currency.toString(cartSerivce.cartTotal)))
+        let taxRow = CartTitleValueView(item: CartTitleValueView.Item(title: "Tax", value: Formatter.Currency.toString(cartSerivce.tax)))
+        let deliveryRow = CartTitleValueView(item: CartTitleValueView.Item(title: "Delivery", value: Formatter.Currency.toString(cartSerivce.deliveryPrice)))
+        let promoDiscauntRow = CartTitleValueView(item: CartTitleValueView.Item(title: "Promo discaunt", value: Formatter.Currency.toString(cartSerivce.promoDiscount)))
+        let subtotalRow = CartTitleValueView(item: CartTitleValueView.Item(title: "Subtotal", value: Formatter.Currency.toString(cartSerivce.subtotal), preferesLargeValueLabel: true))
         
         calculationRows.append(contentsOf: [cartTotalRow, taxRow, deliveryRow, promoDiscauntRow, separator, subtotalRow])
         aloeStackView.insertRows(calculationRows, after: promocodeView)

@@ -58,7 +58,7 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     var restaurantsChain: [Restaurant] {
         var restChain: [Restaurant] = []
         restaurants.forEach { (rest) in
-            if !restChain.contains(where: { rest.chain_id == $0.chain_id }) {
+            if !restChain.contains(where: { rest.chainID == $0.chainID }) {
                 restChain.append(rest)
             }
         }
@@ -76,8 +76,7 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     var filteredRestaurants: [Restaurant] {
         let restaurants = restaurantsChain.filter({
             
-            $0.chain_label?.replacingOccurrences(of: "'", with: "")
-                .containsCaseIgnoring(searchFilter) ?? false
+            $0.chainLabel.containsCaseIgnoring(searchFilter)
         })
         var sizeToBeLoaded = pageSize * pageNumber
         if sizeToBeLoaded > restaurants.count {
@@ -97,12 +96,10 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
             LoadingIndicator.hide()
             switch result {
             case let .success(response):
-                guard let restaurants = response.restaurants else {
-                    return
-                }
-                self?.restaurants = restaurants
+                self?.restaurants = response.restaurants
                 self?.view?.reloadScreen()
-            default: break
+            case let .failure(error):
+                print(error)
             }
         }
     }

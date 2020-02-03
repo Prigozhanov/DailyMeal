@@ -9,12 +9,15 @@ import CollectionKit
 
 class CartItemView: UIView {
     
-    private var onRemoveItem: (CartItemView) -> ()
-    private var onChangeCount: IntClosure
+    struct Item {
+        let cartItem: CartItem
+        let onRemoveItem: (CartItemView) -> ()
+        let onChangeCount: IntClosure
+    }
     
-    private var item: CartItem
+    private var item: Item
     
-    private lazy var optionsDataSource = ArrayDataSource(data: self.item.options.filter { $0.applied })
+    private lazy var optionsDataSource = ArrayDataSource(data: self.item.cartItem.options.filter { $0.applied })
     private lazy var optionsCollectionProvider = BasicProvider(
         dataSource: optionsDataSource,
         viewSource: ClosureViewSource(viewUpdater: { [weak self] (view: FoodOptionCell, data: CartItem.Option, index: Int) in
@@ -52,11 +55,9 @@ class CartItemView: UIView {
         return itemImage
     }()
     
-    init(item: CartItem, onRemoveItem: @escaping (CartItemView) -> (), onChangeCount: @escaping IntClosure) {
+    init(item: Item) {
         self.item = item
-        self.onRemoveItem = onRemoveItem
-        self.onChangeCount = onChangeCount
-        
+
         super.init(frame: .zero)
         
         setup()
@@ -71,12 +72,11 @@ class CartItemView: UIView {
             $0.edges.equalToSuperview()
             $0.height.equalTo(100)
         }
-        let counter = ItemCounter(axis: .veritcal) { [weak self] value in
-            self?.item.count = value
-            self?.onChangeCount(value)
-        }
+        let counter = ItemCounter(axis: .veritcal, valueChanged: item.onChangeCount)
+        //            self?.item.cartItem.count = value
+        //            self?.item.onChangeCount(value)
         
-        counter.updateValue(item.count)
+        counter.updateValue(item.cartItem.count)
         cardView.contentView.addSubview(counter)
         counter.snp.makeConstraints {
             $0.top.bottom.leading.equalToSuperview().inset(Layout.commonInset)
@@ -97,11 +97,11 @@ class CartItemView: UIView {
             $0.leading.equalTo(counter.snp.trailing).offset(Layout.commonMargin)
             $0.size.equalTo(counter.snp.height)
         }
-        if let url = URL(string: item.imageURL.orEmpty) {
+        if let url = URL(string: item.cartItem.imageURL.orEmpty) {
              itemImage.sd_setImage(with: url)
         }
         
-        let itemNameLabel = UILabel.makeText(item.name)
+        let itemNameLabel = UILabel.makeText(item.cartItem.name)
         itemNameLabel.numberOfLines = 2
         itemNameLabel.font = FontFamily.semibold
         cardView.contentView.addSubview(itemNameLabel)
@@ -110,7 +110,7 @@ class CartItemView: UIView {
             $0.leading.equalTo(itemImage.snp.trailing).offset(Layout.largeMargin)
         }
         
-        let itemPrice = UILabel.makeText(Formatter.Currency.toString(item.price))
+        let itemPrice = UILabel.makeText(Formatter.Currency.toString(item.cartItem.price))
         itemPrice.font = FontFamily.semibold
         itemPrice.textColor = Colors.blue.color
         cardView.contentView.addSubview(itemPrice)
@@ -126,7 +126,7 @@ class CartItemView: UIView {
         removeButton.setRoundCorners(4)
         removeButton.imageEdgeInsets = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
         removeButton.setActionHandler(controlEvents: .touchUpInside) { [unowned self] _ in
-            self.onRemoveItem(self)
+            self.item.onRemoveItem(self)
         }
         cardView.contentView.addSubview(removeButton)
         removeButton.snp.makeConstraints {
@@ -143,4 +143,5 @@ class CartItemView: UIView {
             $0.bottom.equalToSuperview()
         }
     }
+    
 }

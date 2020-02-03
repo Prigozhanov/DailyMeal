@@ -6,6 +6,12 @@
 import UIKit
 
 extension UIView {
+    func addSubviews(_ views: [UIView]) {
+        views.forEach({self.addSubview($0)})
+    }
+}
+
+extension UIView {
     
     func setRoundCorners(_ cornerRadius: CGFloat) {
         clipsToBounds = true
@@ -31,7 +37,9 @@ extension UIView {
         layer.borderColor = color
         layer.borderWidth = width
     }
-    
+}
+
+extension UIView {
     static func makeSeparator() -> UIView {
         let view = UIView()
         view.backgroundColor = Colors.lightGray.color
@@ -39,14 +47,26 @@ extension UIView {
         return view
     }
     
+    static func makeDashedSeparator() -> UIView {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.frame = CGRect(x: 0, y: 0, width: 100, height: 3)
+        
+        return view
+    }
+}
+
+extension UIView {
     func tapAnimation(completion: VoidClosure? = nil) {
-        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn, animations: { [weak self] in
-            self?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-        }) { _ in
-            UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseOut, animations: { [weak self] in
+        UIView.animateKeyframes(withDuration: 0.2, delay: 0, options: [], animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1) { [weak self] in
+                self?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.2) { [weak self] in
                 self?.transform = .identity
-                }, completion: { _ in completion?() })
-        }
+            }
+        }) { _ in completion?() }
     }
     
     func startRotating(duration: CFTimeInterval = 1, repeatCount: Float = Float.infinity, clockwise: Bool = true) {

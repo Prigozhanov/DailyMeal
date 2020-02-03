@@ -7,32 +7,34 @@ import UIKit
 
 class CartTitleValueView: UIView {
     
-    private var title: String
-    private var value: String
-    private var preferesLargeValueLabel: Bool
+    struct Item {
+        let title: String
+        let value: String
+        var preferesLargeValueLabel: Bool = false
+    }
+    
+    private let item: Item
     
     private lazy var titleLabel: UILabel = {
-        let label = UILabel.makeText(title)
+        let label = UILabel.makeText(item.title)
         label.font = FontFamily.regular
         label.textColor = Colors.smoke.color
         return label
     }()
     
     private lazy var valueLabel: UILabel = {
-        let label = UILabel.makeText(value)
+        let label = UILabel.makeText(item.value)
         label.textAlignment = .right
         label.font = FontFamily.regular
-        if preferesLargeValueLabel {
+        if item.preferesLargeValueLabel {
             label.font = FontFamily.Poppins.semiBold.font(size: 20)
         }
         return label
     }()
     
     
-    init(title: String, value: String, preferesLargeValueLabel: Bool = false) {
-        self.title = title
-        self.value = value
-        self.preferesLargeValueLabel = preferesLargeValueLabel
+    init(item: Item) {
+        self.item = item
         
         super.init(frame: .zero)
         

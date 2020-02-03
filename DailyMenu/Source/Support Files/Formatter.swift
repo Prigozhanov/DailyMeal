@@ -8,6 +8,13 @@ import Foundation
 enum Formatter {
     
     enum Currency {
+        static func toString(_ string: String) -> String {
+            guard let value = fromString(string) else {
+                return "Error"
+            }
+            return toString(value)
+        }
+        
         static func toString(_ value: Double?) -> String {
             guard let value = value else {
                 return "Error"
@@ -24,11 +31,10 @@ enum Formatter {
     }
     
     enum Distance {
-        
         static func toString(_ value: Double) -> String {
             return String(format: "%.1f km", value)
         }
-        
     }
     
 }
+

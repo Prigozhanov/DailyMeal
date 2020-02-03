@@ -5,6 +5,11 @@
 
 import Foundation
 
+public enum PaymentMethod {
+    case cash, creditCard
+}
+
+
 public protocol CartView: AnyObject {
     func reloadCalculationsRows()
 }

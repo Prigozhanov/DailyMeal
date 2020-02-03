@@ -81,7 +81,6 @@ extension UIButton {
             vc.navigationController?.popViewController(animated: true)
         }
         button.setImage(Images.Icons.back.image.withRenderingMode(.alwaysTemplate), for: .normal)
-        button.tintColor = Colors.white.color
         return button
     }
     

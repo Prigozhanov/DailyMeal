@@ -17,13 +17,12 @@ protocol RestaurantViewModel {
     
     var restaurant: Restaurant { get }
     
-    var items: [CartItem] { get }
+    var products: [Product] { get set }
     
-    var categories: [Category] { get }
+    var categories: [Category] { get set }
     
-    func getItemsByCategory(_ category: Category) -> [CartItem]
-    func loadMenu()
-    func loadCategories()
+    func getItemsByCategory(_ category: Category) -> [Product]
+    func loadInfo()
 }
 
 //MARK: - Implementation
@@ -35,19 +34,7 @@ final class RestaurantViewModelImplementation: RestaurantViewModel {
     
     var restaurant: Restaurant
     
-    var items: [CartItem] {
-        guard let products = products else {
-            return []
-        }
-        return products.map {
-            if let item = CartItem.fromProduct($0) {
-                return item
-            }
-            return .empty
-        }
-    }
-    
-    var products: [Product]?
+    var products: [Product] = []
     
     var categories: [Category] = []
     
@@ -55,53 +42,60 @@ final class RestaurantViewModelImplementation: RestaurantViewModel {
         self.restaurant = restaurant
     }
     
-    func getItemsByCategory(_ category: Category) -> [CartItem] {
-        return items.filter { $0.categoryId == category.restaurantMenuCategories }
+    func getItemsByCategory(_ category: Category) -> [Product] {
+        return products.filter { $0.restaurantMenuCategories == category.restaurantMenuCategories }
     }
     
-    func loadMenu() {
-        guard let id = restaurant.id else {
-            return
-        }
-        let req = Requests.restaurantMenu(id: id)
+    func loadInfo() {
+        let dispatchGroup = DispatchGroup()
         LoadingIndicator.show()
-        context?.networkService.send(request: req, comletion: { [weak self] result in
+        dispatchGroup.enter()
+        dispatchGroup.enter()
+        loadCategories {
+            dispatchGroup.leave()
+        }
+        loadMenu {
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) {[weak self] in
             LoadingIndicator.hide()
+            self?.view?.reloadItems()
+        }
+    }
+    
+    func loadMenu(completion: @escaping VoidClosure) {
+        let req = Requests.restaurantMenu(id: restaurant.id)
+        context?.networkService.send(request: req, completion: { [weak self] result in
             switch result {
             case let .success(response):
                 guard let products = response.data else {
                     return
                 }
                 self?.products = products
-                self?.loadCategories()
             case let .failure(error):
-                print(error.localizedDescription)
+                print(error)
                 break // TODO
             }
+            completion()
         })
     }
     
-    func loadCategories() {
-        guard let id = restaurant.id else {
-            return
-        }
-        let req = Requests.restaurantCategories(id: id)
-        LoadingIndicator.show()
-        context?.networkService.send(request: req, comletion: { [weak self] result in
-            LoadingIndicator.hide()
+    func loadCategories(completion: @escaping VoidClosure) {
+        let req = Requests.restaurantCategories(id: restaurant.id)
+        context?.networkService.send(request: req, completion: { [weak self] result in
             switch result {
             case let .success(response):
                 if let categories = response.data {
                     self?.categories = categories
+                } else {
                 }
-                self?.view?.reloadItems()
             case let .failure(error):
-                print(error.localizedDescription)
+                print(error)
                 break // TODO
             }
+            completion()
         })
     }
     
 }
-
-

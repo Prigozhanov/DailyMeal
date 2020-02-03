@@ -7,7 +7,11 @@ import UIKit
 
 class CartPromocodeView: UIView {
     
-    private let onApplyPromocode: VoidClosure
+    typealias Item = (String?) -> Void
+    
+    private let item: Item
+    
+    private var promoCode: String?
     
     private lazy var textField: UITextField = {
         let field = UITextField()
@@ -17,11 +21,11 @@ class CartPromocodeView: UIView {
     
     private lazy var applyButton = UIButton.makeActionButton("Apply") { [weak self] button in
         button.tapAnimation()
-        self?.onApplyPromocode()
+        self?.item(self?.promoCode)
     }
     
-    init(onApplyPromocode: @escaping VoidClosure){
-        self.onApplyPromocode = onApplyPromocode
+    init(item: @escaping Item){
+        self.item = item
         
         super.init(frame: .height(30))
         

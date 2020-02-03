@@ -7,7 +7,7 @@ import Foundation
 
 //MARK: - View
 protocol ItemView: class {
-    func reloadTotalLabelView()
+    func updateTotalValue()
 }
 
 //MARK: - ViewModel
@@ -17,7 +17,10 @@ protocol ItemViewModel {
     
     var cartService: CartService { get }
     
-    var item: CartItem { get }
+    var restaurant: Restaurant { get }
+    var item: Product { get }
+    var count: Int { get set }
+    
     
 }
 
@@ -28,9 +31,12 @@ final class ItemViewModelImplementation: ItemViewModel {
     
     var cartService: CartService = AppDelegate.shared.context.cartService
     
-    let item: CartItem
+    let restaurant: Restaurant
+    let item: Product
+    var count: Int = 1
     
-    init(item: CartItem) {
+    init(item: Product, restaurant: Restaurant) {
+        self.restaurant = restaurant
         self.item = item
     }
     

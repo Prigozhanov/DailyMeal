@@ -59,24 +59,27 @@ class CollectionHeaderCell: UIView {
     required init?(coder: NSCoder) { fatalError() }
     
     private func setup() {
-        let view = UIView()
-        addSubview(view)
-        view.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.top.bottom.equalToSuperview()
+        let cardView = CardView(shadowSize: .large, customInsets: UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20))
+        addSubview(cardView)
+        cardView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
-        view.setRoundCorners(Layout.cornerRadius)
-        view.setShadow(offset: CGSize(width: 0, height: 4.0), opacity: 0.07, radius: 10)
-        view.backgroundColor = .white
         
-        view.addSubview(restaurantLogo)
+        let logoImageCardView = CardView(shadowSize: .small, customInsets: .zero)
+        cardView.contentView.addSubview(logoImageCardView)
+        logoImageCardView.snp.makeConstraints {
+            $0.top.leading.equalToSuperview().inset(Layout.largeMargin)
+            $0.size.equalTo(60)
+        }
+        
+        cardView.contentView.addSubview(restaurantLogo)
         restaurantLogo.snp.makeConstraints {
             $0.top.leading.equalToSuperview().inset(Layout.largeMargin)
             $0.size.equalTo(60)
         }
         
         let restaurantInfoView = UIView()
-        view.addSubview(restaurantInfoView)
+        cardView.contentView.addSubview(restaurantInfoView)
         restaurantInfoView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(Layout.largeMargin)
             $0.leading.equalTo(restaurantLogo.snp.trailing).offset(20)
@@ -96,25 +99,26 @@ class CollectionHeaderCell: UIView {
         }
         
         
-        view.addSubview(minOrderValueLabel)
+        cardView.contentView.addSubview(minOrderValueLabel)
         minOrderValueLabel.snp.makeConstraints {
             $0.top.trailing.equalToSuperview().inset(Layout.largeMargin)
             $0.leading.equalTo(restaurantInfoView.snp.trailing)
         }
         
         let minOrderLabel = UILabel.makeExtraSmallText("Min order")
-        view.addSubview(minOrderLabel)
+        cardView.contentView.addSubview(minOrderLabel)
         minOrderLabel.snp.makeConstraints {
             $0.top.equalTo(minOrderValueLabel.snp.bottom)
             $0.trailing.equalToSuperview().inset(Layout.largeMargin)
         }
         
         let deliveryInfo = UIView()
-        view.addSubview(deliveryInfo)
+        cardView.contentView.addSubview(deliveryInfo)
         deliveryInfo.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(Layout.largeMargin)
-            $0.bottom.equalToSuperview().inset(25)
+            $0.bottom.lessThanOrEqualTo(cardView.contentView.snp.bottom)
             $0.top.equalTo(restaurantInfoView.snp.bottom).offset(25)
+            $0.height.equalTo(30)
         }
         deliveryInfo.setRoundCorners(Layout.cornerRadius)
         deliveryInfo.backgroundColor = Colors.lightBlue.color

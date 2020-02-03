@@ -34,6 +34,11 @@ internal enum Asset {
     internal static let white = ColorAsset(name: "white")
   }
   internal enum Images {
+    internal enum Category {
+      internal static let burger = ImageAsset(name: "Category/burger")
+      internal static let hotdog = ImageAsset(name: "Category/hotdog")
+      internal static let pizza = ImageAsset(name: "Category/pizza")
+    }
     internal enum FilterIcons {
       internal static let burger = ImageAsset(name: "FilterIcons/burger")
       internal static let chicken = ImageAsset(name: "FilterIcons/chicken")
@@ -71,8 +76,12 @@ internal enum Asset {
       internal static let starHalf = ImageAsset(name: "Icons/star_half")
       internal static let thumb = ImageAsset(name: "Icons/thumb")
     }
+    internal static let cash = ImageAsset(name: "cash")
+    internal static let creditCard = ImageAsset(name: "credit-card")
     internal static let foodItemPlaceholder = ImageAsset(name: "food_item_placeholder")
     internal static let itemImagePlaceholder = ImageAsset(name: "item_image_placeholder")
+    internal static let orderDeliveredPlaceholder = ImageAsset(name: "order-delivered-placeholder")
+    internal static let orderPlacedPlaceholder = ImageAsset(name: "order-placed-placeholder")
     internal static let ratePlaceholder = ImageAsset(name: "rate_placeholder")
     internal static let restaurantLogoPlaceholder = ImageAsset(name: "restaurant_logo_placeholder")
     internal static let restaurentImagePlaceholder = ImageAsset(name: "restaurent_image_placeholder")

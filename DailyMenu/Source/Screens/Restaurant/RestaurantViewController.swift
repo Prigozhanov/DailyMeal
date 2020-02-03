@@ -9,9 +9,9 @@ final class RestaurantViewController: UIViewController {
     
     private var viewModel: RestaurantViewModel
     
-    private lazy var scrollDelegate: StretchScrollDelegate = StretchScrollDelegate(view: navigationBarBackground) { [weak self] shouldBeAppeared in
-        self?.navigationBarControls.alpha = !shouldBeAppeared ? 0 : 1
-        self?.navigationBarControls.isUserInteractionEnabled = shouldBeAppeared
+    private lazy var scrollDelegate: StretchScrollDelegate = StretchScrollDelegate(view: navigationBarBackground) { [weak self] viewShouldAppear in
+        self?.navigationBarControls.alpha = !viewShouldAppear ? 0 : 1
+        self?.navigationBarControls.isUserInteractionEnabled = viewShouldAppear
         self?.setNeedsStatusBarAppearanceUpdate()
     }
     
@@ -21,9 +21,8 @@ final class RestaurantViewController: UIViewController {
         image.clipsToBounds = true
         return image
     }()
-    private var navigationBarBackgroundHeightConstraint: NSLayoutConstraint?
     
-    private var navigationBarControls = NavigationBarControls()
+    private lazy var navigationBarControls = NavigationBarControls(title: viewModel.restaurant.chainLabel)
     
     private lazy var collectionView: CollectionView = {
         let collectionView = CollectionView(provider: composedSectionProvider)
@@ -39,37 +38,39 @@ final class RestaurantViewController: UIViewController {
     ])
     private lazy var headerViewSource = ClosureViewSource<Restaurant, CollectionHeaderCell>(viewUpdater: { (view: CollectionHeaderCell, data: Restaurant, index: Int) in
         let item = CollectionHeaderCell.Item(
-            label: data.chain_label.orEmpty,
-            distance: "\(Formatter.Distance.toString(data.distance ?? 0)) away",
-            orderDelay: "\(data.orderDelayFirst ?? 0) minutes delivery time",
-            minOrderPrice: Formatter.Currency.toString(Double(data.min_amount_order ?? 0)),
-            imageURL: data.src.orEmpty
+            label: data.chainLabel,
+            distance: "\(Formatter.Distance.toString(data.distance)) away",
+            orderDelay: "\(data.orderDelayFirst) minutes delivery time",
+            minOrderPrice: Formatter.Currency.toString(Double(data.minAmountOrder)),
+            imageURL: data.src
         )
         view.configure(with: item)
     })
     private lazy var headerSizeSource = { [weak self] (index: Int, data: Restaurant, collectionSize: CGSize) -> CGSize in
         return CGSize(width: self?.collectionView.frame.width ?? 0, height: 160)
     }
-    
     private lazy var headerProvider = BasicProvider<Restaurant, CollectionHeaderCell>(
         dataSource: headerDataSource,
         viewSource: headerViewSource,
         sizeSource: headerSizeSource
     )
     
-    private lazy var itemViewSource = ClosureViewSource(viewUpdater: { (view: FoodItemCell, data: CartItem, index: Int) in
+    private lazy var itemViewSource = ClosureViewSource(viewUpdater: { (view: FoodItemCell, data: Product, index: Int) in
         view.configure(with: FoodItemCell.Item(
-            title: data.name,
-            description: data.description.orEmpty.withRemovedHtmlTags,
+            title: data.label,
+            description: data.content.withRemovedHtmlTags,
             price: Formatter.Currency.toString(data.price),
-            imageURL: data.imageURL.orEmpty))
+            imageURL: data.src))
         view.addGestureRecognizer(BlockTap(action: { [weak self] _ in
-            let vm = ItemViewModelImplementation(item: data)
+            guard let restaurant = self?.viewModel.restaurant else {
+                return
+            }
+            let vm = ItemViewModelImplementation(item: data, restaurant: restaurant)
             let vc = ItemViewController(viewModel: vm)
             self?.navigationController?.pushViewController(vc, animated: true)
         }))
     })
-    private lazy var itemSizeSource = { [weak self] (index: Int, data: CartItem, collectionSize: CGSize) -> CGSize in
+    private lazy var itemSizeSource = { [weak self] (index: Int, data: Product, collectionSize: CGSize) -> CGSize in
         return CGSize(width: self?.collectionView.frame.width ?? 0, height: 120)
     }
     
@@ -82,7 +83,7 @@ final class RestaurantViewController: UIViewController {
                     return
                 }
                 if !self.viewModel.categories.isEmpty, index > 0 {
-                    view.configure(section: self.viewModel.categories[index - 1].label.orEmpty, itemsCount: data.section.numberOfItems)
+                    view.configure(item: SectionHeaderCell.Item(section: self.viewModel.categories[index - 1].label.orEmpty, itemsCount: data.section.numberOfItems))
                 }
         },
             headerSizeSource: { (index, data, maxSize) -> CGSize in
@@ -102,7 +103,7 @@ final class RestaurantViewController: UIViewController {
     private var sections: [Provider] {
         var sections: [Provider] = viewModel.categories.map { makeItemsSection(viewModel.getItemsByCategory($0)) }
         if sections.isEmpty {
-            sections.append( makeItemsSection(viewModel.items) )
+            sections.append( makeItemsSection(viewModel.products) )
         }
         sections.insert(headerProvider, at: 0)
         return sections
@@ -142,9 +143,11 @@ final class RestaurantViewController: UIViewController {
         view.addSubview(navigationBarControls)
         navigationBarControls.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(100)
         }
+        
+        viewModel.loadInfo()
     }
     
     override func viewDidLayoutSubviews() {
@@ -153,13 +156,8 @@ final class RestaurantViewController: UIViewController {
         Style.addBlackGradient(navigationBarBackground)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        viewModel.loadMenu()
-    }
-    
-    private func makeItemsSection(_ items: [CartItem]) -> BasicProvider<CartItem, FoodItemCell> {
+    private func makeItemsSection(_ items: [Product]) -> BasicProvider<Product, FoodItemCell> {
         let itemDataSource = ArrayDataSource(data: items)
-        
         let itemsProvider = BasicProvider(
             dataSource: itemDataSource,
             viewSource: itemViewSource,
