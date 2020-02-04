@@ -76,11 +76,12 @@ public struct User: Codable {
 }
 
 // MARK: - VerifyToken
-public struct VerifyToken: Codable {
-    public let member: Member
-    public let success: Bool
-    public let message, jwtToken, token: String
-    public let responseCode: Int
+public struct LoginResponse: Codable {
+    public let member: User?
+    public let success: Bool?
+    public let message, jwtToken: String?
+    public let token: String?
+    public let responseCode: Int?
     
     enum CodingKeys: String, CodingKey {
         case member, success, message
@@ -88,40 +89,6 @@ public struct VerifyToken: Codable {
         case token, responseCode
     }
 }
-
-// MARK: - Member
-//TODO: some fields are missing in this structure, see menu.by response to add them then
-public struct Member: Codable {
-    public let id: Int
-    public let fullname, name, lastname, companyName: String
-    public let email, phone, remberMe: String
-    public let status, bonus: Int
-    public let regDate: String
-    public let indms, hasRecuringCard: Int
-    public let recurringCardDate: String
-    public let selectedArea: Int
-    public let isTester, isCorporateUser, phoneVerify, emailVerify: String
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case fullname, name, lastname
-        case companyName = "company_name"
-        case email, phone
-        case remberMe = "rember_me"
-        case status, bonus
-        case regDate = "reg_date"
-        case indms
-        case hasRecuringCard = "has_recuring_card"
-        case recurringCardDate = "recurring_card_date"
-        case selectedArea = "selected_area"
-        case isTester = "is_tester"
-        case isCorporateUser = "is_corporate_user"
-        case phoneVerify = "phone_verify"
-        case emailVerify = "email_verify"
-    }
-}
-
-
 
 // MARK: - DataClass
 public struct PushRegistration: Codable {

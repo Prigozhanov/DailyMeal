@@ -19,8 +19,7 @@ class AppCoordinator {
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
         configureRootViewController()
-        //    showGreeting()
-        
+        showGreeting()
         return true
     }
     
@@ -29,10 +28,10 @@ class AppCoordinator {
 private extension AppCoordinator {
     
     func configureRootViewController() {
-//        let vc = OrderStatusViewController(viewModel: OrderStatusViewModelImplementation())
-//        let nav = NavigationController(rootViewController: vc)
-//        tabBarController.viewControllers = [vc]
-    
+        //        let vc = OrderStatusViewController(viewModel: OrderStatusViewModelImplementation())
+        //        let nav = NavigationController(rootViewController: vc)
+        //        tabBarController.viewControllers = [vc]
+        
         tabBarController.setViewControllers([
             cartTab,
             exploreTab,

@@ -5,11 +5,11 @@
 
 import UIKit
 
-extension UIInputView {
-  static func makeCommonInput(_ placeholder: String? = "") -> UIInputView {
-    let input = UIInputView(frame: .zero)
+extension UITextField {
+  static func makeCommonTextField(_ placeholder: String? = "") -> UITextField {
+    let input = UITextField(frame: .zero)
     input.layer.cornerRadius = Layout.cornerRadius
-    input.backgroundColor = Colors.lightGray.color
+    input.backgroundColor = Colors.white.color
     input.layer.borderColor = Colors.gray.color.cgColor
     input.layer.borderWidth = .onePixel
     return input

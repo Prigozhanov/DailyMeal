@@ -4,18 +4,26 @@
 //
 
 import Foundation
-import Networking
+import Services
 
-typealias AppContextProtocol = CartServiceHolder & NetworkServiceHolder
+typealias AppContextProtocol =
+    CartServiceHolder &
+    NetworkServiceHolder &
+    KeychainServiceHolder &
+    UserDefaultsServiceHolder
 
 class AppContext: AppContextProtocol {
     
     var networkService: NetworkService
     var cartService: CartService
+    var keychainSevice: KeychainService
+    var userDefaultsService: UserDefaultsService
     
     init() {
         self.cartService = CartServiceImplementation()
-        self.networkService = NetworkServiceImplementation()
+        self.keychainSevice = KeychainServiceImplementation()
+        self.networkService = NetworkServiceImplementation(keychainService: keychainSevice)
+        self.userDefaultsService = UserDefaultsServiceImplementation(keychainService: keychainSevice)
     }
     
 }

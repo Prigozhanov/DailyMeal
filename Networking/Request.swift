@@ -29,6 +29,15 @@ public struct Request<Response: Codable> {
 
 public class Requests {
     private static let baseUrlString = "https://v2.menu.by/api/"
+    private static let secondaryUrlString = "https://apiv2.menu.by/"
+    
+    //https://apiv2.menu.by/index/authenticate
+    public static func authenticate(userName: String, password: String) -> Request<LoginResponse> {
+        return Request<LoginResponse>(method: .POST,
+                             baseUrlString: secondaryUrlString,
+                             path: "index/authenticate",
+                             params: .json(["user": userName, "pwd" : password]))
+    }
     
     //https://v2.menu.by/api/user/me
     public static func user() -> Request<User> {

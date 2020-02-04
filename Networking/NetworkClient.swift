@@ -11,25 +11,35 @@ public final class NetworkClient {
         case unknownError
         case parsingError
         case missingData
+        case unauthorized
     }
     
+    private let sessionQueue: OperationQueue
     private let session: URLSession
+    private let urlRequestConfigurator: URLRequestConfigurator
     
-    private var sessionQueue: OperationQueue
-    
-    init() {
+    public init(urlRequestConfigurator: URLRequestConfigurator) {
         sessionQueue = OperationQueue()
         session = URLSession(configuration: .default, delegate: nil, delegateQueue: sessionQueue)
+        self.urlRequestConfigurator = urlRequestConfigurator
     }
     
     public func send<Response: Codable>(request: Request<Response>, completion: @escaping (Result<Response, Error>) -> Void) {
-        let request = URLRequestBuilder(request: request)
+        var urlRequest = URLRequestBuilder(request: request).urlRequest
         
-        let task = session.dataTask(with: request.urlRequest) { (data, response, error) in
+        urlRequestConfigurator.configure(request: &urlRequest)
+        
+        print("[NETWORK] [REQUEST] \(urlRequest)")
+        print("[NETWORK] [REQUEST] [HEADERS] \(String(describing: urlRequest.allHTTPHeaderFields))")
+        print("[NETWORK] [REQUEST] [HEADERS] \(String(describing: urlRequest.httpBody))")
+        
+        let task = session.dataTask(with: urlRequest) { (data, response, error) in
             
             guard let response = response as? HTTPURLResponse else {
                 return
             }
+            
+            print("[NETWORK] [RESPONSE] \(response.debugDescription)")
             
             let successClosure: (Response) -> Void = { response in
                 DispatchQueue.main.async {
@@ -58,6 +68,8 @@ public final class NetworkClient {
                     print(error)
                     failureClosure(Error.parsingError)
                 }
+            case 403:
+                failureClosure(Error.unauthorized)
             default:
                 failureClosure(Error.unknownError)
             }

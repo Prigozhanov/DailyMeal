@@ -2,21 +2,25 @@
 
 platform :ios, '11.0'
 
-pod 'SwiftGen'
+ pod 'SwiftGen'
 
 target 'DailyMenu' do
-  # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
 
-  # Pods for DailyMenu
+ pod 'TableKit'
+ pod "CollectionKit"
+ pod 'SnapKit'
+ pod 'AppCenter'
+ pod 'AppCenter/Distribute'
+ pod 'TableKit'
+ pod 'AloeStackView'
+ pod 'SDWebImage'
+ pod 'KeychainAccess'
 
-pod 'TableKit'
-pod "CollectionKit"
-pod 'SnapKit'
-pod 'AppCenter'
-pod 'AppCenter/Distribute'
-pod 'TableKit'
-pod 'AloeStackView'
-pod 'SDWebImage'
+
+ target 'Services' do
+  pod 'KeychainAccess'
+ end
+
 
 end
+

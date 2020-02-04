@@ -21,6 +21,8 @@ class URLRequestBuilder<Response: Codable> {
         
         var urlRequest = URLRequest(url: url)
         
+        urlRequest.httpMethod = request.method.rawValue
+        
         guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             fatalError("\(urlString) is invalid url")
         }
@@ -31,7 +33,7 @@ class URLRequestBuilder<Response: Codable> {
             components.queryItems = (components.queryItems ?? []) + queryItems
         case let (true, .json(json)):
             do {
-                _ = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
+                urlRequest.httpBody = try JSONSerialization.data(withJSONObject: json, options: [])
             } catch {
                 print(error)
             }
