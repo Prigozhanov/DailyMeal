@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import Networking
 
 //MARK: - View
 protocol RestaurantsView: class {

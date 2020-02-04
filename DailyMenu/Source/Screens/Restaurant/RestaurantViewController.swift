@@ -3,6 +3,7 @@
 //  Copyright © 2019 epam. All rights reserved.
 //
 
+import Networking
 import CollectionKit
 
 final class RestaurantViewController: UIViewController {

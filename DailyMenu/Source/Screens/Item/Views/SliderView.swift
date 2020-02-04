@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import Extensions
 
 class SliderView: UIView {
     

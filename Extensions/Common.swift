@@ -5,30 +5,23 @@
 
 import UIKit
 
-typealias Colors = Asset.Colors
-typealias Images = Asset.Images
-
-typealias VoidClosure = () -> ()
-typealias BoolClosure = (Bool) -> ()
-typealias IntClosure = (Int) -> ()
-
-extension UIResponder {
+public extension UIResponder {
     
     var parentViewController: UIViewController? {
         return next as? UIViewController ?? next?.parentViewController
     }
-
-}
-
-extension CGFloat {
-    
-  static var onePixel: CGFloat {
-    return 1 / UIScreen.main.scale
-  }
     
 }
 
-extension CGRect {
+public extension CGFloat {
+    
+    static var onePixel: CGFloat {
+        return 1 / UIScreen.main.scale
+    }
+    
+}
+
+public extension CGRect {
     
     static func height(_ value: CGFloat) -> CGRect {
         return CGRect(x: 0, y: 0, width: 0, height: value)

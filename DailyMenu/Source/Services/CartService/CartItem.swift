@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import Networking
 
 public class CartItem: Comparable, Equatable, NSCopying {
     var id: Int

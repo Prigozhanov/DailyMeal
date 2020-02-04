@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension String {
+public extension String {
     
     func containsCaseIgnoring(_ string: String) -> Bool {
         return self.lowercased().contains(string.lowercased())

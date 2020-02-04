@@ -33,11 +33,11 @@ private extension AppCoordinator {
 //        let nav = NavigationController(rootViewController: vc)
 //        tabBarController.viewControllers = [vc]
     
-        tabBarController.viewControllers = [
+        tabBarController.setViewControllers([
             cartTab,
             exploreTab,
             settingsTab
-        ]
+        ], animated: false)
         tabBarController.selectedIndex = 1
     }
     

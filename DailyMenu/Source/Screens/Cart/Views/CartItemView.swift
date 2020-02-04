@@ -3,7 +3,7 @@
 //  Copyright © 2020 epam. All rights reserved.
 //
 
-import UIKit
+import Extensions
 import AloeStackView
 import CollectionKit
 

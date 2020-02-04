@@ -15,12 +15,16 @@ public protocol NetworkService {
 
 }
 
-class NetworkServiceImplementation: NetworkService {
+public class NetworkServiceImplementation: NetworkService {
     
-    private let networkClient = NetworkClient()
+    private let networkClient: NetworkClient
+    
+    public init() {
+        networkClient = NetworkClient()
+    }
     
     
-    func send<Response: Codable>(request: Request<Response>, completion: @escaping (Result<Response, NetworkClient.Error>) -> Void) {
+    public func send<Response: Codable>(request: Request<Response>, completion: @escaping (Result<Response, NetworkClient.Error>) -> Void) {
         networkClient.send(request: request, completion: completion)
     }
     

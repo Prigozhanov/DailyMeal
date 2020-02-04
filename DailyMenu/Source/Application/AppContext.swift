@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import Networking
 
 typealias AppContextProtocol = CartServiceHolder & NetworkServiceHolder
 

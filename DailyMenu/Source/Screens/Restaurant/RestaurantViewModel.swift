@@ -4,6 +4,8 @@
 //
 
 import Foundation
+import Networking
+import Extensions
 
 //MARK: - View
 protocol RestaurantView: class {
@@ -19,9 +21,9 @@ protocol RestaurantViewModel {
     
     var products: [Product] { get set }
     
-    var categories: [Category] { get set }
+    var categories: [ProductCategory] { get set }
     
-    func getItemsByCategory(_ category: Category) -> [Product]
+    func getItemsByCategory(_ category: ProductCategory) -> [Product]
     func loadInfo()
 }
 
@@ -36,13 +38,13 @@ final class RestaurantViewModelImplementation: RestaurantViewModel {
     
     var products: [Product] = []
     
-    var categories: [Category] = []
+    var categories: [ProductCategory] = []
     
     init(restaurant: Restaurant) {
         self.restaurant = restaurant
     }
     
-    func getItemsByCategory(_ category: Category) -> [Product] {
+    func getItemsByCategory(_ category: ProductCategory) -> [Product] {
         return products.filter { $0.restaurantMenuCategories == category.restaurantMenuCategories }
     }
     

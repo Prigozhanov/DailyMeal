@@ -25,10 +25,17 @@ class URLRequestBuilder<Response: Codable> {
             fatalError("\(urlString) is invalid url")
         }
         
-        switch request.params {
-        case let .query(values):
+        switch (request.method.hasBody, request.params) {
+        case let (_, .query(values)):
             let queryItems = values.map { URLQueryItem(name: $0.key, value: $0.value) }
             components.queryItems = (components.queryItems ?? []) + queryItems
+        case let (true, .json(json)):
+            do {
+                _ = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
+            } catch {
+                print(error)
+            }
+            
         default:
             break
         }

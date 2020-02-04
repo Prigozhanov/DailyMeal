@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension Optional where Wrapped == String {
+public extension Optional where Wrapped == String {
     
     var orEmpty: String {
         switch self {

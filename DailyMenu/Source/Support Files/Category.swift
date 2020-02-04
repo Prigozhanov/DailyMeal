@@ -4,11 +4,12 @@
 //
 
 import Foundation
+import Networking
 
 public enum FoodCategory: String {
     case burger = "Burgers", chicken, desert = "Desserts", fries, hotdog, lobastar, pizza, sandwich, steak, sushi, taco, pastry, unknown
     
-    static func fromCategory(category: Category) -> FoodCategory {
+    static func fromCategory(category: ProductCategory) -> FoodCategory {
         return FoodCategory(rawValue: category.label.orEmpty.onlyLetters) ?? .unknown
     }
     
