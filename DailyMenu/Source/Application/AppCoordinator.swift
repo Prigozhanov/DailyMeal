@@ -4,6 +4,8 @@
 //
 
 import UIKit
+import Extensions
+import Services
 
 class AppCoordinator {
     
@@ -11,15 +13,33 @@ class AppCoordinator {
     
     private let tabBarController: UITabBarController = UITabBarController()
     
-    init(_ window: UIWindow) {
+    private var notificationTokens: [Token]
+    
+    private let keychainService: KeychainService
+    private let userDefaultsService: UserDefaultsService
+    
+    init(_ window: UIWindow, keychainService: KeychainService, userDefaultsService: UserDefaultsService) {
         self.window = window
+        
+        self.keychainService = keychainService
+        self.userDefaultsService = userDefaultsService
+        
+        self.notificationTokens = []
     }
     
     func registerApplication() -> Bool {
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
         configureRootViewController()
-        showGreeting()
+        
+        if userDefaultsService.getValueForKey(key: .id) == nil {
+            showGreeting()
+        }
+        
+        notificationTokens.append(Token.make(descriptor: .userLoggedOutDescriptor, using: { [weak self] _ in
+            self?.showGreeting()
+        }))
+        
         return true
     }
     
@@ -28,9 +48,8 @@ class AppCoordinator {
 private extension AppCoordinator {
     
     func configureRootViewController() {
-        //        let vc = OrderStatusViewController(viewModel: OrderStatusViewModelImplementation())
-        //        let nav = NavigationController(rootViewController: vc)
-        //        tabBarController.viewControllers = [vc]
+//      let vc = AddCreditCardViewController(viewModel: AddCreditCardViewModelImplementation())
+//      tabBarController.viewControllers = [vc]
         
         tabBarController.setViewControllers([
             cartTab,
