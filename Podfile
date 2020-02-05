@@ -1,11 +1,11 @@
 # Uncomment the next line to define a global platform for your project
 
 platform :ios, '11.0'
+use_frameworks!
 
- pod 'SwiftGen'
 
 target 'DailyMenu' do
-
+ pod 'SwiftGen'
  pod 'TableKit'
  pod "CollectionKit"
  pod 'SnapKit'
@@ -16,11 +16,10 @@ target 'DailyMenu' do
  pod 'SDWebImage'
  pod 'KeychainAccess'
 
-
- target 'Services' do
-  pod 'KeychainAccess'
- end
-
-
 end
 
+target 'Services' do
+
+ pod 'KeychainAccess'
+
+end
