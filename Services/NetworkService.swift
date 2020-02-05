@@ -5,6 +5,7 @@
 
 import Foundation
 import Networking
+import Extensions
 
 public protocol NetworkServiceHolder {
     var networkService: NetworkService { get }
@@ -13,7 +14,7 @@ public protocol NetworkServiceHolder {
 public protocol NetworkService {
     
     func send<Response: Codable>(request: Request<Response>, completion: @escaping (Result<Response, NetworkClient.Error>) -> Void)
-
+    
 }
 
 public class NetworkServiceImplementation: NetworkService {
@@ -52,7 +53,22 @@ public class NetworkServiceImplementation: NetworkService {
         if let token = (response as? LoginResponse)?.token {
             requestConfigurator.addHeader(Header(httpHeaderField: .authorization, value: token))
             keychainService.setValueForItem(.authToken, token)
+            NotificationCenter.default.post(name: .userLoggedIn, object: response)
         }
+    }
+    
+}
+
+public extension NotificationDescriptor {
+    
+    static var userLoggedInDescriptor: NotificationDescriptor<User> {
+        return NotificationDescriptor<User>(name: .userLoggedIn) { notification -> User in
+            notification.object as! User
+        }
+    }
+    
+    static var userLoggedOutDescriptor: NotificationDescriptor<Void> {
+        return NotificationDescriptor<Void>(name: .userLoggedOut) { _ in }
     }
     
 }

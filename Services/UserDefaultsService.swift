@@ -13,9 +13,11 @@ public protocol UserDefaultsServiceHolder {
 
 public protocol UserDefaultsService {
     
-    func setValueForKey(key: UserDefaultsKey, value: String)
+    func setValueForKey(key: UserDefaultsKey, value: Any)
     
-    func getValueForKey(key: UserDefaultsKey) -> String?
+    func getValueForKey(key: UserDefaultsKey) -> Any?
+    
+    func removeAllValues()
     
 }
 
@@ -30,33 +32,23 @@ public class UserDefaultsServiceImplementation: UserDefaultsService {
         userDefaults = UserDefaults.standard
     }
     
-    public func setValueForKey(key: UserDefaultsKey, value: String) {
+    public func setValueForKey(key: UserDefaultsKey, value: Any) {
         userDefaults.set(value, forKey: key.rawValue)
     }
     
-    public func getValueForKey(key: UserDefaultsKey) -> String? {
-        userDefaults.value(forKey: key.rawValue) as? String
+    public func getValueForKey(key: UserDefaultsKey) -> Any? {
+        userDefaults.value(forKey: key.rawValue)
+    }
+    
+    public func removeAllValues() {
+        UserDefaultsKey.allCases.forEach { userDefaults.removeObject(forKey: $0.rawValue) }
     }
 }
 
-public enum UserDefaultsKey: String {
+public enum UserDefaultsKey: String, CaseIterable {
     case id,
-    cafullname,
     name,
     lastname,
-    companyName,
     email,
-    phone,
-    remberMe,
-    status,
-    bonus,
-    regDate,
-    indms,
-    hasRecuringCard,
-    recurringCardDate,
-    selectedArea,
-    isTester,
-    isCorporateUser,
-    phoneVerify,
-    emailVerify
+    phone
 }

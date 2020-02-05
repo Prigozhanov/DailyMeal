@@ -10,6 +10,7 @@ public final class NetworkClient {
     public enum Error: String, Swift.Error {
         case unknownError
         case parsingError
+        case serverSideError
         case missingData
         case unauthorized
     }
@@ -31,7 +32,6 @@ public final class NetworkClient {
         
         print("[NETWORK] [REQUEST] \(urlRequest)")
         print("[NETWORK] [REQUEST] [HEADERS] \(String(describing: urlRequest.allHTTPHeaderFields))")
-        print("[NETWORK] [REQUEST] [HEADERS] \(String(describing: urlRequest.httpBody))")
         
         let task = session.dataTask(with: urlRequest) { (data, response, error) in
             
@@ -39,7 +39,7 @@ public final class NetworkClient {
                 return
             }
             
-            print("[NETWORK] [RESPONSE] \(response.debugDescription)")
+//            print("[NETWORK] [RESPONSE] \(response.debugDescription)")
             
             let successClosure: (Response) -> Void = { response in
                 DispatchQueue.main.async {
@@ -63,13 +63,14 @@ public final class NetworkClient {
                     }
                     let jsonResponse = try jsonDecoder.decode(Response.self, from: data)
                     successClosure(jsonResponse)
-                    print(jsonResponse)
                 } catch {
                     print(error)
                     failureClosure(Error.parsingError)
                 }
             case 403:
                 failureClosure(Error.unauthorized)
+            case 500:
+                failureClosure(Error.serverSideError)
             default:
                 failureClosure(Error.unknownError)
             }

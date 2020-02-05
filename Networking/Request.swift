@@ -77,7 +77,7 @@ public class Requests {
                                      path: "get-RestDataByType",
                                      params: .query([
                                         "type": "all",
-                                        "lng": "7",
+                                        "lng": "6",
                                         "delivery_type": "delivery",
                                         "city_id": "2",
                                         "localization": "1",
@@ -90,7 +90,7 @@ public class Requests {
         return Request<SingleKeyResponseWrapper<[ProductCategory]>>(method: .GET,
                                  baseUrlString: baseUrlString,
                                  path: "get-restaurant-menu-categories",
-                                 params: .query(["rest" : "\(id)", "lng": "7"]))
+                                 params: .query(["rest" : "\(id)", "lng": "6"]))
     }
     
     //https://v2.menu.by/api/get-restaurant-menu?rest=1595&lng=7&restaurant_menu_categories=4729
@@ -100,7 +100,7 @@ public class Requests {
                                   path: "get-restaurant-menu",
                                   params: .query([
                                     "rest" : "\(id)",
-                                    "lng": "7" // TODO link with category id
+                                    "lng": "6" // TODO link with category id
                                   ]))
     }
     

@@ -15,6 +15,7 @@ public protocol KeychainServiceHolder {
 
 public enum KeychainItem: String {
     case authToken
+    case email
 }
 
 
