@@ -9,9 +9,10 @@ extension UITextField {
   static func makeCommonTextField(_ placeholder: String? = "") -> UITextField {
     let input = UITextField(frame: .zero)
     input.layer.cornerRadius = Layout.cornerRadius
-    input.backgroundColor = Colors.white.color
-    input.layer.borderColor = Colors.gray.color.cgColor
+    input.backgroundColor = Colors.backgroundGray.color
+    input.layer.borderColor = Colors.lightGray.color.cgColor
     input.layer.borderWidth = .onePixel
+    input.placeholder = placeholder
     return input
   }
 }

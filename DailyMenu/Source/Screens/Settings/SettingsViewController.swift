@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import Extensions
 
 final class SettingsViewController: UIViewController {
     
@@ -22,10 +23,24 @@ final class SettingsViewController: UIViewController {
         
         viewModel.view = self
         
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        
         view.backgroundColor = Colors.commonBackground.color
         
+        let signOutButton = UIButton.makeCommonButton("Sign out") { [weak self] _ in
+            NotificationCenter.default.post(Notification(name: .userLoggedOut))
+            self?.viewModel.clearUserInfo()
+        }
+        view.addSubview(signOutButton)
+        signOutButton.setTitleColor(Colors.red.color, for: .normal)
+        signOutButton.titleLabel?.font = FontFamily.semibold
+        signOutButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(Layout.commonInset)
+            $0.centerX.equalToSuperview()
+        }
+        
         let label = UILabel.makeText()
-        label.text = viewModel.userName
+        label.text = viewModel.phone
         view.addSubview(label)
         label.snp.makeConstraints {
             $0.center.equalToSuperview()

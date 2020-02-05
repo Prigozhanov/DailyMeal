@@ -16,7 +16,9 @@ protocol SettingsViewModel {
     var view: SettingsView? { get set }
     
     var userName: String? { get set }
+    var phone: String? { get set }
     
+    func clearUserInfo()
 }
 
 //MARK: - Implementation
@@ -27,13 +29,17 @@ final class SettingsViewModelImplementation: SettingsViewModel {
     let context: AppContext
     
     var userName: String?
+    var phone: String?
     
     init() {
         context = AppDelegate.shared.context
-        userName = context.userDefaultsService.getValueForKey(key: .name)
+        userName = context.userDefaultsService.getValueForKey(key: .name) as? String
+        phone = context.userDefaultsService.getValueForKey(key: .phone) as? String
     }
     
-    
+    func clearUserInfo() {
+        context.userDefaultsService.removeAllValues()
+    }
     
 }
 

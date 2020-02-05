@@ -41,7 +41,7 @@ final class OrderStatusViewController: UIViewController {
     }
     
     private func layoutScreen() {
-        let placeholderImageView = UIImageView(image: Images.orderPlacedPlaceholder.image)
+        let placeholderImageView = UIImageView(image: Images.Placeholders.orderPlaced.image)
         placeholderImageView.contentMode = .scaleAspectFit
         view.addSubview(placeholderImageView)
         placeholderImageView.snp.makeConstraints {

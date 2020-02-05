@@ -49,4 +49,24 @@ class Style {
             at: 0)
     }
     
+    static func addTitle(title: String, _ vc: UIViewController) {
+        let titleLabel = UILabel.makeLargeText(title)
+        titleLabel.textAlignment = .center
+        vc.view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(vc.view.safeAreaLayoutGuide.snp.top).inset(20)
+            $0.centerX.equalToSuperview()
+        }
+    }
+    
+    static func addBackButton(_ vc: UIViewController, action: @escaping (UIButton) -> Void) {
+        let backButton = UIButton.makeImageButton(image: Images.Icons.back.image, action: action)
+        backButton.tintColor = Colors.charcoal.color
+        vc.view.addSubview(backButton)
+        backButton.snp.makeConstraints {
+            $0.top.equalTo(vc.view.safeAreaLayoutGuide.snp.top).inset(20)
+            $0.leading.equalToSuperview().inset(20)
+        }
+    }
+    
 }

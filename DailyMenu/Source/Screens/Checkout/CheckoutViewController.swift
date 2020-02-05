@@ -23,7 +23,7 @@ final class CheckoutViewController: UIViewController {
         PaymentMethodView(item:
             PaymentMethodView.Item(
                 title: "Cash",
-                image: Images.cash.image,
+                image: Images.Placeholders.cash.image,
                 tapHandler: { [unowned self] view in
                     self.creditCardRow.setSelected(false)
                     self.viewModel.paymentMethod = .cash
@@ -36,7 +36,7 @@ final class CheckoutViewController: UIViewController {
         PaymentMethodView(item:
             PaymentMethodView.Item(
                 title: "Credit/Debt cart",
-                image: Images.creditCard.image,
+                image: Images.Placeholders.creditCardSecond.image,
                 tapHandler: { [unowned self] view in
                     self.cashRow.setSelected(false)
                     self.viewModel.paymentMethod = .creditCard

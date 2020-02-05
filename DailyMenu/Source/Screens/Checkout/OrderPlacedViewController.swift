@@ -24,7 +24,7 @@ final class OrderPlacedViewController: UIViewController {
         notificationButton.tintColor = Colors.charcoal.color
         let titleLabel = UILabel.makeLargeText("Order placed")
         titleLabel.textAlignment = .center
-        let imageView = UIImageView(image: Images.orderPlacedPlaceholder.image)
+        let imageView = UIImageView(image: Images.Placeholders.orderPlaced.image)
         imageView.contentMode = .scaleAspectFit
         let messageTitle = UILabel.makeText("Your Food order have been placed")
         messageTitle.numberOfLines = 2

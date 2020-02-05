@@ -9,12 +9,75 @@ final class GreetingViewController: UIViewController {
     
     private var viewModel: GreetingViewModel
     
-    lazy var signInButton = UIButton.makeActionButton("Sign in") { [weak self] button in
+    private lazy var emailField: TextField = {
+        let textField = TextField(
+            placeholder: "E-mail",
+            image: Images.Icons.envelope.image,
+            shouldChangeCharacters: { (_, _, _) -> Bool in
+                true
+        },
+            shouldBeginEditing: { (_) -> Bool in
+                true
+        },
+            didBeginEditing: { (_) in
+                
+        },
+            shouldEndEditing: { (_) -> Bool in
+                true
+        },
+            didEndEditing: { (_, _) in
+                
+        },
+            didChangeSelection: { (_) in
+                
+        },
+            shouldClear: { (_) -> Bool in
+                true
+        }) { (_) -> Bool in
+            true
+        }
+        return textField
+    }()
+    
+    private lazy var passwordField: TextField = {
+        let textField = TextField(
+            placeholder: "Password",
+            image: Images.Icons.password.image,
+            shouldChangeCharacters: { (_, _, _) -> Bool in
+                true
+        },
+            shouldBeginEditing: { (_) -> Bool in
+                true
+        },
+            didBeginEditing: { (_) in
+                
+        },
+            shouldEndEditing: { (_) -> Bool in
+                true
+        },
+            didEndEditing: { (_, _) in
+                
+        },
+            didChangeSelection: { (_) in
+                
+        },
+            shouldClear: { (_) -> Bool in
+                true
+        }) { (_) -> Bool in
+            true
+        }
+        textField.setSecureEntry(true)
+        return textField
+    }()
+    
+    private lazy var signInButton = UIButton.makeActionButton("Sign in") { [weak self] button in
         button.tapAnimation()
+        self?.viewModel.email = self?.emailField.text ?? ""
+        self?.viewModel.password = self?.passwordField.text ?? ""
         self?.viewModel.performLogin()
     }
     
-    lazy var signUpRow: UIView = {
+    private lazy var signUpRow: UIView = {
         let view = UIView()
         
         let dontHaveAccountLabel = UILabel.makeMediumText("Don't have an account?")
@@ -41,7 +104,7 @@ final class GreetingViewController: UIViewController {
         return view
     }()
     
-    lazy var skipButton = UIButton.makeCustomButton(title: "Skip >", titleColor: Colors.gray.color, font: FontFamily.light) { [weak self] _ in
+    private lazy var skipButton = UIButton.makeCustomButton(title: "Skip >", titleColor: Colors.gray.color, font: FontFamily.light) { [weak self] _ in
         self?.dismiss(animated: true)
     }
     
@@ -60,38 +123,42 @@ final class GreetingViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        let fieldsStack = UIStackView.makeVerticalStack()
-        view.addSubview(fieldsStack)
-        fieldsStack.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(Layout.commonInset * 2)
-            $0.height.equalTo(100)
-        }
-        fieldsStack.alignment = .fill
-        fieldsStack.spacing = 40
-        fieldsStack.addArrangedSubview(UITextField.makeCommonTextField("+1"))
-        fieldsStack.addArrangedSubview(UITextField.makeCommonTextField("Password"))
+        emailField.text = viewModel.email
         
-        view.addSubview(signInButton)
-        signInButton.snp.makeConstraints {
-            $0.top.equalTo(fieldsStack.snp.bottom).offset(40)
-            $0.center.equalTo(view)
-            $0.leading.trailing.equalToSuperview().inset(Layout.commonInset * 2)
+        view.addSubviews([emailField, passwordField, signInButton, signUpRow, skipButton])
+        
+        emailField.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(200)
+            $0.centerX.equalToSuperview()
             $0.height.equalTo(50)
+            $0.leading.trailing.equalToSuperview().inset(Layout.commonInset * 2)
         }
         
-        view.addSubview(signUpRow)
+        passwordField.snp.makeConstraints {
+            $0.top.equalTo(emailField.snp.bottom).offset(Layout.largeMargin)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(50)
+            $0.width.equalTo(emailField)
+        }
+        
+        signInButton.snp.makeConstraints {
+            $0.top.equalTo(passwordField.snp.bottom).offset(40)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(50)
+            $0.width.equalTo(emailField)
+        }
+        
         signUpRow.snp.makeConstraints {
             $0.top.equalTo(signInButton.snp.bottom).offset(Layout.largeMargin)
             $0.centerX.equalTo(view)
         }
         
-        view.addSubview(skipButton)
         skipButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.snp_bottomMargin).offset(-20)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(20)
             $0.centerX.equalTo(view)
         }
     }
- 
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         Style.addBlueGradient(signInButton)
