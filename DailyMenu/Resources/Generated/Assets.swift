@@ -20,6 +20,7 @@
 internal enum Asset {
   internal enum Colors {
     internal static let background = ColorAsset(name: "background")
+    internal static let backgroundGray = ColorAsset(name: "background_gray")
     internal static let black = ColorAsset(name: "black")
     internal static let blue = ColorAsset(name: "blue")
     internal static let blue2 = ColorAsset(name: "blue2")
@@ -29,6 +30,7 @@ internal enum Asset {
     internal static let lightBlue = ColorAsset(name: "light_blue")
     internal static let lightGray = ColorAsset(name: "light_gray")
     internal static let lightRed = ColorAsset(name: "light_red")
+    internal static let red = ColorAsset(name: "red")
     internal static let smoke = ColorAsset(name: "smoke")
     internal static let transparent = ColorAsset(name: "transparent")
     internal static let white = ColorAsset(name: "white")
@@ -56,6 +58,7 @@ internal enum Asset {
     internal enum Icons {
       internal static let arrowDown = ImageAsset(name: "Icons/arrow_down")
       internal static let back = ImageAsset(name: "Icons/back")
+      internal static let cancel = ImageAsset(name: "Icons/cancel")
       internal static let check = ImageAsset(name: "Icons/check")
       internal static let checkmarkChecked = ImageAsset(name: "Icons/checkmark-checked")
       internal static let checkmarkNotMarked = ImageAsset(name: "Icons/checkmark_not_marked")
@@ -63,6 +66,7 @@ internal enum Asset {
       internal static let clock = ImageAsset(name: "Icons/clock")
       internal static let cross = ImageAsset(name: "Icons/cross")
       internal static let disc = ImageAsset(name: "Icons/disc")
+      internal static let envelope = ImageAsset(name: "Icons/envelope")
       internal static let google = ImageAsset(name: "Icons/google")
       internal static let mapPin = ImageAsset(name: "Icons/map_pin")
       internal static let mapPin1 = ImageAsset(name: "Icons/map_pin_1")
@@ -70,18 +74,22 @@ internal enum Asset {
       internal static let menu2 = ImageAsset(name: "Icons/menu_2")
       internal static let notification = ImageAsset(name: "Icons/notification")
       internal static let notificationWhite = ImageAsset(name: "Icons/notification_white")
+      internal static let password = ImageAsset(name: "Icons/password")
       internal static let refresh = ImageAsset(name: "Icons/refresh")
       internal static let search = ImageAsset(name: "Icons/search")
       internal static let starFull = ImageAsset(name: "Icons/star_full")
       internal static let starHalf = ImageAsset(name: "Icons/star_half")
       internal static let thumb = ImageAsset(name: "Icons/thumb")
     }
-    internal static let cash = ImageAsset(name: "cash")
-    internal static let creditCard = ImageAsset(name: "credit-card")
+    internal enum Placeholders {
+      internal static let cash = ImageAsset(name: "Placeholders/cash")
+      internal static let creditCard = ImageAsset(name: "Placeholders/credit_card")
+      internal static let creditCardSecond = ImageAsset(name: "Placeholders/credit_card_second")
+      internal static let orderDelivered = ImageAsset(name: "Placeholders/order-delivered")
+      internal static let orderPlaced = ImageAsset(name: "Placeholders/order_placed")
+    }
     internal static let foodItemPlaceholder = ImageAsset(name: "food_item_placeholder")
     internal static let itemImagePlaceholder = ImageAsset(name: "item_image_placeholder")
-    internal static let orderDeliveredPlaceholder = ImageAsset(name: "order-delivered-placeholder")
-    internal static let orderPlacedPlaceholder = ImageAsset(name: "order-placed-placeholder")
     internal static let ratePlaceholder = ImageAsset(name: "rate_placeholder")
     internal static let restaurantLogoPlaceholder = ImageAsset(name: "restaurant_logo_placeholder")
     internal static let restaurentImagePlaceholder = ImageAsset(name: "restaurent_image_placeholder")
