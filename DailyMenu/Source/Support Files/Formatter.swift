@@ -36,5 +36,19 @@ enum Formatter {
         }
     }
     
+    enum CreditCard {
+        static func hiddenNumber(string: String?) -> String? {
+            if let string = string, string.count == 16 {
+                return "**** **** **** \(string.suffix(4))"
+            } else {
+                return nil
+            }
+        }
+        
+        static func shouldChange(string: String, maxCharacters: Int) -> Bool {
+            return string.count < maxCharacters + 1 && string.isNumber
+        }
+    }
+    
 }
 

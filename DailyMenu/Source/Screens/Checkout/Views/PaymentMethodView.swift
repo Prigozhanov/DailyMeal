@@ -53,6 +53,8 @@ class PaymentMethodView: UIView {
             $0.leading.equalTo(imageView.snp.trailing).offset(Layout.largeMargin)
         }
         
+        setSelected(item.isSelected)
+        
         addGestureRecognizer(BlockTap(action: { [unowned self] _ in
             self.setSelected(!self.item.isSelected)
             self.item.tapHandler(self)

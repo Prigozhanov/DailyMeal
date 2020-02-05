@@ -10,7 +10,20 @@ final class AddCreditCardViewController: UIViewController {
     
     private var viewModel: AddCreditCardViewModel
     
-    private lazy var cardInfoView = CardInfoView()
+    private lazy var cardInfoView = CardInfoView { [weak self] (details) in
+        guard let self = self else { return }
+        self.viewModel.saveCreditCardDetails(
+            number: details.number,
+            month: details.month,
+            year: details.year,
+            cvv: details.cvv
+        )
+        if self.viewModel.isValid {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            
+        }
+    }
     
     private var notificationTokens: [Token]
     

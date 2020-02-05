@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import Services
 
 //MARK: - View
 protocol CheckoutView: class {
@@ -17,6 +18,8 @@ protocol CheckoutViewModel {
     
     var paymentMethod: PaymentMethod? { get set }
     
+    var creditCard: CreditCard? { get }
+    
 }
 
 //MARK: - Implementation
@@ -24,9 +27,18 @@ final class CheckoutViewModelImplementation: CheckoutViewModel {
     
     weak var view: CheckoutView?
     
+    var context: AppContext
+    var keychainService: KeychainService
+    
+    var creditCard: CreditCard?
+    
     var paymentMethod: PaymentMethod?
     
     init() {
+        context = AppDelegate.shared.context
+        keychainService = context.keychainSevice
+        
+        creditCard = keychainService.getCreditCardDetails()
     }
     
 }

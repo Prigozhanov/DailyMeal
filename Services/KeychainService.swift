@@ -16,6 +16,10 @@ public protocol KeychainServiceHolder {
 public enum KeychainItem: String {
     case authToken
     case email
+    case creditCardNumber
+    case creditCardMonth
+    case creditCardYear
+    case creditCardCVV
 }
 
 
@@ -24,6 +28,8 @@ public protocol KeychainService {
     func setValueForItem(_ item: KeychainItem, _ value: String)
     func getValueForItem(_ item: KeychainItem) -> String?
     func removeValue(_ item: KeychainItem)
+    func getCreditCardDetails() -> CreditCard?
+    func updateCreditCardDetails(_ creditCard: CreditCard)
     
 }
 
@@ -45,6 +51,53 @@ public class KeychainServiceImplementation: KeychainService {
     
     public func removeValue(_ item: KeychainItem) {
         keychain[item.rawValue] = nil
+    }
+    
+    public func getCreditCardDetails() -> CreditCard? {
+        guard let number = getValueForItem(.creditCardNumber),
+            let month = getValueForItem(.creditCardMonth),
+            let year = getValueForItem(.creditCardYear),
+            let cvv = getValueForItem(.creditCardCVV) else {
+                return nil
+        }
+        return CreditCard(number: number, expirationDate: CreditCard.ExpirationDate(month: month, year: year), cvv: cvv)
+    }
+    
+    public func updateCreditCardDetails(_ creditCard: CreditCard) {
+        setValueForItem(.creditCardNumber, creditCard.number)
+        setValueForItem(.creditCardMonth, creditCard.expirationDate.month)
+        setValueForItem(.creditCardYear, creditCard.expirationDate.year)
+        setValueForItem(.creditCardCVV, creditCard.cvv)
+    }
+    
+}
+
+public struct CreditCard {
+    
+    public struct ExpirationDate {
+        public let month: String
+        public let year: String
+        
+        public init(month: String, year: String) {
+            self.month = month
+            self.year = year
+        }
+    }
+    
+    public let number: String
+    public let expirationDate: ExpirationDate
+    public let cvv: String
+    public var isValid: Bool {
+        return number.count == 16 &&
+            expirationDate.month.count == 2 &&
+            expirationDate.year.count == 2 &&
+            cvv.count == 3
+    }
+    
+    public init(number: String, expirationDate: CreditCard.ExpirationDate, cvv: String) {
+        self.number = number
+        self.expirationDate = expirationDate
+        self.cvv = cvv
     }
     
 }

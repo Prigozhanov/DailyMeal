@@ -24,4 +24,12 @@ public extension String {
         })
     }
     
+    var onlyNumbers: String {
+        return filter({ "1" ... "9" ~= $0 })
+    }
+    
+    var isNumber: Bool {
+        return !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
+    }
+    
 }

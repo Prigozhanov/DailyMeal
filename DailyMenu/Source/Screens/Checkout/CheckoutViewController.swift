@@ -33,16 +33,22 @@ final class CheckoutViewController: UIViewController {
     }()
     
     private lazy var creditCardRow: PaymentMethodView = {
-        PaymentMethodView(item:
+        let view = PaymentMethodView(item:
             PaymentMethodView.Item(
                 title: "Credit/Debt cart",
                 image: Images.Placeholders.creditCardSecond.image,
+                isSelected: viewModel.creditCard != nil,
                 tapHandler: { [unowned self] view in
+                    view.tapAnimation()
                     self.cashRow.setSelected(false)
                     self.viewModel.paymentMethod = .creditCard
-                    view.tapAnimation()
+                    if self.viewModel.creditCard == nil {
+                        let vc = AddCreditCardViewController(viewModel: AddCreditCardViewModelImplementation())
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
             })
         )
+        return view
     }()
     
     private lazy var submitButton = UIButton.makeActionButton("Submit Order") { [weak self] button in
@@ -66,6 +72,8 @@ final class CheckoutViewController: UIViewController {
         viewModel.view = self
         
         Style.addBlueCorner(self)
+        
+        creditCardRow.titleLabel.text = Formatter.CreditCard.hiddenNumber(string: viewModel.creditCard?.number) ?? "Credit/Debt cart"
         
         view.backgroundColor = Colors.commonBackground.color
         

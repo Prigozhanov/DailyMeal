@@ -7,11 +7,33 @@ import UIKit
 
 class CardInfoView: UIView {
     
+    typealias Item = (Details) -> Void
+    
+    struct Details {
+        var number: String
+        var year: String
+        var month: String
+        var cvv: String
+    }
+    
+    private var item: Item
+    private var details: Details
+    
     private lazy var cardNumberTextField: TextField = {
         let textField = TextField(
             placeholder: "Card number",
-            shouldChangeCharacters: { (_, _, _) -> Bool in
-                true
+            shouldChangeCharacters: { [weak self] (textField, range, string) -> Bool in
+                if let formattedText = textField.text {
+                    let text = formattedText.replacingOccurrences(of: " ", with: "")
+                    if Formatter.CreditCard.shouldChange(string: text.appending(string), maxCharacters: 16) {
+                        self?.details.number = text.appending(string)
+                        if text.count % 4 == 0, !string.isEmpty {
+                            textField.text = formattedText.replacingOccurrences(of: formattedText, with: "\(formattedText) ")
+                        }
+                        return true
+                    }
+                }
+                return false
         },
             shouldBeginEditing: { (_) -> Bool in
                 true
@@ -40,8 +62,12 @@ class CardInfoView: UIView {
     private lazy var expireDateMonthTextField: TextField = {
         let textField = TextField(
             shouldShowClearButton: false,
-            shouldChangeCharacters: { (field, range, string) -> Bool in
-                return true
+            shouldChangeCharacters: { [weak self] (textField, range, string) -> Bool in
+                if let text = textField.text {
+                    self?.details.month = text
+                    return Formatter.CreditCard.shouldChange(string: text.appending(string), maxCharacters: 2)
+                }
+                return false
         },
             shouldBeginEditing: { (_) -> Bool in
                 true
@@ -70,8 +96,12 @@ class CardInfoView: UIView {
     private lazy var expireDateYearTextField: TextField = {
         let textField = TextField(
             shouldShowClearButton: false,
-            shouldChangeCharacters: { (field, range, string) -> Bool in
-                return true
+            shouldChangeCharacters: { [weak self] (textField, range, string) -> Bool in
+                if let text = textField.text {
+                    self?.details.year = text
+                    return Formatter.CreditCard.shouldChange(string: text.appending(string), maxCharacters: 2)
+                }
+                return false
         },
             shouldBeginEditing: { (_) -> Bool in
                 true
@@ -100,8 +130,13 @@ class CardInfoView: UIView {
     private lazy var securityCodeTextField: TextField = {
         let textField = TextField(
             placeholder: "CVV",
-            shouldChangeCharacters: { (_, _, _) -> Bool in
-                true
+            shouldShowClearButton: false,
+            shouldChangeCharacters: { [weak self] (textField, range, string) -> Bool in
+                if let text = textField.text {
+                    self?.details.cvv = text
+                    return Formatter.CreditCard.shouldChange(string: text.appending(string), maxCharacters: 3)
+                }
+                return false
         },
             shouldBeginEditing: { (_) -> Bool in
                 true
@@ -127,17 +162,20 @@ class CardInfoView: UIView {
         return textField
     }()
     
-    private let saveCreditCardDetailsButton: UIButton = {
-        let button = UIButton.makeActionButton("Save Card details") { view in
+    private lazy var saveCreditCardDetailsButton: UIButton = {
+        let button = UIButton.makeActionButton("Save Card details") { [weak self] view in
             view.tapAnimation()
+            guard let self = self else { return }
+            self.item(self.details)
         }
         return button
     }()
     
-    init() {
+    init(item: @escaping Item) {
+        self.item = item
+        details = Details(number: "", year: "", month: "", cvv: "")
         
         super.init(frame: .zero)
-        
         let cardView = CardView(shadowSize: .large, customInsets: UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20))
         
         addSubview(cardView)
