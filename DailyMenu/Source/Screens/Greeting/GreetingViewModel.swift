@@ -9,7 +9,7 @@ import Services
 
 //MARK: - View
 protocol GreetingView: class {
-    func closeView()
+    func showAuthorizationError()
 }
 
 //MARK: - ViewModel
@@ -20,7 +20,7 @@ protocol GreetingViewModel {
     var email: String { get set }
     var password: String { get set }
     
-    func performLogin()
+    func performLogin(onSuccess: @escaping VoidClosure, onFailure: @escaping VoidClosure)
 }
 
 //MARK: - Implementation
@@ -40,7 +40,7 @@ final class GreetingViewModelImplementation: GreetingViewModel {
         email = keychainService.getValueForItem(.email) ?? ""
     }
     
-    func performLogin() {
+    func performLogin(onSuccess: @escaping VoidClosure, onFailure: @escaping VoidClosure) {
         let req = Requests.authenticate(userName: email, password: password)
         LoadingIndicator.show()
         context.networkService.send(request: req) { [weak self] result in
@@ -54,10 +54,15 @@ final class GreetingViewModelImplementation: GreetingViewModel {
                     self?.context.userDefaultsService.setValueForKey(key: .lastname, value: user.lastname)
                     self?.context.userDefaultsService.setValueForKey(key: .email, value: user.email)
                     self?.context.userDefaultsService.setValueForKey(key: .phone, value: user.phone)
-                    self?.view?.closeView()
+                    onSuccess()
+                } else {
+                    onFailure()
                 }
             case let .failure(error):
-                print(error) // TODO
+                onFailure()
+                if error == .unauthorized {
+                    self?.view?.showAuthorizationError()
+                }
             }
         }
     }

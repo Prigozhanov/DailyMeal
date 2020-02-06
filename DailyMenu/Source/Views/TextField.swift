@@ -52,6 +52,10 @@ class TextField: UIView {
         }
         set {
             textField.text = newValue
+            guard let newValue = newValue else {
+                return
+            }
+            clearButton.isHidden = newValue.isEmpty
         }
     }
     
@@ -152,6 +156,7 @@ extension TextField: UITextFieldDelegate {
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
+        clearButton.isHidden = true
         didChangeSelection?(textField)
     }
     

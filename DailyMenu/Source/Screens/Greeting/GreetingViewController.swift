@@ -71,10 +71,16 @@ final class GreetingViewController: UIViewController {
     }()
     
     private lazy var signInButton = UIButton.makeActionButton("Sign in") { [weak self] button in
-        button.tapAnimation()
         self?.viewModel.email = self?.emailField.text ?? ""
         self?.viewModel.password = self?.passwordField.text ?? ""
-        self?.viewModel.performLogin()
+        self?.viewModel.performLogin(onSuccess: {
+            button.tapAnimation()
+            self?.dismiss(animated: true, completion: nil)
+        }, onFailure: {
+            button.shakeAnimation()
+            self?.passwordField.text = ""
+            self?.showAuthorizationError()
+        })
     }
     
     private lazy var signUpRow: UIView = {
@@ -108,6 +114,13 @@ final class GreetingViewController: UIViewController {
         self?.dismiss(animated: true)
     }
     
+    private lazy var authorizationErrorLabel: UILabel = {
+        let label = UILabel.makeText("Incorrect email or password")
+        label.textColor = Colors.red.color
+        label.isHidden = true
+        return label
+    }()
+    
     init(viewModel: GreetingViewModel) {
         self.viewModel = viewModel
         
@@ -125,7 +138,7 @@ final class GreetingViewController: UIViewController {
         
         emailField.text = viewModel.email
         
-        view.addSubviews([emailField, passwordField, signInButton, signUpRow, skipButton])
+        view.addSubviews([emailField, passwordField, signInButton, signUpRow, skipButton, authorizationErrorLabel])
         
         emailField.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(200)
@@ -157,6 +170,11 @@ final class GreetingViewController: UIViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(20)
             $0.centerX.equalTo(view)
         }
+        
+        authorizationErrorLabel.snp.makeConstraints {
+            $0.bottom.equalTo(emailField.snp.top).inset(-20)
+            $0.centerX.equalToSuperview()
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -168,8 +186,8 @@ final class GreetingViewController: UIViewController {
 
 //MARK: -  GreetingView
 extension GreetingViewController: GreetingView {
-    func closeView() {
-        self.dismiss(animated: true, completion: nil)
+    func showAuthorizationError() {
+        authorizationErrorLabel.isHidden = false
     }
 }
 

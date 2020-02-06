@@ -69,6 +69,16 @@ extension UIView {
         }) { _ in completion?() }
     }
     
+    func shakeAnimation(completion: VoidClosure? = nil) {
+        let animation = CABasicAnimation(keyPath: "position.x")
+        animation.repeatCount = 2
+        animation.duration = 0.1
+        animation.fromValue = self.center.x + 5
+        animation.toValue = self.center.x - 5
+        animation.autoreverses = true
+        layer.add(animation, forKey: "postion.x")
+    }
+    
     func startRotating(duration: CFTimeInterval = 1, repeatCount: Float = Float.infinity, clockwise: Bool = true) {
         if layer.animation(forKey: "transform.rotation.z") != nil { return }
         
