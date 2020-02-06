@@ -156,7 +156,6 @@ extension TextField: UITextFieldDelegate {
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        clearButton.isHidden = true
         didChangeSelection?(textField)
     }
     
