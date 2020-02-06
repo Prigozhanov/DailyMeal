@@ -17,14 +17,13 @@ final class CheckoutViewController: UIViewController {
         return stack
     }()
     
-    private let navigationBarControls = NavigationBarControls(title: "Checkout", appearance: .dark)
-    
     private lazy var cashRow: PaymentMethodView = {
         PaymentMethodView(item:
             PaymentMethodView.Item(
                 title: "Cash",
                 image: Images.Placeholders.cash.image,
                 tapHandler: { [unowned self] view in
+                    view.setSelected(true)
                     self.creditCardRow.setSelected(false)
                     self.viewModel.paymentMethod = .cash
                     view.tapAnimation()
@@ -40,6 +39,7 @@ final class CheckoutViewController: UIViewController {
                 isSelected: viewModel.creditCard != nil,
                 tapHandler: { [unowned self] view in
                     view.tapAnimation()
+                    view.setSelected(true)
                     self.cashRow.setSelected(false)
                     self.viewModel.paymentMethod = .creditCard
                     if self.viewModel.creditCard == nil {
@@ -77,17 +77,9 @@ final class CheckoutViewController: UIViewController {
         
         view.backgroundColor = Colors.commonBackground.color
         
-        navigationBarControls.titleLabel.font = FontFamily.largeRegular
-        
-        view.addSubview(navigationBarControls)
-        navigationBarControls.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            $0.leading.trailing.equalToSuperview()
-        }
-        
         view.addSubview(stackView)
         stackView.snp.makeConstraints {
-            $0.top.equalTo(navigationBarControls.snp.bottom)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(150)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
@@ -102,6 +94,14 @@ final class CheckoutViewController: UIViewController {
         stackView.setInset(forRow: submitButton, inset: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
         submitButton.snp.makeConstraints {
             $0.height.equalTo(50)
+        }
+        
+        Style.addTitle(title: "Checkout", self)
+        Style.addNotificationButton(self) { (_) in
+            
+        }
+        Style.addBackButton(self) { [weak self] _ in
+            self?.dismiss(animated: true, completion: nil)
         }
     }
     

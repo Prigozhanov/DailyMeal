@@ -69,4 +69,14 @@ class Style {
         }
     }
     
+    static func addNotificationButton(_ vc: UIViewController, action: @escaping (UIButton) -> Void) {
+        let backButton = UIButton.makeImageButton(image: Images.Icons.notification.image, action: action)
+        backButton.tintColor = Colors.charcoal.color
+        vc.view.addSubview(backButton)
+        backButton.snp.makeConstraints {
+            $0.top.equalTo(vc.view.safeAreaLayoutGuide.snp.top).inset(20)
+            $0.trailing.equalToSuperview().inset(20)
+        }
+    }
+    
 }

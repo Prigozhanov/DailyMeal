@@ -56,7 +56,6 @@ class PaymentMethodView: UIView {
         setSelected(item.isSelected)
         
         addGestureRecognizer(BlockTap(action: { [unowned self] _ in
-            self.setSelected(!self.item.isSelected)
             self.item.tapHandler(self)
         }))
     }

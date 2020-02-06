@@ -20,10 +20,6 @@ final class OrderPlacedViewController: UIViewController {
         
         view.backgroundColor = Colors.commonBackground.color
         
-        let notificationButton = UIButton.makeNotificationButton()
-        notificationButton.tintColor = Colors.charcoal.color
-        let titleLabel = UILabel.makeLargeText("Order placed")
-        titleLabel.textAlignment = .center
         let imageView = UIImageView(image: Images.Placeholders.orderPlaced.image)
         imageView.contentMode = .scaleAspectFit
         let messageTitle = UILabel.makeText("Your Food order have been placed")
@@ -35,19 +31,11 @@ final class OrderPlacedViewController: UIViewController {
         messageLabel.numberOfLines = 5
         messageLabel.lineBreakMode = .byClipping
         
-        view.addSubviews([notificationButton, titleLabel, imageView, messageTitle, messageLabel, orderAgainButton])
+        view.addSubviews([imageView, messageTitle, messageLabel, orderAgainButton])
         
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(30)
-            $0.leading.trailing.equalToSuperview().inset(Layout.commonInset)
-            $0.height.equalTo(30)
-        }
-        notificationButton.snp.makeConstraints {
-            $0.centerY.equalTo(titleLabel.snp.centerY)
-            $0.trailing.equalToSuperview().inset(25)
-        }
+        
         imageView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(50)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(100)
             $0.leading.trailing.equalToSuperview().inset(Layout.commonInset)
         }
         messageTitle.snp.makeConstraints {
@@ -67,6 +55,12 @@ final class OrderPlacedViewController: UIViewController {
             $0.width.equalToSuperview().multipliedBy(0.7)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(50)
         }
+
+        Style.addNotificationButton(self) { (_) in
+            
+        }
+        Style.addTitle(title: "Order placed", self)
+        
     }
     
     override func viewDidLayoutSubviews() {

@@ -75,10 +75,8 @@ final class ItemViewController: UIViewController {
     private lazy var addToCartButton = UIButton.makeActionButton("Add to Cart") { [weak self] view in
         guard let self = self, let item = CartItem.fromProduct(self.viewModel.item, count: self.viewModel.count) else { return }
         self.viewModel.cartService.addItem(item: item)
-        view.tapAnimation { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }
-        
+        view.tapAnimation()
+        self.navigationController?.popViewController(animated: true)
     }
     
     init(viewModel: ItemViewModel) {

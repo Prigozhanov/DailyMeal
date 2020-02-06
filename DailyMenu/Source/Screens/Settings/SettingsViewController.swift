@@ -31,11 +31,23 @@ final class SettingsViewController: UIViewController {
             NotificationCenter.default.post(Notification(name: .userLoggedOut))
             self?.viewModel.clearUserInfo()
         }
+        
         view.addSubview(signOutButton)
         signOutButton.setTitleColor(Colors.red.color, for: .normal)
         signOutButton.titleLabel?.font = FontFamily.semibold
         signOutButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(Layout.commonInset)
+            $0.centerX.equalToSuperview()
+        }
+        
+        let removeCard = UIButton.makeCommonButton("Remove credit card") { [weak self] _ in
+            self?.viewModel.removeCreditCardInfo()
+        }
+        removeCard.setTitleColor(Colors.red.color, for: .normal)
+        removeCard.titleLabel?.font = FontFamily.semibold
+        view.addSubview(removeCard)
+        removeCard.snp.makeConstraints {
+            $0.bottom.equalTo(signOutButton.snp.top).offset(-20)
             $0.centerX.equalToSuperview()
         }
         

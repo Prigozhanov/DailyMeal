@@ -50,29 +50,16 @@ final class OrderStatusViewController: UIViewController {
             $0.size.equalTo(150)
         }
         
-        let orderStatusLabel = UILabel.makeText("Order status")
-        orderStatusLabel.font = FontFamily.Poppins.bold.font(size: 24)
-        view.addSubview(orderStatusLabel)
-        orderStatusLabel.snp.makeConstraints {
-            $0.centerY.equalTo(placeholderImageView.snp.centerY)
-            $0.leading.equalToSuperview().inset(Layout.commonInset)
-            $0.trailing.greaterThanOrEqualTo(placeholderImageView.snp.leading)
-        }
-        
-        let backButton = UIButton.makeBackButton(self)
-        backButton.tintColor = Colors.black.color
-        view.addSubview(backButton)
-        backButton.snp.makeConstraints {
-            $0.bottom.equalTo(orderStatusLabel.snp.top).offset(-Layout.largeMargin)
-            $0.leading.equalTo(orderStatusLabel.snp.leading)
-            $0.size.equalTo(24)
-        }
-        
         view.addSubview(stackView)
         stackView.snp.makeConstraints {
             $0.top.equalTo(placeholderImageView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        }
+        
+        Style.addTitle(title: "Order status", self)
+        Style.addBackButton(self) { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
         }
     }
     

@@ -19,6 +19,7 @@ protocol SettingsViewModel {
     var phone: String? { get set }
     
     func clearUserInfo()
+    func removeCreditCardInfo()
 }
 
 //MARK: - Implementation
@@ -39,6 +40,10 @@ final class SettingsViewModelImplementation: SettingsViewModel {
     
     func clearUserInfo() {
         context.userDefaultsService.removeAllValues()
+    }
+    
+    func removeCreditCardInfo() {
+        context.keychainSevice.removeCardDetails()
     }
     
 }

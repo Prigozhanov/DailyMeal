@@ -30,6 +30,7 @@ public protocol KeychainService {
     func removeValue(_ item: KeychainItem)
     func getCreditCardDetails() -> CreditCard?
     func updateCreditCardDetails(_ creditCard: CreditCard)
+    func removeCardDetails()
     
 }
 
@@ -61,6 +62,13 @@ public class KeychainServiceImplementation: KeychainService {
                 return nil
         }
         return CreditCard(number: number, expirationDate: CreditCard.ExpirationDate(month: month, year: year), cvv: cvv)
+    }
+    
+    public func removeCardDetails() {
+        removeValue(.creditCardNumber)
+        removeValue(.creditCardMonth)
+        removeValue(.creditCardYear)
+        removeValue(.creditCardCVV)
     }
     
     public func updateCreditCardDetails(_ creditCard: CreditCard) {
@@ -98,6 +106,10 @@ public struct CreditCard {
         self.number = number
         self.expirationDate = expirationDate
         self.cvv = cvv
+    }
+    
+    public static var empty: CreditCard {
+        return CreditCard(number: "", expirationDate: CreditCard.ExpirationDate(month: "", year: ""), cvv: "")
     }
     
 }

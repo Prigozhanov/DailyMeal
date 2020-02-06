@@ -58,15 +58,13 @@ extension UIView {
 
 extension UIView {
     func tapAnimation(completion: VoidClosure? = nil) {
-        UIView.animateKeyframes(withDuration: 0.2, delay: 0, options: [], animations: {
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1) { [weak self] in
-                self?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-            }
-            
-            UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.2) { [weak self] in
-                self?.transform = .identity
-            }
-        }) { _ in completion?() }
+        let animation = CABasicAnimation(keyPath: "transform.scale")
+        animation.repeatCount = 1
+        animation.duration = 0.1
+        animation.autoreverses = true
+        animation.fromValue = layer.mask?.value(forKey: "transform.scale")
+        animation.toValue = 0.95
+        layer.add(animation, forKey: "scale")
     }
     
     func shakeAnimation(completion: VoidClosure? = nil) {
