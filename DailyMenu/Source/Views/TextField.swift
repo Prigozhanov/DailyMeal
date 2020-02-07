@@ -8,6 +8,7 @@ import UIKit
 class TextField: UIView {
     
     private var shouldShowClearButton: Bool
+    private var textAlignment: NSTextAlignment
     
     private var shouldChangeCharacters: ((UITextField, NSRange, String) -> Bool)?
     private var shouldBeginEditing: ((UITextField) -> Bool)?
@@ -63,6 +64,7 @@ class TextField: UIView {
         placeholder: String? = nil,
         image: UIImage? = nil,
         shouldShowClearButton: Bool = true,
+        textAlignment: NSTextAlignment = .left,
         shouldChangeCharacters: ((UITextField, NSRange, String) -> Bool)? = nil,
         shouldBeginEditing: ((UITextField) -> Bool)? = nil,
         didBeginEditing: ((UITextField) -> Void)? = nil,
@@ -72,8 +74,9 @@ class TextField: UIView {
         shouldClear: ((UITextField) -> Bool)? = nil,
         shouldReturn: ((UITextField) -> Bool)? = nil
     ) {
-        self.shouldShowClearButton = shouldShowClearButton
         self.image = image
+        self.shouldShowClearButton = shouldShowClearButton
+        self.textAlignment = textAlignment
         self.shouldChangeCharacters = shouldChangeCharacters
         self.shouldBeginEditing = shouldBeginEditing
         self.didBeginEditing = didBeginEditing
@@ -89,13 +92,18 @@ class TextField: UIView {
         backgroundColor = Colors.backgroundGray.color
         layer.borderColor = Colors.lightGray.color.cgColor
         layer.borderWidth = .onePixel
+        
         textField.placeholder = placeholder
+        textField.textAlignment = textAlignment
+        textField.font = FontFamily.Poppins.medium.font(size: 15)
+        
+        let leftInset = textAlignment == .left ? Layout.commonInset : 5
         
         addSubviews([leftImageView, textField, clearButton])
         
         
         textField.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(Layout.commonInset).priority(.high)
+            $0.leading.equalToSuperview().inset(leftInset).priority(.high)
             $0.trailing.equalToSuperview().inset(4).priority(.high)
             $0.top.bottom.equalToSuperview()
         }
@@ -103,9 +111,9 @@ class TextField: UIView {
         if image != nil {
             leftImageView.snp.makeConstraints {
                 $0.top.bottom.equalToSuperview().inset(10)
-                $0.leading.equalToSuperview().inset(5)
+                $0.leading.equalToSuperview()
                 $0.width.equalTo(snp.height)
-                $0.trailing.equalTo(textField.snp.leading).offset(-Layout.commonInset).priority(.required)
+                $0.trailing.equalTo(textField.snp.leading).offset(-leftInset).priority(.required)
             }
         }
         
@@ -116,15 +124,14 @@ class TextField: UIView {
                 $0.leading.equalTo(textField.snp.trailing).priority(.required)
             }
         }
-        
-        addGestureRecognizer(BlockTap(action: { [weak self] _ in
-            self?.textField.becomeFirstResponder()
-        }))
-        
     }
     
     required init?(coder: NSCoder) { fatalError() }
     
+    @discardableResult
+    override func becomeFirstResponder() -> Bool {
+        return textField.becomeFirstResponder()
+    }
 }
 
 extension TextField: UITextFieldDelegate {
@@ -177,6 +184,10 @@ extension TextField {
     
     func setSecureEntry(_ secure: Bool) {
         textField.isSecureTextEntry = secure
+    }
+    
+    func setFont(_ font: UIFont?) {
+        textField.font = font
     }
     
 }

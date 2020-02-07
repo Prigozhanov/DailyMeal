@@ -34,6 +34,7 @@ class URLRequestBuilder<Response: Codable> {
         case let (true, .json(json)):
             do {
                 urlRequest.httpBody = try JSONSerialization.data(withJSONObject: json, options: [])
+                urlRequest.setValue("application/json", forHTTPHeaderField: "content-type")
             } catch {
                 print(error)
             }

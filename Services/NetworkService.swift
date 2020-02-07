@@ -29,10 +29,15 @@ public class NetworkServiceImplementation: NetworkService {
         self.keychainService = keychainService
         requestConfigurator = URLRequestConfigurator()
         networkClient = NetworkClient(urlRequestConfigurator: requestConfigurator)
+        
+        if let token = keychainService.getValueForItem(.authToken) {
+            requestConfigurator.addHeader(Header(httpHeaderField: .authorization, value: token))
+        }
     }
     
     
     public func send<Response: Codable>(request: Request<Response>, completion: @escaping (Result<Response, NetworkClient.Error>) -> Void) {
+        
         networkClient.send(request: request) { [weak self] result in
             switch result {
             case let .success(response):
@@ -41,6 +46,7 @@ public class NetworkServiceImplementation: NetworkService {
             case let .failure(error):
                 switch error {
                 case .unauthorized:
+                    self?.handleUnauthorized()
                     completion(result)
                 default:
                     completion(result)
@@ -55,6 +61,11 @@ public class NetworkServiceImplementation: NetworkService {
             keychainService.setValueForItem(.authToken, token)
             NotificationCenter.default.post(name: .userLoggedIn, object: response)
         }
+    }
+    
+    func handleUnauthorized() {
+        keychainService.removeValue(.authToken)
+        requestConfigurator.removeHeader(.authorization)
     }
     
 }

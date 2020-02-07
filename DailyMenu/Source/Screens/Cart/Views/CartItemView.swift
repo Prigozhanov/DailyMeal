@@ -73,8 +73,6 @@ class CartItemView: UIView {
             $0.height.equalTo(100)
         }
         let counter = ItemCounter(axis: .veritcal, valueChanged: item.onChangeCount)
-        //            self?.item.cartItem.count = value
-        //            self?.item.onChangeCount(value)
         
         counter.updateValue(item.cartItem.count)
         cardView.contentView.addSubview(counter)

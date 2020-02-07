@@ -48,7 +48,7 @@ class AppCoordinator {
 private extension AppCoordinator {
     
     func configureRootViewController() {
-//      let vc = AddCreditCardViewController(viewModel: AddCreditCardViewModelImplementation())
+//      let vc = EnterValidationCodePhoneVerificationViewController(phoneNumber: "5125113123")
 //      tabBarController.viewControllers = [vc]
         
         tabBarController.setViewControllers([
@@ -85,6 +85,7 @@ private extension AppCoordinator {
     func showGreeting() {
         let vm = GreetingViewModelImplementation()
         let vc = GreetingViewController(viewModel: vm)
+        vc.modalPresentationStyle = .overCurrentContext
         window.rootViewController?.show(vc, sender: nil)
     }
     

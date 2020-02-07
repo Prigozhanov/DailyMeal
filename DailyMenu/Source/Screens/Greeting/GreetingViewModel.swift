@@ -42,18 +42,18 @@ final class GreetingViewModelImplementation: GreetingViewModel {
     
     func performLogin(onSuccess: @escaping VoidClosure, onFailure: @escaping VoidClosure) {
         let req = Requests.authenticate(userName: email, password: password)
-        LoadingIndicator.show()
         context.networkService.send(request: req) { [weak self] result in
             LoadingIndicator.hide()
             switch result {
             case let .success(response):
                 self?.keychainService.setValueForItem(.email, self?.email ?? "")
-                if let user = response.member {
+                if let user = response.member, let token = response.token {
                     NotificationCenter.default.post(name: .userLoggedIn, object: user)
                     self?.context.userDefaultsService.setValueForKey(key: .name, value: user.name)
                     self?.context.userDefaultsService.setValueForKey(key: .lastname, value: user.lastname)
                     self?.context.userDefaultsService.setValueForKey(key: .email, value: user.email)
                     self?.context.userDefaultsService.setValueForKey(key: .phone, value: user.phone)
+                    self?.context.keychainSevice.setValueForItem(.authToken, token)
                     onSuccess()
                 } else {
                     onFailure()

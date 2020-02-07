@@ -51,6 +51,7 @@ public class Token {
 
 public extension Notification.Name {
     
+    static var userSignedUp = Notification.Name("userSignedUp")
     static var userLoggedIn = Notification.Name("userLoggedIn")
     static var userLoggedOut = Notification.Name("userLoggedOut")
     

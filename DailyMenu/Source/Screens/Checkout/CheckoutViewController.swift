@@ -17,20 +17,6 @@ final class CheckoutViewController: UIViewController {
         return stack
     }()
     
-    private lazy var cashRow: PaymentMethodView = {
-        PaymentMethodView(item:
-            PaymentMethodView.Item(
-                title: "Cash",
-                image: Images.Placeholders.cash.image,
-                tapHandler: { [unowned self] view in
-                    view.setSelected(true)
-                    self.creditCardRow.setSelected(false)
-                    self.viewModel.paymentMethod = .cash
-                    view.tapAnimation()
-            })
-        )
-    }()
-    
     private lazy var creditCardRow: PaymentMethodView = {
         let view = PaymentMethodView(item:
             PaymentMethodView.Item(
@@ -39,16 +25,32 @@ final class CheckoutViewController: UIViewController {
                 isSelected: viewModel.creditCard != nil,
                 tapHandler: { [unowned self] view in
                     view.tapAnimation()
-                    view.setSelected(true)
-                    self.cashRow.setSelected(false)
                     self.viewModel.paymentMethod = .creditCard
                     if self.viewModel.creditCard == nil {
-                        let vc = AddCreditCardViewController(viewModel: AddCreditCardViewModelImplementation())
+                        let vc = AddCreditCardViewController(viewModel: AddCreditCardViewModelImplementation(onSaveSuccess: { [weak self] cardNumber in
+                            self?.updateCreditCardLabel(with: cardNumber)
+                            self?.selectCreditCardPaymentType()
+                        }))
                         self.navigationController?.pushViewController(vc, animated: true)
+                    } else {
+                        self.selectCreditCardPaymentType()
                     }
             })
         )
         return view
+    }()
+    
+    private lazy var cashRow: PaymentMethodView = {
+        PaymentMethodView(item:
+            PaymentMethodView.Item(
+                title: "Cash",
+                image: Images.Placeholders.cash.image,
+                tapHandler: { [unowned self] view in
+                    self.selectCashPaymentType()
+                    self.viewModel.paymentMethod = .cash
+                    view.tapAnimation()
+            })
+        )
     }()
     
     private lazy var submitButton = UIButton.makeActionButton("Submit Order") { [weak self] button in
@@ -73,8 +75,6 @@ final class CheckoutViewController: UIViewController {
         
         Style.addBlueCorner(self)
         
-        creditCardRow.titleLabel.text = Formatter.CreditCard.hiddenNumber(string: viewModel.creditCard?.number) ?? "Credit/Debt cart"
-        
         view.backgroundColor = Colors.commonBackground.color
         
         view.addSubview(stackView)
@@ -96,6 +96,8 @@ final class CheckoutViewController: UIViewController {
             $0.height.equalTo(50)
         }
         
+        updateCreditCardLabel(with: self.viewModel.creditCard?.number)
+        
         Style.addTitle(title: "Checkout", self)
         Style.addNotificationButton(self) { (_) in
             
@@ -108,6 +110,20 @@ final class CheckoutViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         Style.addBlueGradient(submitButton)
+    }
+    
+    private func selectCreditCardPaymentType() {
+        cashRow.setSelected(false)
+        creditCardRow.setSelected(true)
+    }
+    
+    private func selectCashPaymentType() {
+        creditCardRow.setSelected(false)
+        cashRow.setSelected(true)
+    }
+    
+    private func updateCreditCardLabel(with cardNumber: String?) {
+        creditCardRow.titleLabel.text = Formatter.CreditCard.hiddenNumber(string: cardNumber) ?? "Credit/Debt cart"
     }
     
 }

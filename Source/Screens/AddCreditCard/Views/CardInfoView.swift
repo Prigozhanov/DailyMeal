@@ -23,6 +23,10 @@ class CardInfoView: UIView {
         let textField = TextField(
             placeholder: "Card number",
             shouldChangeCharacters: { [weak self] (textField, range, string) -> Bool in
+                if range.location == 19 { // reached the end of formatted card nubmer input
+                    self?.expireDateMonthTextField.becomeFirstResponder()
+                    return true
+                }
                 if let formattedText = textField.text {
                     let text = formattedText.replacingOccurrences(of: " ", with: "")
                     if Formatter.CreditCard.shouldChange(string: text.appending(string), maxCharacters: 16) {
@@ -62,10 +66,17 @@ class CardInfoView: UIView {
     private lazy var expireDateMonthTextField: TextField = {
         let textField = TextField(
             shouldShowClearButton: false,
+            textAlignment: .center,
             shouldChangeCharacters: { [weak self] (textField, range, string) -> Bool in
+                if range.location == 2 {
+                    self?.expireDateYearTextField.becomeFirstResponder()
+                    return true
+                }
                 if let text = textField.text {
-                    self?.details.month = text
-                    return Formatter.CreditCard.shouldChange(string: text.appending(string), maxCharacters: 2)
+                    if Formatter.CreditCard.shouldChange(string: text.appending(string), maxCharacters: 2) {
+                        self?.details.month = text.appending(string)
+                        return true
+                    }
                 }
                 return false
         },
@@ -96,10 +107,17 @@ class CardInfoView: UIView {
     private lazy var expireDateYearTextField: TextField = {
         let textField = TextField(
             shouldShowClearButton: false,
+            textAlignment: .center,
             shouldChangeCharacters: { [weak self] (textField, range, string) -> Bool in
+                if range.location == 2 {
+                    self?.securityCodeTextField.becomeFirstResponder()
+                    return true
+                }
                 if let text = textField.text {
-                    self?.details.year = text
-                    return Formatter.CreditCard.shouldChange(string: text.appending(string), maxCharacters: 2)
+                    if Formatter.CreditCard.shouldChange(string: text.appending(string), maxCharacters: 2) {
+                        self?.details.year = text.appending(string)
+                        return true
+                    }
                 }
                 return false
         },
@@ -131,10 +149,13 @@ class CardInfoView: UIView {
         let textField = TextField(
             placeholder: "CVV",
             shouldShowClearButton: false,
+            textAlignment: .center,
             shouldChangeCharacters: { [weak self] (textField, range, string) -> Bool in
                 if let text = textField.text {
-                    self?.details.cvv = text
-                    return Formatter.CreditCard.shouldChange(string: text.appending(string), maxCharacters: 3)
+                    if Formatter.CreditCard.shouldChange(string: text.appending(string), maxCharacters: 3) {
+                        self?.details.cvv = text.appending(string)
+                        return true
+                    }
                 }
                 return false
         },
@@ -159,6 +180,7 @@ class CardInfoView: UIView {
             true
         }
         textField.setKeyboardType(.numberPad)
+        textField.setSecureEntry(true)
         return textField
     }()
     
@@ -216,7 +238,7 @@ class CardInfoView: UIView {
             $0.top.equalTo(expireDateLabel.snp.bottom).offset(Layout.commonMargin)
             $0.leading.equalToSuperview().inset(Layout.commonInset)
             $0.height.equalTo(50)
-            $0.width.equalTo(cardNumberTextField.snp.width).multipliedBy(0.2)
+            $0.width.equalTo(43)
         }
         
         let slashSymbol = UILabel.makeText("/")
@@ -231,7 +253,7 @@ class CardInfoView: UIView {
             $0.top.equalTo(expireDateLabel.snp.bottom).offset(Layout.commonMargin)
             $0.leading.equalTo(slashSymbol.snp.trailing).offset(4)
             $0.height.equalTo(50)
-            $0.width.equalTo(cardNumberTextField.snp.width).multipliedBy(0.2)
+            $0.width.equalTo(43)
         }
         
         let securityCodeLabel = UILabel.makeText("Security Code")

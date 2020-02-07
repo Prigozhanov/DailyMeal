@@ -32,6 +32,8 @@ protocol RestaurantsViewModel {
     
     func showMoreRestaurants()
     
+    func loadRestaurants()
+    
 }
 
 //MARK: - Implementation
@@ -90,7 +92,14 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     
     var foodCategory: FoodCategory?
     
-    init() {
+    func showMoreRestaurants() {
+        if pageSize * pageNumber < restaurantsChain.count {
+            pageNumber += 1
+            view?.reloadScreen()
+        }
+    }
+    
+    func loadRestaurants() {
         let req = Requests.menu()
         LoadingIndicator.show()
         context.networkService.send(request: req) { [weak self] (result) in
@@ -102,13 +111,6 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
             case let .failure(error):
                 print(error)
             }
-        }
-    }
-    
-    func showMoreRestaurants() {
-        if pageSize * pageNumber < restaurantsChain.count {
-            pageNumber += 1
-            view?.reloadScreen()
         }
     }
     

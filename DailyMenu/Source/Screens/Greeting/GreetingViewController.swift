@@ -4,16 +4,21 @@
 //
 
 import UIKit
+import Extensions
 
 final class GreetingViewController: UIViewController {
     
     private var viewModel: GreetingViewModel
     
+    private var notificationTokens: [Token] = []
+    
+    private var signUpViewController: UINavigationController?
+    
     private lazy var emailField: TextField = {
         let textField = TextField(
             placeholder: "E-mail",
             image: Images.Icons.envelope.image,
-            shouldChangeCharacters: { (_, _, _) -> Bool in
+            shouldChangeCharacters: { (textField, _, _) -> Bool in
                 true
         },
             shouldBeginEditing: { (_) -> Bool in
@@ -33,9 +38,11 @@ final class GreetingViewController: UIViewController {
         },
             shouldClear: { (_) -> Bool in
                 true
-        }) { (_) -> Bool in
-            true
+        }) { textField -> Bool in
+            textField.resignFirstResponder()
+            return true
         }
+        textField.setKeyboardType(.emailAddress)
         return textField
     }()
     
@@ -63,8 +70,9 @@ final class GreetingViewController: UIViewController {
         },
             shouldClear: { (_) -> Bool in
                 true
-        }) { (_) -> Bool in
-            true
+        }) { textField -> Bool in
+            textField.resignFirstResponder()
+            return true
         }
         textField.setSecureEntry(true)
         return textField
@@ -73,6 +81,7 @@ final class GreetingViewController: UIViewController {
     private lazy var signInButton = UIButton.makeActionButton("Sign in") { [weak self] button in
         self?.viewModel.email = self?.emailField.text ?? ""
         self?.viewModel.password = self?.passwordField.text ?? ""
+        LoadingIndicator.show(self)
         self?.viewModel.performLogin(onSuccess: {
             button.tapAnimation()
             self?.dismiss(animated: true, completion: nil)
@@ -99,7 +108,10 @@ final class GreetingViewController: UIViewController {
             cornerRadius: 5,
             font: FontFamily.semibold
         ) { [weak self] button in
-            self?.show(SignUpViewController(viewModel: SignUpViewModelImplementation()), sender: nil)
+            self?.signUpViewController = UINavigationController(rootViewController: SendPhoneVerificationViewController())
+            if let vc = self?.signUpViewController {
+                self?.show(vc, sender: nil)
+            }
         }
         
         view.addSubview(signUpButton)
@@ -110,8 +122,11 @@ final class GreetingViewController: UIViewController {
         return view
     }()
     
-    private lazy var skipButton = UIButton.makeCustomButton(title: "Skip >", titleColor: Colors.gray.color, font: FontFamily.light) { [weak self] _ in
-        self?.dismiss(animated: true)
+    private lazy var skipButton = UIButton.makeCustomButton(
+        title: "Skip >",
+        titleColor: Colors.gray.color,
+        font: FontFamily.light) { [weak self] _ in
+            self?.dismiss(animated: true)
     }
     
     private lazy var authorizationErrorLabel: UILabel = {
@@ -131,6 +146,12 @@ final class GreetingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        notificationTokens.append(Token.make(descriptor: .userSignedUpDescriptor, using: { [weak self] _ in
+            self?.signUpViewController?.dismiss(animated: true, completion: { [weak self] in
+                self?.dismiss(animated: true, completion: nil)
+            })
+        }))
         
         viewModel.view = self
         
@@ -196,4 +217,12 @@ private extension GreetingViewController {
     
 }
 
+extension NotificationDescriptor {
+    
+    static var userSignedUpDescriptor: NotificationDescriptor<Void> {
+        return NotificationDescriptor<Void>(name: .userSignedUp) { notification in
+        }
+    }
+    
+}
 

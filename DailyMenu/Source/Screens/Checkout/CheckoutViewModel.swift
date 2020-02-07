@@ -30,15 +30,17 @@ final class CheckoutViewModelImplementation: CheckoutViewModel {
     var context: AppContext
     var keychainService: KeychainService
     
-    var creditCard: CreditCard?
+    var creditCard: CreditCard? {
+        get {
+            keychainService.getCreditCardDetails()
+        }
+    }
     
     var paymentMethod: PaymentMethod?
     
     init() {
         context = AppDelegate.shared.context
         keychainService = context.keychainSevice
-        
-        creditCard = keychainService.getCreditCardDetails()
     }
     
 }

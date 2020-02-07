@@ -29,8 +29,8 @@ public final class NetworkClient {
         var urlRequest = URLRequestBuilder(request: request).urlRequest
         
         urlRequestConfigurator.configure(request: &urlRequest)
-        
         print("[NETWORK] [REQUEST] \(urlRequest)")
+        print("[NETWORK] [REQUEST] [BODY] \(String(data: urlRequest.httpBody ?? Data(), encoding: .utf8))")
         print("[NETWORK] [REQUEST] [HEADERS] \(String(describing: urlRequest.allHTTPHeaderFields))")
         
         let task = session.dataTask(with: urlRequest) { (data, response, error) in

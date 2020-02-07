@@ -137,6 +137,8 @@ final class RestaurantsViewController: UIViewController {
         tableView.contentInset = UIEdgeInsets(top: 250, left: 0, bottom: 0, right: 0)
         tableView.scrollIndicatorInsets = tableView.contentInset
         tableView.setContentOffset(CGPoint(x: 0, y: -250), animated: false)
+        
+        viewModel.loadRestaurants()
     }
     
     override func viewDidAppear(_ animated: Bool) {

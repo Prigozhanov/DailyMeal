@@ -11,3 +11,4 @@ typealias Images = Asset.Images
 typealias VoidClosure = () -> ()
 typealias BoolClosure = (Bool) -> ()
 typealias IntClosure = (Int) -> ()
+typealias StringClosure = (String) -> ()

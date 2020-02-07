@@ -35,9 +35,13 @@ final class AddCreditCardViewModelImplementation: AddCreditCardViewModel {
         return creditCard?.isValid ?? false
     }
     
-    init() {
+    private let onSaveSuccess: StringClosure
+    
+    init(onSaveSuccess: @escaping StringClosure) {
         context = AppDelegate.shared.context
         keychainService = context.keychainSevice
+        
+        self.onSaveSuccess = onSaveSuccess
     }
     
     func saveCreditCardDetails(number: String, month: String, year: String, cvv: String) {
@@ -50,6 +54,7 @@ final class AddCreditCardViewModelImplementation: AddCreditCardViewModel {
             cvv: cvv)
         if let creditCard = creditCard, creditCard.isValid {
             keychainService.updateCreditCardDetails(creditCard)
+            onSaveSuccess(creditCard.number)
         }
     }
     

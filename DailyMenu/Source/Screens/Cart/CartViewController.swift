@@ -133,7 +133,8 @@ final class CartViewController: UIViewController {
                     }
                     
                 },
-                onChangeCount: { [weak self] (value) in
+                onChangeCount: { [weak self] value in
+                    item.count = value
                     self?.reloadCalculationsRows()
             })
             )
