@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import Networking
 
 public protocol UserDefaultsServiceHolder {
     
@@ -18,6 +19,8 @@ public protocol UserDefaultsService {
     func getValueForKey(key: UserDefaultsKey) -> Any?
     
     func removeAllValues()
+    
+    func updateUserDetails(user: User)
     
 }
 
@@ -43,6 +46,15 @@ public class UserDefaultsServiceImplementation: UserDefaultsService {
     public func removeAllValues() {
         UserDefaultsKey.allCases.forEach { userDefaults.removeObject(forKey: $0.rawValue) }
     }
+    
+    public func updateUserDetails(user: User) {
+        setValueForKey(key: .id, value: user.id)
+        setValueForKey(key: .name, value: user.name)
+        setValueForKey(key: .lastname, value: user.lastname)
+        setValueForKey(key: .email, value: user.email)
+        setValueForKey(key: .phone, value: user.phone)
+        setValueForKey(key: .phoneVerify, value: user.phoneVerify)
+    }
 }
 
 public enum UserDefaultsKey: String, CaseIterable {
@@ -50,5 +62,6 @@ public enum UserDefaultsKey: String, CaseIterable {
     name,
     lastname,
     email,
-    phone
+    phone,
+    phoneVerify
 }

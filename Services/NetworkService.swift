@@ -30,7 +30,7 @@ public class NetworkServiceImplementation: NetworkService {
         requestConfigurator = URLRequestConfigurator()
         networkClient = NetworkClient(urlRequestConfigurator: requestConfigurator)
         
-        if let token = keychainService.getValueForItem(.authToken) {
+        if let token = keychainService.getValueForItem(.JWTToken) {
             requestConfigurator.addHeader(Header(httpHeaderField: .authorization, value: token))
         }
     }
@@ -56,15 +56,15 @@ public class NetworkServiceImplementation: NetworkService {
     }
     
     func handleLogin<Response: Codable>(response: Response) {
-        if let token = (response as? LoginResponse)?.token {
+        if let token = (response as? LoginResponse)?.jwtToken {
             requestConfigurator.addHeader(Header(httpHeaderField: .authorization, value: token))
-            keychainService.setValueForItem(.authToken, token)
+            keychainService.setValueForItem(.JWTToken, token)
             NotificationCenter.default.post(name: .userLoggedIn, object: response)
         }
     }
     
     func handleUnauthorized() {
-        keychainService.removeValue(.authToken)
+        keychainService.removeValue(.JWTToken)
         requestConfigurator.removeHeader(.authorization)
     }
     

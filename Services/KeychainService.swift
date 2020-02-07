@@ -15,6 +15,7 @@ public protocol KeychainServiceHolder {
 
 public enum KeychainItem: String {
     case authToken
+    case JWTToken
     case email
     case creditCardNumber
     case creditCardMonth
@@ -38,8 +39,8 @@ public class KeychainServiceImplementation: KeychainService {
     
     var keychain: Keychain
     
-    public init() {
-        keychain = Keychain(accessGroup: Bundle.id)
+    public init(identifier: String) {
+        keychain = Keychain(accessGroup: identifier)
     }
     
     public func setValueForItem(_ item: KeychainItem, _ value: String) {

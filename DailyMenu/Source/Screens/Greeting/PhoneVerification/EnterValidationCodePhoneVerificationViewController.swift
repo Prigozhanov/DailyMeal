@@ -9,21 +9,18 @@ import Extensions
 
 class EnterValidationCodePhoneVerificationViewController: UIViewController {
     
+    private var viewModel: PhoneVerificationViewModel
+    
     private lazy var contentView = ValidationCodeContentView(item:
         ValidationCodeContentView.Item(
-            phoneNumber: self.phoneNumber,
+            phoneNumber: self.viewModel.phoneNumber,
             onSendCode: { [weak self] validationCode in
-                self?.sendVerifyingCode(validationCode)
+                self?.viewModel.sendVerifyingCode(validationCode: validationCode)
         })
     )
     
-    private let phoneNumber: String
-    
-    private var context: AppContext
-    
-    init(phoneNumber: String) {
-        self.context = AppDelegate.shared.context
-        self.phoneNumber = phoneNumber
+    init(viewModel: PhoneVerificationViewModel) {
+        self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -32,6 +29,8 @@ class EnterValidationCodePhoneVerificationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel.view = self
         
         view.backgroundColor = Colors.commonBackground.color
         
@@ -49,19 +48,35 @@ class EnterValidationCodePhoneVerificationViewController: UIViewController {
             $0.top.greaterThanOrEqualTo(titleLabel.snp.bottom).offset(50)
             $0.leading.trailing.equalToSuperview()
         }
+        
+        let resendCodeLabel = UIButton.makeCommonButton("Don’t get the code?") { [weak self] _ in
+            self?.viewModel.sendPushGeneration(phoneNumber: self?.viewModel.phoneNumber)
+        }
+        resendCodeLabel.setTitleColor(Colors.gray.color, for: .normal)
+        resendCodeLabel.titleLabel?.font = FontFamily.Poppins.medium.font(size: 12)
+        view.addSubview(resendCodeLabel)
+        resendCodeLabel.snp.makeConstraints {
+            $0.top.equalTo(contentView.snp.bottom).offset(30)
+            $0.centerX.equalToSuperview()
+        }
     }
     
-    private func sendVerifyingCode(_ string: String) {
-        let req = Requests.verifyToken(verifyCode: string)
-        
-        context.networkService.send(request: req) { [weak self] result in
-            switch result {
-            case .success:
-                self?.navigationController?.pushViewController(PhoneVerifiedViewController(), animated: true)
-            case .failure:
-                self?.contentView.onErrorAction()
-            }
+    
+    
+}
+
+extension EnterValidationCodePhoneVerificationViewController: PhoneVerificationView {
+    
+    func onSuccessAction() {
+        if viewModel.phoneVerified {
+            self.navigationController?.pushViewController(PhoneVerifiedViewController(), animated: true)
+        } else {
+            contentView.clear()
         }
+    }
+    
+    func onErrorAction() {
+        contentView.onErrorAction()
     }
     
 }

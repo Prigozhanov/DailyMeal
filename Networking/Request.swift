@@ -56,11 +56,11 @@ public class Requests {
     }
     
     //https://v2.menu.by/api/sms-verification/verify-token
-    public static func verifyToken(verifyCode: String) -> Request<ResponseWrapper<PushRegistration>> {
-        return Request<ResponseWrapper>(method: .POST,
+    public static func verifyToken(validationCode: String) -> Request<LoginResponse> {
+        return Request<LoginResponse>(method: .POST,
                                         baseUrlString: baseUrlString,
                                         path: "sms-verification/verify-token",
-                                        params: .json(["verify_code" : verifyCode]))
+                                        params: .json(["verify_code" : validationCode]))
     }
     
     //https://v2.menu.by/api/push-registration

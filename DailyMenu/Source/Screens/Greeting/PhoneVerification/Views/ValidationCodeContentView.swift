@@ -97,12 +97,16 @@ class ValidationCodeContentView: UIView {
 
     func onErrorAction() {
         shakeAnimation()
-        firstContainer.textField.text = ""
-        secondContainer.textField.text = ""
-        thirdContainer.textField.text = ""
-        forthContainer.textField.text = ""
-        validationCode = ""
+        clear()
         firstContainer.textField.becomeFirstResponder()
+    }
+    
+    func clear() {
+        firstContainer.clear()
+        secondContainer.clear()
+        thirdContainer.clear()
+        forthContainer.clear()
+        validationCode = ""
     }
     
 }

@@ -9,15 +9,17 @@ import Networking
 
 class SendPhoneVerificationViewController: UIViewController {
     
+    private var viewModel: PhoneVerificationViewModel
+    
     private lazy var contentView = PhoneNumberVerificationContentView(item:
         PhoneNumberVerificationContentView.Item(onSendPhone: { [weak self] phoneNumber in
-            self?.sendPushGeneration(phoneNumber: phoneNumber)
+            LoadingIndicator.show(self)
+            self?.viewModel.phoneNumber = phoneNumber
+            self?.viewModel.sendPushGeneration(phoneNumber: phoneNumber)
         }))
     
-    private var context: AppContext
-    
-    init() {
-        self.context = AppDelegate.shared.context
+    init(viewModel: PhoneVerificationViewModel) {
+        self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -26,6 +28,8 @@ class SendPhoneVerificationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel.view = self
         
         navigationController?.setNavigationBarHidden(true, animated: false)
         
@@ -52,20 +56,21 @@ class SendPhoneVerificationViewController: UIViewController {
         contentView.setupGradient()
     }
     
-    private func sendPushGeneration(phoneNumber: String) {
-        let req = Requests.generateToken(phone: "+\(phoneNumber)")
-        LoadingIndicator.show(self)
-        context.networkService.send(request: req) { [weak self] result in
-            LoadingIndicator.hide()
-            switch result {
-            case .success:
-                self?.navigationController?.pushViewController(
-                    EnterValidationCodePhoneVerificationViewController(phoneNumber: phoneNumber),
-                    animated: true
-                )
-            case .failure:
-                self?.contentView.onErrorAction()
-            }
-        }
+}
+
+extension SendPhoneVerificationViewController: PhoneVerificationView {
+    func onSuccessAction() {
+        navigationController?.pushViewController(
+            EnterValidationCodePhoneVerificationViewController(viewModel: self.viewModel),
+            animated: true
+        )
     }
+    
+    func onErrorAction() {
+        contentView.onErrorAction()
+    }
+    
+    
+    
+    
 }

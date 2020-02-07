@@ -50,5 +50,21 @@ enum Formatter {
         }
     }
     
+    enum PhoneNumber {
+        static func formattedString(_ string: String?) -> String? {
+            guard let string = string, !string.contains("+") else {
+                return nil
+            }
+            return string.replacingOccurrences(of: string, with: "+\(string)")
+        }
+        
+        static func shouldChange(string: String?, maxCharacters: Int) -> Bool {
+            guard let string = string else {
+                return false
+            }
+            return string.count < maxCharacters + 1 && string.isNumber
+        }
+        
+    }
 }
 

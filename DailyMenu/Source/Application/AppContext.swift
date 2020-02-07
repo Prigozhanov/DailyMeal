@@ -21,7 +21,7 @@ class AppContext: AppContextProtocol {
     
     init() {
         self.cartService = CartServiceImplementation()
-        self.keychainSevice = KeychainServiceImplementation()
+        self.keychainSevice = KeychainServiceImplementation(identifier: Bundle.id)
         self.networkService = NetworkServiceImplementation(keychainService: keychainSevice)
         self.userDefaultsService = UserDefaultsServiceImplementation(keychainService: keychainSevice)
     }

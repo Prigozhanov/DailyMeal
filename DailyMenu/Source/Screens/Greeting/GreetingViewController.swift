@@ -108,7 +108,8 @@ final class GreetingViewController: UIViewController {
             cornerRadius: 5,
             font: FontFamily.semibold
         ) { [weak self] button in
-            self?.signUpViewController = UINavigationController(rootViewController: SendPhoneVerificationViewController())
+            self?.signUpViewController = UINavigationController(rootViewController:
+                SendPhoneVerificationViewController(viewModel: PhoneVerificationViewModelImplementation()))
             if let vc = self?.signUpViewController {
                 self?.show(vc, sender: nil)
             }

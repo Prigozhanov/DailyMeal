@@ -58,6 +58,10 @@ class SingleInputValidationCodeView: UIView {
     
     required init?(coder: NSCoder) { fatalError() }
     
+    func clear() {
+        textField.text = ""
+        underline.isHidden = false
+    }
 }
 
 extension SingleInputValidationCodeView: UITextFieldDelegate {

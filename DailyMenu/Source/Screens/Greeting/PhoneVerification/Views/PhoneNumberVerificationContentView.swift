@@ -18,29 +18,18 @@ class PhoneNumberVerificationContentView: UIView {
         let field = TextField(
             placeholder: "+375",
             shouldShowClearButton: true,
-            shouldChangeCharacters: { [weak self] (textField, range, string) -> Bool in
-                if let text = textField.text {
-                    self?.phoneNumber = text.appending(string)
+            shouldChangeCharacters: { [weak self] (textField, _, string) -> Bool in
+                if string.isEmpty {
+                    return true
                 }
-                return true
-        },
-            shouldBeginEditing: { (_) -> Bool in
-                true
-        },
-            didBeginEditing: { (_) in
-                
-        },
-            shouldEndEditing: { (_) -> Bool in
-                true
-        },
-            didEndEditing: { (_, _) in
-                
-        },
-            didChangeSelection: { (_) in
-                
-        },
-            shouldClear: { (_) -> Bool in
-                true
+                let text = textField.text?.replacingOccurrences(of: "+", with: "")
+                if let formattedText = textField.text,
+                    Formatter.PhoneNumber.shouldChange(string: text?.appending(string), maxCharacters: 15) {
+                    self?.phoneNumber = text?.appending(string) ?? ""
+                    textField.text = Formatter.PhoneNumber.formattedString(text?.appending(string)) ?? ""
+                    return false
+                }
+                return false
         }) { textField -> Bool in
             textField.resignFirstResponder()
             return true
