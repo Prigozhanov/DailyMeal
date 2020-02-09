@@ -5,6 +5,7 @@ use_frameworks!
 
 
 target 'DailyMenu' do
+
  pod 'SwiftGen'
  pod 'TableKit'
  pod "CollectionKit"

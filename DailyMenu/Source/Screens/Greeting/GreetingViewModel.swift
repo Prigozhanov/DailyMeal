@@ -41,7 +41,7 @@ final class GreetingViewModelImplementation: GreetingViewModel {
     }
     
     func performLogin(onSuccess: @escaping VoidClosure, onFailure: @escaping VoidClosure) {
-        let req = Requests.authenticate(userName: email, password: password)
+        let req = context.networkService.requestFactory.authenticate(userName: email, password: password)
         context.networkService.send(request: req) { [weak self] result in
             LoadingIndicator.hide()
             switch result {

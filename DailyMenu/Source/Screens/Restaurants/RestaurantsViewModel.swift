@@ -100,7 +100,7 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     }
     
     func loadRestaurants() {
-        let req = Requests.menu()
+        let req = context.networkService.requestFactory.menu()
         LoadingIndicator.show()
         context.networkService.send(request: req) { [weak self] (result) in
             LoadingIndicator.hide()

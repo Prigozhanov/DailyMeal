@@ -14,9 +14,6 @@
 		E703991323E2577A003E527A /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E703991223E2577A003E527A /* LoadingIndicator.swift */; };
 		E703991723E36A12003E527A /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = E703991623E36A12003E527A /* UIApplication.swift */; };
 		E70C9A0E23EA191300530B3C /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70C9A0D23EA191300530B3C /* NotificationCenter.swift */; };
-		E70C9A1223EA3E9F00530B3C /* AddCreditCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70C9A1023EA3E9F00530B3C /* AddCreditCardViewModel.swift */; };
-		E70C9A1323EA3E9F00530B3C /* AddCreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70C9A1123EA3E9F00530B3C /* AddCreditCardViewController.swift */; };
-		E70C9A1523EA3EC000530B3C /* CardInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70C9A1423EA3EC000530B3C /* CardInfoView.swift */; };
 		E70EBEF523EC191100B3D0DF /* Extensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD24B23E96E6700FB270D /* Extensions.framework */; };
 		E70EBEF623EC191100B3D0DF /* Extensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD24B23E96E6700FB270D /* Extensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E70EBEF923EC191800B3D0DF /* Services.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD26D23E9D6A700FB270D /* Services.framework */; };
@@ -65,8 +62,22 @@
 		E7186994237DCC1400059766 /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7186981237DCC1400059766 /* Poppins-Italic.ttf */; };
 		E7186995237DCC1400059766 /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7186982237DCC1400059766 /* Poppins-MediumItalic.ttf */; };
 		E718699A237DEE5000059766 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7186999237DEE5000059766 /* Category.swift */; };
+		E718B4AA23EF229D001EB7FE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E718B4A923EF229D001EB7FE /* MapViewController.swift */; };
+		E718B4AC23EF2706001EB7FE /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E718B4AB23EF2706001EB7FE /* MapViewModel.swift */; };
+		E719C45323EF99BE00574840 /* LocationResultsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E719C45223EF99BE00574840 /* LocationResultsTableView.swift */; };
+		E719C45523EF9A3200574840 /* LocationSearchInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E719C45423EF9A3200574840 /* LocationSearchInputView.swift */; };
 		E71CDC4123AEE4870059505A /* NavigationBarControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CDC4023AEE4870059505A /* NavigationBarControls.swift */; };
+		E71E75AC23EFC4C100D51EEE /* MapHeaderVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71E75AB23EFC4C100D51EEE /* MapHeaderVIew.swift */; };
+		E71E75AE23EFDF0600D51EEE /* ConfirmationDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71E75AD23EFDF0600D51EEE /* ConfirmationDialogViewController.swift */; };
 		E720291923EDE1AE000E9884 /* PhoneVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720291823EDE1AE000E9884 /* PhoneVerificationViewModel.swift */; };
+		E720292723EDF46A000E9884 /* AddCreditCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720292323EDF46A000E9884 /* AddCreditCardViewModel.swift */; };
+		E720292823EDF46A000E9884 /* AddCreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720292423EDF46A000E9884 /* AddCreditCardViewController.swift */; };
+		E720292923EDF46A000E9884 /* CardInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720292623EDF46A000E9884 /* CardInfoView.swift */; };
+		E720292D23EDF472000E9884 /* DeliveryLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720292B23EDF472000E9884 /* DeliveryLocationViewController.swift */; };
+		E720292E23EDF472000E9884 /* DeliveryLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720292C23EDF472000E9884 /* DeliveryLocationViewModel.swift */; };
+		E727B99E23EE4BEE00E2549E /* Geodata.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727B99D23EE4BEE00E2549E /* Geodata.swift */; };
+		E727B9A023EE508000E2549E /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720291A23EDF20A000E9884 /* LocationService.swift */; };
+		E731B29123EF975000CF7AF9 /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E731B29023EF975000CF7AF9 /* LocationSearchView.swift */; };
 		E74831FC2371C71C00216927 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74831FB2371C71C00216927 /* UILabel.swift */; };
 		E74832042371CA8100216927 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74832032371CA8100216927 /* UITextField.swift */; };
 		E74832062371CBB200216927 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74832052371CBB200216927 /* UIView.swift */; };
@@ -214,9 +225,6 @@
 		E703991623E36A12003E527A /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		E70BC2C023E5BEBE0039F582 /* Swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift.swift; sourceTree = "<group>"; };
 		E70C9A0D23EA191300530B3C /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
-		E70C9A1023EA3E9F00530B3C /* AddCreditCardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCreditCardViewModel.swift; sourceTree = "<group>"; };
-		E70C9A1123EA3E9F00530B3C /* AddCreditCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCreditCardViewController.swift; sourceTree = "<group>"; };
-		E70C9A1423EA3EC000530B3C /* CardInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoView.swift; sourceTree = "<group>"; };
 		E70EBEFD23EC610D00B3D0DF /* SendPhoneVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPhoneVerificationViewController.swift; sourceTree = "<group>"; };
 		E71139AB2346A59100889AE2 /* scripts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scripts; sourceTree = SOURCE_ROOT; };
 		E71139B32346AA1100889AE2 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
@@ -261,8 +269,22 @@
 		E7186981237DCC1400059766 /* Poppins-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Italic.ttf"; sourceTree = "<group>"; };
 		E7186982237DCC1400059766 /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
 		E7186999237DEE5000059766 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		E718B4A923EF229D001EB7FE /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		E718B4AB23EF2706001EB7FE /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		E719C45223EF99BE00574840 /* LocationResultsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationResultsTableView.swift; sourceTree = "<group>"; };
+		E719C45423EF9A3200574840 /* LocationSearchInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchInputView.swift; sourceTree = "<group>"; };
 		E71CDC4023AEE4870059505A /* NavigationBarControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarControls.swift; sourceTree = "<group>"; };
+		E71E75AB23EFC4C100D51EEE /* MapHeaderVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHeaderVIew.swift; sourceTree = "<group>"; };
+		E71E75AD23EFDF0600D51EEE /* ConfirmationDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationDialogViewController.swift; sourceTree = "<group>"; };
 		E720291823EDE1AE000E9884 /* PhoneVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewModel.swift; sourceTree = "<group>"; };
+		E720291A23EDF20A000E9884 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		E720292323EDF46A000E9884 /* AddCreditCardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCreditCardViewModel.swift; sourceTree = "<group>"; };
+		E720292423EDF46A000E9884 /* AddCreditCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCreditCardViewController.swift; sourceTree = "<group>"; };
+		E720292623EDF46A000E9884 /* CardInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardInfoView.swift; sourceTree = "<group>"; };
+		E720292B23EDF472000E9884 /* DeliveryLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryLocationViewController.swift; sourceTree = "<group>"; };
+		E720292C23EDF472000E9884 /* DeliveryLocationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryLocationViewModel.swift; sourceTree = "<group>"; };
+		E727B99D23EE4BEE00E2549E /* Geodata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geodata.swift; sourceTree = "<group>"; };
+		E731B29023EF975000CF7AF9 /* LocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchView.swift; sourceTree = "<group>"; };
 		E74831FB2371C71C00216927 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		E74832032371CA8100216927 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		E74832052371CBB200216927 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -417,29 +439,11 @@
 			path = DailyMenu;
 			sourceTree = "<group>";
 		};
-		E70C9A0F23EA3E9E00530B3C /* AddCreditCard */ = {
-			isa = PBXGroup;
-			children = (
-				E70C9A1623EA3EC600530B3C /* Views */,
-				E70C9A1023EA3E9F00530B3C /* AddCreditCardViewModel.swift */,
-				E70C9A1123EA3E9F00530B3C /* AddCreditCardViewController.swift */,
-			);
-			name = AddCreditCard;
-			path = Source/Screens/AddCreditCard;
-			sourceTree = SOURCE_ROOT;
-		};
-		E70C9A1623EA3EC600530B3C /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				E70C9A1423EA3EC000530B3C /* CardInfoView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		E71139A823469FAF00889AE2 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				E70C9A0F23EA3E9E00530B3C /* AddCreditCard */,
+				E720292A23EDF472000E9884 /* DeliveryLocation */,
+				E720292223EDF46A000E9884 /* AddCreditCard */,
 				E71139EC2346AF0500889AE2 /* Settings */,
 				E71139C62346AC7400889AE2 /* Greeting */,
 				E71139F12346AFE300889AE2 /* Restaurants */,
@@ -602,6 +606,7 @@
 			isa = PBXGroup;
 			children = (
 				E71CDC4023AEE4870059505A /* NavigationBarControls.swift */,
+				E71E75AB23EFC4C100D51EEE /* MapHeaderVIew.swift */,
 				E7E04A3B23C8B9870045A381 /* ItemCounter.swift */,
 				E78B605023D8D6DD00389EE2 /* GradientView.swift */,
 				E7A4459023DDE2F4003519E5 /* CardView.swift */,
@@ -610,9 +615,49 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		E720292223EDF46A000E9884 /* AddCreditCard */ = {
+			isa = PBXGroup;
+			children = (
+				E720292323EDF46A000E9884 /* AddCreditCardViewModel.swift */,
+				E720292423EDF46A000E9884 /* AddCreditCardViewController.swift */,
+				E720292523EDF46A000E9884 /* Views */,
+			);
+			path = AddCreditCard;
+			sourceTree = "<group>";
+		};
+		E720292523EDF46A000E9884 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E720292623EDF46A000E9884 /* CardInfoView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E720292A23EDF472000E9884 /* DeliveryLocation */ = {
+			isa = PBXGroup;
+			children = (
+				E731B29223EF975600CF7AF9 /* Views */,
+				E720292B23EDF472000E9884 /* DeliveryLocationViewController.swift */,
+				E720292C23EDF472000E9884 /* DeliveryLocationViewModel.swift */,
+			);
+			path = DeliveryLocation;
+			sourceTree = "<group>";
+		};
+		E731B29223EF975600CF7AF9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E731B29023EF975000CF7AF9 /* LocationSearchView.swift */,
+				E719C45223EF99BE00574840 /* LocationResultsTableView.swift */,
+				E719C45423EF9A3200574840 /* LocationSearchInputView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E748320B2372198900216927 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				E78A5D1723EE45E300D20922 /* Map */,
+				E71E75AD23EFDF0600D51EEE /* ConfirmationDialogViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -667,6 +712,7 @@
 				E77AD22523E96C8200FB270D /* Networking.h */,
 				E7ADCB8023E2346200607E8E /* NetworkClient.swift */,
 				E7CA20002364850C004AA1FC /* Models.swift */,
+				E727B99D23EE4BEE00E2549E /* Geodata.swift */,
 				E7ED307A23E238BD008AD983 /* Request.swift */,
 				E703991423E25A17003E527A /* URLRequestBuilder.swift */,
 				E7976CC423E9EAA700698EC9 /* URLRequestConfigurator.swift */,
@@ -707,6 +753,7 @@
 				E77AD26223E9A41C00FB270D /* KeychainService.swift */,
 				E7ADCB7D23E233E100607E8E /* NetworkService.swift */,
 				E7976CC623E9F5ED00698EC9 /* UserDefaultsService.swift */,
+				E720291A23EDF20A000E9884 /* LocationService.swift */,
 				E77AD26F23E9D6A700FB270D /* Services.h */,
 				E77AD27023E9D6A700FB270D /* Info.plist */,
 			);
@@ -719,6 +766,15 @@
 				E77D33AA23E770D5006577C2 /* PaymentMethodView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		E78A5D1723EE45E300D20922 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				E718B4A923EF229D001EB7FE /* MapViewController.swift */,
+				E718B4AB23EF2706001EB7FE /* MapViewModel.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 		E7926C6523D8C3AC00768405 /* Views */ = {
@@ -1262,6 +1318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E77AD24423E96CC700FB270D /* Request.swift in Sources */,
+				E727B99E23EE4BEE00E2549E /* Geodata.swift in Sources */,
 				E77AD24123E96CC700FB270D /* URLRequestBuilder.swift in Sources */,
 				E77AD24323E96CC700FB270D /* NetworkClient.swift in Sources */,
 				E77AD24523E96CC700FB270D /* Models.swift in Sources */,
@@ -1296,6 +1353,7 @@
 			files = (
 				E7976CC723E9F5ED00698EC9 /* UserDefaultsService.swift in Sources */,
 				E77AD27B23E9D71100FB270D /* NetworkService.swift in Sources */,
+				E727B9A023EE508000E2549E /* LocationService.swift in Sources */,
 				E77AD27A23E9D70600FB270D /* KeychainService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1307,6 +1365,7 @@
 				E77D33AB23E770D5006577C2 /* PaymentMethodView.swift in Sources */,
 				E787FF7723EC89C200C14839 /* SingleInputValidationCodeView.swift in Sources */,
 				E7E04A6323CD68850045A381 /* Style.swift in Sources */,
+				E718B4AC23EF2706001EB7FE /* MapViewModel.swift in Sources */,
 				E7A942352375BDDB00450D78 /* FoodCategoryCell.swift in Sources */,
 				E7CA200523649FA2004AA1FC /* RestaurantCell.swift in Sources */,
 				E7525CF223E0ECC100730AC9 /* StretchScrollDelegate.swift in Sources */,
@@ -1319,13 +1378,15 @@
 				E779CDDB235CE9380004E520 /* Assets.swift in Sources */,
 				E7B86A4C23EC87900051703F /* EnterValidationCodePhoneVerificationViewController.swift in Sources */,
 				E7E04A5D23CCAEB20045A381 /* CartService.swift in Sources */,
+				E71E75AC23EFC4C100D51EEE /* MapHeaderVIew.swift in Sources */,
 				E71139D02346AC7400889AE2 /* CheckoutViewModel.swift in Sources */,
 				E78B605123D8D6DD00389EE2 /* GradientView.swift in Sources */,
+				E720292723EDF46A000E9884 /* AddCreditCardViewModel.swift in Sources */,
+				E719C45323EF99BE00574840 /* LocationResultsTableView.swift in Sources */,
 				E71139D12346AC7400889AE2 /* CartViewController.swift in Sources */,
 				E71139B52346AA1100889AE2 /* RegistrationViewModel.swift in Sources */,
 				E7A4459323DDFD3E003519E5 /* SliderView.swift in Sources */,
 				E71139D82346AC7400889AE2 /* OrderStatusViewController.swift in Sources */,
-				E70C9A1223EA3E9F00530B3C /* AddCreditCardViewModel.swift in Sources */,
 				E718698C237DCC1400059766 /* Fonts.swift in Sources */,
 				E71139DC2346AC7400889AE2 /* DeliveryLocationViewModel.swift in Sources */,
 				E7A4459923DE3674003519E5 /* OptionView.swift in Sources */,
@@ -1334,27 +1395,34 @@
 				E71139F52346AFE300889AE2 /* RestaurantsViewModel.swift in Sources */,
 				E7D15C3223DF8D3C001E24EF /* CartItem.swift in Sources */,
 				E7E04A5823CCADB40045A381 /* AppContext.swift in Sources */,
+				E720292823EDF46A000E9884 /* AddCreditCardViewController.swift in Sources */,
 				E7988BD923799A5600F0E8BD /* BaseCollectionCell.swift in Sources */,
+				E720292923EDF46A000E9884 /* CardInfoView.swift in Sources */,
 				E71139E32346AC7D00889AE2 /* RestaurantViewController.swift in Sources */,
 				E718699A237DEE5000059766 /* Category.swift in Sources */,
+				E720292E23EDF472000E9884 /* DeliveryLocationViewModel.swift in Sources */,
 				E7926C6723D8C3D800768405 /* CartTitleValueView.swift in Sources */,
+				E731B29123EF975000CF7AF9 /* LocationSearchView.swift in Sources */,
 				E7EEC61123E795910066CC76 /* OrderStateRow.swift in Sources */,
 				E71139DD2346AC7400889AE2 /* ItemViewModel.swift in Sources */,
 				E74831FC2371C71C00216927 /* UILabel.swift in Sources */,
 				E79FD751239D399900038933 /* CollectionHeaderCell.swift in Sources */,
 				E71CDC4123AEE4870059505A /* NavigationBarControls.swift in Sources */,
-				E70C9A1323EA3E9F00530B3C /* AddCreditCardViewController.swift in Sources */,
 				E71139D92346AC7400889AE2 /* GreetingViewModel.swift in Sources */,
 				E71139D72346AC7400889AE2 /* OrderStatusViewModel.swift in Sources */,
+				E719C45523EF9A3200574840 /* LocationSearchInputView.swift in Sources */,
 				E7E04A3A23C8A8BB0045A381 /* NavigationController.swift in Sources */,
 				E79ECD6F23EAB26E00824FC5 /* TextField.swift in Sources */,
 				E7E04A3C23C8B9870045A381 /* ItemCounter.swift in Sources */,
 				E7037361234FE0D600852B04 /* UIButton.swift in Sources */,
 				E7EEC60F23E7929A0066CC76 /* OrderIdView.swift in Sources */,
+				E718B4AA23EF229D001EB7FE /* MapViewController.swift in Sources */,
 				E71139E22346AC7D00889AE2 /* RestaurantViewModel.swift in Sources */,
 				E78C382F23D760D400335887 /* CartItemView.swift in Sources */,
+				E720292D23EDF472000E9884 /* DeliveryLocationViewController.swift in Sources */,
 				E76A67412385DBA6001FEF9B /* RestaurantsSearchView.swift in Sources */,
 				E71139B62346AA1100889AE2 /* RegistrationViewController.swift in Sources */,
+				E71E75AE23EFDF0600D51EEE /* ConfirmationDialogViewController.swift in Sources */,
 				E71139DA2346AC7400889AE2 /* GreetingViewController.swift in Sources */,
 				E7B86A4E23EC87DD0051703F /* ValidationCodeContentView.swift in Sources */,
 				E79FD753239D39C300038933 /* FoodItemCell.swift in Sources */,
@@ -1372,7 +1440,6 @@
 				E71139DE2346AC7400889AE2 /* ItemViewController.swift in Sources */,
 				E7EDD3B423E73C07005C5C76 /* UIImageView.swift in Sources */,
 				E74832042371CA8100216927 /* UITextField.swift in Sources */,
-				E70C9A1523EA3EC000530B3C /* CardInfoView.swift in Sources */,
 				E74832062371CBB200216927 /* UIView.swift in Sources */,
 				E7D15C2F23DF18F4001E24EF /* BlockTap.swift in Sources */,
 				E71139D52346AC7400889AE2 /* OrderPlacedViewController.swift in Sources */,

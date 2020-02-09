@@ -35,6 +35,7 @@ class GradientView: UIView {
         }
         gradientLayer.frame = bounds
         layer.insertSublayer(gradientLayer, at: 0)
+        isUserInteractionEnabled = false
         parentView.clipsToBounds = true
     }
     

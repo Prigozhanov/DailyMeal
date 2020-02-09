@@ -15,6 +15,8 @@ public protocol NetworkService {
     
     func send<Response: Codable>(request: Request<Response>, completion: @escaping (Result<Response, NetworkClient.Error>) -> Void)
     
+    var requestFactory: RequestFactory { get }
+    
 }
 
 public class NetworkServiceImplementation: NetworkService {
@@ -25,11 +27,13 @@ public class NetworkServiceImplementation: NetworkService {
     
     private let requestConfigurator: URLRequestConfigurator
     
+    public var requestFactory: RequestFactory
+    
     public init(keychainService: KeychainService) {
         self.keychainService = keychainService
         requestConfigurator = URLRequestConfigurator()
         networkClient = NetworkClient(urlRequestConfigurator: requestConfigurator)
-        
+        requestFactory = RequestFactory()
         if let token = keychainService.getValueForItem(.JWTToken) {
             requestConfigurator.addHeader(Header(httpHeaderField: .authorization, value: token))
         }
@@ -69,6 +73,7 @@ public class NetworkServiceImplementation: NetworkService {
     }
     
 }
+
 
 public extension NotificationDescriptor {
     

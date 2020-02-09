@@ -90,7 +90,7 @@ public struct LoginResponse: Codable {
     }
 }
 
-// MARK: - DataClass
+// MARK: - PushRegistration
 public struct PushRegistration: Codable {
     public let registrationID, deviceName, devicePlatform, deviceUUID: String
     public let appVersion: String
@@ -350,3 +350,52 @@ public struct Choice: Codable {
     }
 }
 
+
+// MARK: - GeodataIsExists
+// Menu.by checks is current address exist and returns consistent app data
+public struct GeodataIsExists: Codable {
+    public let geoobjects: [GeoObject]?
+    public let id: Int?
+    public let isAddressExists: IsAddressExists?
+    
+    public init(geoobjects: [GeoObject]?, id: Int?, isAddressExists: IsAddressExists?) {
+        self.geoobjects = geoobjects
+        self.id = id
+        self.isAddressExists = isAddressExists
+    }
+    
+    func encoded() throws -> [String : Any]? {
+        let jsonData = try JSONEncoder().encode(self)
+        let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: Any]
+        return json
+    }
+}
+
+// MARK: - IsAddressExists
+public struct IsAddressExists: Codable {
+    public let id, addressesID: Int?
+    public let long, lat: String?
+    public let area, areaID, regionID, streetID: Int?
+    public let streetLabel3, streetLabel6, streetLabel7, building3: String?
+    public let building6, building7, lng3, lng6: String?
+    public let lng7, hash: String?
+    public let position: Int?
+    public let updatedAt: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case addressesID = "addresses_id"
+        case long, lat, area, areaID, regionID, streetID
+        case streetLabel3 = "street_label_3"
+        case streetLabel6 = "street_label_6"
+        case streetLabel7 = "street_label_7"
+        case building3 = "building_3"
+        case building6 = "building_6"
+        case building7 = "building_7"
+        case lng3 = "lng_3"
+        case lng6 = "lng_6"
+        case lng7 = "lng_7"
+        case hash, position
+        case updatedAt = "updated_at"
+    }
+}

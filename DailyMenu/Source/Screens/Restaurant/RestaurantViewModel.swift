@@ -32,7 +32,7 @@ final class RestaurantViewModelImplementation: RestaurantViewModel {
     
     weak var view: RestaurantView?
     
-    var context = AppDelegate.shared.context
+    var context: AppContext
     
     var restaurant: Restaurant
     
@@ -41,6 +41,7 @@ final class RestaurantViewModelImplementation: RestaurantViewModel {
     var categories: [ProductCategory] = []
     
     init(restaurant: Restaurant) {
+        context = AppDelegate.shared.context
         self.restaurant = restaurant
     }
     
@@ -67,8 +68,8 @@ final class RestaurantViewModelImplementation: RestaurantViewModel {
     }
     
     func loadMenu(completion: @escaping VoidClosure) {
-        let req = Requests.restaurantMenu(id: restaurant.id)
-        context?.networkService.send(request: req, completion: { [weak self] result in
+        let req = context.networkService.requestFactory.restaurantMenu(id: restaurant.id)
+        context.networkService.send(request: req, completion: { [weak self] result in
             switch result {
             case let .success(response):
                 guard let products = response.data else {
@@ -84,8 +85,8 @@ final class RestaurantViewModelImplementation: RestaurantViewModel {
     }
     
     func loadCategories(completion: @escaping VoidClosure) {
-        let req = Requests.restaurantCategories(id: restaurant.id)
-        context?.networkService.send(request: req, completion: { [weak self] result in
+        let req = context.networkService.requestFactory.restaurantCategories(id: restaurant.id)
+        context.networkService.send(request: req, completion: { [weak self] result in
             switch result {
             case let .success(response):
                 if let categories = response.data {

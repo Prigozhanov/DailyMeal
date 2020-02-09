@@ -40,6 +40,10 @@ class AppCoordinator {
             self?.showGreeting()
         }))
         
+        notificationTokens.append(Token.make(descriptor: .userSkippedLoginDescriptor, using: { [weak self] _ in
+            self?.showAddressCheckin()
+        }))
+        
         return true
     }
     
@@ -48,7 +52,7 @@ class AppCoordinator {
 private extension AppCoordinator {
     
     func configureRootViewController() {
-//      let vc = EnterValidationCodePhoneVerificationViewController(phoneNumber: "5125113123")
+//      let vc = DeliveryLocationViewController(viewModel: DeliveryLocationViewModelImplementation())
 //      tabBarController.viewControllers = [vc]
         
         tabBarController.setViewControllers([
@@ -85,6 +89,13 @@ private extension AppCoordinator {
     func showGreeting() {
         let vm = GreetingViewModelImplementation()
         let vc = GreetingViewController(viewModel: vm)
+        vc.modalPresentationStyle = .overCurrentContext
+        window.rootViewController?.show(vc, sender: nil)
+    }
+    
+    func showAddressCheckin() {
+        let vm  = DeliveryLocationViewModelImplementation()
+        let vc = DeliveryLocationViewController(viewModel: vm)
         vc.modalPresentationStyle = .overCurrentContext
         window.rootViewController?.show(vc, sender: nil)
     }

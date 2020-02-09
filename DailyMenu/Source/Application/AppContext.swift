@@ -10,7 +10,8 @@ typealias AppContextProtocol =
     CartServiceHolder &
     NetworkServiceHolder &
     KeychainServiceHolder &
-    UserDefaultsServiceHolder
+    UserDefaultsServiceHolder &
+    LocationServiceHolder
 
 class AppContext: AppContextProtocol {
     
@@ -18,12 +19,14 @@ class AppContext: AppContextProtocol {
     var cartService: CartService
     var keychainSevice: KeychainService
     var userDefaultsService: UserDefaultsService
+    var locationService: LocationService
     
     init() {
-        self.cartService = CartServiceImplementation()
-        self.keychainSevice = KeychainServiceImplementation(identifier: Bundle.id)
-        self.networkService = NetworkServiceImplementation(keychainService: keychainSevice)
-        self.userDefaultsService = UserDefaultsServiceImplementation(keychainService: keychainSevice)
+        cartService = CartServiceImplementation()
+        keychainSevice = KeychainServiceImplementation(identifier: Bundle.id)
+        networkService = NetworkServiceImplementation(keychainService: keychainSevice)
+        userDefaultsService = UserDefaultsServiceImplementation(keychainService: keychainSevice)
+        locationService = LocationServiceImplementation()
     }
     
 }

@@ -68,6 +68,7 @@ internal enum Asset {
       internal static let disc = ImageAsset(name: "Icons/disc")
       internal static let envelope = ImageAsset(name: "Icons/envelope")
       internal static let google = ImageAsset(name: "Icons/google")
+      internal static let location = ImageAsset(name: "Icons/location")
       internal static let mapPin = ImageAsset(name: "Icons/map_pin")
       internal static let mapPin1 = ImageAsset(name: "Icons/map_pin_1")
       internal static let menu = ImageAsset(name: "Icons/menu")

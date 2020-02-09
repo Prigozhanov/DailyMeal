@@ -44,11 +44,24 @@ class Style {
         }
         view.insertSubview(
             GradientView(parentView: view,
-                         colors: [UIColor.clear.cgColor, Colors.white.color.cgColor],
+                         colors: [Colors.white.color.cgColor, UIColor(white: 1, alpha: 0).cgColor],
                          direction: .custom([0, 1])),
             at: 0)
     }
     
+    static func addShadow(for view: UIView, in parentView: UIView, cornerRadius: CGFloat) {
+        let shadowView = UIView()
+        shadowView.setRoundCorners(cornerRadius)
+        shadowView.setShadow(offset: CGSize(width: 0, height: 10), opacity: 0.2, radius: 20)
+        shadowView.backgroundColor = .white
+        parentView.insertSubview(shadowView, belowSubview: view)
+        shadowView.snp.makeConstraints { $0.edges.equalTo(view) }
+    }
+    
+}
+
+extension Style {
+        
     static func addTitle(title: String, _ vc: UIViewController) {
         let titleLabel = UILabel.makeLargeText(title)
         titleLabel.textAlignment = .center
@@ -78,5 +91,5 @@ class Style {
             $0.trailing.equalToSuperview().inset(20)
         }
     }
-    
+
 }

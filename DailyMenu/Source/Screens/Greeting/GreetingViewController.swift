@@ -127,7 +127,9 @@ final class GreetingViewController: UIViewController {
         title: "Skip >",
         titleColor: Colors.gray.color,
         font: FontFamily.light) { [weak self] _ in
-            self?.dismiss(animated: true)
+            self?.dismiss(animated: true, completion: {
+                NotificationCenter.default.post(Notification(name: .userSkippedLogin))
+            })
     }
     
     private lazy var authorizationErrorLabel: UILabel = {
@@ -221,7 +223,12 @@ private extension GreetingViewController {
 extension NotificationDescriptor {
     
     static var userSignedUpDescriptor: NotificationDescriptor<Void> {
-        return NotificationDescriptor<Void>(name: .userSignedUp) { notification in
+            return NotificationDescriptor<Void>(name: .userSignedUp) { notification in
+        }
+    }
+    
+    static var userSkippedLoginDescriptor: NotificationDescriptor<Void> {
+            return NotificationDescriptor<Void>(name: .userSkippedLogin) { notification in
         }
     }
     

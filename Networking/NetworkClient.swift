@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import os.log
 
 public final class NetworkClient {
     
@@ -29,17 +30,16 @@ public final class NetworkClient {
         var urlRequest = URLRequestBuilder(request: request).urlRequest
         
         urlRequestConfigurator.configure(request: &urlRequest)
-        print("[NETWORK] [REQUEST] \(urlRequest)")
-        print("[NETWORK] [REQUEST] [BODY] \(String(data: urlRequest.httpBody ?? Data(), encoding: .utf8))")
-        print("[NETWORK] [REQUEST] [HEADERS] \(String(describing: urlRequest.allHTTPHeaderFields))")
+        
+        os_log("[NETWORK] [REQUEST] %s", urlRequest.debugDescription)
+        os_log("[NETWORK] [REQUEST] [BODY] %s", String(describing: String(data: urlRequest.httpBody ?? Data(), encoding: .utf8)))
+        os_log("[NETWORK] [REQUEST] [HEADERS] %s",String(describing: urlRequest.allHTTPHeaderFields))
         
         let task = session.dataTask(with: urlRequest) { (data, response, error) in
             
             guard let response = response as? HTTPURLResponse else {
                 return
             }
-            
-//            print("[NETWORK] [RESPONSE] \(response.debugDescription)")
             
             let successClosure: (Response) -> Void = { response in
                 DispatchQueue.main.async {
@@ -64,7 +64,7 @@ public final class NetworkClient {
                     let jsonResponse = try jsonDecoder.decode(Response.self, from: data)
                     successClosure(jsonResponse)
                 } catch {
-                    print(error)
+                    os_log("[NETWORK] [ERROR] ", error.localizedDescription)
                     failureClosure(Error.parsingError)
                 }
             case 403:

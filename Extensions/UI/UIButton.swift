@@ -76,9 +76,9 @@ extension UIButton {
         return button
     }
     
-    static func makeBackButton(_ vc: UIViewController) -> UIButton {
+    static func makeBackButton(_ vc: UIViewController?) -> UIButton {
         let button = UIButton.makeCommonButton { [unowned vc] _ in
-            vc.navigationController?.popViewController(animated: true)
+            vc?.navigationController?.popViewController(animated: true)
         }
         button.setImage(Images.Icons.back.image.withRenderingMode(.alwaysTemplate), for: .normal)
         return button

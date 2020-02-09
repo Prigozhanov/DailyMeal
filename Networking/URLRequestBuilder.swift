@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import os.log
 
 class URLRequestBuilder<Response: Codable> {
     private let request: Request<Response>
@@ -36,9 +37,8 @@ class URLRequestBuilder<Response: Codable> {
                 urlRequest.httpBody = try JSONSerialization.data(withJSONObject: json, options: [])
                 urlRequest.setValue("application/json", forHTTPHeaderField: "content-type")
             } catch {
-                print(error)
+                os_log("[NETWORK] [ERROR]", error.localizedDescription)
             }
-            
         default:
             break
         }
