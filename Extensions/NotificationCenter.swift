@@ -55,5 +55,6 @@ public extension Notification.Name {
     static var userLoggedIn = Notification.Name("userLoggedIn")
     static var userLoggedOut = Notification.Name("userLoggedOut")
     static var userSkippedLogin = Notification.Name("userSkippedLogin")
+    static var userAddressChanged = Notification.Name("userAddressChanged")
     
 }

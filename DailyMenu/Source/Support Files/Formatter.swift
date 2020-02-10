@@ -3,9 +3,25 @@
 //  Copyright © 2020 epam. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum Formatter {
+    
+    static func getHighlightedAttributtedString(string: String,
+                                                keyWord: String,
+                                                font: UIFont,
+                                                highlightingFont: UIFont,
+                                                highlightingColor: UIColor? = nil) -> NSAttributedString {
+        let range = (string as NSString).range(of: keyWord)
+        let attrString = NSMutableAttributedString(
+            string: string, attributes: [.font : font]
+        )
+        attrString.addAttributes([.font : highlightingFont], range: range)
+        if let highlightingColor = highlightingColor {
+            attrString.addAttributes([.foregroundColor: highlightingColor], range: range)
+        }
+        return attrString
+    }
     
     enum Currency {
         static func toString(_ string: String) -> String {

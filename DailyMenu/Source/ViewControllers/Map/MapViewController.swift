@@ -7,11 +7,15 @@ import MapKit
 
 class MapViewController: UIViewController {
     
-    private let viewModel: MapViewModel
+    let viewModel: MapViewModel
     
     lazy var mapView: MKMapView = {
         let view = MKMapView()
         view.mapType = .mutedStandard
+        view.showsPointsOfInterest = true
+        view.showsUserLocation = true
+        view.showsCompass = false
+        view.delegate = self
         return view
     }()
     
@@ -21,7 +25,6 @@ class MapViewController: UIViewController {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
-        
     }
     
     required init?(coder: NSCoder) { fatalError() }
@@ -38,24 +41,50 @@ class MapViewController: UIViewController {
                 $0.center.equalToSuperview()
             }
         }
-        
-        self.mapView.addGestureRecognizer(BlockTap(action: { [weak self] _ in
-            self?.view.becomeFirstResponder()
-        }))
     }
     
     func moveCameraToUserLocation() {
         if let userCoordinates = viewModel.getUserLocation() {
-            mapView.setCamera(MKMapCamera(lookingAtCenter: userCoordinates, fromDistance: 1500, pitch: 0, heading: 0), animated: true)
+            mapView.setCamera(
+                MKMapCamera(
+                    lookingAtCenter: userCoordinates,
+                    fromDistance: 1500,
+                    pitch: 0,
+                    heading: 0
+                ), animated: true
+            )
         }
     }
     
     func moveToCoordinates(lat: Double, lon: Double) {
-        mapView.setCamera(MKMapCamera(lookingAtCenter: CLLocationCoordinate2D(latitude: lat, longitude: lon), fromDistance: 1500, pitch: 0, heading: 0), animated: true)
+        mapView.setCamera(
+            MKMapCamera(
+                lookingAtCenter: CLLocationCoordinate2D(latitude: lat, longitude: lon),
+                fromDistance: 1500,
+                pitch: 0, heading: 0
+            ), animated: true
+        )
     }
     
     func getCameraLocation() -> CLLocationCoordinate2D {
         return mapView.camera.centerCoordinate
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.pinImageView.transform = CGAffineTransform(translationX: 0, y: -10)
+        }
+    }
+    
+}
+
+extension MapViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        viewModel.onRegionDidChange?(mapView.camera.centerCoordinate)
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.pinImageView.transform = .identity
+        }
     }
     
 }

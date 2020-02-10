@@ -6,6 +6,8 @@
 import UIKit
 import TableKit
 import SnapKit
+import Services
+import Extensions
 
 final class RestaurantsViewController: UIViewController {
     
@@ -22,6 +24,8 @@ final class RestaurantsViewController: UIViewController {
     
     private var isDrugging: Bool = false
     private var filterBarTopConstraint: NSLayoutConstraint?
+    
+    private var notificationTokens: [Token] = []
     
     private lazy var headerView: UIView = {
         let view = UIView()
@@ -101,6 +105,12 @@ final class RestaurantsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        notificationTokens.append(Token.make(descriptor: .userAddressChangedDescriptor, using: { [weak self] _ in
+            self?.tableDirector.clear()
+            self?.tableDirector.reload()
+            self?.viewModel.loadRestaurants()
+        }))
+        
         view.backgroundColor = Colors.commonBackground.color
         
         viewModel.view = self
@@ -137,7 +147,10 @@ final class RestaurantsViewController: UIViewController {
         tableView.contentInset = UIEdgeInsets(top: 250, left: 0, bottom: 0, right: 0)
         tableView.scrollIndicatorInsets = tableView.contentInset
         tableView.setContentOffset(CGPoint(x: 0, y: -250), animated: false)
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         viewModel.loadRestaurants()
     }
     
@@ -184,6 +197,10 @@ extension RestaurantsViewController: RestaurantsView {
         tableDirector.append(section: section)
         section.append(rows: rows)
         tableDirector.reload()
+    }
+    
+    func showLoadingIndicator() {
+        LoadingIndicator.show(self)
     }
 }
 

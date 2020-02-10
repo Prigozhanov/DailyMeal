@@ -23,6 +23,8 @@ class LocationSearchView: UIView {
         },
             shouldChangeCharacters: { [weak self] string in
                 self?.item.shouldChangeCharacters(string, self)
+            }, shouldReturn: { [weak self] in
+                self?.updateResults(with: [])
         })
     )
     

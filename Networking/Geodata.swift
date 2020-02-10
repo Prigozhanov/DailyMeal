@@ -409,10 +409,10 @@ public struct MenuV2GeodataRequest: Codable {
 
 // MARK: - MenuV2Geodata
 public struct MenuV2Geodata: Codable {
-    public let data: MenuV2Data?
+    public let data: GeoObject?
     public let lang: String?
     
-    public init(data: MenuV2Data?, lang: String?) {
+    public init(data: GeoObject?, lang: String?) {
         self.data = data
         self.lang = lang
     }

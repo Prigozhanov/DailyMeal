@@ -17,11 +17,11 @@ protocol DeliveryLocationViewModel {
     
     var view: DeliveryLocationView? { get set }
     
-    func requestGeodcode(lat: Double, lon: Double)
+    func requestGeodcode(string: String, onSuccess: @escaping (String) -> Void)
     
     func getAddressesList(string: String, completion: @escaping ([String]) -> Void)
     
-    func requestGeodataExist(address: String, position: String, language: String, onSuccess: @escaping VoidClosure)
+    func saveAddressInfo()
 }
 
 //MARK: - Implementation
@@ -31,45 +31,18 @@ final class DeliveryLocationViewModelImplementation: DeliveryLocationViewModel {
     
     private let context: AppContext
     private let locationService: LocationService
+    private let userDefaultsService: UserDefaultsService
+    
+    private var userAddressMeta: UserAddressMeta?
     
     init() {
         context = AppDelegate.shared.context
         locationService = context.locationService
+        userDefaultsService = context.userDefaultsService
     }
     
-    func requestGeodcode(lat: Double, lon: Double) {
-        let req = context.networkService.requestFactory.getGeocode(lat: lat, lon: lon)
-        
-        context.networkService.send(request: req) { [weak self] result in
-            switch result {
-            case let .success(geodata):
-                guard let address = geodata?
-                    .response?
-                    .geoObjectCollection?
-                    .featureMember?
-                    .first?
-                    .geoObject?
-                    .metaDataProperty?
-                    .geocoderMetaData?
-                    .text,
-                    let position = geodata?
-                        .response?
-                        .geoObjectCollection?
-                        .metaDataProperty?
-                        .geocoderResponseMetaData?
-                        .point?
-                        .pos else {
-                        return
-                }
-                
-                self?.requestGeodataExist(address: address, position: position, language: "en_US", onSuccess: {})
-            case let .failure(error):
-                print(error)
-            }
-        }
-    }
     
-    // for search
+    // Search addresses
     func getAddressesList(string: String, completion: @escaping ([String]) -> Void) {
         let req = context.networkService.requestFactory.getGeodataByString(string: string)
         
@@ -88,20 +61,37 @@ final class DeliveryLocationViewModelImplementation: DeliveryLocationViewModel {
         }
     }
     
-    func requestGeodataExist(address: String, position: String, language: String, onSuccess: @escaping VoidClosure) {
+    /**
+     Before confirming address, we must be sure that address for found geodata is exists
+     in Menu.by database, so before confirming address we should call requestGeodataExist method
+     to check if address exists and valid
+     */
+    func requestGeodcode(string: String, onSuccess: @escaping (String) -> Void) {
+        let req = context.networkService.requestFactory.getGeocode(string: string)
+        
+        context.networkService.send(request: req) { [weak self] result in
+            switch result {
+            case let .success(geodata):
+                guard let featureMember = geodata?
+                    .response?
+                    .geoObjectCollection?
+                    .featureMember?
+                    .first,
+                    let geoObject = featureMember.geoObject else {
+                        return
+                }
+                self?.requestGeodataExist(geoObject: geoObject, onSuccess: onSuccess)
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
+    
+    func requestGeodataExist(geoObject: GeoObject, onSuccess: @escaping (String) -> Void) {
         
         let geodataRequestObject = MenuV2GeodataRequest(geodata: [
             MenuV2Geodata(
-                data: MenuV2Data(point: MenuV2Point(pos: position),
-                                 metaDataProperty: GeoObjectMetaDataProperty(
-                                    geocoderMetaData: GeocoderMetaData(
-                                        precision: nil,
-                                        text: address,
-                                        kind: nil,
-                                        address: nil,
-                                        addressDetails: nil)
-                    )
-                ),
+                data: geoObject,
                 lang: "en_US")
         ])
         
@@ -109,14 +99,30 @@ final class DeliveryLocationViewModelImplementation: DeliveryLocationViewModel {
             geodataRequest: geodataRequestObject
         )
         
-        context.networkService.send(request: networkRequest) { result in
+        context.networkService.send(request: networkRequest) { [weak self] result in
             switch result {
             case let .success(response):
-                print(response)
+                if let address = response.isAddressExists?.lng7 {
+                    onSuccess(address)
+                }
+                if let addressExists = response.isAddressExists {
+                    self?.userAddressMeta = UserAddressMeta(
+                        addressName: addressExists.lng7,
+                        streetName: addressExists.streetLabel7,
+                        areaId: addressExists.areaID,
+                        addressesId: addressExists.id,
+                        regionId: addressExists.regionID,
+                        streetId: addressExists.streetID
+                    )
+                }
             case let .failure(error):
                 print(error)
             }
         }
+    }
+    
+    func saveAddressInfo() {
+        userDefaultsService.updateUserAddressMeta(userAddressMeta)
     }
     
 }

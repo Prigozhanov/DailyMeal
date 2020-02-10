@@ -41,7 +41,10 @@ class AppCoordinator {
         }))
         
         notificationTokens.append(Token.make(descriptor: .userSkippedLoginDescriptor, using: { [weak self] _ in
-            self?.showAddressCheckin()
+            if self?.userDefaultsService.getValueForKey(key: .addressesId) == nil,
+                self?.userDefaultsService.getValueForKey(key: .areaId) == nil {
+                self?.showAddressCheckin()
+            }
         }))
         
         return true
@@ -52,8 +55,8 @@ class AppCoordinator {
 private extension AppCoordinator {
     
     func configureRootViewController() {
-//      let vc = DeliveryLocationViewController(viewModel: DeliveryLocationViewModelImplementation())
-//      tabBarController.viewControllers = [vc]
+        //      let vc = DeliveryLocationViewController(viewModel: DeliveryLocationViewModelImplementation())
+        //      tabBarController.viewControllers = [vc]
         
         tabBarController.setViewControllers([
             cartTab,

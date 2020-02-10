@@ -5,6 +5,7 @@
 
 import Foundation
 import Networking
+import Extensions
 
 public protocol UserDefaultsServiceHolder {
     
@@ -22,6 +23,7 @@ public protocol UserDefaultsService {
     
     func updateUserDetails(user: User)
     
+    func updateUserAddressMeta(_ info: UserAddressMeta?)
 }
 
 public class UserDefaultsServiceImplementation: UserDefaultsService {
@@ -55,6 +57,16 @@ public class UserDefaultsServiceImplementation: UserDefaultsService {
         setValueForKey(key: .phone, value: user.phone)
         setValueForKey(key: .phoneVerify, value: user.phoneVerify)
     }
+    
+    public func updateUserAddressMeta(_ info: UserAddressMeta?) {
+        setValueForKey(key: .addressName, value: info?.addressName as Any)
+        setValueForKey(key: .streetName, value: info?.streetName as Any)
+        setValueForKey(key: .areaId, value: info?.areaId as Any)
+        setValueForKey(key: .addressesId, value: info?.addressesId as Any)
+        setValueForKey(key: .regionId, value: info?.regionId as Any)
+        setValueForKey(key: .streetId, value: info?.streetId as Any)
+    }
+    
 }
 
 public enum UserDefaultsKey: String, CaseIterable {
@@ -63,5 +75,24 @@ public enum UserDefaultsKey: String, CaseIterable {
     lastname,
     email,
     phone,
-    phoneVerify
+    phoneVerify,
+    //Address info
+    addressName,
+    streetName,
+    areaId,
+    addressesId,
+    regionId,
+    streetId
+}
+
+public enum PaymentMethod: Int {
+    case cash = 20
+}
+
+public extension NotificationDescriptor {
+    
+    static var userAddressChangedDescriptor: NotificationDescriptor<Void> {
+        return NotificationDescriptor<Void>(name: .userAddressChanged) { _ in }
+    }
+    
 }

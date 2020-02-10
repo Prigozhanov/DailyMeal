@@ -5,7 +5,7 @@
 
 import UIKit
 
-open class BlockTap: UITapGestureRecognizer {
+class BlockTap: UITapGestureRecognizer {
     private var tapAction: ((UITapGestureRecognizer) -> Void)?
     
     public override init(target: Any?, action: Selector?) {

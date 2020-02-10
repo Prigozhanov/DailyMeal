@@ -82,17 +82,17 @@ public class RequestFactory {
                                                           params: .none)
     }
     
-    public func menu() -> Request<MenuResponse> {
+    public func menu(cityId: Int, addressId: Int) -> Request<MenuResponse> {
         return Request<MenuResponse>(method: .GET,
                                      baseUrlString: baseUrlString,
                                      path: "get-RestDataByType",
                                      params: .query([
                                         "type": "all",
-                                        "lng": "6",
+                                        "lng": "7",
                                         "delivery_type": "delivery",
-                                        "city_id": "2",
+                                        "city_id": "\(cityId)",
                                         "localization": "1",
-                                        "addressId": "39307",
+                                        "addressId": "\(addressId)",
                                      ]))
     }
     
@@ -101,7 +101,7 @@ public class RequestFactory {
         return Request<SingleKeyResponseWrapper<[ProductCategory]>>(method: .GET,
                                                                     baseUrlString: baseUrlString,
                                                                     path: "get-restaurant-menu-categories",
-                                                                    params: .query(["rest" : "\(id)", "lng": "6"]))
+                                                                    params: .query(["rest" : "\(id)", "lng": "7"]))
     }
     
     //https://v2.menu.by/api/get-restaurant-menu?rest=1595&lng=7&restaurant_menu_categories=4729
@@ -111,7 +111,7 @@ public class RequestFactory {
                                                             path: "get-restaurant-menu",
                                                             params: .query([
                                                                 "rest" : "\(id)",
-                                                                "lng": "6" // TODO link with category id
+                                                                "lng": "7" // TODO link with category id
                                                             ]))
     }
     
@@ -128,17 +128,17 @@ public class RequestFactory {
     private let yandexGeodecoderUrlString = "https://geocode-maps.yandex.ru/"
     private let yandexGeocoderApiKey = "3832850a-49ca-413e-87fa-d5426a875301"
     
-    public func getGeocode(lat: Double, lon: Double) -> Request<Geodata?> {
+    public func getGeocode(string: String) -> Request<Geodata?> {
         return Request<Geodata?>(method: .GET,
-                                baseUrlString: yandexGeodecoderUrlString,
-                                path: "1.x/",
-                                params: .query([
+                                 baseUrlString: yandexGeodecoderUrlString,
+                                 path: "1.x/",
+                                 params: .query([
                                     "apikey": yandexGeocoderApiKey,
                                     "format": "json",
-                                    "geocode": "\(lon),\(lat)",
+                                    "geocode": "\(string)",
                                     "lang": "en",
                                     "result": "1"
-                                ]))
+                                 ]))
     }
     
     //https://geocode-maps.yandex.ru/1.x/?apikey=3832850a-49ca-413e-87fa-d5426a875301&geocode=%string%

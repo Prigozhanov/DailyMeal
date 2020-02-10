@@ -10,6 +10,7 @@ class LocationSearchInputView: UIView {
     struct Item {
         let onUserLocationButtonTapped: VoidClosure
         let shouldChangeCharacters: StringClosure
+        let shouldReturn: VoidClosure
     }
     
     private var item: Item
@@ -92,6 +93,7 @@ extension LocationSearchInputView: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        self.item.shouldReturn()
         return true
     }
     

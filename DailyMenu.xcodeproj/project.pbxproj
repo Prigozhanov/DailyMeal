@@ -13,6 +13,7 @@
 		E7037363234FE85D00852B04 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7037362234FE85D00852B04 /* Layout.swift */; };
 		E703991323E2577A003E527A /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E703991223E2577A003E527A /* LoadingIndicator.swift */; };
 		E703991723E36A12003E527A /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = E703991623E36A12003E527A /* UIApplication.swift */; };
+		E704AB1A23F1CF36002203E8 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704AB1923F1CF36002203E8 /* Models.swift */; };
 		E70C9A0E23EA191300530B3C /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70C9A0D23EA191300530B3C /* NotificationCenter.swift */; };
 		E70EBEF523EC191100B3D0DF /* Extensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD24B23E96E6700FB270D /* Extensions.framework */; };
 		E70EBEF623EC191100B3D0DF /* Extensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD24B23E96E6700FB270D /* Extensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -30,8 +31,6 @@
 		E71139D82346AC7400889AE2 /* OrderStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C52346AC7400889AE2 /* OrderStatusViewController.swift */; };
 		E71139D92346AC7400889AE2 /* GreetingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C72346AC7400889AE2 /* GreetingViewModel.swift */; };
 		E71139DA2346AC7400889AE2 /* GreetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C82346AC7400889AE2 /* GreetingViewController.swift */; };
-		E71139DB2346AC7400889AE2 /* DeliveryLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139CA2346AC7400889AE2 /* DeliveryLocationViewController.swift */; };
-		E71139DC2346AC7400889AE2 /* DeliveryLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139CB2346AC7400889AE2 /* DeliveryLocationViewModel.swift */; };
 		E71139DD2346AC7400889AE2 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139CD2346AC7400889AE2 /* ItemViewModel.swift */; };
 		E71139DE2346AC7400889AE2 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139CE2346AC7400889AE2 /* ItemViewController.swift */; };
 		E71139E22346AC7D00889AE2 /* RestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139E02346AC7D00889AE2 /* RestaurantViewModel.swift */; };
@@ -223,6 +222,7 @@
 		E703991223E2577A003E527A /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		E703991423E25A17003E527A /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
 		E703991623E36A12003E527A /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		E704AB1923F1CF36002203E8 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		E70BC2C023E5BEBE0039F582 /* Swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift.swift; sourceTree = "<group>"; };
 		E70C9A0D23EA191300530B3C /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 		E70EBEFD23EC610D00B3D0DF /* SendPhoneVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPhoneVerificationViewController.swift; sourceTree = "<group>"; };
@@ -237,8 +237,6 @@
 		E71139C52346AC7400889AE2 /* OrderStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderStatusViewController.swift; sourceTree = "<group>"; };
 		E71139C72346AC7400889AE2 /* GreetingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreetingViewModel.swift; sourceTree = "<group>"; };
 		E71139C82346AC7400889AE2 /* GreetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreetingViewController.swift; sourceTree = "<group>"; };
-		E71139CA2346AC7400889AE2 /* DeliveryLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryLocationViewController.swift; sourceTree = "<group>"; };
-		E71139CB2346AC7400889AE2 /* DeliveryLocationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryLocationViewModel.swift; sourceTree = "<group>"; };
 		E71139CD2346AC7400889AE2 /* ItemViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		E71139CE2346AC7400889AE2 /* ItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		E71139E02346AC7D00889AE2 /* RestaurantViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantViewModel.swift; sourceTree = "<group>"; };
@@ -439,6 +437,15 @@
 			path = DailyMenu;
 			sourceTree = "<group>";
 		};
+		E704AB1823F1CF21002203E8 /* UserDefaultsService */ = {
+			isa = PBXGroup;
+			children = (
+				E7976CC623E9F5ED00698EC9 /* UserDefaultsService.swift */,
+				E704AB1923F1CF36002203E8 /* Models.swift */,
+			);
+			path = UserDefaultsService;
+			sourceTree = "<group>";
+		};
 		E71139A823469FAF00889AE2 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -451,7 +458,6 @@
 				E71139CC2346AC7400889AE2 /* Item */,
 				E71139BA2346AC7400889AE2 /* Cart */,
 				E71139B72346AC7400889AE2 /* Checkout */,
-				E71139C92346AC7400889AE2 /* DeliveryLocation */,
 				E71139C32346AC7400889AE2 /* OrderStatus */,
 				E71139B22346AA1100889AE2 /* Registration */,
 			);
@@ -505,15 +511,6 @@
 				E71139C82346AC7400889AE2 /* GreetingViewController.swift */,
 			);
 			path = Greeting;
-			sourceTree = "<group>";
-		};
-		E71139C92346AC7400889AE2 /* DeliveryLocation */ = {
-			isa = PBXGroup;
-			children = (
-				E71139CA2346AC7400889AE2 /* DeliveryLocationViewController.swift */,
-				E71139CB2346AC7400889AE2 /* DeliveryLocationViewModel.swift */,
-			);
-			path = DeliveryLocation;
 			sourceTree = "<group>";
 		};
 		E71139CC2346AC7400889AE2 /* Item */ = {
@@ -749,10 +746,10 @@
 		E77AD26E23E9D6A700FB270D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				E704AB1823F1CF21002203E8 /* UserDefaultsService */,
 				E7D15C3023DF8D27001E24EF /* CartService */,
 				E77AD26223E9A41C00FB270D /* KeychainService.swift */,
 				E7ADCB7D23E233E100607E8E /* NetworkService.swift */,
-				E7976CC623E9F5ED00698EC9 /* UserDefaultsService.swift */,
 				E720291A23EDF20A000E9884 /* LocationService.swift */,
 				E77AD26F23E9D6A700FB270D /* Services.h */,
 				E77AD27023E9D6A700FB270D /* Info.plist */,
@@ -1355,6 +1352,7 @@
 				E77AD27B23E9D71100FB270D /* NetworkService.swift in Sources */,
 				E727B9A023EE508000E2549E /* LocationService.swift in Sources */,
 				E77AD27A23E9D70600FB270D /* KeychainService.swift in Sources */,
+				E704AB1A23F1CF36002203E8 /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1370,7 +1368,6 @@
 				E7CA200523649FA2004AA1FC /* RestaurantCell.swift in Sources */,
 				E7525CF223E0ECC100730AC9 /* StretchScrollDelegate.swift in Sources */,
 				E7D722EF23A033CF007F096C /* SectionHeaderCell.swift in Sources */,
-				E71139DB2346AC7400889AE2 /* DeliveryLocationViewController.swift in Sources */,
 				E703991723E36A12003E527A /* UIApplication.swift in Sources */,
 				E70EBEFE23EC610D00B3D0DF /* SendPhoneVerificationViewController.swift in Sources */,
 				E779CDB4235B72FE0004E520 /* AppCoordinator.swift in Sources */,
@@ -1388,7 +1385,6 @@
 				E7A4459323DDFD3E003519E5 /* SliderView.swift in Sources */,
 				E71139D82346AC7400889AE2 /* OrderStatusViewController.swift in Sources */,
 				E718698C237DCC1400059766 /* Fonts.swift in Sources */,
-				E71139DC2346AC7400889AE2 /* DeliveryLocationViewModel.swift in Sources */,
 				E7A4459923DE3674003519E5 /* OptionView.swift in Sources */,
 				E7A4458F23DDE1DA003519E5 /* ItemHeaderView.swift in Sources */,
 				E7926C6923D8C40600768405 /* CartPromocodeView.swift in Sources */,

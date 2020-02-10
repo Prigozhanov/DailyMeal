@@ -22,6 +22,11 @@ class LoadingIndicator {
             spinnerImageView.startRotating()
         }
         
+        override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            spinnerImageView.startRotating()
+        }
+        
     }
     
     private static var loadingIndicatorViewController: LoadingIndicatorViewController!

@@ -64,7 +64,8 @@ public final class NetworkClient {
                     let jsonResponse = try jsonDecoder.decode(Response.self, from: data)
                     successClosure(jsonResponse)
                 } catch {
-                    os_log("[NETWORK] [ERROR] ", error.localizedDescription)
+                    print(String(data: data!, encoding: .utf8))
+                    print(error)
                     failureClosure(Error.parsingError)
                 }
             case 403:

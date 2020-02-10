@@ -5,10 +5,12 @@
 
 import Foundation
 import Networking
+import Services
 
 //MARK: - View
 protocol RestaurantsView: class {
     func reloadScreen()
+    func showLoadingIndicator()
 }
 
 //MARK: - ViewModel
@@ -39,7 +41,8 @@ protocol RestaurantsViewModel {
 //MARK: - Implementation
 final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     
-    let context: AppContext = AppDelegate.shared.context
+    let context: AppContext
+    let userDefaultsService: UserDefaultsService
     
     weak var view: RestaurantsView?
     
@@ -92,6 +95,11 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     
     var foodCategory: FoodCategory?
     
+    init() {
+        context = AppDelegate.shared.context
+        userDefaultsService = context.userDefaultsService
+    }
+    
     func showMoreRestaurants() {
         if pageSize * pageNumber < restaurantsChain.count {
             pageNumber += 1
@@ -100,8 +108,12 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     }
     
     func loadRestaurants() {
-        let req = context.networkService.requestFactory.menu()
-        LoadingIndicator.show()
+        guard let areaId = userDefaultsService.getValueForKey(key: .areaId) as? Int,
+            let addressId = userDefaultsService.getValueForKey(key: .addressesId) as? Int else {
+                return
+        }
+        let req = context.networkService.requestFactory.menu(cityId: areaId, addressId: addressId)
+        view?.showLoadingIndicator()
         context.networkService.send(request: req) { [weak self] (result) in
             LoadingIndicator.hide()
             switch result {

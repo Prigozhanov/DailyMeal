@@ -9,8 +9,9 @@ import CoreLocation
 
 protocol MapViewModel {
     var shouldShowPin: Bool { get }
+    var onRegionDidChange: ((CLLocationCoordinate2D) -> Void)? { get }
     
-     func getUserLocation() -> CLLocationCoordinate2D?
+    func getUserLocation() -> CLLocationCoordinate2D?
 }
 
 class MapViewModelImplementation: MapViewModel {
@@ -20,11 +21,14 @@ class MapViewModelImplementation: MapViewModel {
     
     let shouldShowPin: Bool
     
-    init(shouldShowPin: Bool = false) {
+    var onRegionDidChange: ((CLLocationCoordinate2D) -> Void)?
+    
+    init(shouldShowPin: Bool = false, onRegionDidChange: ((CLLocationCoordinate2D) -> Void)? = nil) {
         context = AppDelegate.shared.context
         locationService = context.locationService
         
         self.shouldShowPin = shouldShowPin
+        self.onRegionDidChange = onRegionDidChange
         
         locationService.startUpdatingLocation { _ in
             

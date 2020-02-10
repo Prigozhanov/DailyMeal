@@ -7,6 +7,12 @@ import UIKit
 
 class MapHeaderView: UIView {
     
+    lazy var backButton: UIButton = {
+        var button = UIButton.makeBackButton(self.parentViewController)
+        button.tintColor = Colors.charcoal.color
+        return button
+    }()
+    
     init(title: String, shouldShowBackButton: Bool = true, shouldShowNotificationsButton: Bool = true) {
         super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 100))
         let headerTitleLabel = UILabel.makeText(title)
@@ -16,8 +22,6 @@ class MapHeaderView: UIView {
         notificationButton.setActionHandler(controlEvents: .touchUpInside) { _ in
             
         }
-        let backButton = UIButton.makeBackButton(self.parentViewController)
-        backButton.tintColor = Colors.charcoal.color
         
         addSubviews([backButton, headerTitleLabel, notificationButton])
         

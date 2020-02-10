@@ -20,7 +20,13 @@ final class DeliveryLocationViewController: UIViewController {
     )
     
     private var mapControllerViewBottomConstraint: Constraint?
-    private lazy var mapController = MapViewController(viewModel: MapViewModelImplementation(shouldShowPin: true))
+    private lazy var mapController = MapViewController(
+        viewModel: MapViewModelImplementation(shouldShowPin: true, onRegionDidChange: { [weak self] coordinates in
+            self?.viewModel.requestGeodcode(string: "\(coordinates.longitude),\(coordinates.latitude)", onSuccess: { [weak self] string in
+                self?.showConfiramtionDialog(address: string)
+            })
+        })
+    )
     
     private var notificationTokens: [Token] = []
     
@@ -31,8 +37,16 @@ final class DeliveryLocationViewController: UIViewController {
             results: [],
             onSelectItem: { [weak self] address, searchView in
                 searchView?.selectAddress(string: address)
+                self?.viewModel.requestGeodcode(string: address, onSuccess: { address in
+                    self?.showConfiramtionDialog(address: address)
+                })
         }, onLocationButtonTap: { [weak self] in
             self?.mapController.moveCameraToUserLocation()
+            let currentLocation = self?.mapController.viewModel.getUserLocation()
+            let formattedPostionString = "\(currentLocation?.longitude ?? 0),\(currentLocation?.latitude ?? 0)"
+            self?.viewModel.requestGeodcode(string: formattedPostionString, onSuccess: { [weak self] address in
+                self?.showConfiramtionDialog(address: address)
+            })
         }, shouldChangeCharacters: { [weak self] string, searchView in
             self?.viewModel.getAddressesList(string: string, completion: { addresses in
                 searchView?.updateResults(with: addresses)
@@ -98,6 +112,11 @@ final class DeliveryLocationViewController: UIViewController {
         }
         Style.addShadow(for: locationSearchView, in: self.view, cornerRadius: Layout.cornerRadius)
         
+        headerView.backButton.setActionHandler(controlEvents: .touchUpInside) { [weak self] _ in
+            self?.dismiss(animated: true, completion: {
+                NotificationCenter.default.post(name: .userLoggedOut, object: nil)
+            })
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -108,6 +127,21 @@ final class DeliveryLocationViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.mapController.moveCameraToUserLocation()
+    }
+    
+    func showConfiramtionDialog(address: String) {
+        let vc = ConfirmationDiagloViewController(title: "Address confirmation", subtitle: "") { [weak self] in
+            self?.viewModel.saveAddressInfo()
+            NotificationCenter.default.post(name: .userAddressChanged, object: nil)
+            self?.dismiss(animated: true)
+        }
+        vc.subtitleLabel.attributedText = Formatter.getHighlightedAttributtedString(
+            string: "Do you want to choose \(address) as your delivery address, please confirm if it's correct, and start to choose your meal.",
+            keyWord: address,
+            font: FontFamily.smallMedium!,
+            highlightingFont: FontFamily.Poppins.semiBold.font(size: 12),
+            highlightingColor: Colors.charcoal.color)
+        show(vc, sender: nil)
     }
     
 }
