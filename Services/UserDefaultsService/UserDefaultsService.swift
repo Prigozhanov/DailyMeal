@@ -15,6 +15,10 @@ public protocol UserDefaultsServiceHolder {
 
 public protocol UserDefaultsService {
     
+    var isLoggedIn: Bool { get }
+    
+    var hasAddress: Bool { get }
+    
     func setValueForKey(key: UserDefaultsKey, value: Any)
     
     func getValueForKey(key: UserDefaultsKey) -> Any?
@@ -31,6 +35,14 @@ public class UserDefaultsServiceImplementation: UserDefaultsService {
     private let userDefaults: UserDefaults
     
     private let keychainService: KeychainService
+    
+    public var isLoggedIn: Bool {
+        return keychainService.getValueForItem(.authToken) != nil
+    }
+    
+    public var hasAddress: Bool {
+        return getValueForKey(key: .addressesId) != nil && getValueForKey(key: .areaId) != nil
+    }
     
     public init(keychainService: KeychainService) {
         self.keychainService = keychainService

@@ -112,6 +112,12 @@ final class RestaurantsViewController: UIViewController {
             self?.viewModel.loadRestaurants()
         }))
         
+        notificationTokens.append(Token.make(descriptor: .userLoggedInDescriptor, using: { [weak self] _ in
+            self?.tableDirector.clear()
+            self?.tableDirector.reload()
+            self?.viewModel.loadRestaurants()
+        }))
+        
         view.backgroundColor = Colors.commonBackground.color
         
         viewModel.view = self

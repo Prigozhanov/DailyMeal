@@ -65,6 +65,8 @@ final class DeliveryLocationViewModelImplementation: DeliveryLocationViewModel {
      Before confirming address, we must be sure that address for found geodata is exists
      in Menu.by database, so before confirming address we should call requestGeodataExist method
      to check if address exists and valid
+     
+     For lat lon geocode request use format %lon,lat%
      */
     func requestGeodcode(string: String, onSuccess: @escaping (String) -> Void) {
         let req = context.networkService.requestFactory.getGeocode(string: string)

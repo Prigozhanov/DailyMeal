@@ -5,7 +5,7 @@
 
 import UIKit
 
-class ItemHeaderView: UIView {
+class ProductHeaderView: UIView {
     
     struct Item {
         let title: String

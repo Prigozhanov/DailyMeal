@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol {
         
         context = AppContext()
         
-        coordinator = AppCoordinator(window, keychainService: context.keychainSevice, userDefaultsService: context.userDefaultsService)
+        coordinator = AppCoordinator(window, keychainService: context.keychainSevice, userDefaultsService: context.userDefaultsService, networkService: context.networkService)
         
         return coordinator.registerApplication()
     }

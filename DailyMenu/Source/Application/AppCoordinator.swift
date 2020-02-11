@@ -17,12 +17,14 @@ class AppCoordinator {
     
     private let keychainService: KeychainService
     private let userDefaultsService: UserDefaultsService
+    private let networkService: NetworkService
     
-    init(_ window: UIWindow, keychainService: KeychainService, userDefaultsService: UserDefaultsService) {
+    init(_ window: UIWindow, keychainService: KeychainService, userDefaultsService: UserDefaultsService, networkService: NetworkService) {
         self.window = window
         
         self.keychainService = keychainService
         self.userDefaultsService = userDefaultsService
+        self.networkService = networkService
         
         self.notificationTokens = []
     }
@@ -32,19 +34,23 @@ class AppCoordinator {
         window.makeKeyAndVisible()
         configureRootViewController()
         
-        if userDefaultsService.getValueForKey(key: .id) == nil {
-            showGreeting()
+        networkService.fetchUserData(onSuccess: { [weak self] user in
+            guard let self = self else { return }
+            if self.userDefaultsService.hasAddress {
+                NotificationCenter.default.post(name: .userLoggedIn, object: nil)
+            } else {
+                NotificationCenter.default.post(name: .userInvalidAddress, object: nil)
+            }
+        }) { [weak self] in
+            self?.showGreeting()
         }
         
         notificationTokens.append(Token.make(descriptor: .userLoggedOutDescriptor, using: { [weak self] _ in
             self?.showGreeting()
         }))
         
-        notificationTokens.append(Token.make(descriptor: .userSkippedLoginDescriptor, using: { [weak self] _ in
-            if self?.userDefaultsService.getValueForKey(key: .addressesId) == nil,
-                self?.userDefaultsService.getValueForKey(key: .areaId) == nil {
-                self?.showAddressCheckin()
-            }
+        notificationTokens.append(Token.make(descriptor: .userInvalidAddress, using: { [weak self] _ in
+            self?.showAddressCheckin()
         }))
         
         return true
@@ -55,8 +61,8 @@ class AppCoordinator {
 private extension AppCoordinator {
     
     func configureRootViewController() {
-//              let vc = SettingsViewController(viewModel: SettingsViewModelImplementation())
-//              tabBarController.viewControllers = [vc]
+        //              let vc = SettingsViewController(viewModel: SettingsViewModelImplementation())
+        //              tabBarController.viewControllers = [vc]
         
         tabBarController.setViewControllers([
             cartTab,

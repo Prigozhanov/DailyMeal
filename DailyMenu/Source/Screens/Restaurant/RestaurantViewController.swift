@@ -66,8 +66,8 @@ final class RestaurantViewController: UIViewController {
             guard let restaurant = self?.viewModel.restaurant else {
                 return
             }
-            let vm = ItemViewModelImplementation(item: data, restaurant: restaurant)
-            let vc = ItemViewController(viewModel: vm)
+            let vm = ProductViewModelImplementation(product: data, restaurant: restaurant)
+            let vc = ProductViewController(viewModel: vm)
             self?.navigationController?.pushViewController(vc, animated: true)
         }))
     })

@@ -43,7 +43,9 @@ final class DeliveryLocationViewController: UIViewController {
         }, onLocationButtonTap: { [weak self] in
             self?.mapController.moveCameraToUserLocation()
             let currentLocation = self?.mapController.viewModel.getUserLocation()
+            
             let formattedPostionString = "\(currentLocation?.longitude ?? 0),\(currentLocation?.latitude ?? 0)"
+            
             self?.viewModel.requestGeodcode(string: formattedPostionString, onSuccess: { [weak self] address in
                 self?.showConfiramtionDialog(address: address)
             })
@@ -127,6 +129,12 @@ final class DeliveryLocationViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.mapController.moveCameraToUserLocation()
+        
+        if let userCoordinates = mapController.viewModel.getUserLocation() {
+            viewModel.requestGeodcode(string: "\(userCoordinates.longitude),\(userCoordinates.latitude)") { [weak self] string in
+                self?.showConfiramtionDialog(address: string)
+            }
+        }
     }
     
     func showConfiramtionDialog(address: String) {

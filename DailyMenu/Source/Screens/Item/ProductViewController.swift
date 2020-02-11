@@ -5,9 +5,9 @@
 
 import AloeStackView
 
-final class ItemViewController: UIViewController {
+final class ProductViewController: UIViewController {
     
-    private var viewModel: ItemViewModel
+    private var viewModel: ProductViewModel
     
     private lazy var scrollDelegate: StretchScrollDelegate = StretchScrollDelegate(view: navigationBarBackground) { [weak self] shouldBeAppeared in
         self?.navigationBarControls.alpha = !shouldBeAppeared ? 0 : 1
@@ -42,9 +42,9 @@ final class ItemViewController: UIViewController {
     
     private lazy var navigationBarControls = NavigationBarControls(title: viewModel.restaurant.chainLabel)
     
-    private lazy var itemHeader = ItemHeaderView(item: ItemHeaderView.Item(
-        title: viewModel.item.label,
-        price: Formatter.Currency.toString(viewModel.item.price),
+    private lazy var productHeader = ProductHeaderView(item: ProductHeaderView.Item(
+        title: viewModel.product.label,
+        price: Formatter.Currency.toString(viewModel.product.price),
         onChangeCount: { [weak self] value in
             self?.viewModel.count = value
             self?.updateTotalValue()
@@ -53,7 +53,7 @@ final class ItemViewController: UIViewController {
     
     private lazy var sliderView = SliderView(title: "Spicy Level", sliderValues: ["Regular", "Spicy", "Naga"]) // TODO
     
-    private lazy var optionsStackView = OptionsStackView(item: OptionsStackView.Item(options: self.viewModel.item.options ?? [], onSelectOption: { option in
+    private lazy var optionsStackView = OptionsStackView(item: OptionsStackView.Item(options: self.viewModel.product.options ?? [], onSelectOption: { option in
         //TODO
     }))
     
@@ -68,18 +68,18 @@ final class ItemViewController: UIViewController {
         label.textColor = Colors.blue.color
         label.textAlignment = .center
         label.font = FontFamily.Poppins.medium.font(size: 36)
-        label.text = Formatter.Currency.toString((Double(viewModel.item.price) ?? 0.0) * Double(viewModel.count)) //FIXME: price calculation
+        label.text = Formatter.Currency.toString((Double(viewModel.product.price) ?? 0.0) * Double(viewModel.count)) //FIXME: price calculation
         return label
     }()
     
     private lazy var addToCartButton = UIButton.makeActionButton("Add to Cart") { [weak self] view in
-        guard let self = self, let item = CartItem.fromProduct(self.viewModel.item, count: self.viewModel.count) else { return }
+        guard let self = self, let item = CartItem.fromProduct(self.viewModel.product, count: self.viewModel.count) else { return }
         self.viewModel.cartService.addItem(item: item)
         view.tapAnimation()
         self.navigationController?.popViewController(animated: true)
     }
     
-    init(viewModel: ItemViewModel) {
+    init(viewModel: ProductViewModel) {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
@@ -109,7 +109,7 @@ final class ItemViewController: UIViewController {
         view.backgroundColor = Colors.commonBackground.color
         
         view.addSubview(navigationBarBackground)
-        if let url = URL(string: viewModel.item.src) {
+        if let url = URL(string: viewModel.product.src) {
             navigationBarBackground.sd_setImage(with: url)
         }
         navigationBarBackground.snp.makeConstraints {
@@ -131,7 +131,7 @@ final class ItemViewController: UIViewController {
     }
     
     private func setupStackView() {
-        stackView.addRow(itemHeader)
+        stackView.addRow(productHeader)
         stackView.addRow(sliderView)
         stackView.addRow(optionsStackView)
         stackView.addRow(totalLabel)
@@ -144,15 +144,15 @@ final class ItemViewController: UIViewController {
     }
 }
 
-//MARK: -  ItemView
-extension ItemViewController: ItemView {
+//MARK: -  ProductView
+extension ProductViewController: ProductView {
     func updateTotalValue() {
-        totalValueLabel.text = Formatter.Currency.toString((Double(viewModel.item.price) ?? 0) * Double(viewModel.count)) //FIXME: price calculation
+        totalValueLabel.text = Formatter.Currency.toString((Double(viewModel.product.price) ?? 0) * Double(viewModel.count)) //FIXME: price calculation
     }
 }
 
 //MARK: -  Private
-private extension ItemViewController {
+private extension ProductViewController {
     
 }
 

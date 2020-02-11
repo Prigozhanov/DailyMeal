@@ -43,14 +43,23 @@ final class GreetingViewModelImplementation: GreetingViewModel {
     func performLogin(onSuccess: @escaping VoidClosure, onFailure: @escaping VoidClosure) {
         let req = context.networkService.requestFactory.authenticate(userName: email, password: password)
         context.networkService.send(request: req) { [weak self] result in
+            guard let strongSelf = self else { return }
             LoadingIndicator.hide()
             switch result {
             case let .success(response):
                 self?.keychainService.setValueForItem(.email, self?.email ?? "")
+                
                 if let user = response.member, let token = response.token {
-                    NotificationCenter.default.post(name: .userLoggedIn, object: user)
                     self?.context.userDefaultsService.updateUserDetails(user: user)
-                    self?.context.keychainSevice.setValueForItem(.authToken, token)
+                    self?.context.networkService.fetchUserData(onSuccess: { (user) in
+                        if strongSelf.context.userDefaultsService.hasAddress {
+                            NotificationCenter.default.post(name: .userLoggedIn, object: nil)
+                        } else {
+                            NotificationCenter.default.post(name: .userInvalidAddress, object: nil)
+                        }
+                    }, onFailure: {
+                        
+                    })
                     onSuccess()
                 } else {
                     onFailure()

@@ -9,6 +9,8 @@ class MapViewController: UIViewController {
     
     let viewModel: MapViewModel
     
+    private var userIteractionStarted: Bool = false
+    
     lazy var mapView: MKMapView = {
         let view = MKMapView()
         view.mapType = .mutedStandard
@@ -19,7 +21,7 @@ class MapViewController: UIViewController {
         return view
     }()
     
-    private var pinImageView = UIImageView(image: Images.Icons.mapPin.image)
+    private let pinImageView = UIImageView(image: Images.Icons.mapPinBlue.image)
     
     init(viewModel: MapViewModel) {
         self.viewModel = viewModel
@@ -36,8 +38,18 @@ class MapViewController: UIViewController {
         mapView.snp.makeConstraints { $0.edges.equalToSuperview() }
         
         if viewModel.shouldShowPin {
-            view.addSubview(pinImageView)
+            let pinShadow = UIImageView(image: Images.Icons.pinShadow.image)
+            pinShadow.alpha = 0.5
+            view.addSubviews([pinShadow, pinImageView])
+            pinImageView.contentMode = .scaleAspectFit
             pinImageView.snp.makeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.size.equalTo(44)
+            }
+            pinShadow.snp.makeConstraints {
+                $0.top.equalTo(pinImageView.snp.bottom).inset(5)
+                $0.width.equalTo(pinImageView)
+                $0.height.equalTo(10)
                 $0.center.equalToSuperview()
             }
         }
@@ -71,6 +83,7 @@ class MapViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.userIteractionStarted = true
         UIView.animate(withDuration: 0.3) { [weak self] in
             self?.pinImageView.transform = CGAffineTransform(translationX: 0, y: -10)
         }
@@ -81,7 +94,10 @@ class MapViewController: UIViewController {
 extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        viewModel.onRegionDidChange?(mapView.camera.centerCoordinate)
+        if userIteractionStarted {
+            viewModel.onRegionDidChange?(mapView.camera.centerCoordinate)
+        }
+        userIteractionStarted = false
         UIView.animate(withDuration: 0.3) { [weak self] in
             self?.pinImageView.transform = .identity
         }

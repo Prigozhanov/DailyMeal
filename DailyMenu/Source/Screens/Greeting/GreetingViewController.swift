@@ -128,7 +128,7 @@ final class GreetingViewController: UIViewController {
         titleColor: Colors.gray.color,
         font: FontFamily.light) { [weak self] _ in
             self?.dismiss(animated: true, completion: {
-                NotificationCenter.default.post(Notification(name: .userSkippedLogin))
+                NotificationCenter.default.post(Notification(name: .userInvalidAddress))
             })
     }
     
@@ -227,8 +227,8 @@ extension NotificationDescriptor {
         }
     }
     
-    static var userSkippedLoginDescriptor: NotificationDescriptor<Void> {
-            return NotificationDescriptor<Void>(name: .userSkippedLogin) { notification in
+    static var userInvalidAddress: NotificationDescriptor<Void> {
+            return NotificationDescriptor<Void>(name: .userInvalidAddress) { notification in
         }
     }
     

@@ -7,38 +7,38 @@ import Foundation
 import Networking
 
 //MARK: - View
-protocol ItemView: class {
+protocol ProductView: class {
     func updateTotalValue()
 }
 
 //MARK: - ViewModel
-protocol ItemViewModel {
+protocol ProductViewModel {
     
-    var view: ItemView? { get set }
+    var view: ProductView? { get set }
     
     var cartService: CartService { get }
     
     var restaurant: Restaurant { get }
-    var item: Product { get }
+    var product: Product { get }
     var count: Int { get set }
     
     
 }
 
 //MARK: - Implementation
-final class ItemViewModelImplementation: ItemViewModel {
+final class ProductViewModelImplementation: ProductViewModel {
     
-    weak var view: ItemView?
+    weak var view: ProductView?
     
     var cartService: CartService = AppDelegate.shared.context.cartService
     
     let restaurant: Restaurant
-    let item: Product
+    let product: Product
     var count: Int = 1
     
-    init(item: Product, restaurant: Restaurant) {
+    init(product: Product, restaurant: Restaurant) {
         self.restaurant = restaurant
-        self.item = item
+        self.product = product
     }
     
 }

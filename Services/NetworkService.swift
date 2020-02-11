@@ -12,10 +12,12 @@ public protocol NetworkServiceHolder {
 }
 
 public protocol NetworkService {
+
+    var requestFactory: RequestFactory { get }
+    
+    func fetchUserData(onSuccess: @escaping (User) -> Void, onFailure: @escaping () -> Void)
     
     func send<Response: Codable>(request: Request<Response>, completion: @escaping (Result<Response, NetworkClient.Error>) -> Void)
-    
-    var requestFactory: RequestFactory { get }
     
 }
 
@@ -24,17 +26,19 @@ public class NetworkServiceImplementation: NetworkService {
     private let networkClient: NetworkClient
     
     private let keychainService: KeychainService
+    private let userDefaultsService: UserDefaultsService
     
     private let requestConfigurator: URLRequestConfigurator
     
     public var requestFactory: RequestFactory
     
-    public init(keychainService: KeychainService) {
+    public init(keychainService: KeychainService, userDefaultsService: UserDefaultsService) {
         self.keychainService = keychainService
+        self.userDefaultsService = userDefaultsService
         requestConfigurator = URLRequestConfigurator()
         networkClient = NetworkClient(urlRequestConfigurator: requestConfigurator)
         requestFactory = RequestFactory()
-        if let token = keychainService.getValueForItem(.JWTToken) {
+        if let token = keychainService.getValueForItem(.authToken) {
             requestConfigurator.addHeader(Header(httpHeaderField: .authorization, value: token))
         }
     }
@@ -60,16 +64,32 @@ public class NetworkServiceImplementation: NetworkService {
     }
     
     func handleLogin<Response: Codable>(response: Response) {
-        if let token = (response as? LoginResponse)?.jwtToken {
+        if let token = (response as? LoginResponse)?.token {
             requestConfigurator.addHeader(Header(httpHeaderField: .authorization, value: token))
-            keychainService.setValueForItem(.JWTToken, token)
-            NotificationCenter.default.post(name: .userLoggedIn, object: response)
+            keychainService.setValueForItem(.authToken, token)
         }
     }
     
     func handleUnauthorized() {
+        keychainService.removeValue(.authToken)
         keychainService.removeValue(.JWTToken)
         requestConfigurator.removeHeader(.authorization)
+    }
+    
+    public func fetchUserData(onSuccess: @escaping (User) -> Void, onFailure: @escaping () -> Void) {
+        let req = requestFactory.user()
+        
+        send(request: req) { [weak self] result in
+            switch result {
+            case let .success(user):
+                self?.userDefaultsService.updateUserDetails(user: user)
+                onSuccess(user)
+            case let .failure(error):
+                print(error)
+                self?.handleUnauthorized()
+                onFailure()
+            }
+        }
     }
     
 }
@@ -77,10 +97,8 @@ public class NetworkServiceImplementation: NetworkService {
 
 public extension NotificationDescriptor {
     
-    static var userLoggedInDescriptor: NotificationDescriptor<User> {
-        return NotificationDescriptor<User>(name: .userLoggedIn) { notification -> User in
-            notification.object as! User
-        }
+    static var userLoggedInDescriptor: NotificationDescriptor<Void> {
+        return NotificationDescriptor<Void>(name: .userLoggedIn) { _ in }
     }
     
     static var userLoggedOutDescriptor: NotificationDescriptor<Void> {
