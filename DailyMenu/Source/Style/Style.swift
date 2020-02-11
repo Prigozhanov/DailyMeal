@@ -14,6 +14,7 @@ class Style {
         vc.view.addSubview(view)
         view.center = CGPoint(x: vc.view.frame.maxX, y: 0)
         view.transform = CGAffineTransform(rotationAngle: 0.45)
+        vc.view.clipsToBounds = true
     }
     
     static func addBlueGradient(_ view: UIView) {

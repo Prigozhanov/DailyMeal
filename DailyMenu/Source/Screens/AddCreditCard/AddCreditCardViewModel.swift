@@ -7,7 +7,7 @@ import Services
 
 //MARK: - View
 protocol AddCreditCardView: class {
-    
+     func dismissController()
 }
 
 //MARK: - ViewModel
@@ -55,6 +55,7 @@ final class AddCreditCardViewModelImplementation: AddCreditCardViewModel {
         if let creditCard = creditCard, creditCard.isValid {
             keychainService.updateCreditCardDetails(creditCard)
             onSaveSuccess(creditCard.number)
+            view?.dismissController()
         }
     }
     

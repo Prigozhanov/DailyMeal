@@ -65,6 +65,7 @@ class PhoneVerificationViewModelImplementation: PhoneVerificationViewModel {
             LoadingIndicator.hide()
             switch result {
             case .success:
+                self?.phoneNumber = phoneNumber ?? ""
                 self?.view?.onSuccessAction()
             case .failure:
                 self?.view?.onErrorAction()

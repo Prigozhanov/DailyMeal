@@ -77,6 +77,7 @@
 		E727B99E23EE4BEE00E2549E /* Geodata.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727B99D23EE4BEE00E2549E /* Geodata.swift */; };
 		E727B9A023EE508000E2549E /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720291A23EDF20A000E9884 /* LocationService.swift */; };
 		E731B29123EF975000CF7AF9 /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E731B29023EF975000CF7AF9 /* LocationSearchView.swift */; };
+		E746675223F1E1DC00A802BA /* EditableTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E746675123F1E1DC00A802BA /* EditableTextFieldView.swift */; };
 		E74831FC2371C71C00216927 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74831FB2371C71C00216927 /* UILabel.swift */; };
 		E74832042371CA8100216927 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74832032371CA8100216927 /* UITextField.swift */; };
 		E74832062371CBB200216927 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74832052371CBB200216927 /* UIView.swift */; };
@@ -283,6 +284,7 @@
 		E720292C23EDF472000E9884 /* DeliveryLocationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryLocationViewModel.swift; sourceTree = "<group>"; };
 		E727B99D23EE4BEE00E2549E /* Geodata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geodata.swift; sourceTree = "<group>"; };
 		E731B29023EF975000CF7AF9 /* LocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchView.swift; sourceTree = "<group>"; };
+		E746675123F1E1DC00A802BA /* EditableTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextFieldView.swift; sourceTree = "<group>"; };
 		E74831FB2371C71C00216927 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		E74832032371CA8100216927 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		E74832052371CBB200216927 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -547,6 +549,7 @@
 		E71139EC2346AF0500889AE2 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				E746675323F1E83D00A802BA /* Views */,
 				E71139ED2346AF0500889AE2 /* SettingsViewModel.swift */,
 				E71139EE2346AF0500889AE2 /* SettingsViewController.swift */,
 			);
@@ -646,6 +649,14 @@
 				E731B29023EF975000CF7AF9 /* LocationSearchView.swift */,
 				E719C45223EF99BE00574840 /* LocationResultsTableView.swift */,
 				E719C45423EF9A3200574840 /* LocationSearchInputView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E746675323F1E83D00A802BA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E746675123F1E1DC00A802BA /* EditableTextFieldView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1436,6 +1447,7 @@
 				E71139DE2346AC7400889AE2 /* ItemViewController.swift in Sources */,
 				E7EDD3B423E73C07005C5C76 /* UIImageView.swift in Sources */,
 				E74832042371CA8100216927 /* UITextField.swift in Sources */,
+				E746675223F1E1DC00A802BA /* EditableTextFieldView.swift in Sources */,
 				E74832062371CBB200216927 /* UIView.swift in Sources */,
 				E7D15C2F23DF18F4001E24EF /* BlockTap.swift in Sources */,
 				E71139D52346AC7400889AE2 /* OrderPlacedViewController.swift in Sources */,

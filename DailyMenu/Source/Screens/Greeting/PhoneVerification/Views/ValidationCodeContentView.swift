@@ -51,7 +51,7 @@ class ValidationCodeContentView: UIView {
     init(item: Item) {
         self.item = item
         validationCode = ""
-        phoneNumber = ""
+        phoneNumber = item.phoneNumber
         
         super.init(frame: .zero)
         
@@ -59,11 +59,17 @@ class ValidationCodeContentView: UIView {
         let titleLabel = UILabel.makeText("Enter validation code")
         titleLabel.font = FontFamily.Poppins.medium.font(size: 16)
         titleLabel.textAlignment = .center
-        let subtitleLabel = UILabel.makeText("A verification code is sent to your number provided \(phoneNumber)")
-        subtitleLabel.font = FontFamily.Poppins.regular.font(size: 12)
+        let subtitleLabel = UILabel()
         subtitleLabel.textColor = Colors.gray.color
         subtitleLabel.textAlignment = .center
         subtitleLabel.numberOfLines = 3
+        subtitleLabel.attributedText = Formatter.getHighlightedAttributtedString(
+            string: "A verification code is sent to your number provided +\(phoneNumber)",
+            keyWord: "+\(phoneNumber)",
+            font: FontFamily.Poppins.regular.font(size: 12),
+            highlightingFont: FontFamily.Poppins.semiBold.font(size: 12),
+            highlightingColor: Colors.charcoal.color
+        )
         
         addSubview(cardView)
         cardView.snp.makeConstraints { $0.edges.equalToSuperview() }

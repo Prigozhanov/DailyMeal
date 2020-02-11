@@ -55,8 +55,8 @@ class AppCoordinator {
 private extension AppCoordinator {
     
     func configureRootViewController() {
-        //      let vc = DeliveryLocationViewController(viewModel: DeliveryLocationViewModelImplementation())
-        //      tabBarController.viewControllers = [vc]
+//              let vc = SettingsViewController(viewModel: SettingsViewModelImplementation())
+//              tabBarController.viewControllers = [vc]
         
         tabBarController.setViewControllers([
             cartTab,

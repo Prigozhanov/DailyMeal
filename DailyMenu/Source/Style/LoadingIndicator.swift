@@ -43,9 +43,6 @@ class LoadingIndicator {
         presentingViewController.addChild(loadingIndicatorViewController)
         presentingViewController.view.addSubview(loadingIndicatorViewController.view)
         loadingIndicatorViewController.didMove(toParent: presentingViewController)
-        presentingViewController.view.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
     }
     
     static func hide() {

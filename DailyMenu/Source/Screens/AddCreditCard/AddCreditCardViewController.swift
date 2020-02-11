@@ -74,7 +74,7 @@ final class AddCreditCardViewController: UIViewController {
         
         Style.addTitle(title: "Add Credit Card", self)
         Style.addBackButton(self) { [weak self] _ in
-            self?.navigationController?.popViewController(animated: true)
+            self?.dismissController()
         }
     }
     
@@ -94,7 +94,13 @@ final class AddCreditCardViewController: UIViewController {
 
 //MARK: -  AddCreditCardView
 extension AddCreditCardViewController: AddCreditCardView {
-    
+    func dismissController() {
+        if let navigationController = navigationController {
+            navigationController.popViewController(animated: true)
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
+    }
 }
 
 //MARK: -  Private

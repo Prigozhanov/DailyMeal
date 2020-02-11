@@ -18,6 +18,8 @@ protocol RestaurantsViewModel {
     
     var view: RestaurantsView? { get set }
     
+    var userName: String { get }
+    
     var searchFilter: String { get set }
     
     var restaurants: [Restaurant] { get }
@@ -58,6 +60,12 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     var searchFilter: String = "" {
         didSet {
             view?.reloadScreen()
+        }
+    }
+    
+    var userName: String {
+        get {
+            userDefaultsService.getValueForKey(key: .name) as? String ?? ""
         }
     }
     

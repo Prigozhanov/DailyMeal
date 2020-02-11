@@ -29,14 +29,15 @@ final class RestaurantsViewController: UIViewController {
     
     private lazy var headerView: UIView = {
         let view = UIView()
-        let label = UILabel.makeText("What would you like to eat?")
-        label.numberOfLines = 2
+        let greetingPrefix = viewModel.userName.isEmpty ? "" : "Hello, \(viewModel.userName). "
+        let label = UILabel.makeText("\(greetingPrefix)What would you like to eat?")
+        label.numberOfLines = 3
         label.font = FontFamily.Poppins.bold.font(size: 24)
         label.textColor = Colors.charcoal.color
         view.addSubview(label)
         label.snp.makeConstraints {
             $0.leading.top.equalToSuperview().inset(Layout.largeMargin)
-            $0.width.equalTo(200)
+            $0.trailing.equalToSuperview().inset(50)
         }
         
         let notificationButton = UIButton.makeCommonButton { _ in }
@@ -147,10 +148,7 @@ final class RestaurantsViewController: UIViewController {
         tableView.contentInset = UIEdgeInsets(top: 250, left: 0, bottom: 0, right: 0)
         tableView.scrollIndicatorInsets = tableView.contentInset
         tableView.setContentOffset(CGPoint(x: 0, y: -250), animated: false)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
         viewModel.loadRestaurants()
     }
     

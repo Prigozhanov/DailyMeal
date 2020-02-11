@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import Services
 
 //MARK: - View
 protocol SettingsView: class {
@@ -15,8 +16,10 @@ protocol SettingsViewModel {
     
     var view: SettingsView? { get set }
     
-    var userName: String? { get set }
-    var phone: String? { get set }
+    var userName: String { get set }
+    var phone: String { get set }
+    var creditCardNumber: String { get }
+    var address: String { get }
     
     func clearUserInfo()
     func removeCreditCardInfo()
@@ -28,14 +31,43 @@ final class SettingsViewModelImplementation: SettingsViewModel {
     weak var view: SettingsView?
     
     let context: AppContext
+    let userDefaultsService: UserDefaultsService
+    let keychainService: KeychainService
     
-    var userName: String?
-    var phone: String?
+    var userName: String {
+        get {
+            return userDefaultsService.getValueForKey(key: .name) as? String ?? ""
+        }
+        set {
+            userDefaultsService.setValueForKey(key: .name, value: newValue)
+        }
+    }
+    
+    var phone: String {
+        get {
+            return userDefaultsService.getValueForKey(key: .phone) as? String ?? ""
+        }
+        set {
+            userDefaultsService.setValueForKey(key: .phone, value: newValue)
+        }
+    }
+    
+    var creditCardNumber: String {
+        get {
+            return keychainService.getValueForItem(.creditCardNumber) ?? ""
+        }
+    }
+    
+    var address: String {
+        get {
+            return userDefaultsService.getValueForKey(key: .addressName) as? String ?? ""
+        }
+    }
     
     init() {
         context = AppDelegate.shared.context
-        userName = context.userDefaultsService.getValueForKey(key: .name) as? String
-        phone = context.userDefaultsService.getValueForKey(key: .phone) as? String
+        userDefaultsService = context.userDefaultsService
+        keychainService = context.keychainSevice
     }
     
     func clearUserInfo() {

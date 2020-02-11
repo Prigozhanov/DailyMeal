@@ -5,10 +5,20 @@
 
 import UIKit
 import Extensions
+import AloeStackView
 
 final class SettingsViewController: UIViewController {
     
     private var viewModel: SettingsViewModel
+    
+    private var notificationTokens: [Token] = []
+    
+    private var stackView: AloeStackView = {
+        let stack = AloeStackView()
+        stack.backgroundColor = .clear
+        stack.separatorHeight = 0
+        return stack
+    }()
     
     init(viewModel: SettingsViewModel) {
         self.viewModel = viewModel
@@ -27,36 +37,96 @@ final class SettingsViewController: UIViewController {
         
         view.backgroundColor = Colors.commonBackground.color
         
+        notificationTokens.append(Token.make(descriptor: .userAddressChangedDescriptor, using: { [weak self] _ in
+            self?.reloadRows()
+        }))
+        
+        view.addSubview(stackView)
+        stackView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(100)
+            $0.leading.trailing.bottom.equalToSuperview().inset(Layout.commonInset)
+        }
+        
+        reloadRows()
+        
+        view.addGestureRecognizer(BlockTap(action: { [weak self] _ in
+            self?.stackView.getAllRows().forEach({ $0.resignFirstResponder() })
+        }))
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        stackView.getAllRows().forEach({ ($0 as? EditableTextFieldView)?.setupGradient() })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadRows()
+    }
+    
+    func reloadRows() {
+        stackView.removeAllRows()
+        
+        let addressField: EditableTextFieldView = EditableTextFieldView(
+            item: EditableTextFieldView.Item(
+                title: "Address",
+                text: viewModel.address,
+                type: .address,
+                didEndEdititng: { string in
+                    
+            })
+        )
+        
+        
+        let nameField: EditableTextFieldView = EditableTextFieldView(
+            item: EditableTextFieldView.Item(
+                title: "Name",
+                text: viewModel.userName,
+                type: .standard,
+                didEndEdititng: { [weak self] name in
+                    self?.viewModel.userName = name
+            })
+        )
+        
+        
+        let phoneField: EditableTextFieldView = EditableTextFieldView(
+            item: EditableTextFieldView.Item(
+                title: "Phone",
+                text: viewModel.phone,
+                type: .phone,
+                didEndEdititng: { [weak self] phone in
+                    self?.viewModel.phone = phone
+            })
+        )
+        
+        let creditCardField: EditableTextFieldView = EditableTextFieldView(
+            item: EditableTextFieldView.Item(
+                title: "Credit Card",
+                text: Formatter.CreditCard.hiddenNumber(string: viewModel.creditCardNumber) ?? "",
+                type: .creditCard,
+                didEndEdititng: { _ in })
+        )
+        
+        stackView.addRows([addressField, nameField, phoneField, creditCardField])
+        
+        // App info
+        
         let signOutButton = UIButton.makeCommonButton("Sign out") { [weak self] _ in
             NotificationCenter.default.post(Notification(name: .userLoggedOut))
             self?.viewModel.clearUserInfo()
         }
-        
-        view.addSubview(signOutButton)
         signOutButton.setTitleColor(Colors.red.color, for: .normal)
-        signOutButton.titleLabel?.font = FontFamily.semibold
-        signOutButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(Layout.commonInset)
-            $0.centerX.equalToSuperview()
-        }
+        signOutButton.titleLabel?.font = FontFamily.regular
         
-        let removeCard = UIButton.makeCommonButton("Remove credit card") { [weak self] _ in
-            self?.viewModel.removeCreditCardInfo()
-        }
-        removeCard.setTitleColor(Colors.red.color, for: .normal)
-        removeCard.titleLabel?.font = FontFamily.semibold
-        view.addSubview(removeCard)
-        removeCard.snp.makeConstraints {
-            $0.bottom.equalTo(signOutButton.snp.top).offset(-20)
-            $0.centerX.equalToSuperview()
-        }
+        let appInfoLabel = UILabel.makeSmallText("Daily Menu. Version \(Bundle.versionNumber)")
+        #if DEBUG
+        appInfoLabel.text = "Daily Menu Version \(Bundle.versionNumber). Build \(Bundle.buildNumber)"
+        #endif
+        appInfoLabel.textColor = Colors.gray.color
+        appInfoLabel.textAlignment = .center
         
-        let label = UILabel.makeText()
-        label.text = viewModel.phone
-        view.addSubview(label)
-        label.snp.makeConstraints {
-            $0.center.equalToSuperview()
-        }
+        stackView.addRows([signOutButton, appInfoLabel])
+        stackView.setInset(forRow: signOutButton, inset: UIEdgeInsets(top: 100, left: 0, bottom: 0, right: 0))
     }
     
 }
