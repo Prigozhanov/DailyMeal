@@ -457,7 +457,7 @@
 				E71139C62346AC7400889AE2 /* Greeting */,
 				E71139F12346AFE300889AE2 /* Restaurants */,
 				E71139DF2346AC7D00889AE2 /* Restaurant */,
-				E71139CC2346AC7400889AE2 /* Item */,
+				E71139CC2346AC7400889AE2 /* Product */,
 				E71139BA2346AC7400889AE2 /* Cart */,
 				E71139B72346AC7400889AE2 /* Checkout */,
 				E71139C32346AC7400889AE2 /* OrderStatus */,
@@ -515,14 +515,14 @@
 			path = Greeting;
 			sourceTree = "<group>";
 		};
-		E71139CC2346AC7400889AE2 /* Item */ = {
+		E71139CC2346AC7400889AE2 /* Product */ = {
 			isa = PBXGroup;
 			children = (
 				E7A4458D23DDE1C4003519E5 /* Views */,
 				E71139CD2346AC7400889AE2 /* ProductViewModel.swift */,
 				E71139CE2346AC7400889AE2 /* ProductViewController.swift */,
 			);
-			path = Item;
+			path = Product;
 			sourceTree = "<group>";
 		};
 		E71139DF2346AC7D00889AE2 /* Restaurant */ = {
