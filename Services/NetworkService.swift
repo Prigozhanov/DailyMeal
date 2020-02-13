@@ -17,7 +17,8 @@ public protocol NetworkService {
     
     func fetchUserData(onSuccess: @escaping (User) -> Void, onFailure: @escaping () -> Void)
     
-    func send<Response: Codable>(request: Request<Response>, completion: @escaping (Result<Response, NetworkClient.Error>) -> Void)
+    @discardableResult
+    func send<Response: Codable>(request: Request<Response>, completion: @escaping (Result<Response, NetworkClient.Error>, String) -> Void) -> URLSessionDataTask
     
 }
 
@@ -43,21 +44,21 @@ public class NetworkServiceImplementation: NetworkService {
         }
     }
     
-    
-    public func send<Response: Codable>(request: Request<Response>, completion: @escaping (Result<Response, NetworkClient.Error>) -> Void) {
+    @discardableResult
+    public func send<Response: Codable>(request: Request<Response>, completion: @escaping (Result<Response, NetworkClient.Error>, String) -> Void) -> URLSessionDataTask {
         
-        networkClient.send(request: request) { [weak self] result in
+        return networkClient.send(request: request) { [weak self] result, uuid in
             switch result {
             case let .success(response):
                 self?.handleLogin(response: response)
-                completion(result)
+                completion(result, uuid)
             case let .failure(error):
                 switch error {
                 case .unauthorized:
                     self?.handleUnauthorized()
-                    completion(result)
+                    completion(result, uuid)
                 default:
-                    completion(result)
+                    completion(result, uuid)
                 }
             }
         }
@@ -79,7 +80,7 @@ public class NetworkServiceImplementation: NetworkService {
     public func fetchUserData(onSuccess: @escaping (User) -> Void, onFailure: @escaping () -> Void) {
         let req = requestFactory.user()
         
-        send(request: req) { [weak self] result in
+        send(request: req) { [weak self] result, _ in
             switch result {
             case let .success(user):
                 self?.userDefaultsService.updateUserDetails(user: user)

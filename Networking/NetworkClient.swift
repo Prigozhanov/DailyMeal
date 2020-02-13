@@ -26,7 +26,8 @@ public final class NetworkClient {
         self.urlRequestConfigurator = urlRequestConfigurator
     }
     
-    public func send<Response: Codable>(request: Request<Response>, completion: @escaping (Result<Response, Error>) -> Void) {
+    @discardableResult
+    public func send<Response: Codable>(request: Request<Response>, completion: @escaping (Result<Response, Error>, String) -> Void) -> URLSessionDataTask  {
         var urlRequest = URLRequestBuilder(request: request).urlRequest
         
         urlRequestConfigurator.configure(request: &urlRequest)
@@ -36,6 +37,7 @@ public final class NetworkClient {
         os_log("[NETWORK] [REQUEST] [HEADERS] %s",String(describing: urlRequest.allHTTPHeaderFields))
         
         let task = session.dataTask(with: urlRequest) { (data, response, error) in
+            let uuid = UUID().uuidString
             
             guard let response = response as? HTTPURLResponse else {
                 return
@@ -43,13 +45,13 @@ public final class NetworkClient {
             
             let successClosure: (Response) -> Void = { response in
                 DispatchQueue.main.async {
-                    completion(.success(response))
+                    completion(.success(response), uuid)
                 }
             }
             
             let failureClosure: (Error) -> Void = { error in
                 DispatchQueue.main.async {
-                    completion(.failure(error))
+                    completion(.failure(error), uuid)
                 }
             }
             
@@ -78,6 +80,7 @@ public final class NetworkClient {
         }
         
         task.resume()
+        return task
     }
     
 }

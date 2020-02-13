@@ -103,6 +103,10 @@ class ValidationCodeContentView: UIView {
 
     func onErrorAction() {
         shakeAnimation()
+        let impactFeedbackgenerator = UINotificationFeedbackGenerator()
+        impactFeedbackgenerator.prepare()
+        impactFeedbackgenerator.notificationOccurred(.error)
+
         clear()
         firstContainer.textField.becomeFirstResponder()
     }

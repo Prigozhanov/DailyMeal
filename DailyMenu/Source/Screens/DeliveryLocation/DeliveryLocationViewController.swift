@@ -13,6 +13,8 @@ final class DeliveryLocationViewController: UIViewController {
     
     private var viewModel: DeliveryLocationViewModel
     
+    private var confirmationDiaglogIsVisible: Bool = false
+    
     private let headerView = MapHeaderView(
         title: "Delivery location",
         shouldShowBackButton: false,
@@ -138,10 +140,12 @@ final class DeliveryLocationViewController: UIViewController {
     }
     
     func showConfiramtionDialog(address: String) {
-        let vc = ConfirmationDiagloViewController(title: "Address confirmation", subtitle: "") { [weak self] in
+        let vc = ConfirmationDiagloViewController(title: "Address confirmation", subtitle: "", onConfirm: { [weak self] in
             self?.viewModel.saveAddressInfo()
             NotificationCenter.default.post(name: .userAddressChanged, object: nil)
             self?.dismiss(animated: true)
+        }) { [weak self] in
+            self?.confirmationDiaglogIsVisible = false
         }
         vc.subtitleLabel.attributedText = Formatter.getHighlightedAttributtedString(
             string: "Do you want to choose \(address) as your delivery address, please confirm if it's correct, and start to choose your meal.",
@@ -149,7 +153,10 @@ final class DeliveryLocationViewController: UIViewController {
             font: FontFamily.smallMedium!,
             highlightingFont: FontFamily.Poppins.semiBold.font(size: 12),
             highlightingColor: Colors.charcoal.color)
-        show(vc, sender: nil)
+        if confirmationDiaglogIsVisible != true {
+            confirmationDiaglogIsVisible = true
+            show(vc, sender: nil)
+        }
     }
     
 }

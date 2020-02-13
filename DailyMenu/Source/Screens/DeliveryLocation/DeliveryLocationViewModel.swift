@@ -35,6 +35,8 @@ final class DeliveryLocationViewModelImplementation: DeliveryLocationViewModel {
     
     private var userAddressMeta: UserAddressMeta?
     
+    private var lastGeoDataExistRequestUUID: String = ""
+    
     init() {
         context = AppDelegate.shared.context
         locationService = context.locationService
@@ -46,7 +48,7 @@ final class DeliveryLocationViewModelImplementation: DeliveryLocationViewModel {
     func getAddressesList(string: String, completion: @escaping ([String]) -> Void) {
         let req = context.networkService.requestFactory.getGeodataByString(string: string)
         
-        context.networkService.send(request: req) { result in
+        context.networkService.send(request: req) { result, _ in
             switch result {
             case let .success(geodata):
                 if let featureMembers = geodata?.response?.geoObjectCollection?.featureMember {
@@ -70,8 +72,9 @@ final class DeliveryLocationViewModelImplementation: DeliveryLocationViewModel {
      */
     func requestGeodcode(string: String, onSuccess: @escaping (String) -> Void) {
         let req = context.networkService.requestFactory.getGeocode(string: string)
-        
-        context.networkService.send(request: req) { [weak self] result in
+        lastGeoDataExistRequestUUID = ""
+        context.networkService.send(request: req) { [weak self] result, uuid in
+            self?.lastGeoDataExistRequestUUID = uuid
             switch result {
             case let .success(geodata):
                 guard let featureMember = geodata?
@@ -82,14 +85,16 @@ final class DeliveryLocationViewModelImplementation: DeliveryLocationViewModel {
                     let geoObject = featureMember.geoObject else {
                         return
                 }
-                self?.requestGeodataExist(geoObject: geoObject, onSuccess: onSuccess)
+                if self?.lastGeoDataExistRequestUUID == uuid {
+                    self?.requestGeodataExist(geoObject: geoObject, onSuccess: onSuccess, uuid: uuid)
+                }
             case let .failure(error):
                 print(error)
             }
         }
     }
     
-    func requestGeodataExist(geoObject: GeoObject, onSuccess: @escaping (String) -> Void) {
+    func requestGeodataExist(geoObject: GeoObject, onSuccess: @escaping (String) -> Void, uuid: String) {
         
         let geodataRequestObject = MenuV2GeodataRequest(geodata: [
             MenuV2Geodata(
@@ -101,11 +106,17 @@ final class DeliveryLocationViewModelImplementation: DeliveryLocationViewModel {
             geodataRequest: geodataRequestObject
         )
         
-        context.networkService.send(request: networkRequest) { [weak self] result in
+        context.networkService.send(request: networkRequest) { [weak self] result, _ in
             switch result {
             case let .success(response):
                 if let address = response.isAddressExists?.lng7 {
-                    onSuccess(address)
+                    print("DEBUG LAST UUID")
+                    print(self?.lastGeoDataExistRequestUUID)
+                    print("DEBUG UUID")
+                    print(uuid)
+                    if self?.lastGeoDataExistRequestUUID == uuid {
+                        onSuccess(address)
+                    }
                 }
                 if let addressExists = response.isAddressExists {
                     self?.userAddressMeta = UserAddressMeta(

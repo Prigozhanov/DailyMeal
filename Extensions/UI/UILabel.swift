@@ -56,4 +56,10 @@ extension UILabel {
         return label
     }
     
+    static func makeSmallTitle(_ text: String? = nil) -> UILabel {
+        let label = UILabel.makeText(text)
+        label.font = FontFamily.Poppins.light.font(size: 10)
+        return label
+    }
+    
 }

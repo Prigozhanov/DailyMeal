@@ -70,6 +70,10 @@ final class CartViewController: UIViewController {
         super.viewDidLoad()
         setupScreen()
         reloadScreen()
+        
+        view.addGestureRecognizer(BlockTap(action: { [weak self] _ in
+            self?.promocodeView.resignFirstResponder()
+        }))
     }
     
     override func viewWillAppear(_ animated: Bool) {

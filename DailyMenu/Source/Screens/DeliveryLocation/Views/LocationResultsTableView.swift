@@ -31,12 +31,12 @@ class LocationResultsTableView: UITableView {
         }
     }
     
-    func reloadTableWithData(data: [String]) {
+    func reloadTableWithData(data: [String], searchString: String) {
         tableDirector.clear()
         let rows = data.map {
-            TableRow<LocationResultRow>(item: $0)
+            TableRow<LocationResultRow>(item: LocationResultRow.Item(string: $0, searchText: searchString))
                 .on(.click) { [weak self] data in
-                    self?.item(data.item)
+                    self?.item(data.item.string)
             }
             
         }
@@ -48,37 +48,11 @@ class LocationResultsTableView: UITableView {
     
     private func layoutHeight() {
         heightConstraint?.update(
-            offset: self.contentSize.height < maxHeight ? self.contentSize.height : maxHeight
+            offset: self.contentSize.height < maxHeight ? self.contentSize.height : maxHeight //TODO acnhor to top constraint
         )
     }
     
     required init?(coder: NSCoder) { fatalError() }
     
-    
-}
-
-class LocationResultRow: BaseTableCell, ConfigurableCell {
-    typealias CellData = String
-    
-    private var addressLabel: UILabel = {
-        let label = UILabel.makeText()
-        label.font = FontFamily.Poppins.medium.font(size: 14)
-        return label
-    }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: nil)
-        contentView.addSubview(addressLabel)
-        addressLabel.snp.makeConstraints {
-            $0.top.trailing.bottom.equalToSuperview().inset(Layout.commonInset)
-            $0.leading.equalToSuperview().inset(40 + Layout.commonInset)
-        }
-    }
-    
-    required init?(coder aDecoder: NSCoder) { fatalError() }
-    
-    func configure(with string: String) {
-        addressLabel.text = string
-    }
     
 }

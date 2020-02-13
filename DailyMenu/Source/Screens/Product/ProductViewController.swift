@@ -53,10 +53,6 @@ final class ProductViewController: UIViewController {
     
     private lazy var sliderView = SliderView(title: "Spicy Level", sliderValues: ["Regular", "Spicy", "Naga"]) // TODO
     
-    private lazy var optionsStackView = OptionsStackView(item: OptionsStackView.Item(options: self.viewModel.product.options ?? [], onSelectOption: { option in
-        //TODO
-    }))
-    
     private var totalLabel: UILabel = {
         let label = UILabel.makeSmallText("Total")
         label.textAlignment = .center
@@ -132,8 +128,29 @@ final class ProductViewController: UIViewController {
     
     private func setupStackView() {
         stackView.addRow(productHeader)
-        stackView.addRow(sliderView)
-        stackView.addRow(optionsStackView)
+        
+        if let options = viewModel.product.options {
+            stackView.addRows(
+                options.map({
+                    OptionView(
+                        item: OptionView.Item(
+                            id: $0.id,
+                            title: $0.optionTitle,
+                            minChoices: $0.minimum,
+                            maxChoices: $0.maximum,
+                            free: $0.free,
+                            freeMaxChoices: $0.freemax,
+                            choices: $0.choices.map({
+                                ChoiceRow.Item(id: $0.id, title: $0.label, price: $0.price, isSelected: false ) { choiceItem in
+                                    // TODO which parameter applies choice?
+                                }
+                            })
+                        )
+                    )
+                })
+            )
+        }
+        
         stackView.addRow(totalLabel)
         stackView.addRow(totalValueLabel)
         stackView.addRow(addToCartButton)

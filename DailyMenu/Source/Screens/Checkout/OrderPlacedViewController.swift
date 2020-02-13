@@ -7,9 +7,9 @@ import UIKit
 
 final class OrderPlacedViewController: UIViewController {
     
-    private lazy var orderAgainButton = UIButton.makeActionButton("View order status") { button in
+    private lazy var orderAgainButton = UIButton.makeActionButton("View order status") { [weak self] button in
         button.tapAnimation()
-        self.navigationController?.dismiss(animated: true, completion: {
+        self?.navigationController?.dismiss(animated: true, completion: {
         })
     }
     
@@ -29,8 +29,6 @@ final class OrderPlacedViewController: UIViewController {
         messageLabel.font = FontFamily.Poppins.regular.font(size: 12)
         messageLabel.textColor = Colors.gray.color
         messageLabel.numberOfLines = 5
-        messageLabel.lineBreakMode = .byClipping
-        
         view.addSubviews([imageView, messageTitle, messageLabel, orderAgainButton])
         
         
@@ -45,7 +43,7 @@ final class OrderPlacedViewController: UIViewController {
         }
         messageLabel.snp.makeConstraints {
             $0.top.equalTo(messageTitle.snp.bottom).offset(Layout.largeMargin)
-            $0.centerX.equalToSuperview()
+            $0.leading.equalTo(messageTitle)
             $0.width.equalToSuperview().multipliedBy(0.7)
         }
         orderAgainButton.snp.makeConstraints {

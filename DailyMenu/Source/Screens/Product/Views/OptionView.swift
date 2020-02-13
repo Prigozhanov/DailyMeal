@@ -1,86 +1,71 @@
 //
-//  Created by Vladimir on 1/26/20.
+//  Created by Vladimir on 2/11/20.
 //  Copyright © 2020 epam. All rights reserved.
 //
 
 import UIKit
-import Networking
-import Extensions
 
 class OptionView: UIView {
     
     struct Item {
-        var option: Option
-        let onSelectOption: (Option) -> Void
-        var isSelected: Bool
+        let id: Int
+        let title: String
+        let minChoices: Int
+        let maxChoices: Int
+        let free: Int
+        let freeMaxChoices: Int
+        let choices: [ChoiceRow.Item]
     }
     
     private var item: Item
     
-    private lazy var checkMarkImageView: UIImageView = {
-        let view = UIImageView(image: item.isSelected ? Images.Icons.checkmarkChecked.image : Images.Icons.checkmarkNotMarked.image)
-        view.contentMode = .scaleAspectFit
-        return view
-    }()
+    private var selectedChoicesCount: Int
     
-    private var titleLabel: UILabel = {
-        let label = UILabel.makeText()
-        label.font = FontFamily.Poppins.medium.font(size: 14)
-        return label
+    private var choicesStack: UIStackView = {
+        let stack = UIStackView(frame: .zero)
+        stack.distribution = .fillEqually
+        stack.axis = .vertical
+        return stack
     }()
-    
-    private var priceLabel = UILabel.makeSmallText()
     
     init(item: Item) {
         self.item = item
         
-        super.init(frame: .height(60))
+        selectedChoicesCount = item.choices.filter({ $0.isSelected }).count
         
-        let cardView = CardView(shadowSize: .small, customInsets: UIEdgeInsets(
-            top: 0,
-            left: CGFloat(Layout.commonInset),
-            bottom: CGFloat(Layout.commonInset),
-            right: CGFloat(Layout.commonInset))
-        )
-        addSubview(cardView)
-        cardView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
+        super.init(frame: .zero)
         
-        cardView.contentView.addSubview(checkMarkImageView)
-        checkMarkImageView.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(Layout.commonInset)
-            $0.centerY.equalToSuperview()
-            $0.size.equalTo(15)
-        }
-        cardView.contentView.addSubview(titleLabel)
-        titleLabel.text = item.option.label
+        let titleLabel = UILabel.makeSmallTitle(item.title)
+        addSubviews([titleLabel, choicesStack])
         titleLabel.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview()
-            $0.leading.equalTo(checkMarkImageView.snp.trailing).offset(Layout.commonMargin)
+            $0.top.leading.trailing.equalToSuperview().inset(20)
         }
-//        cardView.contentView.addSubview(priceLabel)
-//        priceLabel.text = Formatter.Currency.toString(item.option.p)
-//        priceLabel.snp.makeConstraints {
-//            $0.top.bottom.trailing.equalToSuperview().inset(Layout.commonInset)
-//        }
         
-        cardView.addGestureRecognizer(BlockTap(action: { [unowned self] _ in
-            self.setSelected()
-            item.onSelectOption(item.option)
-        }))
+        choicesStack.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
+            $0.leading.trailing.bottom.equalToSuperview().inset(20)
+        }
+        
+        item.choices.forEach {
+            let choiceView = ChoiceRow(item: $0) { [weak self] choiceView in
+                guard let self = self else { return }
+                if self.item.maxChoices == 1 {
+                    (self.choicesStack.arrangedSubviews as? [ChoiceRow])?.forEach({ $0.setSelected(false) })
+                    choiceView.setSelected()
+                } else if self.selectedChoicesCount >= self.item.maxChoices, !choiceView.item.isSelected {
+                    print("TODO")
+                } else if self.selectedChoicesCount <= self.item.minChoices, choiceView.item.isSelected {
+                    print("TODO")
+                } else {
+                    choiceView.setSelected()
+                    self.selectedChoicesCount = choiceView.item.isSelected ? self.selectedChoicesCount + 1 : self.selectedChoicesCount - 1
+                }
+            }
+            self.choicesStack.addArrangedSubview(choiceView)
+        }
     }
     
     required init?(coder: NSCoder) { fatalError() }
     
-    private func setSelected() {
-        item.isSelected = !item.isSelected
-        item.option.active = item.isSelected ? 1 : 0
-        if item.isSelected {
-            checkMarkImageView.image = Images.Icons.checkmarkChecked.image
-        } else {
-           checkMarkImageView.image = Images.Icons.checkmarkNotMarked.image
-        }
-    }
     
 }

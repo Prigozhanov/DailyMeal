@@ -10,6 +10,7 @@ class ConfirmationDiagloViewController: UIViewController {
     private let dialogTitle: String
     private let dialogSubtitle: String
     private let onConfirm: VoidClosure
+    private let onDismiss: VoidClosure
     
     private let cardView = CardView(shadowSize: .large, customInsets: .zero)
     
@@ -48,10 +49,11 @@ class ConfirmationDiagloViewController: UIViewController {
         return button
     }()
     
-    init(title: String, subtitle: String, onConfirm: @escaping VoidClosure) {
+    init(title: String, subtitle: String, onConfirm: @escaping VoidClosure, onDismiss: @escaping VoidClosure = {}) {
         dialogTitle = title
         dialogSubtitle = subtitle
         self.onConfirm = onConfirm
+        self.onDismiss = onDismiss
         
         super.init(nibName: nil, bundle: nil)
         
@@ -97,6 +99,13 @@ class ConfirmationDiagloViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         Style.addBlueGradient(confirmButton)
+    }
+    
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        super.dismiss(animated: flag, completion: { [weak self] in
+            self?.onDismiss()
+            completion?()
+        })
     }
     
 }

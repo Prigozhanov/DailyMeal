@@ -20,12 +20,13 @@ class LocationSearchView: UIView {
         item: LocationSearchInputView.Item(
             onUserLocationButtonTapped: { [weak self] in
                 self?.item.onLocationButtonTap()
-        },
+            },
             shouldChangeCharacters: { [weak self] string in
                 self?.item.shouldChangeCharacters(string, self)
             }, shouldReturn: { [weak self] in
                 self?.updateResults(with: [])
-        })
+            }
+        )
     )
     
     private lazy var locationResultsTableView = LocationResultsTableView { [weak self] address in
@@ -53,7 +54,7 @@ class LocationSearchView: UIView {
     }
     
     func updateResults(with results: [String]) {
-        locationResultsTableView.reloadTableWithData(data: results)
+        locationResultsTableView.reloadTableWithData(data: results, searchString: searchTextField.text ?? "")
     }
     
     func selectAddress(string: String) {

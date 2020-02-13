@@ -122,7 +122,7 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
         }
         let req = context.networkService.requestFactory.menu(cityId: areaId, addressId: addressId)
         view?.showLoadingIndicator()
-        context.networkService.send(request: req) { [weak self] (result) in
+        context.networkService.send(request: req) { [weak self] result, _ in
             LoadingIndicator.hide()
             switch result {
             case let .success(response):

@@ -16,6 +16,7 @@ class CartPromocodeView: UIView {
     private lazy var textField: UITextField = {
         let field = UITextField()
         field.placeholder = "Promo Code"
+        field.delegate = self
         return field
     }()
     
@@ -59,4 +60,15 @@ class CartPromocodeView: UIView {
         Style.addBlueGradient(applyButton)
     }
     
+    override func resignFirstResponder() -> Bool {
+        textField.resignFirstResponder()
+    }
+    
+}
+
+extension CartPromocodeView : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

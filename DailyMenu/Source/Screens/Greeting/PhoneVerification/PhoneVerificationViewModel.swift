@@ -43,7 +43,7 @@ class PhoneVerificationViewModelImplementation: PhoneVerificationViewModel {
     func sendVerifyingCode(validationCode: String) {
         let req = context.networkService.requestFactory.verifyToken(validationCode: validationCode)
         
-        context.networkService.send(request: req) { [weak self] result in
+        context.networkService.send(request: req) { [weak self] result, _ in
             switch result {
             case let .success(response):
                 if let user = response.member, let jwtToken = response.jwtToken {
@@ -61,7 +61,7 @@ class PhoneVerificationViewModelImplementation: PhoneVerificationViewModel {
     
     func sendPushGeneration(phoneNumber: String?) {
         let req = context.networkService.requestFactory.generateToken(phone: "+\(phoneNumber ?? self.phoneNumber)")
-        context.networkService.send(request: req) { [weak self] result in
+        context.networkService.send(request: req) { [weak self] result, _ in
             LoadingIndicator.hide()
             switch result {
             case .success:

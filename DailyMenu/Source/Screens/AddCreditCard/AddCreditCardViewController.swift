@@ -25,14 +25,12 @@ final class AddCreditCardViewController: UIViewController {
         }
     }
     
-    private var notificationTokens: [Token]
+    private var notificationTokens: [Token] = []
     
     private var bottomConstraint: Constraint?
     
     init(viewModel: AddCreditCardViewModel) {
         self.viewModel = viewModel
-        
-        notificationTokens = []
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -48,7 +46,6 @@ final class AddCreditCardViewController: UIViewController {
         
         Style.addBlueCorner(self)
         
-        var bottomConstraint: Constraint?
         notificationTokens.append(Token.make(descriptor: .keyboardWillShowDescriptor, using: { [weak self] frame in
             self?.updateBottomConstraint(offset: frame.height - (self?.view.safeAreaInsets.bottom ?? 0))
         }))
@@ -64,6 +61,7 @@ final class AddCreditCardViewController: UIViewController {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
         }
         
+        var bottomConstraint: Constraint?
         view.addSubview(cardInfoView)
         cardInfoView.snp.makeConstraints {
             $0.top.equalTo(placeholderImage.snp.bottom).offset(20)
