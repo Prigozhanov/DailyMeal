@@ -6,6 +6,7 @@
 import Extensions
 import AloeStackView
 import CollectionKit
+import Networking
 
 class CartItemView: UIView {
     
@@ -17,22 +18,22 @@ class CartItemView: UIView {
     
     private var item: Item
     
-    private lazy var optionsDataSource = ArrayDataSource(data: self.item.cartItem.options.filter { $0.applied })
+    private lazy var optionsDataSource = ArrayDataSource(data: self.item.cartItem.product.options ?? [])
     private lazy var optionsCollectionProvider = BasicProvider(
         dataSource: optionsDataSource,
-        viewSource: ClosureViewSource(viewUpdater: { [weak self] (view: FoodOptionCell, data: CartItem.Option, index: Int) in
+        viewSource: ClosureViewSource(viewUpdater: { [weak self] (view: FoodOptionCell, data: Option, index: Int) in
             view.configure(with: FoodOptionCell.Item(option: data, onRemoveOption: { [weak self] (_) in
                 guard let self = self else { return }
-                data.applied = false
+//                data.applied = false
                 self.optionsDataSource.data.remove(at: index)
                 self.optionsDataSource.reloadData()
                 AppDelegate.shared.context.cartService.view?.reloadCalculationsRows()
             }))
         }),
-        sizeSource: { [weak self] (index: Int, data: CartItem.Option, collectionSize: CGSize) -> CGSize in
+        sizeSource: { [weak self] (index: Int, data: Option, collectionSize: CGSize) -> CGSize in
             guard let self = self else { return .zero }
             return CGSize(
-                width: NSString(string: data.option.rawValue)
+                width: NSString(string: data.label)
                     .size(withAttributes: [
                         NSAttributedString.Key.font : FontFamily.Poppins.regular.font(size: 11)!
                     ])
@@ -95,11 +96,11 @@ class CartItemView: UIView {
             $0.leading.equalTo(counter.snp.trailing).offset(Layout.commonMargin)
             $0.size.equalTo(counter.snp.height)
         }
-        if let url = URL(string: item.cartItem.imageURL.orEmpty) {
+        if let url = URL(string: item.cartItem.product.src.orEmpty) {
              itemImage.sd_setImage(with: url)
         }
         
-        let itemNameLabel = UILabel.makeText(item.cartItem.name)
+        let itemNameLabel = UILabel.makeText(item.cartItem.product.label)
         itemNameLabel.numberOfLines = 2
         itemNameLabel.font = FontFamily.semibold
         cardView.contentView.addSubview(itemNameLabel)
@@ -108,7 +109,7 @@ class CartItemView: UIView {
             $0.leading.equalTo(itemImage.snp.trailing).offset(Layout.largeMargin)
         }
         
-        let itemPrice = UILabel.makeText(Formatter.Currency.toString(item.cartItem.price))
+        let itemPrice = UILabel.makeText(Formatter.Currency.toString(item.cartItem.product.price))
         itemPrice.font = FontFamily.semibold
         itemPrice.textColor = Colors.blue.color
         cardView.contentView.addSubview(itemPrice)

@@ -4,11 +4,12 @@
 //
 
 import UIKit
+import Networking
 
 class FoodOptionCell: UICollectionViewCell {
     
     public struct Item {
-        public let option: CartItem.Option
+        public let option: Option
         public let onRemoveOption: ((UIButton) -> ())
     }
     
@@ -36,7 +37,7 @@ class FoodOptionCell: UICollectionViewCell {
     required init?(coder: NSCoder) { fatalError() }
     
     public func configure(with item: Item) {
-        label.text = item.option.option.rawValue
+        label.text = item.option.label
         optionRemoveButton.setActionHandler(controlEvents: .touchUpInside, ForAction: item.onRemoveOption)
     }
     

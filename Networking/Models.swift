@@ -244,6 +244,7 @@ public struct Restaurant: Codable {
         case type, distance, source, duration, distanceMetr, sortByMinutes, orderDelayFirst, orderDelaySecond
         case poligonMatch = "poligon_match"
     }
+    
 }
 
 // MARK: - AltWorkHour
@@ -282,31 +283,53 @@ public struct ProductCategory: Codable {
 
 // MARK: - Product
 public struct Product: Codable {
-    public let alias: String
-    public let menu, new, id: Int
-    public let label, imageTitle, content: String
-    public let itemNumber, inventory, restID, instock: Int
-    public let desiredStock: Int
-    public let price: String
-    public let restaurantMenuCategories: Int
-    public let image, type, keywords, readyTime: String
+    public let src: String?
+    public let imageTitle, image: String?
+    public let inventory, new: Int?
     public let options: [Option]?
-    public let src: String
+    public let restWorkingTime: [RESTWorkingTime]?
+    public let restID: Int?
+    public let keywords, alias: String?
+    public let menu, instock: Int?
+    public let type, restDeliveryFee, chainLabel: String?
+    public let id: Int
+    public let label: String
+    public var productcount: Int?
+    public let itemNumber, restaurantMenuCategories: Int?
+    public let readyTime: String?
+    public let price: String
+    public let comment: String?
+    public let desiredStock: Int?
+    public let content: String?
     
     enum CodingKeys: String, CodingKey {
-        case alias, menu, new, id, label
+        case src
         case imageTitle = "image_title"
-        case content
-        case itemNumber = "item_number"
-        case inventory
+        case image, inventory, new, options, restWorkingTime
         case restID = "rest_id"
-        case instock
-        case desiredStock = "desired_stock"
-        case price
+        case keywords, alias, menu, instock, type
+        case restDeliveryFee = "rest_delivery_fee"
+        case chainLabel = "chain_label"
+        case id, label, productcount
+        case itemNumber = "item_number"
         case restaurantMenuCategories = "restaurant_menu_categories"
-        case image, type, keywords
         case readyTime = "ready_time"
-        case options, src
+        case price, comment
+        case desiredStock = "desired_stock"
+        case content
+    }
+}
+
+// MARK: - RESTWorkingTime
+public struct RESTWorkingTime: Codable {
+    public let close: [String]?
+    public let minutes: Int?
+    public let start: [String]?
+    
+    public init(close: [String]?, minutes: Int?, start: [String]?) {
+        self.close = close
+        self.minutes = minutes
+        self.start = start
     }
 }
 
@@ -397,5 +420,255 @@ public struct IsAddressExists: Codable {
         case lng7 = "lng_7"
         case hash, position
         case updatedAt = "updated_at"
+    }
+}
+
+// MARK: - ShoppingCartRequest
+public struct ShoppingCartRequest: Codable {
+    public let paymentMethods: Int
+    public let yourNotes: String
+    public let memberID: Int
+    public let intercom: String
+    public let phoneConfirm: Int
+    public let timeMinute, fullname: String
+    public let addressID: Int
+    public let deliveryDate: Double
+    public let details, apartament, house, orderType: String
+    public let floor: String
+    public let recuringUserID, restID, deliveryDirtyLong: Int
+    public let coupon, deliveryType, deliveryAddress: String
+    public let deliveryDirtyLat: Int
+    public let delivery, timeHour, addressDetails, entrance: String
+    public let phone: String
+    public let products: [Product]
+    public let usebonus: String
+    
+    enum CodingKeys: String, CodingKey {
+        case paymentMethods = "payment_methods"
+        case yourNotes = "your_notes"
+        case memberID = "member_id"
+        case intercom
+        case phoneConfirm = "phone_confirm"
+        case timeMinute = "Time_Minute"
+        case fullname
+        case addressID = "addressId"
+        case deliveryDate = "delivery_date"
+        case details, apartament, house
+        case orderType = "order_type"
+        case floor
+        case recuringUserID = "recuring-user-id"
+        case restID = "rest_id"
+        case deliveryDirtyLong = "delivery_dirty_long"
+        case coupon
+        case deliveryType = "delivery_type"
+        case deliveryAddress = "delivery_address"
+        case deliveryDirtyLat = "delivery_dirty_lat"
+        case delivery
+        case timeHour = "Time_Hour"
+        case addressDetails = "address_details"
+        case entrance, phone, products, usebonus
+    }
+    
+    public init(paymentMethods: Int,
+                yourNotes: String,
+                memberID: Int,
+                intercom: String,
+                phoneConfirm: Int,
+                timeMinute: String,
+                fullname: String,
+                addressID: Int,
+                deliveryDate: Double,
+                details: String,
+                apartament: String,
+                house: String,
+                orderType: String,
+                floor: String,
+                recuringUserID: Int,
+                restID: Int,
+                deliveryDirtyLong: Int,
+                coupon: String,
+                deliveryType: String,
+                deliveryAddress: String,
+                deliveryDirtyLat: Int,
+                delivery: String,
+                timeHour: String,
+                addressDetails: String,
+                entrance: String,
+                phone: String,
+                products: [Product],
+                usebonus: String) {
+        self.paymentMethods = paymentMethods
+        self.yourNotes = yourNotes
+        self.memberID = memberID
+        self.intercom = intercom
+        self.phoneConfirm = phoneConfirm
+        self.timeMinute = timeMinute
+        self.fullname = fullname
+        self.addressID = addressID
+        self.deliveryDate = deliveryDate
+        self.details = details
+        self.apartament = apartament
+        self.house = house
+        self.orderType = orderType
+        self.floor = floor
+        self.recuringUserID = recuringUserID
+        self.restID = restID
+        self.deliveryDirtyLong = deliveryDirtyLong
+        self.coupon = coupon
+        self.deliveryType = deliveryType
+        self.deliveryAddress = deliveryAddress
+        self.deliveryDirtyLat = deliveryDirtyLat
+        self.delivery = delivery
+        self.timeHour = timeHour
+        self.addressDetails = addressDetails
+        self.entrance = entrance
+        self.phone = phone
+        self.products = products
+        self.usebonus = usebonus
+    }
+    
+    func encoded() -> [String : Any] {
+        let jsonData = try! JSONEncoder().encode(self)
+        let json = try! JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: Any]
+        return json
+    }
+}
+
+// MARK: - ShoppingCartResponse
+public struct ShoppingCartResponse: Codable {
+    public let success: Bool
+    public let rawRequest: ShoppingCartRequest
+    public let rawResponse: ShoppingCartRawResponse
+    
+    enum CodingKeys: String, CodingKey {
+        case success
+        case rawRequest = "raw_request"
+        case rawResponse = "raw_response"
+    }
+    
+    public init(success: Bool, rawRequest: ShoppingCartRequest, rawResponse: ShoppingCartRawResponse) {
+        self.success = success
+        self.rawRequest = rawRequest
+        self.rawResponse = rawResponse
+    }
+}
+
+// MARK: - ShoppingCartRawResponse
+public struct ShoppingCartRawResponse: Codable {
+    public let basketData: BasketData?
+    public let post: Post?
+    public let orderID, rate: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case basketData = "basket_data"
+        case post
+        case orderID = "order_id"
+        case rate
+    }
+    
+    public init(basketData: BasketData?, post: Post?, orderID: String?, rate: String?) {
+        self.basketData = basketData
+        self.post = post
+        self.orderID = orderID
+        self.rate = rate
+    }
+}
+
+// MARK: - BasketData
+public struct BasketData: Codable {
+    public let price, totalPrice: Double?
+    public let currentLngID, deliveryPrice, paymentMethod: Int?
+    public let orderType: String?
+    public let useBonus, usedBonus, pushID: Int?
+    public let deliveryType: String?
+    public let addressID, changeLat, changeLong: Int?
+    
+    enum CodingKeys: String, CodingKey {
+        case price
+        case totalPrice = "total_price"
+        case currentLngID = "currentLngId"
+        case deliveryPrice = "delivery_price"
+        case paymentMethod = "payment_method"
+        case orderType = "order_type"
+        case useBonus = "use_bonus"
+        case usedBonus = "used_bonus"
+        case pushID = "push_id"
+        case deliveryType = "delivery_type"
+        case addressID = "addressId"
+        case changeLat = "change_lat"
+        case changeLong = "change_long"
+    }
+    
+    public init(price: Double?, totalPrice: Double?, currentLngID: Int?, deliveryPrice: Int?, paymentMethod: Int?, orderType: String?, useBonus: Int?, usedBonus: Int?, pushID: Int?, deliveryType: String?, addressID: Int?, changeLat: Int?, changeLong: Int?) {
+        self.price = price
+        self.totalPrice = totalPrice
+        self.currentLngID = currentLngID
+        self.deliveryPrice = deliveryPrice
+        self.paymentMethod = paymentMethod
+        self.orderType = orderType
+        self.useBonus = useBonus
+        self.usedBonus = usedBonus
+        self.pushID = pushID
+        self.deliveryType = deliveryType
+        self.addressID = addressID
+        self.changeLat = changeLat
+        self.changeLong = changeLong
+    }
+}
+
+// MARK: - Post
+public struct Post: Codable {
+    public let quickOrderPhone, address: String?
+    public let addresInfo: AddresInfo?
+    public let userInfo: UserInfo?
+    public let paymentMethod: Int?
+    
+    enum CodingKeys: String, CodingKey {
+        case quickOrderPhone = "quick_order_phone"
+        case address
+        case addresInfo = "addres_info"
+        case userInfo = "user_info"
+        case paymentMethod = "payment_method"
+    }
+    
+    public init(quickOrderPhone: String?, address: String?, addresInfo: AddresInfo?, userInfo: UserInfo?, paymentMethod: Int?) {
+        self.quickOrderPhone = quickOrderPhone
+        self.address = address
+        self.addresInfo = addresInfo
+        self.userInfo = userInfo
+        self.paymentMethod = paymentMethod
+    }
+}
+
+// MARK: - AddresInfo
+public struct AddresInfo: Codable {
+    public let city, street, apartament, house: String?
+    public let entrance, floor, intercom, coupon: String?
+    public let addressDetails: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case city, street, apartament, house, entrance, floor, intercom, coupon
+        case addressDetails = "address_details"
+    }
+    
+    public init(city: String?, street: String?, apartament: String?, house: String?, entrance: String?, floor: String?, intercom: String?, coupon: String?, addressDetails: String?) {
+        self.city = city
+        self.street = street
+        self.apartament = apartament
+        self.house = house
+        self.entrance = entrance
+        self.floor = floor
+        self.intercom = intercom
+        self.coupon = coupon
+        self.addressDetails = addressDetails
+    }
+}
+
+// MARK: - UserInfo
+public struct UserInfo: Codable {
+    public let details: String?
+    
+    public init(details: String?) {
+        self.details = details
     }
 }

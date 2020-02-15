@@ -5,11 +5,6 @@
 
 import Foundation
 
-public enum PaymentMethod {
-    case cash, creditCard
-}
-
-
 public protocol CartView: AnyObject {
     func reloadCalculationsRows()
 }
@@ -33,7 +28,6 @@ public protocol CartService {
     
     func addItem(item: CartItem)
     func removeItem(item: CartItem)
-    func removeOption(option: CartItem.Option, atIndex index: Int, fromItem item: CartItem)
     
 }
 
@@ -65,9 +59,5 @@ public final class CartServiceImplementation: CartService {
     
     public func removeItem(item: CartItem) {
         items.removeValue(forKey: item.id)
-    }
-    
-    public func removeOption(option: CartItem.Option, atIndex index: Int, fromItem item: CartItem) {
-        items[item.id]?.options.remove(at: index)
     }
 }

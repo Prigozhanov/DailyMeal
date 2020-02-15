@@ -74,7 +74,7 @@
 		E720292923EDF46A000E9884 /* CardInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720292623EDF46A000E9884 /* CardInfoView.swift */; };
 		E720292D23EDF472000E9884 /* DeliveryLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720292B23EDF472000E9884 /* DeliveryLocationViewController.swift */; };
 		E720292E23EDF472000E9884 /* DeliveryLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720292C23EDF472000E9884 /* DeliveryLocationViewModel.swift */; };
-		E727B99E23EE4BEE00E2549E /* Geodata.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727B99D23EE4BEE00E2549E /* Geodata.swift */; };
+		E727B99E23EE4BEE00E2549E /* GeodataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727B99D23EE4BEE00E2549E /* GeodataModels.swift */; };
 		E727B9A023EE508000E2549E /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720291A23EDF20A000E9884 /* LocationService.swift */; };
 		E729CB5F23F3785600CE01AB /* ChoiceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E729CB5E23F3785600CE01AB /* ChoiceRow.swift */; };
 		E731B29123EF975000CF7AF9 /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E731B29023EF975000CF7AF9 /* LocationSearchView.swift */; };
@@ -283,7 +283,7 @@
 		E720292623EDF46A000E9884 /* CardInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardInfoView.swift; sourceTree = "<group>"; };
 		E720292B23EDF472000E9884 /* DeliveryLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryLocationViewController.swift; sourceTree = "<group>"; };
 		E720292C23EDF472000E9884 /* DeliveryLocationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryLocationViewModel.swift; sourceTree = "<group>"; };
-		E727B99D23EE4BEE00E2549E /* Geodata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geodata.swift; sourceTree = "<group>"; };
+		E727B99D23EE4BEE00E2549E /* GeodataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeodataModels.swift; sourceTree = "<group>"; };
 		E729CB5E23F3785600CE01AB /* ChoiceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceRow.swift; sourceTree = "<group>"; };
 		E731B29023EF975000CF7AF9 /* LocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchView.swift; sourceTree = "<group>"; };
 		E7333EC823F34C8C004E4400 /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
@@ -723,7 +723,7 @@
 				E77AD22523E96C8200FB270D /* Networking.h */,
 				E7ADCB8023E2346200607E8E /* NetworkClient.swift */,
 				E7CA20002364850C004AA1FC /* Models.swift */,
-				E727B99D23EE4BEE00E2549E /* Geodata.swift */,
+				E727B99D23EE4BEE00E2549E /* GeodataModels.swift */,
 				E7ED307A23E238BD008AD983 /* Request.swift */,
 				E703991423E25A17003E527A /* URLRequestBuilder.swift */,
 				E7976CC423E9EAA700698EC9 /* URLRequestConfigurator.swift */,
@@ -1329,7 +1329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E77AD24423E96CC700FB270D /* Request.swift in Sources */,
-				E727B99E23EE4BEE00E2549E /* Geodata.swift in Sources */,
+				E727B99E23EE4BEE00E2549E /* GeodataModels.swift in Sources */,
 				E77AD24123E96CC700FB270D /* URLRequestBuilder.swift in Sources */,
 				E77AD24323E96CC700FB270D /* NetworkClient.swift in Sources */,
 				E77AD24523E96CC700FB270D /* Models.swift in Sources */,

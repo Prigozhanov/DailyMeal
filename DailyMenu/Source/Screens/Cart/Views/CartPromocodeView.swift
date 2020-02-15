@@ -60,8 +60,9 @@ class CartPromocodeView: UIView {
         Style.addBlueGradient(applyButton)
     }
     
+    @discardableResult
     override func resignFirstResponder() -> Bool {
-        textField.resignFirstResponder()
+        return textField.resignFirstResponder()
     }
     
 }

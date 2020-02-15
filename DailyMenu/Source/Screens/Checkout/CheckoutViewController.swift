@@ -55,8 +55,9 @@ final class CheckoutViewController: UIViewController {
     
     private lazy var submitButton = UIButton.makeActionButton("Submit Order") { [weak self] button in
         button.tapAnimation()
-        let vc = OrderPlacedViewController()
-        self?.navigationController?.pushViewController(vc, animated: true)
+        self?.viewModel.checkoutOrder()
+//        let vc = OrderPlacedViewController()
+//        self?.navigationController?.pushViewController(vc, animated: true)
         
     }
     

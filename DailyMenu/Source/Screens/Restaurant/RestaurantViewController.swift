@@ -59,9 +59,9 @@ final class RestaurantViewController: UIViewController {
     private lazy var itemViewSource = ClosureViewSource(viewUpdater: { (view: FoodItemCell, data: Product, index: Int) in
         view.configure(with: FoodItemCell.Item(
             title: data.label,
-            description: data.content.withRemovedHtmlTags,
+            description: data.content.orEmpty.withRemovedHtmlTags,
             price: Formatter.Currency.toString(data.price),
-            imageURL: data.src))
+            imageURL: data.src.orEmpty))
         view.addGestureRecognizer(BlockTap(action: { [weak self] _ in
             guard let restaurant = self?.viewModel.restaurant else {
                 return

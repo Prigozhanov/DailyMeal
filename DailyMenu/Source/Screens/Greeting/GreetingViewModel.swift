@@ -49,7 +49,7 @@ final class GreetingViewModelImplementation: GreetingViewModel {
             case let .success(response):
                 self?.keychainService.setValueForItem(.email, self?.email ?? "")
                 
-                if let user = response.member, let token = response.token {
+                if let user = response.member, let _ = response.token {
                     self?.context.userDefaultsService.updateUserDetails(user: user)
                     self?.context.networkService.fetchUserData(onSuccess: { (user) in
                         if strongSelf.context.userDefaultsService.hasAddress {

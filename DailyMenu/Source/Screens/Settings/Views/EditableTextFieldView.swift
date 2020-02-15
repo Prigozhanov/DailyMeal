@@ -102,7 +102,7 @@ class EditableTextFieldView: UIView {
                 UIApplication.topViewController?.show(vc, sender: nil)
             }
         case .address:
-            changeButton.setActionHandler(controlEvents: .touchUpInside) { [weak self] button in
+            changeButton.setActionHandler(controlEvents: .touchUpInside) { button in
                 button.tapAnimation()
                 let vc = DeliveryLocationViewController(viewModel: DeliveryLocationViewModelImplementation())
                 vc.modalPresentationStyle = .overCurrentContext

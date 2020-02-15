@@ -88,7 +88,6 @@ public enum UserDefaultsKey: String, CaseIterable {
     email,
     phone,
     phoneVerify,
-    //Address info
     addressName,
     streetName,
     areaId,
@@ -99,6 +98,7 @@ public enum UserDefaultsKey: String, CaseIterable {
 
 public enum PaymentMethod: Int {
     case cash = 20
+    case creditCard = 0 // FIXME Change value to actual
 }
 
 public extension NotificationDescriptor {

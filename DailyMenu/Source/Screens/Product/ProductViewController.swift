@@ -69,7 +69,8 @@ final class ProductViewController: UIViewController {
     }()
     
     private lazy var addToCartButton = UIButton.makeActionButton("Add to Cart") { [weak self] view in
-        guard let self = self, let item = CartItem.fromProduct(self.viewModel.product, count: self.viewModel.count) else { return }
+        guard let self = self else { return }
+        let item = CartItem(id: self.viewModel.product.id, product: self.viewModel.product, count: self.viewModel.count)
         self.viewModel.cartService.addItem(item: item)
         view.tapAnimation()
         self.navigationController?.popViewController(animated: true)
@@ -105,7 +106,7 @@ final class ProductViewController: UIViewController {
         view.backgroundColor = Colors.commonBackground.color
         
         view.addSubview(navigationBarBackground)
-        if let url = URL(string: viewModel.product.src) {
+        if let url = URL(string: viewModel.product.src.orEmpty) {
             navigationBarBackground.sd_setImage(with: url)
         }
         navigationBarBackground.snp.makeConstraints {

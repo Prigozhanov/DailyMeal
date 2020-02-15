@@ -66,7 +66,6 @@ public final class NetworkClient {
                     let jsonResponse = try jsonDecoder.decode(Response.self, from: data)
                     successClosure(jsonResponse)
                 } catch {
-                    print(String(data: data!, encoding: .utf8))
                     print(error)
                     failureClosure(Error.parsingError)
                 }
