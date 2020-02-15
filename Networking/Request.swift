@@ -122,6 +122,15 @@ public class RequestFactory {
                                         params: .json(geodataRequest.encoded()))
     }
     
+    //https://apiv2.menu.by/index/shoping-card
+    public func shoppingCart(shoppingCartRequest: ShoppingCartRequest) -> Request<ShoppingCartResponse> {
+        return  Request<ShoppingCartResponse>(method: .POST,
+                                              baseUrlString: secondaryUrlString,
+                                              path: "index/shoping-card",
+                                              params: .json(shoppingCartRequest.encoded()))
+        
+    }
+    
     ///----------------------///
     ///---YANDEX GEOCODER ---///
     ///----------------------///
@@ -151,7 +160,8 @@ public class RequestFactory {
                                     "format": "json",
                                     "geocode": string,
                                     "lang": "en",
-                                    "result": "10"
+                                    "result": "10",
+                                    "kind": "house"
                                  ]))
     }
     
