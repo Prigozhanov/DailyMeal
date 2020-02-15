@@ -46,16 +46,27 @@ final class DeliveryLocationViewModelImplementation: DeliveryLocationViewModel {
     
     // Search addresses
     func getAddressesList(string: String, completion: @escaping ([String]) -> Void) {
-        let req = context.networkService.requestFactory.getGeodataByString(string: string)
+        let req = context.networkService.requestFactory.getGeodataByString(string: "Minsk, Belarus \(string)")
         
-        context.networkService.send(request: req) { result, _ in
+        context.networkService.send(request: req) { [weak self] result, _ in
+            guard let self = self else { return }
             switch result {
             case let .success(geodata):
                 if let featureMembers = geodata?.response?.geoObjectCollection?.featureMember {
-                    let addresses = featureMembers
-                        .filter({ $0.geoObject?.metaDataProperty?.geocoderMetaData?.text != nil })
-                        .map { $0.geoObject?.metaDataProperty?.geocoderMetaData?.text ?? "" }
-                    completion(addresses)
+                    if let pos = featureMembers.first?.geoObject?.point?.pos {
+                        let req = self.context.networkService.requestFactory.getGeodataByString(string: pos)
+                        
+                        self.context.networkService.send(request: req) { (result, _) in
+                            switch result {
+                            case let .success(geodata):
+                                let addresses = geodata?.response?.geoObjectCollection?.featureMember?.compactMap({ $0.geoObject?.metaDataProperty?.geocoderMetaData?.text })
+                                completion(addresses ?? [])
+                            case .failure:
+                                completion([])
+                            }
+                        }
+                    }
+                    
                 }
             case .failure:
                 completion([])
@@ -110,10 +121,6 @@ final class DeliveryLocationViewModelImplementation: DeliveryLocationViewModel {
             switch result {
             case let .success(response):
                 if let address = response.isAddressExists?.lng7 {
-                    print("DEBUG LAST UUID")
-                    print(self?.lastGeoDataExistRequestUUID)
-                    print("DEBUG UUID")
-                    print(uuid)
                     if self?.lastGeoDataExistRequestUUID == uuid {
                         onSuccess(address)
                     }
