@@ -19,9 +19,11 @@ protocol ProductViewModel {
     var cartService: CartService { get }
     
     var restaurant: Restaurant { get }
-    var product: Product { get }
+    var originalProduct: Product { get }
+    var product: Product { get set }
     var count: Int { get set }
     
+    var availableChoices: [Choice] { get }
     
 }
 
@@ -33,12 +35,28 @@ final class ProductViewModelImplementation: ProductViewModel {
     var cartService: CartService = AppDelegate.shared.context.cartService
     
     let restaurant: Restaurant
-    let product: Product
-    var count: Int = 1
+    let originalProduct: Product
+    let availableChoices: [Choice]
+    
+    var product: Product
+    
+    var count: Int = 1 {
+        didSet {
+            product.productcount = self.count
+        }
+    }
     
     init(product: Product, restaurant: Restaurant) {
         self.restaurant = restaurant
+        self.originalProduct = product
         self.product = product
+        self.product.removeAllChoices()
+        self.product.productcount = 1
+        self.product.productcount = count
+        
+        self.availableChoices = product.options?.flatMap({ (option) -> [Choice] in
+            option.choices
+        }) ?? []
     }
     
 }

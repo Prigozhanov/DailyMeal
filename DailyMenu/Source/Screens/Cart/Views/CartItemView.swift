@@ -18,19 +18,24 @@ class CartItemView: UIView {
     
     private var item: Item
     
-    private lazy var optionsDataSource = ArrayDataSource(data: self.item.cartItem.product.options ?? [])
+    private var choices: [Choice] {
+        return item.cartItem.product.options?.flatMap({ (option) -> [Choice] in
+            option.choices
+        }) ?? []
+    }
+    
+    private lazy var optionsDataSource = ArrayDataSource<Choice>(data: choices)
     private lazy var optionsCollectionProvider = BasicProvider(
         dataSource: optionsDataSource,
-        viewSource: ClosureViewSource(viewUpdater: { [weak self] (view: FoodOptionCell, data: Option, index: Int) in
+        viewSource: ClosureViewSource(viewUpdater: { [weak self] (view: FoodOptionCell, data: Choice, index: Int) in
             view.configure(with: FoodOptionCell.Item(option: data, onRemoveOption: { [weak self] (_) in
                 guard let self = self else { return }
-//                data.applied = false
                 self.optionsDataSource.data.remove(at: index)
                 self.optionsDataSource.reloadData()
                 AppDelegate.shared.context.cartService.view?.reloadCalculationsRows()
             }))
         }),
-        sizeSource: { [weak self] (index: Int, data: Option, collectionSize: CGSize) -> CGSize in
+        sizeSource: { [weak self] (index: Int, data: Choice, collectionSize: CGSize) -> CGSize in
             guard let self = self else { return .zero }
             return CGSize(
                 width: NSString(string: data.label)
@@ -43,8 +48,8 @@ class CartItemView: UIView {
     )
     
     private lazy var optionsCollection: CollectionView = {
-        let collection = CollectionView(provider: self.optionsCollectionProvider)
-        self.optionsCollectionProvider.layout = FlowLayout(lineSpacing: 5, interitemSpacing: 10, justifyContent: .start, alignItems: .start, alignContent: .start)
+        let collection = CollectionView(provider: optionsCollectionProvider)
+        optionsCollectionProvider.layout = FlowLayout(lineSpacing: 5, interitemSpacing: 10, justifyContent: .start, alignItems: .start, alignContent: .start)
         collection.isScrollEnabled = false
         return collection
     }()
@@ -114,9 +119,8 @@ class CartItemView: UIView {
         itemPrice.textColor = Colors.blue.color
         cardView.contentView.addSubview(itemPrice)
         itemPrice.snp.makeConstraints {
-            $0.top.equalTo(itemNameLabel.snp.bottom).offset(Layout.commonMargin)
+            $0.top.equalTo(itemNameLabel.snp.bottom)
             $0.leading.equalTo(itemNameLabel)
-            $0.bottom.equalToSuperview().inset(Layout.commonInset)
         }
         
         let removeButton = UIButton()

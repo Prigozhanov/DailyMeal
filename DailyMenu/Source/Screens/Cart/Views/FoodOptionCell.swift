@@ -9,7 +9,7 @@ import Networking
 class FoodOptionCell: UICollectionViewCell {
     
     public struct Item {
-        public let option: Option
+        public let option: Choice
         public let onRemoveOption: ((UIButton) -> ())
     }
     

@@ -58,7 +58,7 @@ final class CheckoutViewModelImplementation: CheckoutViewModel {
             memberID: userDefaultsService.getValueForKey(key: .id) as? Int ?? 0,
             intercom: "",
             phoneConfirm: 0,
-            timeMinute: "05",
+            timeMinute: "09",
             fullname: "",
             addressID: userDefaultsService.getValueForKey(key: .addressesId) as? Int ?? 0,
             deliveryDate: Date().timeIntervalSince1970 + 3600,

@@ -162,7 +162,6 @@ final class RestaurantsViewController: UIViewController {
         super.viewDidAppear(animated)
         filterBarUpperBorder = headerView.frame.height - filterBar.frame.height + view.safeAreaInsets.top
         filterBarBottomBorder = headerView.frame.height + view.safeAreaInsets.top
-        
     }
     
 }

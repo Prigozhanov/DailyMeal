@@ -9,6 +9,7 @@ class ChoiceRow: UIView {
     
     struct Item {
         let id: Int
+        let optionId: Int
         let title: String
         let price: String
         var isSelected: Bool

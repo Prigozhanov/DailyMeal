@@ -64,7 +64,7 @@ final class ProductViewController: UIViewController {
         label.textColor = Colors.blue.color
         label.textAlignment = .center
         label.font = FontFamily.Poppins.medium.font(size: 36)
-        label.text = Formatter.Currency.toString((Double(viewModel.product.price) ?? 0.0) * Double(viewModel.count)) //FIXME: price calculation
+        label.text = Formatter.Currency.toString(viewModel.product.overallPrice * Double(viewModel.count)) //FIXME: price calculation
         return label
     }()
     
@@ -130,20 +130,27 @@ final class ProductViewController: UIViewController {
     private func setupStackView() {
         stackView.addRow(productHeader)
         
-        if let options = viewModel.product.options {
+        if let options = viewModel.originalProduct.options {
             stackView.addRows(
-                options.map({
+                options.map({ option in
                     OptionView(
                         item: OptionView.Item(
-                            id: $0.id,
-                            title: $0.optionTitle,
-                            minChoices: $0.minimum,
-                            maxChoices: $0.maximum,
-                            free: $0.free,
-                            freeMaxChoices: $0.freemax,
-                            choices: $0.choices.map({
-                                ChoiceRow.Item(id: $0.id, title: $0.label, price: $0.price, isSelected: false ) { choiceItem in
-                                    // TODO which parameter applies choice?
+                            id: option.id,
+                            title: option.optionTitle,
+                            minChoices: option.minimum,
+                            maxChoices: option.maximum,
+                            free: option.free,
+                            freeMaxChoices: option.freemax,
+                            choices: option.choices.map({
+                                ChoiceRow.Item(id: $0.id, optionId: option.id, title: $0.label, price: $0.price, isSelected: false ) { [weak self] choiceItem in
+                                    if let choice = self?.viewModel.availableChoices.first(where: { $0.id == choiceItem.id }) {
+                                        if choiceItem.isSelected {
+                                            self?.viewModel.product.addChoiceForOption(choice, optionId: choiceItem.optionId)
+                                        } else {
+                                            self?.viewModel.product.removeChoiceForOption(choice, optionId: choiceItem.optionId)
+                                        }
+                                        self?.updateTotalValue()
+                                    }
                                 }
                             })
                         )
@@ -165,7 +172,7 @@ final class ProductViewController: UIViewController {
 //MARK: -  ProductView
 extension ProductViewController: ProductView {
     func updateTotalValue() {
-        totalValueLabel.text = Formatter.Currency.toString((Double(viewModel.product.price) ?? 0) * Double(viewModel.count)) //FIXME: price calculation
+        totalValueLabel.text = Formatter.Currency.toString(viewModel.product.overallPrice * Double(viewModel.count)) //FIXME: price calculation
     }
 }
 

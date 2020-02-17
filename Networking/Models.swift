@@ -286,7 +286,7 @@ public struct Product: Codable {
     public let src: String?
     public let imageTitle, image: String?
     public let inventory, new: Int?
-    public let options: [Option]?
+    public var options: [Option]?
     public let restWorkingTime: [RESTWorkingTime]?
     public let restID: Int?
     public let keywords, alias: String?
@@ -301,6 +301,14 @@ public struct Product: Codable {
     public let comment: String?
     public let desiredStock: Int?
     public let content: String?
+    
+    public var overallPrice: Double {
+        let productPrice = Double(price) ?? 0
+        let optionsPrice = options?.flatMap({ $0.choices }).reduce(0.0, { (res, choice) -> Double in
+            res + (Double(choice.price) ?? 0)
+        }) ?? 0
+        return productPrice + optionsPrice
+    }
     
     enum CodingKeys: String, CodingKey {
         case src
@@ -317,6 +325,31 @@ public struct Product: Codable {
         case price, comment
         case desiredStock = "desired_stock"
         case content
+    }
+    
+    public mutating func addChoiceForOption(_ choice: Choice, optionId: Int) {
+        let localOptions = options
+        localOptions?.enumerated().forEach({ index, item in
+            if item.id == optionId {
+                self.options?[index].addChoice(choice)
+            }
+        })
+    }
+    
+    public mutating func removeChoiceForOption(_ choice: Choice, optionId: Int) {
+        let localOptions = options
+        localOptions?.enumerated().forEach({ index, item in
+            if item.id == optionId {
+                self.options?[index].removeChoice(choice)
+            }
+        })
+    }
+    
+    public mutating func removeAllChoices() {
+        let localOptions = options
+        localOptions?.enumerated().forEach({ index, item in
+            self.options?[index].choices = []
+        })
     }
 }
 
@@ -342,7 +375,7 @@ public struct Option: Codable {
     public let optionTitle: String
     public let lngID: Int
     public let label: String
-    public let choices: [Choice]
+    public var choices: [Choice]
     
     enum CodingKeys: String, CodingKey {
         case id, active, minimum, maximum, free, freemax
@@ -351,6 +384,14 @@ public struct Option: Codable {
         case optionTitle = "option_title"
         case lngID = "lng_id"
         case label, choices
+    }
+    
+    public mutating func addChoice(_ choice: Choice) {
+        choices.append(choice)
+    }
+    
+    public mutating func removeChoice(_ choice: Choice) {
+        choices.removeAll(where: { $0.id == choice.id })
     }
 }
 

@@ -19,7 +19,7 @@ public class CartItem: Comparable, Equatable {
     
     var overallPrice: Double {
         get {
-            Double(product.price) ?? 0
+            product.overallPrice
         }
     }
     
