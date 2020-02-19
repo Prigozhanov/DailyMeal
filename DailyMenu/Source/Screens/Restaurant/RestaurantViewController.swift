@@ -98,6 +98,7 @@ final class RestaurantViewController: UIViewController {
         
         provider.isSticky = false
         provider.layout = FlowLayout(spacing: 10)
+        provider.animator = ScaleAnimator()
         return provider
     }()
     

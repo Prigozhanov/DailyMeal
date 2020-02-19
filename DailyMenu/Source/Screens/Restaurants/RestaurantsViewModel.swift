@@ -37,6 +37,8 @@ protocol RestaurantsViewModel {
     
     func showMoreRestaurants()
     
+    func getRestaurantsFilteredByCategory(_ category: FoodCategory) -> [Restaurant]
+    
     func loadRestaurants()
     func loadCategory(restId: Int, onSuccess: @escaping ([ProductCategory]) -> Void)
     
@@ -112,6 +114,16 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     init() {
         context = AppDelegate.shared.context
         userDefaultsService = context.userDefaultsService
+    }
+    
+    func getRestaurantsFilteredByCategory(_ category: FoodCategory) -> [Restaurant] {
+        pagedRestaurants.filter({
+            let restId = $0.id
+            if categories[restId]?.contains(where: { ($0.label?.containsCaseIgnoring(category.rawValue) ?? false) }) ?? false {
+                return true
+            }
+            return false
+        })
     }
     
     func showMoreRestaurants() {

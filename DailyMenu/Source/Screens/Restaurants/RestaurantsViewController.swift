@@ -50,37 +50,12 @@ final class RestaurantsViewController: UIViewController {
         return view
     }()
     
-    private lazy var filterBar: UIView = {
-        let view = UIView()
-        view.backgroundColor = Colors.commonBackground.color
-        view.addSubview(categoryCollectionView)
-        categoryCollectionView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.top.equalToSuperview().inset(10)
-            $0.height.equalTo(90)
-        }
-        
-        view.addSubview(searchView)
-        searchView.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalToSuperview()
-            $0.top.equalTo(categoryCollectionView.snp.bottom)
-        }
-        return view
-    }()
-    
-    private lazy var categoryCollectionView: UICollectionView = {
-        let collectionViewFlowLayout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: .height(100), collectionViewLayout: collectionViewFlowLayout)
-        collectionViewFlowLayout.scrollDirection = .horizontal
-        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        collectionView.backgroundColor = Colors.commonBackground.color
-        collectionView.collectionViewLayout = collectionViewFlowLayout
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(FoodCategoryCell.self, forCellWithReuseIdentifier: filterCellIdentifier)
-        return collectionView
-    }()
+    private lazy var filterBar = CategoryFilterBar(item: CategoryFilterBar.Item(onSelectAction: { [weak self] selectedCategory in
+        self?.viewModel.categoryFilter = selectedCategory
+        self?.reloadScreen()
+        }, categoryRestaurantsCount: { [weak self] category in
+            return self?.viewModel.getRestaurantsFilteredByCategory(category).count ?? 0
+    }))
     
     private lazy var searchView = RestaurantsSearchView(viewModel: viewModel)
     
@@ -134,7 +109,13 @@ final class RestaurantsViewController: UIViewController {
         view.addSubview(filterBar)
         filterBar.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(150)
+            $0.height.equalTo(70)
+        }
+        view.addSubview(searchView)
+        searchView.snp.makeConstraints {
+            $0.top.equalTo(filterBar.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(50)
         }
         
         view.addSubview(headerView)
@@ -152,9 +133,9 @@ final class RestaurantsViewController: UIViewController {
         view.addSubview(statusBarBackground)
         
         
-        tableView.contentInset = UIEdgeInsets(top: 250, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 200, left: 0, bottom: 0, right: 0)
         tableView.scrollIndicatorInsets = tableView.contentInset
-        tableView.setContentOffset(CGPoint(x: 0, y: -250), animated: false)
+        tableView.setContentOffset(CGPoint(x: 0, y: -200), animated: false)
         
         viewModel.loadRestaurants()
     }
@@ -174,13 +155,7 @@ extension RestaurantsViewController: RestaurantsView {
         var rows: [TableRow<RestaurantCell>]
         if viewModel.isFiltering {
             if let categoryFilter = viewModel.categoryFilter {
-                rows = makeRestaurantItemRows(restaurants: viewModel.pagedRestaurants.filter({
-                    let restId = $0.id
-                    if viewModel.categories[restId]?.contains(where: { ($0.label?.containsCaseIgnoring(categoryFilter.rawValue) ?? false) }) ?? false {
-                        return true
-                    }
-                    return false
-                }))
+                rows = makeRestaurantItemRows(restaurants: viewModel.getRestaurantsFilteredByCategory(categoryFilter))
             } else {
                 rows = makeRestaurantItemRows(restaurants: viewModel.filteredRestaurants)
             }
@@ -223,78 +198,6 @@ extension RestaurantsViewController: RestaurantsView {
 
 //MARK: -  Private
 private extension RestaurantsViewController {
-    
-}
-
-//MARK: - CollectionView
-extension RestaurantsViewController: UICollectionViewDataSource {
-    
-    private var categoryItems: [(image: UIImage, category: FoodCategory)] {
-        return [
-            (image: Images.FilterIcons.burger.image, .burger),
-            (image: Images.FilterIcons.chicken.image, .chicken),
-            (image: Images.FilterIcons.deserts.image, .desert),
-            (image: Images.FilterIcons.fries.image, .fries),
-            (image: Images.FilterIcons.hotdog.image, .hotdog),
-            (image: Images.FilterIcons.lobstar.image, .lobastar),
-            (image: Images.FilterIcons.pizza.image, .pizza),
-            (image: Images.FilterIcons.sandwich.image, .sandwich),
-            (image: Images.FilterIcons.steak.image, .steak),
-            (image: Images.FilterIcons.sushi.image, .sushi),
-            (image: Images.FilterIcons.taco.image, .taco),
-            (image: Images.FilterIcons.pastry.image, .pasta)
-        ]
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        categoryItems.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let filterItem = categoryItems[indexPath.item]
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: filterCellIdentifier, for: indexPath) as! FoodCategoryCell
-        
-        let item = FoodCategoryCell.Item(image: filterItem.image, category: filterItem.category, subtitle: "10 Restaurants")
-        cell.configure(with: item)
-        
-        if viewModel.categoryFilter != nil, !cell.isSelected {
-            cell.setState(.outOfFocus)
-        }
-        
-        return cell
-    }
-    
-}
-
-extension RestaurantsViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 170, height: 50)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 25
-    }
-    
-}
-
-
-extension RestaurantsViewController: UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! FoodCategoryCell
-        
-        viewModel.categoryFilter = cell.category
-        
-        collectionView.visibleCells.forEach {
-            guard let cell = $0 as? FoodCategoryCell else { return }
-            cell.setState(.outOfFocus, animated: true)
-            
-        }
-        cell.setState(.selected, animated: true)
-        reloadScreen()
-    }
     
 }
 

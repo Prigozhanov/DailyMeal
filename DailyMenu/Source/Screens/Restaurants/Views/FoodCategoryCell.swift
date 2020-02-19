@@ -11,15 +11,16 @@ class FoodCategoryCell: BaseCollectionCell {
         let image: UIImage
         let category: FoodCategory
         let subtitle: String
+        let onSelectAction: (FoodCategory?) -> Void
     }
     
     enum State {
         case normal, selected, outOfFocus
     }
     
-    private var state: State = .normal
+    var item: Item?
     
-    var category: FoodCategory!
+    private var state: State = .normal
     
     private let cardView: CardView = CardView(shadowSize: .small, customInsets: UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0))
     
@@ -82,13 +83,25 @@ class FoodCategoryCell: BaseCollectionCell {
         borderView.snp.makeConstraints{ $0.edges.equalToSuperview() }
         borderView.setRoundCorners(cardView.contentView.layer.cornerRadius)
         borderView.setBorder(width: 1, color: Colors.blue.color.cgColor)
+        
+        addGestureRecognizer(BlockTap(action: { [unowned self] _ in
+            if self.state != .selected {
+                self.setState(.selected, animated: true)
+                self.item?.onSelectAction(self.item?.category)
+            } else {
+                self.setState(.normal, animated: true)
+                self.item?.onSelectAction(nil)
+            }
+         
+        }))
     }
     
     func configure(with item: Item) {
+        self.item = item
+        
         imageView.image = item.image
         filterNameLabel.text = item.category.rawValue
         restaurantCountLabel.text = item.subtitle
-        category = item.category
         if isSelected {
             setState(.selected)
         } else {
@@ -97,7 +110,10 @@ class FoodCategoryCell: BaseCollectionCell {
     }
     
     func setState(_ state: State, animated: Bool? = false) {
-        UIView.transition(with: contentView, duration: animated == true ? 0.3 : 0, options: .transitionCrossDissolve, animations: { [weak self] in
+        self.state = state
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            UIView.transition(with: self.contentView, duration: animated == true ? 0.3 : 0, options: .transitionCrossDissolve, animations: { [weak self] in
             switch state {
             case .normal:
                 self?.borderView.alpha = 0
@@ -114,6 +130,12 @@ class FoodCategoryCell: BaseCollectionCell {
                 self?.cardView.alpha = 0.5
             }
         })
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
     }
     
 }
