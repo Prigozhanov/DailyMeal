@@ -20,9 +20,9 @@ protocol RestaurantsViewModel {
     
     var userName: String { get }
     
-    var searchFilter: String { get set }
-    
     var restaurants: [Restaurant] { get }
+    
+    var categories: [Int: [ProductCategory]] { get set }
     
     var restaurantsChain: [Restaurant] { get }
     var pagedRestaurants: [Restaurant] { get }
@@ -30,13 +30,15 @@ protocol RestaurantsViewModel {
     
     var filterDidSelected: Bool { get set }
     
-    var foodCategory: FoodCategory? { get set }
-    
     var isFiltering: Bool { get }
+    
+    var searchFilter: String { get set }
+    var categoryFilter: FoodCategory? { get set }
     
     func showMoreRestaurants()
     
     func loadRestaurants()
+    func loadCategory(restId: Int, onSuccess: @escaping ([ProductCategory]) -> Void)
     
 }
 
@@ -53,8 +55,10 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     
     var restaurants: [Restaurant] = []
     
+    var categories: [Int: [ProductCategory]] = [:]
+    
     var isFiltering: Bool {
-        return !searchFilter.isEmpty
+        return !searchFilter.isEmpty || categoryFilter != nil
     }
     
     var searchFilter: String = "" {
@@ -62,6 +66,8 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
             view?.reloadScreen()
         }
     }
+    
+    var categoryFilter: FoodCategory?
     
     var userName: String {
         get {
@@ -126,10 +132,26 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
             LoadingIndicator.hide()
             switch result {
             case let .success(response):
-                self?.restaurants = response.restaurants
+                self?.restaurants = response.restaurants.filter({ $0.type == .restaurant })
                 self?.view?.reloadScreen()
+                self?.restaurants.forEach({ self?.loadCategory(restId: $0.id, onSuccess: { (_) in })})
             case let .failure(error):
                 print(error)
+            }
+        }
+    }
+    
+    func loadCategory(restId: Int, onSuccess: @escaping ([ProductCategory]) -> Void) {
+        let req = context.networkService.requestFactory.restaurantCategories(id: restId)
+        
+        context.networkService.send(request: req) { [weak self] (result, _) in
+            guard let self = self else { return }
+            switch result {
+            case let .success(response):
+                self.categories[restId] = response.data
+                onSuccess(response.data ?? [])
+            case let .failure(error):
+                logDebug(message: error.localizedDescription)
             }
         }
     }

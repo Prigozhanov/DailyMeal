@@ -7,17 +7,5 @@ import UIKit
 
 extension UIImageView {
     
-    func setImageByCategory(_ category: FoodCategory) {
-            switch category {
-            case .burger:
-                self.image = Images.Category.burger.image
-            case .pizza:
-                self.image = Images.Category.pizza.image
-            case .hotdog:
-                self.image = Images.Category.hotdog.image
-            default:
-                break
-            }
-    }
     
 }

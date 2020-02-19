@@ -40,9 +40,10 @@ final class RestaurantViewModelImplementation: RestaurantViewModel {
     
     var categories: [ProductCategory] = []
     
-    init(restaurant: Restaurant) {
+    init(restaurant: Restaurant, categories: [ProductCategory]) {
         context = AppDelegate.shared.context
         self.restaurant = restaurant
+        self.categories = categories
     }
     
     func getItemsByCategory(_ category: ProductCategory) -> [Product] {

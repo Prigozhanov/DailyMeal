@@ -17,7 +17,7 @@ final class RestaurantViewController: UIViewController {
     }
     
     private var navigationBarBackground: UIImageView = {
-        let image = UIImageView(image: Images.restaurentImagePlaceholder.image)
+        let image = UIImageView(image: Images.Category.placeholder.image)
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         return image
@@ -146,6 +146,14 @@ final class RestaurantViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(100)
+        }
+        
+        if let image = RestaurantPreviewImages.getPreviewByRestaurantId(viewModel.restaurant.chainID) {
+            navigationBarBackground.image = image
+        } else {
+            navigationBarBackground.image = RestaurantPreviewImages.getRestaurantPreviewByCategory(
+                FoodCategory.getMainCategoryBasedOnRestaurantCategories(viewModel.categories)
+            )
         }
         
         viewModel.loadInfo()

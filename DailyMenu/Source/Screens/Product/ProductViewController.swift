@@ -64,7 +64,7 @@ final class ProductViewController: UIViewController {
         label.textColor = Colors.blue.color
         label.textAlignment = .center
         label.font = FontFamily.Poppins.medium.font(size: 36)
-        label.text = Formatter.Currency.toString(viewModel.product.overallPrice * Double(viewModel.count)) //FIXME: price calculation
+        label.text = Formatter.Currency.toString(viewModel.product.overallPrice * Double(viewModel.count))
         return label
     }()
     
@@ -172,7 +172,7 @@ final class ProductViewController: UIViewController {
 //MARK: -  ProductView
 extension ProductViewController: ProductView {
     func updateTotalValue() {
-        totalValueLabel.text = Formatter.Currency.toString(viewModel.product.overallPrice * Double(viewModel.count)) //FIXME: price calculation
+        totalValueLabel.text = Formatter.Currency.toString(viewModel.product.overallPrice * Double(viewModel.count))
     }
 }
 

@@ -7,6 +7,7 @@ import UIKit
 import TableKit
 import SnapKit
 import Services
+import Networking
 import Extensions
 
 final class RestaurantsViewController: UIViewController {
@@ -171,30 +172,20 @@ extension RestaurantsViewController: RestaurantsView {
     func reloadScreen() {
         tableDirector.clear()
         var rows: [TableRow<RestaurantCell>]
-        if !viewModel.isFiltering {
-        rows = viewModel
-            .pagedRestaurants
-            .enumerated()
-            .map { [weak self] (index, item) -> TableRow<RestaurantCell> in
-                let row = TableRow<RestaurantCell>(item: viewModel.restaurants[index])
-                    .on(.click) { [weak self] cell in
-                        let vc = RestaurantViewController(viewModel: RestaurantViewModelImplementation(restaurant: cell.item))
-                        self?.navigationController?.pushViewController(vc, animated: true)
-                }
-                return row
+        if viewModel.isFiltering {
+            if let categoryFilter = viewModel.categoryFilter {
+                rows = makeRestaurantItemRows(restaurants: viewModel.pagedRestaurants.filter({
+                    let restId = $0.id
+                    if viewModel.categories[restId]?.contains(where: { ($0.label?.containsCaseIgnoring(categoryFilter.rawValue) ?? false) }) ?? false {
+                        return true
+                    }
+                    return false
+                }))
+            } else {
+                rows = makeRestaurantItemRows(restaurants: viewModel.filteredRestaurants)
             }
         } else {
-           rows = viewModel
-            .filteredRestaurants
-            .enumerated()
-            .map { [weak self] (index, item) -> TableRow<RestaurantCell> in
-                let row = TableRow<RestaurantCell>(item: viewModel.filteredRestaurants[index])
-                    .on(.click) { [weak self] cell in
-                        let vc = RestaurantViewController(viewModel: RestaurantViewModelImplementation(restaurant: cell.item))
-                        self?.navigationController?.pushViewController(vc, animated: true)
-                }
-                return row
-            }
+            rows = makeRestaurantItemRows(restaurants: viewModel.pagedRestaurants)
         }
         let section = TableSection()
         tableDirector.append(section: section)
@@ -204,6 +195,29 @@ extension RestaurantsViewController: RestaurantsView {
     
     func showLoadingIndicator() {
         LoadingIndicator.show(self)
+    }
+    
+    func makeRestaurantItemRows(restaurants: [Restaurant]) -> [TableRow<RestaurantCell>] {
+        restaurants.enumerated().map { [weak self] (index, item) -> TableRow<RestaurantCell> in
+                TableRow<RestaurantCell>(item: restaurants[index])
+                    .on(.click) { [weak self] data in
+                        let vc = RestaurantViewController(viewModel: RestaurantViewModelImplementation(restaurant: data.item, categories: data.cell?.categories ?? []))
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                }
+                .on(.configure) { [weak self] data in
+                    guard let self = self else { return }
+                    if let categories = self.viewModel.categories[data.cell?.restaurant?.id ?? 0] {
+                        data.cell?.categories = categories
+                        data.cell?.updatePreview()
+                    } else {
+                        self.viewModel.loadCategory(restId: data.cell?.restaurant?.id ?? 0) { (categories) in
+                            data.cell?.categories = categories
+                            data.cell?.updatePreview()
+                        }
+                    }
+                }
+        }
+        
     }
 }
 
@@ -228,7 +242,7 @@ extension RestaurantsViewController: UICollectionViewDataSource {
             (image: Images.FilterIcons.steak.image, .steak),
             (image: Images.FilterIcons.sushi.image, .sushi),
             (image: Images.FilterIcons.taco.image, .taco),
-            (image: Images.FilterIcons.pastry.image, .pastry)
+            (image: Images.FilterIcons.pastry.image, .pasta)
         ]
     }
     
@@ -244,7 +258,7 @@ extension RestaurantsViewController: UICollectionViewDataSource {
         let item = FoodCategoryCell.Item(image: filterItem.image, category: filterItem.category, subtitle: "10 Restaurants")
         cell.configure(with: item)
         
-        if viewModel.foodCategory != nil, !cell.isSelected {
+        if viewModel.categoryFilter != nil, !cell.isSelected {
             cell.setState(.outOfFocus)
         }
         
@@ -271,7 +285,7 @@ extension RestaurantsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! FoodCategoryCell
         
-        viewModel.foodCategory = cell.category
+        viewModel.categoryFilter = cell.category
         
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? FoodCategoryCell else { return }
@@ -279,6 +293,7 @@ extension RestaurantsViewController: UICollectionViewDelegate {
             
         }
         cell.setState(.selected, animated: true)
+        reloadScreen()
     }
     
 }

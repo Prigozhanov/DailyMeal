@@ -11,7 +11,9 @@ class RestaurantCell: BaseTableCell {
     
     typealias CellData = Restaurant
     
-    var categories: [FoodCategory] = []
+    var categories: [ProductCategory] = []
+    
+    var restaurant: Restaurant?
     
     private let deliveryFeeValueLabel: UILabel = {
         let label = UILabel.makeText()
@@ -29,7 +31,7 @@ class RestaurantCell: BaseTableCell {
     
     
     var restaurantImageView: UIImageView = {
-        let view = UIImageView(image: Images.restaurentImagePlaceholder.image)
+        let view = UIImageView(image: Images.Category.placeholder.image)
         view.setRoundCorners(15, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
         return view
     }()
@@ -41,8 +43,6 @@ class RestaurantCell: BaseTableCell {
         label.textColor = Colors.gray.color
         return label
     }()
-    
-    var restaurant: Restaurant?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: nil)
@@ -140,6 +140,21 @@ class RestaurantCell: BaseTableCell {
         contentView.layoutIfNeeded()
     }
     
+    func updatePreview() {
+        if let image = RestaurantPreviewImages.getPreviewByRestaurantId(restaurant?.chainID ?? -1) {
+            restaurantImageView.image = image
+        } else {
+            restaurantImageView.image = RestaurantPreviewImages.getRestaurantPreviewByCategory(
+                FoodCategory.getMainCategoryBasedOnRestaurantCategories(categories)
+            )
+        }
+    }
+    
+    override func prepareForReuse() {
+        restaurantImageView.image = Images.Category.placeholder.image
+        super.prepareForReuse()
+    }
+    
 }
 
 extension RestaurantCell: ConfigurableCell {
@@ -149,6 +164,7 @@ extension RestaurantCell: ConfigurableCell {
     }
     
     func configure(with item: Restaurant) {
+        restaurant = item
         restaurantNameLabel.text = item.chainLabel
         deliveryFeeValueLabel.text = Formatter.Currency.toString(Double(item.restDeliveryFee))
         restaurantDescriptionLabel.text = item.restaurantDescription

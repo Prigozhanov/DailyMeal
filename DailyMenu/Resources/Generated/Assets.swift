@@ -39,7 +39,11 @@ internal enum Asset {
     internal enum Category {
       internal static let burger = ImageAsset(name: "Category/burger")
       internal static let hotdog = ImageAsset(name: "Category/hotdog")
+      internal static let pasta = ImageAsset(name: "Category/pasta")
       internal static let pizza = ImageAsset(name: "Category/pizza")
+      internal static let placeholder = ImageAsset(name: "Category/placeholder")
+      internal static let shawarma = ImageAsset(name: "Category/shawarma")
+      internal static let sushi = ImageAsset(name: "Category/sushi")
     }
     internal enum FilterIcons {
       internal static let burger = ImageAsset(name: "FilterIcons/burger")
@@ -92,11 +96,14 @@ internal enum Asset {
       internal static let orderPlaced = ImageAsset(name: "Placeholders/order_placed")
       internal static let phoneVerified = ImageAsset(name: "Placeholders/phone-verified")
     }
+    internal enum Restaurants {
+      internal static let mcdonalds = ImageAsset(name: "Restaurants/mcdonalds")
+      internal static let pzz = ImageAsset(name: "Restaurants/pzz")
+    }
     internal static let foodItemPlaceholder = ImageAsset(name: "food_item_placeholder")
     internal static let itemImagePlaceholder = ImageAsset(name: "item_image_placeholder")
     internal static let ratePlaceholder = ImageAsset(name: "rate_placeholder")
     internal static let restaurantLogoPlaceholder = ImageAsset(name: "restaurant_logo_placeholder")
-    internal static let restaurentImagePlaceholder = ImageAsset(name: "restaurent_image_placeholder")
     internal static let spinner = ImageAsset(name: "spinner")
     internal static let tabCartActive = ImageAsset(name: "tab_cart_active")
     internal static let tabCartInactive = ImageAsset(name: "tab_cart_inactive")
