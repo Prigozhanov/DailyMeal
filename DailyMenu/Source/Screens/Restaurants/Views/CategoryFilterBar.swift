@@ -91,12 +91,11 @@ class CategoryFilterBar: UIView {
         
         backgroundColor = Colors.commonBackground.color
         
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.provider = basicProvider
         addSubview(collectionView)
         collectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
         
-        collectionView.showsHorizontalScrollIndicator = false
-        
-        collectionView.provider = basicProvider
         basicProvider.layout = WaterfallLayout(columns: 1, spacing: 20)
             .transposed()
             .inset(by: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))

@@ -52,16 +52,18 @@ final class RestaurantViewModelImplementation: RestaurantViewModel {
     
     func loadInfo() {
         let dispatchGroup = DispatchGroup()
-        LoadingIndicator.show()
-        dispatchGroup.enter()
+        
         dispatchGroup.enter()
         loadCategories {
             dispatchGroup.leave()
         }
+        
+        dispatchGroup.enter()
         loadMenu {
             dispatchGroup.leave()
         }
         
+        LoadingIndicator.show()
         dispatchGroup.notify(queue: .main) {[weak self] in
             LoadingIndicator.hide()
             self?.view?.reloadItems()

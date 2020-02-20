@@ -60,10 +60,12 @@ public class RequestFactory {
     
     //https://v2.menu.by/api/sms-verification/generate-token
     public func generateToken(phone: String) -> Request<ResponseWrapper<Empty>> {
-        return Request<ResponseWrapper<Empty>>(method: .POST,
-                                               baseUrlString: baseUrlString,
-                                               path: "sms-verification/generate-token",
-                                               params: .json(["phone" : phone]))
+        return Request<ResponseWrapper<Empty>>(
+            method: .POST,
+            baseUrlString: baseUrlString,
+            path: "sms-verification/generate-token",
+            params: .json(["phone" : phone])
+        )
     }
     
     //https://v2.menu.by/api/sms-verification/verify-token

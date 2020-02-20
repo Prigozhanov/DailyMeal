@@ -8,7 +8,7 @@ import UIKit
 protocol AppDelegateProtocol {
     var coordinator: AppCoordinator! { get }
     
-    var context: AppContext! { get }
+    var context: AppContext! { get } // TODO make shared instance
 }
 
 @UIApplicationMain
