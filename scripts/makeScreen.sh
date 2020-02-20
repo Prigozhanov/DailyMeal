@@ -78,9 +78,9 @@ final class ${module_name}ViewModelImplementation: ${module_name}ViewModel {
 
 echo "${module_name}ViewModel.swift was created"
     cd ..
-    mkdir -p ../Source/Screens/$module_name
-    mv $module_name ../Source/Screens/
-    open ../Source/Screens/
+    mkdir -p ../DailyMenu/Source/Screens/$module_name
+    mv $module_name ../DailyMenu/Source/Screens/
+    open ../DailyMenu/Source/Screens/
 else
     echo "[ERROR] Provide screen name"
     exit 0

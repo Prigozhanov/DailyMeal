@@ -11,12 +11,13 @@ class GradientView: UIView {
         case vertical, horizontal, custom([NSNumber]), points(CGPoint, CGPoint)
     }
     
-    init(parentView: UIView, colors: [CGColor], direction: Direction) {
-        super.init(frame: parentView.bounds)
+    let gradientLayer = CAGradientLayer()
+    
+    init(parentView: UIView?, colors: [CGColor], direction: Direction) {
+        super.init(frame: parentView?.bounds ?? .zero)
         
         isUserInteractionEnabled = false
         
-        let gradientLayer = CAGradientLayer()
         gradientLayer.colors = colors
         switch direction {
         case .horizontal:
@@ -35,11 +36,14 @@ class GradientView: UIView {
         }
         gradientLayer.frame = bounds
         layer.insertSublayer(gradientLayer, at: 0)
-        parentView.clipsToBounds = true
+        isUserInteractionEnabled = false
+        parentView?.clipsToBounds = true
     }
     
     required init?(coder: NSCoder) { fatalError() }
     
-    
+    func updateGradientLayer() {
+        gradientLayer.frame = bounds
+    }
     
 }

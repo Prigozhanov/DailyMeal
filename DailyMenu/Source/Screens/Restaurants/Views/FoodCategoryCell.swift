@@ -11,23 +11,18 @@ class FoodCategoryCell: BaseCollectionCell {
         let image: UIImage
         let category: FoodCategory
         let subtitle: String
+        let onSelectAction: (FoodCategory?) -> Void
     }
     
     enum State {
         case normal, selected, outOfFocus
     }
     
+    var item: Item?
+    
     private var state: State = .normal
     
-    var category: FoodCategory!
-    
-    private let cardView: UIView = {
-        let view = UIView()
-        view.backgroundColor = Colors.white.color
-        view.setRoundCorners(10)
-        view.setShadow(offset: CGSize(width: 0, height: 4.0), opacity: 0.1, radius: 5)
-        return view
-    }()
+    private let cardView: CardView = CardView(shadowSize: .small, customInsets: UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0))
     
     private let imageView: UIImageView = {
         let view = UIImageView()
@@ -61,10 +56,9 @@ class FoodCategoryCell: BaseCollectionCell {
         contentView.addSubview(cardView)
         cardView.snp.makeConstraints {
             $0.leading.trailing.top.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(20)
         }
         
-        cardView.addSubview(imageView)
+        cardView.contentView.addSubview(imageView)
         imageView.snp.makeConstraints {
             $0.leading.equalTo(Layout.largeMargin)
             $0.top.equalTo(Layout.largeMargin)
@@ -72,33 +66,42 @@ class FoodCategoryCell: BaseCollectionCell {
             $0.width.equalTo(50)
         }
         
-        cardView.addSubview(filterNameLabel)
+        cardView.contentView.addSubview(filterNameLabel)
         filterNameLabel.snp.makeConstraints {
             $0.leading.equalTo(imageView.snp.trailing).offset(Layout.commonMargin)
             $0.top.equalTo(Layout.largeMargin)
         }
         
-        cardView.addSubview(restaurantCountLabel)
+        cardView.contentView.addSubview(restaurantCountLabel)
         restaurantCountLabel.snp.makeConstraints {
             $0.leading.equalTo(imageView.snp.trailing).offset(Layout.commonMargin)
             $0.bottom.equalTo(imageView.snp.bottom)
             $0.trailing.equalToSuperview().inset(Layout.largeMargin)
         }
         
-        contentView.addSubview(borderView)
-        borderView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(20)
-        }
-        borderView.setRoundCorners(cardView.layer.cornerRadius)
+        cardView.contentView.addSubview(borderView)
+        borderView.snp.makeConstraints{ $0.edges.equalToSuperview() }
+        borderView.setRoundCorners(cardView.contentView.layer.cornerRadius)
         borderView.setBorder(width: 1, color: Colors.blue.color.cgColor)
+        
+        addGestureRecognizer(BlockTap(action: { [unowned self] _ in
+            if self.state != .selected {
+                self.setState(.selected, animated: true)
+                self.item?.onSelectAction(self.item?.category)
+            } else {
+                self.setState(.normal, animated: true)
+                self.item?.onSelectAction(nil)
+            }
+         
+        }))
     }
     
     func configure(with item: Item) {
+        self.item = item
+        
         imageView.image = item.image
         filterNameLabel.text = item.category.rawValue
         restaurantCountLabel.text = item.subtitle
-        category = item.category
         if isSelected {
             setState(.selected)
         } else {
@@ -107,7 +110,10 @@ class FoodCategoryCell: BaseCollectionCell {
     }
     
     func setState(_ state: State, animated: Bool? = false) {
-        UIView.transition(with: contentView, duration: animated == true ? 0.3 : 0, options: .transitionCrossDissolve, animations: { [weak self] in
+        self.state = state
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            UIView.transition(with: self.contentView, duration: animated == true ? 0.3 : 0, options: .transitionCrossDissolve, animations: { [weak self] in
             switch state {
             case .normal:
                 self?.borderView.alpha = 0
@@ -124,6 +130,12 @@ class FoodCategoryCell: BaseCollectionCell {
                 self?.cardView.alpha = 0.5
             }
         })
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
     }
     
 }

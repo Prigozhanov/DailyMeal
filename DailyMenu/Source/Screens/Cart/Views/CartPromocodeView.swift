@@ -7,22 +7,28 @@ import UIKit
 
 class CartPromocodeView: UIView {
     
-    private let onApplyPromocode: VoidClosure
+    typealias Item = (String?) -> Void
+    
+    private let item: Item
+    
+    private var promoCode: String?
     
     private lazy var textField: UITextField = {
         let field = UITextField()
         field.placeholder = "Promo Code"
+        field.delegate = self
         return field
     }()
     
-    private lazy var applyButton = UIButton.makeActionButton("Apply") { [weak self] _ in
-        self?.onApplyPromocode()
+    private lazy var applyButton = UIButton.makeActionButton("Apply") { [weak self] button in
+        button.tapAnimation()
+        self?.item(self?.promoCode)
     }
     
-    init(onApplyPromocode: @escaping VoidClosure){
-        self.onApplyPromocode = onApplyPromocode
+    init(item: @escaping Item){
+        self.item = item
         
-        super.init(frame: .zero)
+        super.init(frame: .height(30))
         
         setup()
     }
@@ -30,23 +36,18 @@ class CartPromocodeView: UIView {
     required init?(coder: NSCoder) { fatalError() }
     
     private func setup() {
-        let background = UIView()
-        addSubview(background)
-        background.backgroundColor = Colors.white.color
-        background.snp.makeConstraints {
-            $0.height.equalTo(56)
-            $0.leading.trailing.top.equalToSuperview().inset(Layout.commonInset)
-            $0.bottom.equalToSuperview().inset(Layout.largeMargin)
+        let cardView = CardView(shadowSize: .medium, customInsets: UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20))
+        addSubview(cardView)
+        cardView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
-        background.setRoundCorners(Layout.cornerRadius)
-        background.setShadow(offset: CGSize(width: 0, height: 5.0), opacity: 0.05, radius: 10)
         
-        background.addSubview(textField)
+        cardView.contentView.addSubview(textField)
         textField.snp.makeConstraints {
             $0.top.bottom.leading.equalToSuperview().inset(Layout.commonInset)
         }
         
-        background.addSubview(applyButton)
+        cardView.contentView.addSubview(applyButton)
         applyButton.snp.makeConstraints {
             $0.top.bottom.trailing.equalToSuperview().inset(7)
             $0.leading.equalTo(textField.snp.trailing).inset(Layout.commonInset)
@@ -59,4 +60,16 @@ class CartPromocodeView: UIView {
         Style.addBlueGradient(applyButton)
     }
     
+    @discardableResult
+    override func resignFirstResponder() -> Bool {
+        return textField.resignFirstResponder()
+    }
+    
+}
+
+extension CartPromocodeView : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

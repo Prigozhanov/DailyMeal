@@ -23,9 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let window = UIWindow(frame: UIScreen.main.bounds)
         
-        coordinator = AppCoordinator(window)
-        
         context = AppContext()
+        
+        coordinator = AppCoordinator(window, keychainService: context.keychainSevice, userDefaultsService: context.userDefaultsService, networkService: context.networkService)
         
         return coordinator.registerApplication()
     }

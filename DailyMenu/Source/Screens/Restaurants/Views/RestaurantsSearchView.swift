@@ -9,8 +9,22 @@ class RestaurantsSearchView: UITextField {
     
     let padding = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 10)
     
-    init() {
+    var isActive: Bool = false
+    
+    var restaurantsViewModel: RestaurantsViewModel
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+    }
+    
+    init(viewModel: RestaurantsViewModel) {
+        self.restaurantsViewModel = viewModel
+        
         super.init(frame: .zero)
+        
+        returnKeyType = .done
+        
+        delegate = self
         
         let underlineView = UIView()
         addSubview(underlineView)
@@ -41,7 +55,7 @@ class RestaurantsSearchView: UITextField {
         backgroundColor = Colors.commonBackground.color
     }
     
-    required init?(coder: NSCoder) { super.init(frame: .zero) }
+    required init?(coder: NSCoder) { fatalError() }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: padding)
@@ -54,5 +68,33 @@ class RestaurantsSearchView: UITextField {
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: padding)
     }
+    
+}
+
+extension RestaurantsSearchView: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        isActive = true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        isActive = false
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard var text = textField.text else {
+            return false
+        }
+        if string.isEmpty {
+            text.removeLast()
+            restaurantsViewModel.searchFilter = text
+        } else {
+            restaurantsViewModel.searchFilter = text + string
+        }
+        restaurantsViewModel.view?.reloadScreen()
+        return true
+    }
+    
+    
     
 }

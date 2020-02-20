@@ -4,27 +4,81 @@
 //
 
 import Foundation
+import Services
 
 //MARK: - View
 protocol SettingsView: class {
-
+    
 }
 
 //MARK: - ViewModel
 protocol SettingsViewModel {
-
-var view: SettingsView? { get set }
-
+    
+    var view: SettingsView? { get set }
+    
+    var userName: String { get set }
+    var phone: String { get set }
+    var creditCardNumber: String { get }
+    var address: String { get }
+    
+    func clearUserInfo()
+    func removeCreditCardInfo()
 }
 
 //MARK: - Implementation
 final class SettingsViewModelImplementation: SettingsViewModel {
-
-  weak var view: SettingsView?
-
-  init() {
-  }
-
+    
+    weak var view: SettingsView?
+    
+    let context: AppContext
+    let userDefaultsService: UserDefaultsService
+    let keychainService: KeychainService
+    
+    var userName: String {
+        get {
+            return userDefaultsService.getValueForKey(key: .name) as? String ?? ""
+        }
+        set {
+            userDefaultsService.setValueForKey(key: .name, value: newValue)
+        }
+    }
+    
+    var phone: String {
+        get {
+            return userDefaultsService.getValueForKey(key: .phone) as? String ?? ""
+        }
+        set {
+            userDefaultsService.setValueForKey(key: .phone, value: newValue)
+        }
+    }
+    
+    var creditCardNumber: String {
+        get {
+            return keychainService.getValueForItem(.creditCardNumber) ?? ""
+        }
+    }
+    
+    var address: String {
+        get {
+            return userDefaultsService.getValueForKey(key: .addressName) as? String ?? ""
+        }
+    }
+    
+    init() {
+        context = AppDelegate.shared.context
+        userDefaultsService = context.userDefaultsService
+        keychainService = context.keychainSevice
+    }
+    
+    func clearUserInfo() {
+        context.userDefaultsService.removeAllValues()
+        context.keychainSevice.removeValue(.authToken)
+    }
+    
+    func removeCreditCardInfo() {
+        context.keychainSevice.removeCardDetails()
+    }
+    
 }
 
 

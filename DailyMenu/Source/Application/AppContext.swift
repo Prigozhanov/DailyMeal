@@ -4,13 +4,29 @@
 //
 
 import Foundation
+import Services
 
-class AppContext: CartServiceHolder {
+typealias AppContextProtocol =
+    CartServiceHolder &
+    NetworkServiceHolder &
+    KeychainServiceHolder &
+    UserDefaultsServiceHolder &
+    LocationServiceHolder
+
+class AppContext: AppContextProtocol {
     
+    var networkService: NetworkService
     var cartService: CartService
+    var keychainSevice: KeychainService
+    var userDefaultsService: UserDefaultsService
+    var locationService: LocationService
     
     init() {
-        self.cartService = CartServiceImplementation()
+        cartService = CartServiceImplementation()
+        keychainSevice = KeychainServiceImplementation(identifier: Bundle.id)
+        userDefaultsService = UserDefaultsServiceImplementation(keychainService: keychainSevice)
+        networkService = NetworkServiceImplementation(keychainService: keychainSevice, userDefaultsService: userDefaultsService)
+        locationService = LocationServiceImplementation()
     }
     
 }

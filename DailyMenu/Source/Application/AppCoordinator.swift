@@ -4,20 +4,54 @@
 //
 
 import UIKit
+import Extensions
+import Services
 
 class AppCoordinator {
     
     let window: UIWindow
     
-    init(_ window: UIWindow) {
+    private let tabBarController: UITabBarController = UITabBarController()
+    
+    private var notificationTokens: [Token]
+    
+    private let keychainService: KeychainService
+    private let userDefaultsService: UserDefaultsService
+    private let networkService: NetworkService
+    
+    init(_ window: UIWindow, keychainService: KeychainService, userDefaultsService: UserDefaultsService, networkService: NetworkService) {
         self.window = window
+        
+        self.keychainService = keychainService
+        self.userDefaultsService = userDefaultsService
+        self.networkService = networkService
+        
+        self.notificationTokens = []
     }
     
     func registerApplication() -> Bool {
-        window.rootViewController = makeRootViewController()
+        window.rootViewController = tabBarController
         window.makeKeyAndVisible()
+        configureRootViewController()
         
-        //    showGreeting()
+        networkService.fetchUserData(onSuccess: { [weak self] user in
+            guard let self = self else { return }
+            if self.userDefaultsService.hasAddress {
+                NotificationCenter.default.post(name: .userLoggedIn, object: nil)
+            } else {
+                NotificationCenter.default.post(name: .userInvalidAddress, object: nil)
+            }
+        }) { [weak self] in
+            self?.showGreeting()
+        }
+        
+        notificationTokens.append(Token.make(descriptor: .userLoggedOutDescriptor, using: { [weak self] _ in
+            self?.showGreeting()
+        }))
+        
+        notificationTokens.append(Token.make(descriptor: .userInvalidAddress, using: { [weak self] _ in
+            self?.showAddressCheckin()
+        }))
         
         return true
     }
@@ -26,25 +60,23 @@ class AppCoordinator {
 
 private extension AppCoordinator {
     
-    func makeRootViewController() -> UIViewController {
-//        let vc = ItemViewController(viewModel: ItemViewModelImplementation(item: .dummy))
-//        let nav = NavigationController(rootViewController: vc)
-//        return vc
+    func configureRootViewController() {
+//        let vc = ProductViewController(viewModel: ProductViewModelImplementation(product: .dummy, restaurant: .dummy))
+//         tabBarController.viewControllers = [vc]
         
-        let tabbar = UITabBarController()
-        tabbar.viewControllers = [
+        tabBarController.setViewControllers([
             cartTab,
             exploreTab,
             settingsTab
-        ]
-        tabbar.selectedIndex = 1
-        return tabbar
+        ], animated: false)
+        tabBarController.selectedIndex = 1
     }
     
     var exploreTab: NavigationController {
         let vm = RestaurantsViewModelImplementation()
         let vc = RestaurantsViewController(viewModel: vm)
-        vc.tabBarItem.image = Images.tabExploreInactive.image
+        vc.tabBarItem.image = Images.tabExploreInactive.image.withRenderingMode(.alwaysOriginal)
+        vc.tabBarItem.selectedImage = Images.tabExploreActive.image.withRenderingMode(.alwaysOriginal)
         vc.tabBarItem.title = "Explore"
         return NavigationController(rootViewController: vc)
     }
@@ -52,14 +84,16 @@ private extension AppCoordinator {
     var settingsTab: NavigationController {
         let vm = SettingsViewModelImplementation()
         let vc = SettingsViewController(viewModel: vm)
-        vc.tabBarItem.image = Images.tabSettingsInactive.image
+        vc.tabBarItem.image = Images.tabSettingsInactive.image.withRenderingMode(.alwaysOriginal)
+        vc.tabBarItem.selectedImage = Images.tabSettingsActive.image.withRenderingMode(.alwaysOriginal)
         vc.tabBarItem.title = "Settings"
         return NavigationController(rootViewController: vc)
     }
     
     var cartTab: NavigationController {
         let vc = CartViewController()
-        vc.tabBarItem.image = Images.tabCartInactive.image
+        vc.tabBarItem.image = Images.tabCartInactive.image.withRenderingMode(.alwaysOriginal)
+        vc.tabBarItem.selectedImage = Images.tabCartActive.image.withRenderingMode(.alwaysOriginal)
         vc.tabBarItem.title = "Cart"
         return NavigationController(rootViewController: vc)
     }
@@ -67,6 +101,14 @@ private extension AppCoordinator {
     func showGreeting() {
         let vm = GreetingViewModelImplementation()
         let vc = GreetingViewController(viewModel: vm)
+        vc.modalPresentationStyle = .overCurrentContext
+        window.rootViewController?.show(vc, sender: nil)
+    }
+    
+    func showAddressCheckin() {
+        let vm  = DeliveryLocationViewModelImplementation()
+        let vc = DeliveryLocationViewController(viewModel: vm)
+        vc.modalPresentationStyle = .overCurrentContext
         window.rootViewController?.show(vc, sender: nil)
     }
     
