@@ -31,7 +31,6 @@ final class OrderPlacedViewController: UIViewController {
         messageLabel.numberOfLines = 5
         view.addSubviews([imageView, messageTitle, messageLabel, orderAgainButton])
         
-        
         imageView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(100)
             $0.leading.trailing.equalToSuperview().inset(Layout.commonInset)

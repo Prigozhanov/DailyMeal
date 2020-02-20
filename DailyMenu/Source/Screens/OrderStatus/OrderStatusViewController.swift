@@ -67,18 +67,18 @@ final class OrderStatusViewController: UIViewController {
         let orderConfirmedRow = OrderStateRow(title: "Order confirmed", time: "12:11", checked: true)
         let prepearingFoodRow = OrderStateRow(title: "Preparing food", time: "12:11", checked: true)
         let foodOnTheWayRow = OrderStateRow(title: "Food on the way", time: "12:11", checked: false)
-        let DeliveredToYoutRow = OrderStateRow(title: "Delivered to you", time: "12:11", checked: false)
+        let DeliveredToYouRow = OrderStateRow(title: "Delivered to you", time: "12:11", checked: false)
         stackView.addRow(orderIdView)
         stackView.addRow(orderConfirmedRow)
         stackView.addRow(prepearingFoodRow)
         stackView.addRow(foodOnTheWayRow)
-        stackView.addRow(DeliveredToYoutRow)
+        stackView.addRow(DeliveredToYouRow)
         
         stackView.showSeparator(forRow: orderIdView)
         stackView.showSeparator(forRow: orderConfirmedRow)
         stackView.showSeparator(forRow: prepearingFoodRow)
         stackView.showSeparator(forRow: foodOnTheWayRow)
-        stackView.showSeparator(forRow: DeliveredToYoutRow)
+        stackView.showSeparator(forRow: DeliveredToYouRow)
     }
     
 }
