@@ -18,6 +18,7 @@ class MapViewController: UIViewController {
         view.showsUserLocation = true
         view.showsCompass = false
         view.delegate = self
+        view.register(RestaurantAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         return view
     }()
     
@@ -27,6 +28,7 @@ class MapViewController: UIViewController {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
+        
     }
     
     required init?(coder: NSCoder) { fatalError() }
@@ -80,6 +82,10 @@ class MapViewController: UIViewController {
     
     func getCameraLocation() -> CLLocationCoordinate2D {
         return mapView.camera.centerCoordinate
+    }
+    
+    func addAnnotation(_ annotation: RestaurantAnnotation) {
+        mapView.addAnnotation(annotation)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

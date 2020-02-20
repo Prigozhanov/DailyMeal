@@ -61,15 +61,17 @@ class AppCoordinator {
 private extension AppCoordinator {
     
     func configureRootViewController() {
-//        let vc = ProductViewController(viewModel: ProductViewModelImplementation(product: .dummy, restaurant: .dummy))
-//         tabBarController.viewControllers = [vc]
+        let vc = RestaurantsMapViewController(viewModel: RestaurantsMapViewModelImplementation())
+        let nav = UINavigationController(rootViewController: vc)
+        nav.isNavigationBarHidden = true
+         tabBarController.viewControllers = [nav]
         
-        tabBarController.setViewControllers([
-            cartTab,
-            exploreTab,
-            settingsTab
-        ], animated: false)
-        tabBarController.selectedIndex = 1
+//        tabBarController.setViewControllers([
+//            cartTab,
+//            exploreTab,
+//            settingsTab
+//        ], animated: false)
+//        tabBarController.selectedIndex = 1
     }
     
     var exploreTab: NavigationController {
