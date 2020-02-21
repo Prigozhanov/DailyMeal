@@ -44,6 +44,23 @@ class RestaurantCell: BaseTableCell {
         return label
     }()
     
+    private lazy var restaurantRateView: RatingView = {
+        RatingView(
+            item: RatingView.Item(
+                lowerBound: 0,
+                upperBound: Double(restaurant?.rate ?? "0")!,
+                maxValue: 5
+            )
+        )
+    }()
+    
+    private lazy var restaurantRateValueLabel: UILabel = {
+        let label = UILabel.makeText()
+        label.font = FontFamily.Poppins.semiBold.font(size: 12)
+        label.textColor = Colors.blue.color
+        return label
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: nil)
     }
@@ -54,8 +71,6 @@ class RestaurantCell: BaseTableCell {
         let shadowView = UIView(frame: .zero)
         let cardView = CardView(shadowSize: .medium, customInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
         let restaurantInfoView: UIView = UIView(frame: .zero)
-        
-        var restaurantRateView: UIImageView
         
         selectionStyle = .none
         contentView.backgroundColor = Colors.commonBackground.color
@@ -105,13 +120,17 @@ class RestaurantCell: BaseTableCell {
             $0.leading.equalTo(restaurantLogoImageView.snp.trailing).offset(20)
         }
         
-        restaurantRateView = UIImageView(image: Images.ratePlaceholder.image)
         restaurantInfoView.addSubview(restaurantRateView)
-        restaurantRateView.contentMode = .scaleAspectFit
         restaurantRateView.snp.makeConstraints {
             $0.top.equalTo(restaurantNameLabel.snp.bottom)
-            $0.bottom.equalToSuperview()
+            $0.height.equalTo(10)
+            $0.bottom.greaterThanOrEqualToSuperview()
             $0.leading.equalTo(restaurantLogoImageView.snp.trailing).offset(20)
+        }
+        restaurantInfoView.addSubview(restaurantRateValueLabel)
+        restaurantRateValueLabel.snp.makeConstraints {
+            $0.leading.equalTo(restaurantRateView.snp.trailing).offset(Layout.commonMargin)
+            $0.centerY.equalTo(restaurantRateView)
         }
         
         restaurantInfoView.addSubview(deliveryFeeValueLabel)
@@ -166,6 +185,8 @@ extension RestaurantCell: ConfigurableCell {
     func configure(with item: Restaurant) {
         restaurant = item
         restaurantNameLabel.text = item.chainLabel
+        restaurantRateView.configure(item: RatingView.Item(lowerBound: 0, upperBound: (Double(item.rate) ?? 0) / 2, maxValue: 5))
+        restaurantRateValueLabel.text = String(format: "%.1f", (Double(item.rate) ?? 0) / 2)
         deliveryFeeValueLabel.text = Formatter.Currency.toString(Double(item.restDeliveryFee))
         restaurantDescriptionLabel.text = item.restaurantDescription
         if let url = URL(string: item.src) {
