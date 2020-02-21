@@ -103,4 +103,8 @@ class CategoryFilterBar: UIView {
     
     required init?(coder: NSCoder) { fatalError() }
     
+    func reload() {
+        basicProvider.reloadData()
+    }
+    
 }
