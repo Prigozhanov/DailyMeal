@@ -11,6 +11,7 @@ import Services
 protocol RestaurantsView: class {
     func reloadScreen()
     func showLoadingIndicator()
+    func hideLoadingIndicator()
 }
 
 //MARK: - ViewModel
@@ -40,7 +41,7 @@ protocol RestaurantsViewModel {
     func getRestaurantsFilteredByCategory(_ category: FoodCategory) -> [Restaurant]
     
     func loadRestaurants()
-    func loadCategory(restId: Int, onSuccess: @escaping ([ProductCategory]) -> Void)
+    func loadCategory(restId: Int, onSuccess: @escaping ([ProductCategory]) -> Void, onFailure: @escaping VoidClosure)
     
 }
 
@@ -141,19 +142,27 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
         let req = context.networkService.requestFactory.menu(cityId: areaId, addressId: addressId)
         view?.showLoadingIndicator()
         context.networkService.send(request: req) { [weak self] result, _ in
-            LoadingIndicator.hide()
             switch result {
             case let .success(response):
                 self?.restaurants = response.restaurants.filter({ $0.type == .restaurant })
-                self?.view?.reloadScreen()
-                self?.restaurants.forEach({ self?.loadCategory(restId: $0.id, onSuccess: { (_) in })})
+                let group = DispatchGroup()
+                self?.restaurants.forEach({
+                    group.enter()
+                    self?.loadCategory(restId: $0.id, onSuccess: { _ in
+                         group.leave()
+                    }, onFailure: { group.leave() })
+                })
+                group.notify(queue: .main) { [weak self] in
+                    self?.view?.reloadScreen()
+                    self?.view?.hideLoadingIndicator()
+                }
             case let .failure(error):
                 print(error)
             }
         }
     }
     
-    func loadCategory(restId: Int, onSuccess: @escaping ([ProductCategory]) -> Void) {
+    func loadCategory(restId: Int, onSuccess: @escaping ([ProductCategory]) -> Void, onFailure: @escaping VoidClosure) {
         let req = context.networkService.requestFactory.restaurantCategories(id: restId)
         
         context.networkService.send(request: req) { [weak self] (result, _) in

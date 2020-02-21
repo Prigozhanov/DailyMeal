@@ -166,10 +166,15 @@ extension RestaurantsViewController: RestaurantsView {
         tableDirector.append(section: section)
         section.append(rows: rows)
         tableDirector.reload()
+        filterBar.reload()
     }
     
     func showLoadingIndicator() {
         LoadingIndicator.show(self)
+    }
+    
+    func hideLoadingIndicator() {
+        LoadingIndicator.hide()
     }
     
     func makeRestaurantItemRows(restaurants: [Restaurant]) -> [TableRow<RestaurantCell>] {
@@ -185,10 +190,9 @@ extension RestaurantsViewController: RestaurantsView {
                         data.cell?.categories = categories
                         data.cell?.updatePreview()
                     } else {
-                        self.viewModel.loadCategory(restId: data.cell?.restaurant?.id ?? 0) { (categories) in
+                        self.viewModel.loadCategory(restId: data.cell?.restaurant?.id ?? 0, onSuccess: {(categories) in
                             data.cell?.categories = categories
-                            data.cell?.updatePreview()
-                        }
+                            data.cell?.updatePreview()}) {}
                     }
                 }
         }
