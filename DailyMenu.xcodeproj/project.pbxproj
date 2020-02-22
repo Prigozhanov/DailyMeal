@@ -151,6 +151,9 @@
 		E7EEC61123E795910066CC76 /* OrderStateRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EEC61023E795910066CC76 /* OrderStateRow.swift */; };
 		E7F15DF223FF00B900E35668 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F15DF123FF00B900E35668 /* RatingView.swift */; };
 		E7F15DF423FF063D00E35668 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F15DF323FF063D00E35668 /* UIImage.swift */; };
+		E7F15DF823FF66DE00E35668 /* RatingRangeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F15DF723FF66DE00E35668 /* RatingRangeControl.swift */; };
+		E7F15DFB2400469F00E35668 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD22323E96C8200FB270D /* Networking.framework */; };
+		E7F15DFC2400469F00E35668 /* Networking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD22323E96C8200FB270D /* Networking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,6 +199,13 @@
 			remoteGlobalIDString = E7C6035A233D3ECA004686DB;
 			remoteInfo = DailyMenu;
 		};
+		E7F15DFD2400469F00E35668 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7C60353233D3ECA004686DB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E77AD22223E96C8200FB270D;
+			remoteInfo = Networking;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -208,6 +218,17 @@
 				E70EBEF623EC191100B3D0DF /* Extensions.framework in Embed Frameworks */,
 				E70EBEFA23EC191800B3D0DF /* Services.framework in Embed Frameworks */,
 				E7B7C08923EC162F0090C9DF /* Networking.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7F15DFF2400469F00E35668 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E7F15DFC2400469F00E35668 /* Networking.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -370,6 +391,7 @@
 		E7EEC61023E795910066CC76 /* OrderStateRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStateRow.swift; sourceTree = "<group>"; };
 		E7F15DF123FF00B900E35668 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		E7F15DF323FF063D00E35668 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		E7F15DF723FF66DE00E35668 /* RatingRangeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingRangeControl.swift; sourceTree = "<group>"; };
 		F6978153A996CCA2C94A5A5E /* Pods-DailyMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyMenu.debug.xcconfig"; path = "Target Support Files/Pods-DailyMenu/Pods-DailyMenu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -400,6 +422,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7F15DFB2400469F00E35668 /* Networking.framework in Frameworks */,
 				1577F5CAFB63789A51829A53 /* Pods_Services.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -615,6 +638,7 @@
 		E71CDC3F23AEE4620059505A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E7F15E0024006F2D00E35668 /* Controls */,
 				E71CDC4023AEE4870059505A /* NavigationBarControls.swift */,
 				E71E75AB23EFC4C100D51EEE /* MapHeaderVIew.swift */,
 				E7E04A3B23C8B9870045A381 /* ItemCounter.swift */,
@@ -953,6 +977,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		E7F15E0024006F2D00E35668 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				E7F15DF723FF66DE00E35668 /* RatingRangeControl.swift */,
+			);
+			path = Controls;
+			sourceTree = "<group>";
+		};
 		F8233BB71F6893F86D137C97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1057,10 +1089,12 @@
 				E77AD26923E9D6A700FB270D /* Sources */,
 				E77AD26A23E9D6A700FB270D /* Frameworks */,
 				E77AD26B23E9D6A700FB270D /* Resources */,
+				E7F15DFF2400469F00E35668 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E7F15DFE2400469F00E35668 /* PBXTargetDependency */,
 			);
 			name = Services;
 			productName = Services;
@@ -1462,6 +1496,7 @@
 				E76622F523FD2C41004D64BB /* CategoryFilterBar.swift in Sources */,
 				E75C442F23F5CDB80099A2D0 /* LocationResultsRow.swift in Sources */,
 				E71139DE2346AC7400889AE2 /* ProductViewController.swift in Sources */,
+				E7F15DF823FF66DE00E35668 /* RatingRangeControl.swift in Sources */,
 				E74832042371CA8100216927 /* UITextField.swift in Sources */,
 				E746675223F1E1DC00A802BA /* EditableTextFieldView.swift in Sources */,
 				E74832062371CBB200216927 /* UIView.swift in Sources */,
@@ -1517,6 +1552,11 @@
 			target = E7C6035A233D3ECA004686DB /* DailyMenu */;
 			targetProxy = E7C60391233D5F5B004686DB /* PBXContainerItemProxy */;
 		};
+		E7F15DFE2400469F00E35668 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E77AD22223E96C8200FB270D /* Networking */;
+			targetProxy = E7F15DFD2400469F00E35668 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1538,6 +1578,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = 53APD5F9YQ;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1553,7 +1594,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.epam.Networking;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1568,6 +1609,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = 53APD5F9YQ;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1583,7 +1625,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.epam.Networking;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";

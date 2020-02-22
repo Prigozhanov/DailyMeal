@@ -47,8 +47,7 @@ class RestaurantCell: BaseTableCell {
     private lazy var restaurantRateView: RatingView = {
         RatingView(
             item: RatingView.Item(
-                lowerBound: 0,
-                upperBound: Double(restaurant?.rate ?? "0")!,
+                value: Double(restaurant?.rate ?? "0")!,
                 maxValue: 5
             )
         )
@@ -185,7 +184,7 @@ extension RestaurantCell: ConfigurableCell {
     func configure(with item: Restaurant) {
         restaurant = item
         restaurantNameLabel.text = item.chainLabel
-        restaurantRateView.configure(item: RatingView.Item(lowerBound: 0, upperBound: (Double(item.rate) ?? 0) / 2, maxValue: 5))
+        restaurantRateView.value = (Double(item.rate) ?? 0) / 2
         restaurantRateValueLabel.text = String(format: "%.1f", (Double(item.rate) ?? 0) / 2)
         deliveryFeeValueLabel.text = Formatter.Currency.toString(Double(item.restDeliveryFee))
         restaurantDescriptionLabel.text = item.restaurantDescription
