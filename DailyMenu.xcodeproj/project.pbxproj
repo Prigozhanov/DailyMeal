@@ -119,6 +119,7 @@
 		E79ECD6F23EAB26E00824FC5 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79ECD6E23EAB26E00824FC5 /* TextField.swift */; };
 		E79FD751239D399900038933 /* CollectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79FD750239D399900038933 /* CollectionHeaderCell.swift */; };
 		E79FD753239D39C300038933 /* FoodItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79FD752239D39C300038933 /* FoodItemCell.swift */; };
+		E7A03B7224016D240011C541 /* PriceRangeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A03B7124016D240011C541 /* PriceRangeControl.swift */; };
 		E7A4458723DA2F70003519E5 /* FoodOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4458623DA2F70003519E5 /* FoodOptionCell.swift */; };
 		E7A4458F23DDE1DA003519E5 /* ProductHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4458E23DDE1DA003519E5 /* ProductHeaderView.swift */; };
 		E7A4459123DDE2F4003519E5 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4459023DDE2F4003519E5 /* CardView.swift */; };
@@ -353,6 +354,7 @@
 		E79ECD6E23EAB26E00824FC5 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		E79FD750239D399900038933 /* CollectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeaderCell.swift; sourceTree = "<group>"; };
 		E79FD752239D39C300038933 /* FoodItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemCell.swift; sourceTree = "<group>"; };
+		E7A03B7124016D240011C541 /* PriceRangeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceRangeControl.swift; sourceTree = "<group>"; };
 		E7A4458623DA2F70003519E5 /* FoodOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodOptionCell.swift; sourceTree = "<group>"; };
 		E7A4458E23DDE1DA003519E5 /* ProductHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductHeaderView.swift; sourceTree = "<group>"; };
 		E7A4459023DDE2F4003519E5 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -981,6 +983,7 @@
 			isa = PBXGroup;
 			children = (
 				E7F15DF723FF66DE00E35668 /* RatingRangeControl.swift */,
+				E7A03B7124016D240011C541 /* PriceRangeControl.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -1488,6 +1491,7 @@
 				E77AD26023E9790E00FB270D /* Globals.swift in Sources */,
 				E71139CF2346AC7400889AE2 /* CheckoutViewController.swift in Sources */,
 				E703991323E2577A003E527A /* LoadingIndicator.swift in Sources */,
+				E7A03B7224016D240011C541 /* PriceRangeControl.swift in Sources */,
 				E71139F42346AFE300889AE2 /* RestaurantsViewController.swift in Sources */,
 				E71139EF2346AF0500889AE2 /* SettingsViewModel.swift in Sources */,
 				E7333EC923F34C8C004E4400 /* OptionView.swift in Sources */,
