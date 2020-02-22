@@ -7,7 +7,7 @@ import UIKit
 
 public extension UIImage {
     
-    func withHorizontalFill(ratio: CGFloat, fillColor: UIColor, secondColor: UIColor) -> UIImage {
+    func withHorizontalFill(ratio: CGFloat, highlightingColor: UIColor, fillColor: UIColor) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         
         
@@ -17,14 +17,43 @@ public extension UIImage {
         let context = UIGraphicsGetCurrentContext()!
         context.setBlendMode(CGBlendMode.sourceIn)
         
-        context.setFillColor(fillColor.cgColor)
+        context.setFillColor(highlightingColor.cgColor)
         
         let rectToFill = CGRect(x: 0, y: 0, width: size.width * ratio, height: size.height)
         context.fill(rectToFill)
         
-        context.setFillColor(secondColor.cgColor)
+        context.setFillColor(fillColor.cgColor)
         let secondRectToFill = CGRect(x: size.width * ratio, y: 0, width: size.width * (1 - ratio), height: size.height)
         context.fill(secondRectToFill)
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+    
+    func withHorizontalFill(lowerBound: CGFloat,
+                            upperBound: CGFloat,
+                            highlightingColor: UIColor) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        draw(in: rect)
+        
+        let context = UIGraphicsGetCurrentContext()!
+        context.setBlendMode(CGBlendMode.sourceIn)
+        
+        context.setFillColor(highlightingColor.cgColor)
+        
+        let rectToFill = CGRect(
+            x: size.width * lowerBound,
+            y: 0.5,
+            width: (size.width * upperBound) - size.width * lowerBound,
+            height: size.height
+        
+        )
+        context.fill(rectToFill)
         
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
