@@ -102,6 +102,7 @@ internal enum Asset {
     }
     internal static let foodItemPlaceholder = ImageAsset(name: "food_item_placeholder")
     internal static let itemImagePlaceholder = ImageAsset(name: "item_image_placeholder")
+    internal static let priceRangeBackground = ImageAsset(name: "price_range_background")
     internal static let ratePlaceholder = ImageAsset(name: "rate_placeholder")
     internal static let restaurantLogoPlaceholder = ImageAsset(name: "restaurant_logo_placeholder")
     internal static let spinner = ImageAsset(name: "spinner")
