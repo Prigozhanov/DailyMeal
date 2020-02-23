@@ -13,13 +13,13 @@ class RestaurantsFilterHeader: UIView {
     
     private let item: Item
     
+    var isExpanded = true
+    
     private var headerLabel: UILabel = {
         let label = UILabel.makeText("Filter")
         label.font = FontFamily.medium
         return label
     }()
-    
-    private var separator = UIView.makeSeparator()
     
     private lazy var hideControlsButton: UIButton = {
         let button = UIButton.makeImageButton(image: Images.Icons.cross.image) { [weak self] _ in
@@ -34,6 +34,10 @@ class RestaurantsFilterHeader: UIView {
         
         super.init(frame: .zero)
         
+        backgroundColor = Colors.commonBackground.color
+        setBorder(width: 1, color: Colors.lightGray.color.cgColor)
+        setRoundCorners(Layout.cornerRadius, maskedCorners: [.layerMinXMinYCorner, .layerMaxXMinYCorner])
+        
         addSubview(headerLabel)
         headerLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
@@ -45,10 +49,6 @@ class RestaurantsFilterHeader: UIView {
             $0.centerY.equalToSuperview()
         }
         
-        addSubview(separator)
-        separator.snp.makeConstraints {
-            $0.bottom.leading.trailing.equalToSuperview()
-        }
     }
     
     required init?(coder: NSCoder) { fatalError() }

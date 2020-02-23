@@ -80,7 +80,6 @@ class RatingView: UIView {
         
     }
     
-    
     private func calculateFillData() {
         viewsFillData.removeAll()
         for i in 0 ..< Int(item.maxValue) {

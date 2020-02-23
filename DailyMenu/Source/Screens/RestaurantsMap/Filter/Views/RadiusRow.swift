@@ -8,17 +8,19 @@ import UIKit
 class RadiusRow: UIView {
     
     struct Item {
-        let valueChanged: (Int) -> Void
+        var value: Float
+        let maximumValue: Float
+        let valueChanged: (Float) -> Void
     }
 
-    private let item: Item
+    private var item: Item
     
-    private var initialValue: Float = 4
+    private lazy var initialValue = item.value
     
     private lazy var slider: Slider = {
        let slider = Slider()
         slider.minimumValue = 0
-        slider.maximumValue = 50
+        slider.maximumValue = item.maximumValue
         
         slider.value = initialValue
      
@@ -28,7 +30,7 @@ class RadiusRow: UIView {
     }()
 
     private lazy var valueLabel: UILabel = {
-        let label = UILabel.makeSmallText("\(Int(initialValue)) km")
+        let label = UILabel.makeSmallText("\(Int(item.value)) km")
         label.textColor = Colors.blue.color
         return label
     }()
@@ -60,8 +62,9 @@ class RadiusRow: UIView {
     required init?(coder: NSCoder) { fatalError() }
     
     @objc func valueChanged(slider: UISlider) {
-        item.valueChanged(Int(slider.value))
-        valueLabel.text = "\(Int(slider.value)) km"
+        item.value = slider.value
+        item.valueChanged(slider.value)
+        valueLabel.text = String(format: "%.0f km", slider.value)
     }
     
 }

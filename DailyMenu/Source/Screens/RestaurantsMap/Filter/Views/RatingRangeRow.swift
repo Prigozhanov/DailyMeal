@@ -8,20 +8,22 @@ import UIKit
 class RatingRangeRow: UIView {
     
     struct Item {
-        let valueChanged: (Double, Double) -> Void
+        var value: RangeValue<CGFloat>
+        let maximumValue: CGFloat
+        let valueChanged: (CGFloat, CGFloat) -> Void
     }
     
-    private let item: Item
+    private var item: Item
     
     private lazy var ratingRangeControl: RatingRangeControl = {
         let control = RatingRangeControl { [weak self] rangeSlider in
-            let upperValue = Double(rangeSlider.upperValue)
-            let lowerValue = Double(rangeSlider.lowerValue)
-            self?.item.valueChanged(lowerValue, upperValue)
+            self?.item.value.upperValue = rangeSlider.upperValue
+            self?.item.value.lowerValue = rangeSlider.lowerValue
+            self?.item.valueChanged(rangeSlider.lowerValue, rangeSlider.upperValue)
         }
-        control.maximumValue = 5
-        control.upperValue = 4
-        control.lowerValue = 2
+        control.maximumValue = item.maximumValue
+        control.lowerValue = item.value.lowerValue
+        control.upperValue = item.value.upperValue
         return control
     }()
     

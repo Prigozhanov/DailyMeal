@@ -8,20 +8,20 @@ import CollectionKit
 class FoodTypeRow: UIView {
     
     struct Item {
+        var selectedCategories: [FoodCategory]
         let didChange: ([FoodCategory]) -> ()
     }
     
-    private let item: Item
+    private var item: Item
     
     private let categories: [FoodCategory] = FoodCategory.allCases.filter { $0 != .unknown }
-    private var selectedCategories: [FoodCategory] = []
     
     private lazy var dataSource = ArrayDataSource(data: categories)
     
     private lazy var viewSource = ClosureViewSource { [weak self] (view: CategoryCell, data: FoodCategory, index: Int) in
         guard let self = self else { return }
         view.configure(item: data)
-        view.setSelected( self.selectedCategories.contains(data))
+        view.setSelected( self.item.selectedCategories.contains(data))
     }
     
     private lazy var categoriesSizeSource = { (index: Int, data: FoodCategory, collectionSize: CGSize) -> CGSize in
@@ -35,12 +35,12 @@ class FoodTypeRow: UIView {
         layout: FlowLayout(lineSpacing: 10).transposed(),
         tapHandler: { [weak self] handler in
             guard let self = self else { return }
-            if self.selectedCategories.contains(handler.data) {
-                self.selectedCategories.removeAll(where: { $0 == handler.data })
+            if self.item.selectedCategories.contains(handler.data) {
+                self.item.selectedCategories.removeAll(where: { $0 == handler.data })
             } else {
-                self.selectedCategories.append(handler.data)
+                self.item.selectedCategories.append(handler.data)
             }
-            self.item.didChange(self.selectedCategories)
+            self.item.didChange(self.item.selectedCategories)
             handler.setNeedsReload()
     })
     
