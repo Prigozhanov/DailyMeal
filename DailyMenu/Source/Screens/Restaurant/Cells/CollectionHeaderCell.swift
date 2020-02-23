@@ -4,7 +4,7 @@
 //
 
 import UIKit
-import SDWebImage
+import Kingfisher
 
 class CollectionHeaderCell: UIView {
     
@@ -160,7 +160,7 @@ class CollectionHeaderCell: UIView {
         deliveryTimeValueLabel.text = item.orderDelay
         minOrderValueLabel.text = item.minOrderPrice
         if let url = URL(string: item.imageURL) {
-            restaurantLogo.sd_setImage(with: url)
+            restaurantLogo.kf.setImage(with: url)
         }
         
     }

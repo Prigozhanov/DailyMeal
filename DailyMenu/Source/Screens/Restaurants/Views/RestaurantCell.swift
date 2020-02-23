@@ -189,7 +189,7 @@ extension RestaurantCell: ConfigurableCell {
         deliveryFeeValueLabel.text = Formatter.Currency.toString(Double(item.restDeliveryFee))
         restaurantDescriptionLabel.text = item.restaurantDescription
         if let url = URL(string: item.src) {
-            self.restaurantLogoImageView.sd_setImage(with: url)
+            self.restaurantLogoImageView.kf.setImage(with: url)
         }
     }
     

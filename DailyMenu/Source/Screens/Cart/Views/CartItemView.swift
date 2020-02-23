@@ -101,8 +101,9 @@ class CartItemView: UIView {
             $0.leading.equalTo(counter.snp.trailing).offset(Layout.commonMargin)
             $0.size.equalTo(counter.snp.height)
         }
+        
         if let url = URL(string: item.cartItem.product.src.orEmpty) {
-             itemImage.sd_setImage(with: url)
+            itemImage.kf.setImage(with: url)
         }
         
         let itemNameLabel = UILabel.makeText(item.cartItem.product.label)
