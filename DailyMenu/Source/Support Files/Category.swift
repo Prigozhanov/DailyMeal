@@ -6,8 +6,28 @@
 import Foundation
 import Networking
 
-public enum FoodCategory: String {
+public enum FoodCategory: String, CaseIterable {
+    
     case burger = "Burgers", chicken, desert = "Desserts", fries, hotdog = "Hot Dogs", lobastar, pizza, sandwich, steak, sushi, taco, pasta, shawarma, unknown
+    
+    var humanReadableValue: String {
+        switch self {
+        case .burger: return "Burgers"
+        case .chicken: return "Chicken"
+        case .desert: return "Deserts"
+        case .fries: return "Fries"
+        case .hotdog: return "Hotdog"
+        case .lobastar: return "Lobstar"
+        case .pizza: return "Pizza"
+        case .sandwich: return "Sandwich"
+        case .steak: return "Steak"
+        case .sushi: return "Sushi"
+        case .taco: return "Taco"
+        case .pasta: return "Pasta"
+        case .shawarma: return "Shaurma"
+        case .unknown: return "Unknown"
+        }
+    }
     
     static func fromCategory(category: ProductCategory) -> FoodCategory {
         return FoodCategory(rawValue: category.label.orEmpty.onlyLetters) ?? .unknown
@@ -25,6 +45,8 @@ public enum FoodCategory: String {
         if categories.contains(where: { $0.label?.containsCaseIgnoring(FoodCategory.desert.rawValue) ?? false }) { return .desert }
         return .unknown
     }
+    
+    
 }
 
 public enum FoodOption: String {
