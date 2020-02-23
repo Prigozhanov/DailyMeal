@@ -101,7 +101,7 @@ class FoodItemCell: UIView {
         foodDescription.text = item.description
         priceLabel.text = item.price
         if let url = URL(string: item.imageURL) {
-            foodImage.sd_setImage(with: url)
+            foodImage.kf.setImage(with: url)
         }
         
         layoutSubviews()

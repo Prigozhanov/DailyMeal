@@ -19,7 +19,7 @@ class RestaurantCalloutView: UIView {
         let view = UIImageView(frame: .zero)
         view.contentMode = .scaleAspectFit
         if let url = URL(string: item.imageSrc) {
-            view.sd_setImage(with: url)
+            view.kf.setImage(with: url)
         }
         return view
     }()
