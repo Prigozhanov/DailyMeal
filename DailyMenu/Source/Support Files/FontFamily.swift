@@ -40,4 +40,8 @@ extension FontFamily {
         return Poppins.medium.font(size: 12)
     }
     
+    public static var medium: UIFont? {
+        return Poppins.medium.font(size: 14)
+    }
+    
 }

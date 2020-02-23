@@ -38,6 +38,13 @@ enum Formatter {
             return value < 0 ? String(format: "- BYN %.2f", abs(value)) : String(format: "BYN %.2f", value)
         }
         
+        static func toString(_ value: Int?) -> String {
+            guard let value = value else {
+                return "Error"
+            }
+            return value < 0 ? "- BYN \(abs(value))" : "BYN \(value)"
+        }
+        
         static func fromString(_ string: String?) -> Double? {
             guard let string = string else {
                 return nil

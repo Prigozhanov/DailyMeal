@@ -125,6 +125,14 @@
 		E7A03B7A2401A98D0011C541 /* RestaurantCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A03B792401A98D0011C541 /* RestaurantCalloutView.swift */; };
 		E7A03B7E2401A9EB0011C541 /* RestaurantsMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A03B7C2401A9EA0011C541 /* RestaurantsMapViewModel.swift */; };
 		E7A03B7F2401A9EB0011C541 /* RestaurantsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A03B7D2401A9EA0011C541 /* RestaurantsMapViewController.swift */; };
+		E7A03B822401ABFC0011C541 /* RestaurantsFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A03B812401ABFC0011C541 /* RestaurantsFilterView.swift */; };
+		E7A03B842401AE900011C541 /* RestaurantsFilterControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A03B832401AE900011C541 /* RestaurantsFilterControls.swift */; };
+		E7A03B862401AEAF0011C541 /* RestaurantsFilterHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A03B852401AEAF0011C541 /* RestaurantsFilterHeader.swift */; };
+		E7A03B892401B4F60011C541 /* RadiusRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A03B882401B4F60011C541 /* RadiusRow.swift */; };
+		E7A03B8B2401B7100011C541 /* PriceRangeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A03B8A2401B7100011C541 /* PriceRangeRow.swift */; };
+		E7A03B8D2401B77C0011C541 /* FoodTypeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A03B8C2401B77C0011C541 /* FoodTypeRow.swift */; };
+		E7A03B8F2401B7900011C541 /* RatingRangeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A03B8E2401B7900011C541 /* RatingRangeRow.swift */; };
+		E7A03B932401BE470011C541 /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A03B922401BE470011C541 /* Slider.swift */; };
 		E7A4458723DA2F70003519E5 /* FoodOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4458623DA2F70003519E5 /* FoodOptionCell.swift */; };
 		E7A4458F23DDE1DA003519E5 /* ProductHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4458E23DDE1DA003519E5 /* ProductHeaderView.swift */; };
 		E7A4459123DDE2F4003519E5 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4459023DDE2F4003519E5 /* CardView.swift */; };
@@ -365,6 +373,14 @@
 		E7A03B792401A98D0011C541 /* RestaurantCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantCalloutView.swift; sourceTree = "<group>"; };
 		E7A03B7C2401A9EA0011C541 /* RestaurantsMapViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantsMapViewModel.swift; sourceTree = "<group>"; };
 		E7A03B7D2401A9EA0011C541 /* RestaurantsMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantsMapViewController.swift; sourceTree = "<group>"; };
+		E7A03B812401ABFC0011C541 /* RestaurantsFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsFilterView.swift; sourceTree = "<group>"; };
+		E7A03B832401AE900011C541 /* RestaurantsFilterControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsFilterControls.swift; sourceTree = "<group>"; };
+		E7A03B852401AEAF0011C541 /* RestaurantsFilterHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsFilterHeader.swift; sourceTree = "<group>"; };
+		E7A03B882401B4F60011C541 /* RadiusRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusRow.swift; sourceTree = "<group>"; };
+		E7A03B8A2401B7100011C541 /* PriceRangeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceRangeRow.swift; sourceTree = "<group>"; };
+		E7A03B8C2401B77C0011C541 /* FoodTypeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTypeRow.swift; sourceTree = "<group>"; };
+		E7A03B8E2401B7900011C541 /* RatingRangeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingRangeRow.swift; sourceTree = "<group>"; };
+		E7A03B922401BE470011C541 /* Slider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slider.swift; sourceTree = "<group>"; };
 		E7A4458623DA2F70003519E5 /* FoodOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodOptionCell.swift; sourceTree = "<group>"; };
 		E7A4458E23DDE1DA003519E5 /* ProductHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductHeaderView.swift; sourceTree = "<group>"; };
 		E7A4459023DDE2F4003519E5 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -651,7 +667,6 @@
 		E71CDC3F23AEE4620059505A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E7F15E0024006F2D00E35668 /* Controls */,
 				E71CDC4023AEE4870059505A /* NavigationBarControls.swift */,
 				E71E75AB23EFC4C100D51EEE /* MapHeaderVIew.swift */,
 				E7E04A3B23C8B9870045A381 /* ItemCounter.swift */,
@@ -659,6 +674,7 @@
 				E7A4459023DDE2F4003519E5 /* CardView.swift */,
 				E79ECD6E23EAB26E00824FC5 /* TextField.swift */,
 				E7F15DF123FF00B900E35668 /* RatingView.swift */,
+				E7A03B922401BE470011C541 /* Slider.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -861,10 +877,34 @@
 		E7A03B7B2401A9EA0011C541 /* RestaurantsMap */ = {
 			isa = PBXGroup;
 			children = (
+				E7A03B802401ABD40011C541 /* Views */,
 				E7A03B7C2401A9EA0011C541 /* RestaurantsMapViewModel.swift */,
 				E7A03B7D2401A9EA0011C541 /* RestaurantsMapViewController.swift */,
 			);
 			path = RestaurantsMap;
+			sourceTree = "<group>";
+		};
+		E7A03B802401ABD40011C541 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E7F15E0024006F2D00E35668 /* Controls */,
+				E7A03B872401B4E40011C541 /* Rows */,
+				E7A03B812401ABFC0011C541 /* RestaurantsFilterView.swift */,
+				E7A03B832401AE900011C541 /* RestaurantsFilterControls.swift */,
+				E7A03B852401AEAF0011C541 /* RestaurantsFilterHeader.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E7A03B872401B4E40011C541 /* Rows */ = {
+			isa = PBXGroup;
+			children = (
+				E7A03B882401B4F60011C541 /* RadiusRow.swift */,
+				E7A03B8A2401B7100011C541 /* PriceRangeRow.swift */,
+				E7A03B8C2401B77C0011C541 /* FoodTypeRow.swift */,
+				E7A03B8E2401B7900011C541 /* RatingRangeRow.swift */,
+			);
+			path = Rows;
 			sourceTree = "<group>";
 		};
 		E7A4458D23DDE1C4003519E5 /* Views */ = {
@@ -1465,6 +1505,7 @@
 				E71E75AC23EFC4C100D51EEE /* MapHeaderVIew.swift in Sources */,
 				E71139D02346AC7400889AE2 /* CheckoutViewModel.swift in Sources */,
 				E78B605123D8D6DD00389EE2 /* GradientView.swift in Sources */,
+				E7A03B8F2401B7900011C541 /* RatingRangeRow.swift in Sources */,
 				E720292723EDF46A000E9884 /* AddCreditCardViewModel.swift in Sources */,
 				E719C45323EF99BE00574840 /* LocationResultsTableView.swift in Sources */,
 				E71139D12346AC7400889AE2 /* CartViewController.swift in Sources */,
@@ -1474,9 +1515,12 @@
 				E718698C237DCC1400059766 /* Fonts.swift in Sources */,
 				E7A4458F23DDE1DA003519E5 /* ProductHeaderView.swift in Sources */,
 				E7926C6923D8C40600768405 /* CartPromocodeView.swift in Sources */,
+				E7A03B892401B4F60011C541 /* RadiusRow.swift in Sources */,
+				E7A03B842401AE900011C541 /* RestaurantsFilterControls.swift in Sources */,
 				E71139F52346AFE300889AE2 /* RestaurantsViewModel.swift in Sources */,
 				E7D15C3223DF8D3C001E24EF /* CartItem.swift in Sources */,
 				E7E04A5823CCADB40045A381 /* AppContext.swift in Sources */,
+				E7A03B8B2401B7100011C541 /* PriceRangeRow.swift in Sources */,
 				E720292823EDF46A000E9884 /* AddCreditCardViewController.swift in Sources */,
 				E7988BD923799A5600F0E8BD /* BaseCollectionCell.swift in Sources */,
 				E720292923EDF46A000E9884 /* CardInfoView.swift in Sources */,
@@ -1486,13 +1530,16 @@
 				E7926C6723D8C3D800768405 /* CartTitleValueView.swift in Sources */,
 				E731B29123EF975000CF7AF9 /* LocationSearchView.swift in Sources */,
 				E7EEC61123E795910066CC76 /* OrderStateRow.swift in Sources */,
+				E7A03B822401ABFC0011C541 /* RestaurantsFilterView.swift in Sources */,
 				E71139DD2346AC7400889AE2 /* ProductViewModel.swift in Sources */,
 				E74831FC2371C71C00216927 /* UILabel.swift in Sources */,
 				E79FD751239D399900038933 /* CollectionHeaderCell.swift in Sources */,
 				E71CDC4123AEE4870059505A /* NavigationBarControls.swift in Sources */,
 				E7A03B7F2401A9EB0011C541 /* RestaurantsMapViewController.swift in Sources */,
+				E7A03B862401AEAF0011C541 /* RestaurantsFilterHeader.swift in Sources */,
 				E76622F323FC96F4004D64BB /* RestaurantPreviewImages.swift in Sources */,
 				E71139D92346AC7400889AE2 /* GreetingViewModel.swift in Sources */,
+				E7A03B8D2401B77C0011C541 /* FoodTypeRow.swift in Sources */,
 				E71139D72346AC7400889AE2 /* OrderStatusViewModel.swift in Sources */,
 				E719C45523EF9A3200574840 /* LocationSearchInputView.swift in Sources */,
 				E7E04A3A23C8A8BB0045A381 /* NavigationController.swift in Sources */,
@@ -1527,6 +1574,7 @@
 				E720291923EDE1AE000E9884 /* PhoneVerificationViewModel.swift in Sources */,
 				E76622F523FD2C41004D64BB /* CategoryFilterBar.swift in Sources */,
 				E75C442F23F5CDB80099A2D0 /* LocationResultsRow.swift in Sources */,
+				E7A03B932401BE470011C541 /* Slider.swift in Sources */,
 				E71139DE2346AC7400889AE2 /* ProductViewController.swift in Sources */,
 				E7F15DF823FF66DE00E35668 /* RatingRangeControl.swift in Sources */,
 				E74832042371CA8100216927 /* UITextField.swift in Sources */,
