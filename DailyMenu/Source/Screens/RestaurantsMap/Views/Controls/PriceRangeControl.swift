@@ -13,19 +13,45 @@ class PriceRangeControl: UIControl {
         }
     }
     
+    override var bounds: CGRect {
+        didSet {
+            updateLayerFrames()
+        }
+    }
+    
     private var previousLocation = CGPoint()
     
-    var minimumValue: CGFloat =  0
-    var maximumValue: CGFloat = 1
-    var lowerValue: CGFloat = 0.2
-    var upperValue: CGFloat = 0.8
+    var minimumValue: CGFloat = 0 {
+        didSet {
+            updateLayerFrames()
+        }
+    }
+    
+    var maximumValue: CGFloat = 1 {
+        didSet {
+            updateLayerFrames()
+        }
+    }
+    
+    var lowerValue: CGFloat = 0.2 {
+        didSet {
+            updateLayerFrames()
+        }
+    }
+    
+    var upperValue: CGFloat = 0.8 {
+        didSet {
+            updateLayerFrames()
+        }
+    }
+
     
     private let trackLayer = PriceRangeTrackLayer()
     
     let trackTintColor = Colors.lightGray.color
     let trackHighlightTintColor = Colors.blue.color
     
-    private let thumbImage = Images.Icons.thumb.image
+    private let thumbImage = Images.Icons.thumb.image.kf.resize(to: CGSize(width: 15, height: 15), for: .aspectFill)
     
     private let backgroundImage = Images.priceRangeBackground.image
     private let backgroundImageView = UIImageView()
@@ -71,8 +97,8 @@ class PriceRangeControl: UIControl {
             )
         )
         backgroundImageView.image = backgroundImage.withHorizontalFill(
-            lowerBound: lowerValue,
-            upperBound: upperValue,
+            lowerBound: lowerValue / maximumValue,
+            upperBound: upperValue / maximumValue,
             highlightingColor: Colors.blue.color
         )
         

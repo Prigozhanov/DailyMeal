@@ -13,6 +13,12 @@ class RatingRangeControl: UIControl {
         }
     }
     
+    override var bounds: CGRect {
+        didSet {
+            updateLayerFrames()
+        }
+    }
+    
     private var previousLocation = CGPoint()
     
     var minimumValue: CGFloat =  0
@@ -64,6 +70,12 @@ class RatingRangeControl: UIControl {
     private func thumbOriginForValue(_ value: CGFloat) -> CGPoint {
         let x = positionForValue(value) - 1
         return CGPoint(x: x, y: (bounds.height - frame.height) / 2.0)
+    }
+    
+    internal class RatingRangeThumb: UIView {
+        
+        var isHighlighted: Bool = false
+        
     }
     
 }
@@ -120,12 +132,6 @@ extension RatingRangeControl {
                             upperValue: CGFloat) -> CGFloat {
         return min(max(value, lowerValue), upperValue)
     }
-    
-}
-
-class RatingRangeThumb: UIView {
-    
-    var isHighlighted: Bool = false
     
 }
 
