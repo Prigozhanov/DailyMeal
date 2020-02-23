@@ -53,7 +53,7 @@ class Style {
     static func addShadow(for view: UIView, in parentView: UIView, cornerRadius: CGFloat) {
         let shadowView = UIView()
         shadowView.setRoundCorners(cornerRadius)
-        shadowView.setShadow(offset: CGSize(width: 0, height: 10), opacity: 0.2, radius: 20)
+        shadowView.setShadow(offset: CGSize(width: 0, height: 10), opacity: 0.1, radius: 20)
         shadowView.backgroundColor = .white
         parentView.insertSubview(shadowView, belowSubview: view)
         shadowView.snp.makeConstraints { $0.edges.equalTo(view) }

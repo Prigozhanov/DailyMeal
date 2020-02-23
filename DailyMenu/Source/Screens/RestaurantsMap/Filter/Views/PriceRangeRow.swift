@@ -8,29 +8,31 @@ import UIKit
 class PriceRangeRow: UIView {
     
     struct Item {
-        let valueChanged: (Int, Int) -> Void
+        var value: RangeValue<CGFloat>
+        let maximumValue: CGFloat
+        let valueChanged: (CGFloat, CGFloat) -> Void
     }
     
-    private let item: Item
-    
-    private var initialValue: Float = 4
+    private var item: Item
     
     private lazy var rangeSlider: PriceRangeControl = {
         let control = PriceRangeControl { [weak self] rangeSlider in
-            let upperValue = Int(rangeSlider.upperValue)
-            let lowerValue = Int(rangeSlider.lowerValue)
-            self?.item.valueChanged(lowerValue, upperValue)
-            self?.valueLabel.text = "\(Formatter.Currency.toString(lowerValue)) - \(Formatter.Currency.toString(upperValue))"
+            self?.item.value.lowerValue = rangeSlider.lowerValue
+            self?.item.value.upperValue = rangeSlider.upperValue
+            self?.item.valueChanged(rangeSlider.lowerValue, rangeSlider.upperValue)
+            self?.valueLabel.text = "\(Formatter.Currency.toString(Int(rangeSlider.lowerValue))) - \(Formatter.Currency.toString(Int(rangeSlider.upperValue)))"
         }
         control.minimumValue = 0
-        control.maximumValue = 500
-        control.upperValue = 500
-        control.lowerValue = 0
+        control.maximumValue = item.maximumValue
+        control.lowerValue = item.value.lowerValue
+        control.upperValue = item.value.upperValue
         return control
     }()
     
     private lazy var valueLabel: UILabel = {
-        let label = UILabel.makeSmallText("\(Formatter.Currency.toString(0)) - \(Formatter.Currency.toString(500))")
+        let label = UILabel.makeSmallText(
+            "\(Formatter.Currency.toString(Int(item.value.lowerValue))) - \(Formatter.Currency.toString(Int(item.value.upperValue)))"
+        )
         label.textColor = Colors.blue.color
         return label
     }()

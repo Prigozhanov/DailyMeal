@@ -5,9 +5,11 @@
 
 import UIKit
 
-class LocationSearchInputView: UIView {
+class MapSearchInputView: UIView {
     
     struct Item {
+        let placeholder: String
+        var onFilterButtonTap: VoidClosure?
         let onUserLocationButtonTapped: VoidClosure
         let shouldChangeCharacters: StringClosure
         let shouldReturn: VoidClosure
@@ -36,7 +38,7 @@ class LocationSearchInputView: UIView {
     private lazy var textField: UITextField = {
         let textField = UITextField(frame: .zero)
         textField.font = FontFamily.Poppins.medium.font(size: 14)
-        textField.placeholder = "Type delivery location"
+        textField.placeholder = item.placeholder
         textField.tintColor = Colors.gray.color
         textField.delegate = self
         return textField
@@ -45,6 +47,15 @@ class LocationSearchInputView: UIView {
     private lazy var userLocationButton: UIButton = {
         let button = UIButton.makeImageButton(image: Images.Icons.location.image) { [weak self] _ in
             self?.item.onUserLocationButtonTapped()
+        }
+        button.contentMode = .scaleAspectFit
+        button.tintColor = Colors.gray.color
+        return button
+    }()
+    
+    private lazy var filterButton: UIButton = {
+        let button = UIButton.makeImageButton(image: Images.Icons.filter.image) { [weak self] _ in
+            self?.item.onFilterButtonTap?()
         }
         button.contentMode = .scaleAspectFit
         button.tintColor = Colors.gray.color
@@ -62,18 +73,28 @@ class LocationSearchInputView: UIView {
         
         searchIcon.snp.makeConstraints {
             $0.top.leading.bottom.equalToSuperview().inset(Layout.commonInset)
-            $0.width.equalTo(30).priority(.required)
+            $0.width.equalTo(30)
         }
         
         textField.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
             $0.leading.equalTo(searchIcon.snp.trailing).offset(Layout.commonMargin)
-            $0.trailing.equalTo(userLocationButton.snp.leading).offset(-Layout.largeMargin).priority(.required)
+            $0.trailing.equalTo(userLocationButton.snp.leading).offset(-Layout.largeMargin).priority(.high)
         }
         
         userLocationButton.snp.makeConstraints {
             $0.top.bottom.trailing.equalToSuperview().inset(Layout.commonInset)
             $0.width.equalTo(30)
+        }
+        
+        if item.onFilterButtonTap != nil {
+            addSubview(filterButton)
+            filterButton.snp.makeConstraints {
+                $0.top.bottom.equalToSuperview().inset(Layout.commonInset)
+                $0.trailing.equalTo(userLocationButton.snp.leading).offset(-Layout.largeMargin).priority(.required)
+                $0.leading.equalTo(textField.snp.trailing).priority(.required)
+                $0.width.equalTo(30)
+            }
         }
         
     }
@@ -82,10 +103,15 @@ class LocationSearchInputView: UIView {
     
 }
 
-extension LocationSearchInputView: UITextFieldDelegate {
+extension MapSearchInputView: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let text = textField.text {
+        if var text = textField.text {
+            if string.isEmpty {
+                text.removeLast()
+                item.shouldChangeCharacters(text)
+                return true
+            }
             item.shouldChangeCharacters(text.appending(string))
         }
         return true

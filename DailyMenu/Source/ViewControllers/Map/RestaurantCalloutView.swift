@@ -30,6 +30,14 @@ class RestaurantCalloutView: UIView {
         return label
     }()
     
+    private lazy var ratingView = RatingView(item: RatingView.Item(value: item.rating, maxValue: 5))
+    
+    private lazy var ratingLabel: UILabel = {
+        let label = UILabel.makeText(String(format: "%.1f", item.rating))
+        label.textColor = Colors.blue.color
+        return label
+    }()
+    
     init(item: Item) {
         self.item = item
         
@@ -51,6 +59,23 @@ class RestaurantCalloutView: UIView {
         titleLabel.snp.makeConstraints {
             $0.top.trailing.equalToSuperview()
             $0.leading.equalTo(restaurantLogoCardView.snp.trailing).offset(Layout.largeMargin)
+        }
+        
+        addSubview(ratingView)
+        ratingView.snp.makeConstraints {
+            $0.leading.equalTo(titleLabel)
+            $0.bottom.equalTo(restaurantLogoCardView)
+            $0.height.equalTo(10)
+        }
+        
+        addSubview(ratingLabel)
+        ratingLabel.snp.makeConstraints {
+            $0.leading.equalTo(ratingView.snp.trailing).offset(Layout.largeMargin)
+            $0.centerY.equalTo(ratingView)
+        }
+        
+        snp.makeConstraints {
+            $0.width.greaterThanOrEqualTo(150)
         }
         
     }

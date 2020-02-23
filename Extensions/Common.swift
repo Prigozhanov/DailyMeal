@@ -32,3 +32,11 @@ public extension CGRect {
     }
     
 }
+
+public extension Double {
+    
+    var intValue: Int? {
+        return Int(self)
+    }
+    
+}

@@ -34,11 +34,11 @@ final class DeliveryLocationViewController: UIViewController {
     
     private var locationSearchViewBottomConstraint: Constraint?
     private let locationSearchBottomInset: CGFloat = 60
-    private lazy var locationSearchView = LocationSearchView(
-        item: LocationSearchView.Item(
+    private lazy var locationSearchView = MapSearchView(
+        item: MapSearchView.Item(
+            placeholder: "Type delivery location",
             results: [],
             onSelectItem: { [weak self] address, searchView in
-                searchView?.selectAddress(string: address)
                 self?.viewModel.requestGeodcode(string: address, onSuccess: { address in
                     self?.showConfiramtionDialog(address: address)
                 })
@@ -46,14 +46,14 @@ final class DeliveryLocationViewController: UIViewController {
             self?.mapController.moveCameraToUserLocation()
             let currentLocation = self?.mapController.viewModel.getUserLocation()
             
-            let formattedPostionString = "\(currentLocation?.longitude ?? 0),\(currentLocation?.latitude ?? 0)"
+            let formattedPositionString = "\(currentLocation?.longitude ?? 0),\(currentLocation?.latitude ?? 0)"
             
-            self?.viewModel.requestGeodcode(string: formattedPostionString, onSuccess: { [weak self] address in
+            self?.viewModel.requestGeodcode(string: formattedPositionString, onSuccess: { [weak self] address in
                 self?.showConfiramtionDialog(address: address)
             })
         }, shouldChangeCharacters: { [weak self] string, searchView in
             self?.viewModel.getAddressesList(string: string, completion: { addresses in
-                searchView?.updateResults(with: addresses)
+                searchView?.updateResults(with: addresses, searchString: string)
             })
         })
     )
