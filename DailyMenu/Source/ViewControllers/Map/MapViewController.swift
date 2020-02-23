@@ -11,6 +11,9 @@ class MapViewController: UIViewController {
     
     private var userIteractionStarted: Bool = false
     
+    private var standardCameraDistance: Double = 1500
+    private lazy var currentCameraDistance = standardCameraDistance
+    
     lazy var mapView: MKMapView = {
         let view = MKMapView()
         view.mapType = .mutedStandard
@@ -29,6 +32,10 @@ class MapViewController: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
         
+    }
+    
+    var restaurantAnnotations: [RestaurantAnnotation] {
+        return mapView.annotations.compactMap { $0 as? RestaurantAnnotation }
     }
     
     required init?(coder: NSCoder) { fatalError() }
@@ -57,12 +64,13 @@ class MapViewController: UIViewController {
         }
     }
     
-    func moveCameraToUserLocation() {
+    func moveCameraToUserLocation(fromDistance: Double? = nil) {
+        currentCameraDistance = fromDistance ?? standardCameraDistance
         if let userCoordinates = viewModel.getUserLocation() {
             mapView.setCamera(
                 MKMapCamera(
                     lookingAtCenter: userCoordinates,
-                    fromDistance: 1500,
+                    fromDistance: fromDistance ?? standardCameraDistance,
                     pitch: 0,
                     heading: 0
                 ), animated: true
@@ -74,7 +82,7 @@ class MapViewController: UIViewController {
         mapView.setCamera(
             MKMapCamera(
                 lookingAtCenter: CLLocationCoordinate2D(latitude: lat, longitude: lon),
-                fromDistance: 1500,
+                fromDistance: currentCameraDistance,
                 pitch: 0, heading: 0
             ), animated: true
         )
@@ -84,8 +92,17 @@ class MapViewController: UIViewController {
         return mapView.camera.centerCoordinate
     }
     
-    func addAnnotation(_ annotation: RestaurantAnnotation) {
-        mapView.addAnnotation(annotation)
+    func addAnnotations(_ annotations: [RestaurantAnnotation]) {
+        mapView.addAnnotations(annotations)
+    }
+    
+    func removaAnnotations() {
+        mapView.removeAnnotations(restaurantAnnotations)
+    }
+    
+    func selectAnnotation(_ annotation: RestaurantAnnotation) {
+        moveToCoordinates(lat: annotation.coordinate.latitude, lon: annotation.coordinate.longitude)
+        mapView.selectAnnotation(annotation, animated: true)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

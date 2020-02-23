@@ -5,19 +5,23 @@
 
 import UIKit
 
-class LocationSearchView: UIView {
+class MapSearchView: UIView {
     
     struct Item {
+        let placeholder: String
         let results: [String]
-        let onSelectItem: (String, LocationSearchView?) -> Void
+        let onSelectItem: (String, MapSearchView?) -> Void
         let onLocationButtonTap: VoidClosure
-        let shouldChangeCharacters: (String, LocationSearchView?) -> Void
+        var onFilterButtonTap: VoidClosure? = nil
+        let shouldChangeCharacters: (String, MapSearchView?) -> Void
     }
     
     private var item: Item
     
-    private lazy var searchTextField = LocationSearchInputView(
-        item: LocationSearchInputView.Item(
+    private lazy var searchTextField = MapSearchInputView(
+        item: MapSearchInputView.Item(
+            placeholder: item.placeholder,
+            onFilterButtonTap: item.onFilterButtonTap,
             onUserLocationButtonTapped: { [weak self] in
                 self?.item.onLocationButtonTap()
             },
@@ -29,8 +33,9 @@ class LocationSearchView: UIView {
         )
     )
     
-    private lazy var locationResultsTableView = LocationResultsTableView { [weak self] address in
-        self?.item.onSelectItem(address, self)
+    private lazy var resultsTableView = MapResultsTableView { [weak self] value in
+        self?.selectValue(string: value)
+        self?.item.onSelectItem(value, self)
     }
     
     init(item: Item) {
@@ -41,23 +46,23 @@ class LocationSearchView: UIView {
         setRoundCorners(Layout.cornerRadius)
         setBorder(width: 1, color: Colors.lightGray.color.cgColor)
         
-        addSubviews([searchTextField, locationResultsTableView])
+        addSubviews([searchTextField, resultsTableView])
         
         searchTextField.snp.makeConstraints {
             $0.leading.bottom.trailing.equalToSuperview()
         }
         
-        locationResultsTableView.snp.makeConstraints {
+        resultsTableView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(searchTextField.snp.top)
         }
     }
     
-    func updateResults(with results: [String]) {
-        locationResultsTableView.reloadTableWithData(data: results, searchString: searchTextField.text ?? "")
+    func updateResults(with results: [String], searchString: String = "") {
+        resultsTableView.reloadTableWithData(data: results, searchString: searchString)
     }
     
-    func selectAddress(string: String) {
+    func selectValue(string: String) {
         updateResults(with: [])
         searchTextField.text = string
     }

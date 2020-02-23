@@ -8,7 +8,7 @@ import Networking
 
 public enum FoodCategory: String, CaseIterable {
     
-    case burger = "Burgers", chicken, desert = "Desserts", fries, hotdog = "Hot Dogs", lobastar, pizza, sandwich, steak, sushi, taco, pasta, shawarma, unknown
+    case burger = "Burgers", chicken = "Chicken", desert = "Desserts", fries, hotdog = "Hot Dogs", lobastar, pizza = "Pizza", sandwich, steak = "Steak", sushi = "Sushi", taco, pasta = "Pasta", shawarma = "Shawarma", unknown
     
     var humanReadableValue: String {
         switch self {
@@ -29,8 +29,8 @@ public enum FoodCategory: String, CaseIterable {
         }
     }
     
-    static func fromCategory(category: ProductCategory) -> FoodCategory {
-        return FoodCategory(rawValue: category.label.orEmpty.onlyLetters) ?? .unknown
+    static func fromProductCategory(category: ProductCategory) -> FoodCategory? {
+        return FoodCategory(rawValue: category.label.orEmpty.onlyLetters)
     }
     
     static func getMainCategoryBasedOnRestaurantCategories(_ categories: [ProductCategory]) -> FoodCategory {

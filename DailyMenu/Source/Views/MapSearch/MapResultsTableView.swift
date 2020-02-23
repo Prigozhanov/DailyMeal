@@ -6,7 +6,7 @@
 import TableKit
 import SnapKit
 
-class LocationResultsTableView: UITableView {
+class MapResultsTableView: UITableView {
     
     typealias Item = StringClosure
     
@@ -34,7 +34,7 @@ class LocationResultsTableView: UITableView {
     func reloadTableWithData(data: [String], searchString: String) {
         tableDirector.clear()
         let rows = data.map {
-            TableRow<LocationResultRow>(item: LocationResultRow.Item(string: $0, searchText: searchString))
+            TableRow<MapResultRow>(item: MapResultRow.Item(string: $0, searchText: searchString))
                 .on(.click) { [weak self] data in
                     self?.item(data.item.string)
             }

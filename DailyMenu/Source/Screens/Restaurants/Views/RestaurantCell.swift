@@ -184,8 +184,8 @@ extension RestaurantCell: ConfigurableCell {
     func configure(with item: Restaurant) {
         restaurant = item
         restaurantNameLabel.text = item.chainLabel
-        restaurantRateView.value = (Double(item.rate) ?? 0) / 2
-        restaurantRateValueLabel.text = String(format: "%.1f", (Double(item.rate) ?? 0) / 2)
+        restaurantRateView.value = (Double(item.rate) ?? 0)
+        restaurantRateValueLabel.text = String(format: "%.1f", (Double(item.rate) ?? 0))
         deliveryFeeValueLabel.text = Formatter.Currency.toString(Double(item.restDeliveryFee))
         restaurantDescriptionLabel.text = item.restaurantDescription
         if let url = URL(string: item.src) {
