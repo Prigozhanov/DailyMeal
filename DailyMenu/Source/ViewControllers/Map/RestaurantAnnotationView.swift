@@ -34,7 +34,7 @@ class RestaurantAnnotationView: MKAnnotationView {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
-            image = Images.Icons.disc.image.sd_resizedImage(with: CGSize(width: 30, height: 30), scaleMode: .fill)
+            image = Images.Icons.disc.image.kf.resize(to: CGSize(width: 30, height: 30), for: .aspectFill)
         } else {
             image = Images.Icons.disc.image
         }

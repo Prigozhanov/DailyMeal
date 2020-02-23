@@ -14,7 +14,7 @@ target 'DailyMenu' do
  pod 'AppCenter/Distribute'
  pod 'TableKit'
  pod 'AloeStackView'
- pod 'SDWebImage'
+ pod 'Kingfisher'
  pod 'KeychainAccess'
 
 end

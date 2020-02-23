@@ -107,7 +107,7 @@ final class ProductViewController: UIViewController {
         
         view.addSubview(navigationBarBackground)
         if let url = URL(string: viewModel.product.src.orEmpty) {
-            navigationBarBackground.sd_setImage(with: url)
+            navigationBarBackground.kf.setImage(with: url)
         }
         navigationBarBackground.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
