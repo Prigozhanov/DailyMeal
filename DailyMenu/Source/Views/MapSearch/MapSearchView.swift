@@ -44,7 +44,7 @@ class MapSearchView: UIView {
         super.init(frame: .zero)
         
         setRoundCorners(Layout.cornerRadius)
-        setBorder(width: 1, color: Colors.lightGray.color.cgColor)
+        setBorder(width: 1, color: Colors.lightGray.color)
         
         addSubviews([searchTextField, resultsTableView])
         

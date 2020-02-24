@@ -4,13 +4,20 @@
 //
 
 import UIKit
-import MapKit
+import Networking
 
 final class RestaurantsMapViewController: UIViewController {
     
     private var viewModel: RestaurantsMapViewModel
     
-    private var mapController = MapViewController(viewModel: MapViewModelImplementation(shouldShowPin: false, onRegionDidChange: nil))
+    private var mapHeaderView = MapHeaderView(
+        title: "Nearby restaurants",
+        shouldShowBackButton: true,
+        shouldShowNotificationsButton: true)
+    
+    private var mapController = MapViewController(
+        viewModel: MapViewModelImplementation(shouldShowPin: false, onRegionDidChange: nil)
+    )
     
     private lazy var searchView: MapSearchView = {
         let view = MapSearchView(
@@ -18,7 +25,10 @@ final class RestaurantsMapViewController: UIViewController {
                 placeholder: "Type restaurant name",
                 results: [],
                 onSelectItem: { [weak self] (string, view) in
-                    if let annotation = self?.mapController.restaurantAnnotations.first(where: { $0.restaurant.chainLabel == string }) {
+                    if let annotation = self?
+                        .mapController
+                        .restaurantAnnotations
+                        .first(where: { $0.restaurant.chainLabel == string }) {
                         self?.mapController.selectAnnotation(annotation)
                     }
                 },
@@ -26,7 +36,7 @@ final class RestaurantsMapViewController: UIViewController {
                     self?.mapController.moveCameraToUserLocation(fromDistance: 15000)
                 },
                 onFilterButtonTap: { [weak self] in
-                    self?.showFilter()
+                    self?.showFilterConfigurationView()
                 },
                 shouldChangeCharacters: { [weak self] (string, view) in
                     guard let self = self else { return }
@@ -40,6 +50,34 @@ final class RestaurantsMapViewController: UIViewController {
         return view
     }()
     
+    private lazy var filterAppliedView = FilterAppliedView(
+        item: FilterAppliedView.Item(
+            onHideButtonTapAction: { [weak self] in
+                self?.removeFilter()
+        },
+            onTapAction: { [weak self] in
+                self?.showFilterConfigurationView()
+        }))
+    
+    private lazy var filteredRestaurantsPreview = FilteredRestaurantsPreview(
+        items: self.viewModel.filteredRestaurants.map { rest in
+            FilteredRestaurantsPreviewCell.Item(
+                title: rest.chainLabel,
+                rating: Double(rest.rate) ?? 0,
+                imageSrc: rest.src,
+                categories: self.viewModel.categories[rest.id]?
+                    .compactMap({ FoodCategory.fromProductCategory(category: $0) }) ?? [],
+                minOrderPrice: String(rest.minAmountOrder)) { [weak self] in
+                    let vc = RestaurantViewController(
+                        viewModel: RestaurantViewModelImplementation(
+                            restaurant: rest,
+                            categories: []
+                        )
+                    )
+                    self?.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    )
     
     init(viewModel: RestaurantsMapViewModel) {
         self.viewModel = viewModel
@@ -59,68 +97,111 @@ final class RestaurantsMapViewController: UIViewController {
         view.addSubview(mapController.mapView)
         mapController.mapView.snp.makeConstraints { $0.edges.equalToSuperview() }
         
+        view.addSubview(mapHeaderView)
+        mapHeaderView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(100)
+        }
+        
         view.addSubview(searchView)
         searchView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(Layout.largeMargin)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(50)
         }
         
-        
         mapController.moveCameraToUserLocation(fromDistance: 15000)
     }
     
-    private func showFilter() {
-        let filterViewController = RestaurantsFilterViewController(
-            viewModel: self.viewModel.filterViewModel ?? RestaurantFilterViewModelImplementation(onRemoveFilter: { [weak self] in
-                self?.viewModel.filterViewModel = nil
-                self?.removeFilter()
-            }, onApplyFilter: { [weak self] filterViewModel in
-                self?.viewModel.filterViewModel = filterViewModel
-                self?.applyFilter()
-            })
-        )
-        self.present(filterViewController, animated: true, completion: nil)
-    }
-    
-    private func applyFilter() {
-        mapController.removaAnnotations()
-        mapController.addAnnotations(viewModel.filteredRestaurants.map { [weak self] rest in
-            RestaurantAnnotation(
-                restaurant: rest,
-                coordinate: CLLocationCoordinate2D(latitude: rest.latitude, longitude: rest.longitude)) { [weak self] rest in
-                    let vm = RestaurantViewModelImplementation(restaurant: rest, categories: [])
-                    let vc = RestaurantViewController(viewModel: vm)
-                    self?.navigationController?.pushViewController(vc, animated: true)
-            }
-        })
-    }
-    
-    private func removeFilter() {
-        mapController.removaAnnotations()
-        displayAvailableRestaurants()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        mapHeaderView.setupGradient()
     }
     
 }
 
 //MARK: -  RestaurantsMapView
 extension RestaurantsMapViewController: RestaurantsMapView {
-    func displayAvailableRestaurants() {
-        mapController.removaAnnotations()
-        mapController.addAnnotations(viewModel.restaurants.map { [weak self] rest in
-            RestaurantAnnotation(
-                restaurant: rest,
-                coordinate: CLLocationCoordinate2D(latitude: rest.latitude, longitude: rest.longitude)) { [weak self] rest in
-                    let vm = RestaurantViewModelImplementation(restaurant: rest, categories: [])
-                    let vc = RestaurantViewController(viewModel: vm)
-                    self?.navigationController?.pushViewController(vc, animated: true)
+    
+    func reloadScreen() {
+        filteredRestaurantsPreview.removeFromSuperview()
+        filterAppliedView.removeFromSuperview()
+        mapController.removeRestaurants()
+        
+        if viewModel.isFilterApplied {
+            searchView.isHidden = true
+            filterAppliedView.isHidden = false
+            filteredRestaurantsPreview.isHidden = false
+            
+            view.addSubviews([filteredRestaurantsPreview, filterAppliedView])
+            filteredRestaurantsPreview.snp.makeConstraints {
+                $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(Layout.commonInset)
+                $0.leading.trailing.equalToSuperview()
+                $0.height.equalTo(150)
             }
-        })
+            
+            filterAppliedView.snp.makeConstraints {
+                $0.top.equalTo(mapHeaderView.snp.bottom)
+                $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(Layout.commonInset)
+                $0.height.equalTo(50)
+            }
+            
+            filteredRestaurantsPreview.configure(items: viewModel.filteredRestaurants.map {
+                makeRestaurantsPreviewItem(restaurant: $0)
+            })
+            mapController.addRestaurants(viewModel.filteredRestaurants)
+        } else {
+            searchView.isHidden = false
+            mapController.addRestaurants(viewModel.restaurants)
+        }
     }
+    
 }
 
 //MARK: -  Private
 private extension RestaurantsMapViewController {
     
+    func makeRestaurantsPreviewItem(restaurant: Restaurant) -> FilteredRestaurantsPreviewCell.Item {
+        FilteredRestaurantsPreviewCell.Item(
+            title: restaurant.chainLabel,
+            rating: Double(restaurant.rate) ?? 0,
+            imageSrc: restaurant.src,
+            categories: viewModel.categories[restaurant.id]?
+                .compactMap({ FoodCategory.fromProductCategory(category: $0) }) ?? [],
+            minOrderPrice: Formatter.Currency.toString(restaurant.minAmountOrder)) { [weak self] in
+                let vc = RestaurantViewController(
+                    viewModel: RestaurantViewModelImplementation(
+                        restaurant: restaurant,
+                        categories: []
+                    )
+                )
+                self?.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func showFilterConfigurationView() {
+        let filterViewController = RestaurantsFilterViewController(
+            viewModel: self.viewModel.filterViewModel ?? RestaurantFilterViewModelImplementation(onRemoveFilter: { [weak self] in
+                self?.removeFilter()
+                }, onApplyFilter: { [weak self] filterViewModel in
+                    self?.applyFilter(filterViewModel)
+            })
+        )
+        searchView.isHidden = true
+        filterAppliedView.isHidden = true
+        filteredRestaurantsPreview.isHidden = true
+        present(filterViewController, animated: true, completion: nil)
+    }
+    
+    func applyFilter(_ filterViewModel: RestaurantFilterViewModel) {
+        self.viewModel.filterViewModel = filterViewModel
+        reloadScreen()
+    }
+    
+    func removeFilter() {
+        viewModel.filterViewModel = nil
+        reloadScreen()
+    }
+
 }
 
 

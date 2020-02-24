@@ -30,7 +30,7 @@ class SingleInputValidationCodeView: UIView {
         
         backgroundColor = Colors.backgroundGray.color
         setRoundCorners(Layout.cornerRadius)
-        setBorder(width: 1, color: Colors.lightGray.color.cgColor)
+        setBorder(width: 1, color: Colors.lightGray.color)
         
         snp.makeConstraints {
             $0.width.equalTo(40)

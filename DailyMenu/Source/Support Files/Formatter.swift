@@ -12,7 +12,7 @@ enum Formatter {
                                                 font: UIFont,
                                                 highlightingFont: UIFont,
                                                 highlightingColor: UIColor? = nil) -> NSAttributedString {
-        let range = (string as NSString).range(of: keyWord)
+        let range = (string as NSString).range(of: keyWord, options: [.caseInsensitive])
         let attrString = NSMutableAttributedString(
             string: string, attributes: [.font : font]
         )

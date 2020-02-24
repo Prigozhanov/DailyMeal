@@ -80,7 +80,7 @@ class RestaurantsFilterControls: UIView {
         
         super.init(frame: .zero)
         
-        backgroundColor = Colors.commonBackground.color
+        backgroundColor = Colors.white.color
         setRoundCorners(Layout.cornerRadius, maskedCorners: [.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
         
         addSubview(controlsStack)

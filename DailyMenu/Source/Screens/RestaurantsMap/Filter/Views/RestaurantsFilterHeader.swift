@@ -34,8 +34,8 @@ class RestaurantsFilterHeader: UIView {
         
         super.init(frame: .zero)
         
-        backgroundColor = Colors.commonBackground.color
-        setBorder(width: 1, color: Colors.lightGray.color.cgColor)
+        backgroundColor = Colors.white.color
+        setBorder(width: 1, color: Colors.lightGray.color)
         setRoundCorners(Layout.cornerRadius, maskedCorners: [.layerMinXMinYCorner, .layerMaxXMinYCorner])
         
         addSubview(headerLabel)

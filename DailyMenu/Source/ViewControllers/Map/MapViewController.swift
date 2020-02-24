@@ -4,6 +4,7 @@
 //
 
 import MapKit
+import Networking
 
 class MapViewController: UIViewController {
     
@@ -92,19 +93,6 @@ class MapViewController: UIViewController {
         return mapView.camera.centerCoordinate
     }
     
-    func addAnnotations(_ annotations: [RestaurantAnnotation]) {
-        mapView.addAnnotations(annotations)
-    }
-    
-    func removaAnnotations() {
-        mapView.removeAnnotations(restaurantAnnotations)
-    }
-    
-    func selectAnnotation(_ annotation: RestaurantAnnotation) {
-        moveToCoordinates(lat: annotation.coordinate.latitude, lon: annotation.coordinate.longitude)
-        mapView.selectAnnotation(annotation, animated: true)
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.userIteractionStarted = true
         UIView.animate(withDuration: 0.3) { [weak self] in
@@ -114,7 +102,42 @@ class MapViewController: UIViewController {
     
 }
 
+extension MapViewController {
+    
+    func addRestaurants(_ restaurants: [Restaurant]) {
+        mapView.addAnnotations(restaurants.map {
+            RestaurantAnnotation(
+                restaurant: $0,
+                coordinate: CLLocationCoordinate2D(
+                    latitude: $0.latitude,
+                    longitude: $0.longitude
+            )) { [weak self] rest in
+                let vm = RestaurantViewModelImplementation(restaurant: rest, categories: [])
+                let vc = RestaurantViewController(viewModel: vm)
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+        })
+    }
+    
+    func removeRestaurants() {
+        mapView.removeAnnotations(restaurantAnnotations)
+    }
+    
+    func selectAnnotation(_ annotation: RestaurantAnnotation) {
+        moveToCoordinates(lat: annotation.coordinate.latitude, lon: annotation.coordinate.longitude)
+        mapView.selectAnnotation(annotation, animated: true)
+    }
+    
+}
+
 extension MapViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if let annotation = annotation as? MKUserLocation {
+           return UserLocationAnnotationView(annotation: annotation, reuseIdentifier: "User")
+        }
+        return nil
+    }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         if userIteractionStarted {
