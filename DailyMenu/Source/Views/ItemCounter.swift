@@ -75,7 +75,7 @@ class ItemCounter: UIView {
             }
         }
         
-        setBorder(width: 1, color: Colors.lightGray.color.cgColor)
+        setBorder(width: 1, color: Colors.lightGray.color)
         setRoundCorners(Layout.cornerRadius)
     }
     

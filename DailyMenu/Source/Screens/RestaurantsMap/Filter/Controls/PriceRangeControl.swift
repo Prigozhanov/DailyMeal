@@ -113,7 +113,9 @@ class PriceRangeControl: UIControl {
     }
     
     func positionForValue(_ value: CGFloat) -> CGFloat {
-        return bounds.width * (value / maximumValue)
+        let thumbWidth = thumbImage.size.width
+        return ((CGFloat(bounds.width - thumbWidth) * (value - minimumValue)) /
+            (maximumValue - minimumValue)) + CGFloat(thumbWidth / 2.0)
     }
     
     private func thumbOriginForValue(_ value: CGFloat) -> CGPoint {

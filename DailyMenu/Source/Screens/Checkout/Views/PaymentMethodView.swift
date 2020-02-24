@@ -18,7 +18,7 @@ class PaymentMethodView: UIView {
     
     let borderView: UIView = {
        let view = UIView()
-        view.setBorder(width: 1, color: Colors.blue.color.cgColor)
+        view.setBorder(width: 1, color: Colors.blue.color)
         view.setRoundCorners(Layout.cornerRadius)
         view.isUserInteractionEnabled = false
         view.alpha = 0

@@ -82,7 +82,7 @@ class FoodCategoryCell: BaseCollectionCell {
         cardView.contentView.addSubview(borderView)
         borderView.snp.makeConstraints{ $0.edges.equalToSuperview() }
         borderView.setRoundCorners(cardView.contentView.layer.cornerRadius)
-        borderView.setBorder(width: 1, color: Colors.blue.color.cgColor)
+        borderView.setBorder(width: 1, color: Colors.blue.color)
         
         addGestureRecognizer(BlockTap(action: { [unowned self] _ in
             if self.state != .selected {

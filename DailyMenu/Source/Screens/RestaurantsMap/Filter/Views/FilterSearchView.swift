@@ -38,7 +38,7 @@ class FilterSearchView: UIView {
         
         backgroundColor = Colors.white.color
         setRoundCorners(Layout.cornerRadius)
-        setBorder(width: 1, color: Colors.lightGray.color.cgColor)
+        setBorder(width: 1, color: Colors.lightGray.color)
         
         addSubviews([textField, searchActionButton])
         

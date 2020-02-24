@@ -88,6 +88,7 @@ internal enum Asset {
       internal static let starFull = ImageAsset(name: "Icons/star_full")
       internal static let starHalf = ImageAsset(name: "Icons/star_half")
       internal static let thumb = ImageAsset(name: "Icons/thumb")
+      internal static let userLocation = ImageAsset(name: "Icons/user_location")
     }
     internal enum Placeholders {
       internal static let cash = ImageAsset(name: "Placeholders/cash")
