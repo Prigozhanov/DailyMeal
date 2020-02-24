@@ -10,10 +10,17 @@ final class RestaurantsMapViewController: UIViewController {
     
     private var viewModel: RestaurantsMapViewModel
     
-    private var mapHeaderView = MapHeaderView(
-        title: "Nearby restaurants",
-        shouldShowBackButton: true,
-        shouldShowNotificationsButton: true)
+    private lazy var mapHeaderView: MapHeaderView = {
+        let view = MapHeaderView(
+            title: "Nearby restaurants",
+            shouldShowBackButton: true,
+            shouldShowNotificationsButton: true
+        )
+        view.backButton.setActionHandler(controlEvents: .touchUpInside) { [weak self] _ in
+            self?.navigationController?.dismiss(animated: true, completion: nil)
+        }
+        return view
+    }()
     
     private var mapController = MapViewController(
         viewModel: MapViewModelImplementation(shouldShowPin: false, onRegionDidChange: nil)
