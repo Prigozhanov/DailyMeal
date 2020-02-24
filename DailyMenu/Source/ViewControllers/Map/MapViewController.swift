@@ -39,6 +39,10 @@ class MapViewController: UIViewController {
         return mapView.annotations.compactMap { $0 as? RestaurantAnnotation }
     }
     
+    var radiusOverlay: MKOverlay? {
+        return mapView.overlays.first(where: { $0 is MKCircle })
+    }
+    
     required init?(coder: NSCoder) { fatalError() }
     
     override func viewDidLoad() {
@@ -130,6 +134,26 @@ extension MapViewController {
     
 }
 
+extension MapViewController {
+    
+    func addRadiusCircle(radius: Int) {
+        let radius = CLLocationDistance(radius)
+        if let center = viewModel.getUserLocation() {
+            let circle = MKCircle(center: center,
+                                  radius: radius)
+            
+            mapView.addOverlay(circle)
+        }
+    }
+    
+    func removeRadiusCircle() {
+        if let radiusOverlay = radiusOverlay {
+            mapView.removeOverlay(radiusOverlay)
+        }
+    }
+    
+}
+
 extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -147,6 +171,17 @@ extension MapViewController: MKMapViewDelegate {
         UIView.animate(withDuration: 0.3) { [weak self] in
             self?.pinImageView.transform = .identity
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if let circleOverlay = overlay as? MKCircle {
+            let circleRenderer = MKCircleRenderer(overlay: circleOverlay)
+            circleRenderer.fillColor = Colors.blue.color
+            circleRenderer.alpha = 0.1
+            
+            return circleRenderer
+        }
+        return MKOverlayRenderer()
     }
     
 }
