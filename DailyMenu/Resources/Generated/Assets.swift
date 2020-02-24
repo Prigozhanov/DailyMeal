@@ -74,6 +74,7 @@ internal enum Asset {
       internal static let filter = ImageAsset(name: "Icons/filter")
       internal static let google = ImageAsset(name: "Icons/google")
       internal static let location = ImageAsset(name: "Icons/location")
+      internal static let map = ImageAsset(name: "Icons/map")
       internal static let mapPin = ImageAsset(name: "Icons/map_pin")
       internal static let mapPin1 = ImageAsset(name: "Icons/map_pin_1")
       internal static let mapPinBlue = ImageAsset(name: "Icons/map_pin_blue")
