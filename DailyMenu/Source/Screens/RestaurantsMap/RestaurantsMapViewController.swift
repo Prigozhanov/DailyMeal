@@ -132,7 +132,9 @@ extension RestaurantsMapViewController: RestaurantsMapView {
     func reloadScreen() {
         filteredRestaurantsPreview.removeFromSuperview()
         filterAppliedView.removeFromSuperview()
+        
         mapController.removeRestaurants()
+        mapController.removeRadiusCircle()
         
         if viewModel.isFilterApplied {
             searchView.isHidden = true
@@ -155,7 +157,9 @@ extension RestaurantsMapViewController: RestaurantsMapView {
             filteredRestaurantsPreview.configure(items: viewModel.filteredRestaurants.map {
                 makeRestaurantsPreviewItem(restaurant: $0)
             })
+            
             mapController.addRestaurants(viewModel.filteredRestaurants)
+            mapController.addRadiusCircle(radius: (viewModel.filterViewModel?.radius ?? 0) * 1000)
         } else {
             searchView.isHidden = false
             mapController.addRestaurants(viewModel.restaurants)
