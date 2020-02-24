@@ -28,27 +28,9 @@ final class RestaurantsViewController: UIViewController {
     
     private var notificationTokens: [Token] = []
     
-    private lazy var headerView: UIView = {
-        let view = UIView()
-        let greetingPrefix = viewModel.userName.isEmpty ? "" : "Hello, \(viewModel.userName). "
-        let label = UILabel.makeText("\(greetingPrefix)What would you like to eat?")
-        label.numberOfLines = 3
-        label.font = FontFamily.Poppins.bold.font(size: 24)
-        label.textColor = Colors.charcoal.color
-        view.addSubview(label)
-        label.snp.makeConstraints {
-            $0.leading.top.equalToSuperview().inset(Layout.largeMargin)
-            $0.trailing.equalToSuperview().inset(50)
-        }
-        
-        let notificationButton = UIButton.makeCommonButton { _ in }
-        notificationButton.setImage(Images.Icons.notification.image, for: .normal)
-        view.addSubview(notificationButton)
-        notificationButton.snp.makeConstraints {
-            $0.trailing.top.equalToSuperview().inset(Layout.largeMargin)
-        }
-        return view
-    }()
+    private lazy var headerView = RestaurantsHeaderView(
+        item: viewModel.userName.isEmpty ? "" : "Hello, \(viewModel.userName)."
+    )
     
     private lazy var filterBar = CategoryFilterBar(item: CategoryFilterBar.Item(onSelectAction: { [weak self] selectedCategory in
         self?.viewModel.categoryFilter = selectedCategory
@@ -81,7 +63,6 @@ final class RestaurantsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         notificationTokens.append(Token.make(descriptor: .userAddressChangedDescriptor, using: { [weak self] _ in
             self?.tableDirector.clear()
             self?.tableDirector.reload()
