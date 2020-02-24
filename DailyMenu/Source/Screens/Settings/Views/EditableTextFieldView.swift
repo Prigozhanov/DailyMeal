@@ -50,7 +50,7 @@ class EditableTextFieldView: UIView {
         let textFieldContainer = UIView()
         textFieldContainer.backgroundColor = Colors.white.color
         textFieldContainer.setRoundCorners(Layout.cornerRadius)
-        textFieldContainer.setBorder(width: 0.5, color: Colors.lightGray.color.cgColor)
+        textFieldContainer.setBorder(width: 0.5, color: Colors.lightGray.color)
         
         let titleLabel = UILabel.makeText(item.title)
         titleLabel.font = FontFamily.Poppins.light.font(size: 10)

@@ -9,7 +9,7 @@ import Networking
 
 //MARK: - View
 protocol RestaurantsMapView: class {
-    func displayAvailableRestaurants()
+    func reloadScreen()
 }
 
 //MARK: - ViewModel
@@ -17,6 +17,7 @@ protocol RestaurantsMapViewModel {
     
     var view: RestaurantsMapView? { get set }
     
+    var isFilterApplied: Bool { get }
     var filterViewModel: RestaurantFilterViewModel? { get set }
     
     var restaurants: [Restaurant] { get }
@@ -25,13 +26,13 @@ protocol RestaurantsMapViewModel {
     var categories: [Int: [ProductCategory]] { get }
     var products: [Int: [Product]] { get }
     
+    
     func loadRestaurants()
     
 }
 
 //MARK: - Implementation
 final class RestaurantsMapViewModelImplementation: RestaurantsMapViewModel {
-    
     
     weak var view: RestaurantsMapView?
     
@@ -41,6 +42,10 @@ final class RestaurantsMapViewModelImplementation: RestaurantsMapViewModel {
     let userDefaultsService: UserDefaultsService
     
     var restaurants: [Restaurant]
+    
+    var isFilterApplied: Bool {
+        return filterViewModel != nil
+    }
     
     var filteredRestaurants: [Restaurant] {
         guard let filter = filterViewModel else {
@@ -65,13 +70,21 @@ final class RestaurantsMapViewModelImplementation: RestaurantsMapViewModel {
             return !priceFilterRange.intersection(allPricesSet).isEmpty
         }
         
-        return priceFilteredRestaurants.filter {
+        let ratingFilteredRestaurants = priceFilteredRestaurants.filter {
             guard let rate = Double($0.rate) else {
                 return false
             }
             return Int($0.distance) < filter.radius &&
                 rate > filter.ratingRagne.lowerValue &&
                 rate < filter.ratingRagne.upperValue
+        }
+        
+        guard !filter.restaurantName.isEmpty else {
+            return ratingFilteredRestaurants
+        }
+        
+        return ratingFilteredRestaurants.filter {
+            $0.chainLabel.containsCaseIgnoring(filter.restaurantName)
         }
     }
     
@@ -99,7 +112,7 @@ final class RestaurantsMapViewModelImplementation: RestaurantsMapViewModel {
             switch result {
             case let .success(response):
                 self?.restaurants = response.restaurants.filter({ $0.type == .restaurant })
-                self?.view?.displayAvailableRestaurants()
+                self?.view?.reloadScreen()
                 self?.loadRestaurantsDetails()
             case let .failure(error):
                 print(error)

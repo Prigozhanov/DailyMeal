@@ -15,7 +15,7 @@ class RestaurantsFilterViewController: UIViewController {
         stack.separatorHeight = 0
         stack.rowInset = .zero
         stack.backgroundColor = .clear
-        stack.setBorder(width: 1, color: Colors.lightGray.color.cgColor)
+        stack.setBorder(width: 1, color: Colors.lightGray.color)
         stack.setRoundCorners(Layout.cornerRadius)
         return stack
     }()
