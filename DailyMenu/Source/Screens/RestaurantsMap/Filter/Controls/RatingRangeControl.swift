@@ -7,18 +7,6 @@ import UIKit
 
 class RatingRangeControl: UIControl {
     
-    override var frame: CGRect {
-        didSet {
-            updateLayerFrames()
-        }
-    }
-    
-    override var bounds: CGRect {
-        didSet {
-            updateLayerFrames()
-        }
-    }
-    
     private var previousLocation = CGPoint()
     
     var minimumValue: CGFloat =  0
@@ -71,6 +59,12 @@ class RatingRangeControl: UIControl {
         let x = positionForValue(value) - 1
         return CGPoint(x: x, y: (bounds.height - frame.height) / 2.0)
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateLayerFrames()
+    }
+    
     
     internal class RatingRangeThumb: UIView {
         

@@ -7,18 +7,6 @@ import UIKit
 
 class PriceRangeControl: UIControl {
     
-    override var frame: CGRect {
-        didSet {
-            updateLayerFrames()
-        }
-    }
-    
-    override var bounds: CGRect {
-        didSet {
-            updateLayerFrames()
-        }
-    }
-    
     private var previousLocation = CGPoint()
     
     var minimumValue: CGFloat = 0 {
@@ -121,6 +109,11 @@ class PriceRangeControl: UIControl {
     private func thumbOriginForValue(_ value: CGFloat) -> CGPoint {
         let x = positionForValue(value) - thumbImage.size.width / 2.0
         return CGPoint(x: x, y: bounds.maxY - thumbImage.size.height)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateLayerFrames()
     }
     
 }

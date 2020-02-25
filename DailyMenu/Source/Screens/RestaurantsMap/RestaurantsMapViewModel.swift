@@ -57,17 +57,15 @@ final class RestaurantsMapViewModelImplementation: RestaurantsMapViewModel {
         }
         
         let priceFilteredRestaurants = categoriesFilteredRestaurants.filter {
-            let allPricesSet = Set<Int>(
-                products[$0.id]?.compactMap({
-                    guard let price = Double($0.price)?.intValue else {
-                        return nil
-                    }
-                    return price > 0 ? price : nil
-                }) ?? []
-            )
+            let allPricesArray = products[$0.id]?.compactMap({
+                guard let price = Double($0.price)?.intValue else {
+                    return nil
+                }
+                return price > 0 ? price : nil
+            }) ?? [] as Array<Int>
 
-            let priceFilterRange = Set<Int>(filter.priceRange.lowerValue...filter.priceRange.upperValue)
-            return !priceFilterRange.intersection(allPricesSet).isEmpty
+            let priceFilterRange = filter.priceRange.lowerValue...filter.priceRange.upperValue
+            return allPricesArray.contains { priceFilterRange.contains($0) }
         }
         
         let ratingFilteredRestaurants = priceFilteredRestaurants.filter {

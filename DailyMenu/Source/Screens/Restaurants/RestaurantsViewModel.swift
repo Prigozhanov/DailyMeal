@@ -41,7 +41,7 @@ protocol RestaurantsViewModel {
     func getRestaurantsFilteredByCategory(_ category: FoodCategory) -> [Restaurant]
     
     func loadRestaurants()
-    func loadCategory(restId: Int, onSuccess: @escaping ([ProductCategory]) -> Void, onFailure: @escaping VoidClosure)
+    func loadCategory(restId: Int, onCompletion: @escaping (Result<SingleKeyResponseWrapper<[ProductCategory]>, NetworkClient.Error>) -> Void)
     
 }
 
@@ -139,6 +139,7 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
             let addressId = userDefaultsService.getValueForKey(key: .addressesId) as? Int else {
                 return
         }
+        
         let req = context.networkService.requestFactory.menu(cityId: areaId, addressId: addressId)
         view?.showLoadingIndicator()
         context.networkService.send(request: req) { [weak self] result, _ in
@@ -146,11 +147,17 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
             case let .success(response):
                 self?.restaurants = response.restaurants.filter({ $0.type == .restaurant })
                 let group = DispatchGroup()
-                self?.restaurants.forEach({
+                self?.restaurants.forEach({ rest in
                     group.enter()
-                    self?.loadCategory(restId: $0.id, onSuccess: { _ in
-                         group.leave()
-                    }, onFailure: { group.leave() })
+                    self?.loadCategory(restId: rest.id, onCompletion: { [weak self] result in
+                        switch result {
+                        case let .success(response):
+                            self?.categories[rest.id] = response.data
+                        case let .failure(error):
+                            logDebug(message: error.localizedDescription)
+                        }
+                        group.leave()
+                    })
                 })
                 group.notify(queue: .main) { [weak self] in
                     self?.view?.reloadScreen()
@@ -162,18 +169,10 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
         }
     }
     
-    func loadCategory(restId: Int, onSuccess: @escaping ([ProductCategory]) -> Void, onFailure: @escaping VoidClosure) {
+    func loadCategory(restId: Int, onCompletion: @escaping (Result<SingleKeyResponseWrapper<[ProductCategory]>, NetworkClient.Error>) -> Void) {
         let req = context.networkService.requestFactory.restaurantCategories(id: restId)
-        
-        context.networkService.send(request: req) { [weak self] (result, _) in
-            guard let self = self else { return }
-            switch result {
-            case let .success(response):
-                self.categories[restId] = response.data
-                onSuccess(response.data ?? [])
-            case let .failure(error):
-                logDebug(message: error.localizedDescription)
-            }
+        context.networkService.send(request: req) { result, _ in
+            onCompletion(result)
         }
     }
     
