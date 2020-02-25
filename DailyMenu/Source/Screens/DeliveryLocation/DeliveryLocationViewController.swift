@@ -72,27 +72,18 @@ final class DeliveryLocationViewController: UIViewController {
         viewModel.view = self
         
         view.backgroundColor = Colors.white.color
-        
-        notificationTokens.append(Token.make(descriptor: .keyboardWillShowDescriptor, using: { [weak self] keyboardFrame in
+
+        notificationTokens.append(Token.make(descriptor: .keyboardWillChangeFrameDescriptor, using: { [weak self] keyboardFrame in
             guard let self = self else { return }
-            self.mapControllerViewBottomConstraint?.update(
-                inset: keyboardFrame.height + Layout.commonInset - self.locationSearchBottomInset
-            )
-            self.locationSearchViewBottomConstraint?.update(inset: keyboardFrame.height)
-            UIView.transition(with: self.view, duration: 0.3, options: [], animations: { [weak self] in
-                self?.view.layoutSubviews()
-                self?.mapController.view.layoutSubviews()
-            }, completion: nil)
+            self.updateConstraint(constraint: self.mapControllerViewBottomConstraint, inset: keyboardFrame.height + Layout.commonInset - self.locationSearchBottomInset)
+            self.updateConstraint(constraint: self.locationSearchViewBottomConstraint, inset: keyboardFrame.height)
+         
         }))
-        
+
         notificationTokens.append(Token.make(descriptor: .keyboardWillHideDescriptor, using: { [weak self] _ in
             guard let self = self else { return }
-            self.mapControllerViewBottomConstraint?.update(inset: 0)
-            self.locationSearchViewBottomConstraint?.update(inset: self.locationSearchBottomInset)
-            UIView.transition(with: self.view, duration: 0.3, options: [], animations: { [weak self] in
-                self?.view.layoutSubviews()
-                self?.mapController.view.layoutSubviews()
-                }, completion: nil)
+            self.updateConstraint(constraint: self.mapControllerViewBottomConstraint, inset: 0)
+            self.updateConstraint(constraint: self.locationSearchViewBottomConstraint, inset: self.locationSearchBottomInset)
         }))
         
         addChild(mapController)
@@ -157,6 +148,14 @@ final class DeliveryLocationViewController: UIViewController {
             confirmationDiaglogIsVisible = true
             show(vc, sender: nil)
         }
+    }
+    
+    private func updateConstraint(constraint: Constraint?, inset: CGFloat) {
+        constraint?.update(inset: inset)
+        UIView.transition(with: self.view, duration: 0.3, options: [], animations: { [weak self] in
+            self?.view.layoutSubviews()
+            self?.mapController.view.layoutSubviews()
+            }, completion: nil)
     }
     
 }

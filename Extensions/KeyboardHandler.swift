@@ -9,18 +9,19 @@ public typealias KeyboardFrame = CGRect
 
 public extension NotificationDescriptor {
     
-    static var keyboardWillShowDescriptor: NotificationDescriptor<KeyboardFrame> {
-        return NotificationDescriptor<KeyboardFrame>(name: UIResponder.keyboardWillShowNotification) { (notification) -> KeyboardFrame in
-            return notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? KeyboardFrame ?? .zero
-            
-        }
-    }
-    
     static var keyboardWillHideDescriptor: NotificationDescriptor<KeyboardFrame> {
         return NotificationDescriptor<KeyboardFrame>(name: UIResponder.keyboardWillHideNotification) { (notification) -> KeyboardFrame in
             return notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? KeyboardFrame ?? .zero
             
         }
     }
+    
+    static var keyboardWillChangeFrameDescriptor: NotificationDescriptor<KeyboardFrame> {
+        return NotificationDescriptor<KeyboardFrame>(name: UIResponder.keyboardWillChangeFrameNotification) { (notification) -> KeyboardFrame in
+            return notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? KeyboardFrame ?? .zero
+            
+        }
+    }
+    
     
 }

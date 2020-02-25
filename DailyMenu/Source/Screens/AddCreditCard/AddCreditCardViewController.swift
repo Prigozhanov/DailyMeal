@@ -46,7 +46,7 @@ final class AddCreditCardViewController: UIViewController {
         
         Style.addBlueCorner(self)
         
-        notificationTokens.append(Token.make(descriptor: .keyboardWillShowDescriptor, using: { [weak self] frame in
+        notificationTokens.append(Token.make(descriptor: .keyboardWillChangeFrameDescriptor, using: { [weak self] frame in
             self?.updateBottomConstraint(offset: frame.height - (self?.view.safeAreaInsets.bottom ?? 0))
         }))
         
