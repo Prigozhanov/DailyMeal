@@ -171,10 +171,17 @@ extension RestaurantsViewController: RestaurantsView {
                         data.cell?.categories = categories
                         data.cell?.updatePreview()
                     } else {
-                        self.viewModel.loadCategory(restId: data.cell?.restaurant?.id ?? 0, onSuccess: {(categories) in
-                            data.cell?.categories = categories
-                            data.cell?.updatePreview()}) {}
+                        self.viewModel.loadCategory(restId: data.cell?.restaurant?.id ?? 0) { result in
+                            switch result {
+                            case let .success(response):
+                                if let categories = response.data {
+                                    data.cell?.categories = categories
+                                    data.cell?.updatePreview()
+                                }
+                            default: break
+                        }
                     }
+            }
                 }
         }
         

@@ -137,10 +137,8 @@ class FilteredRestaurantsPreviewCell: UICollectionViewCell {
         titleLabel.text = item.title
         ratingView.value = item.rating
         ratingValueLabel.text = String(format: "%.1f", item.rating)
-        item.categories.enumerated().forEach {
-            if $0 < 3 {
-                foodCategoriesStack.addRow(StackCategoryView(item: $1))
-            }
+        item.categories.prefix(3).forEach {
+            foodCategoriesStack.addRow(StackCategoryView(item: $0))
         }
         minOrderLabel.text = item.minOrderPrice
         
