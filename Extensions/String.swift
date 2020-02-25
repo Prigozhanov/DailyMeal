@@ -8,11 +8,11 @@ import Foundation
 public extension String {
     
     func containsCaseIgnoring(_ string: String) -> Bool {
-        return self.lowercased().contains(string.lowercased())
+        return lowercased().contains(string.lowercased())
     }
     
     var withRemovedHtmlTags: String {
-        return self.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+        return replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
     }
     
     var onlyLetters: String {

@@ -59,7 +59,7 @@ class CardInfoView: UIView {
         }) { [weak self] (_) -> Bool in
             return true
         }
-        textField.setKeyboardType(.numberPad)
+        textField.keyboardType = .numberPad
         return textField
     }()
     
@@ -100,7 +100,7 @@ class CardInfoView: UIView {
         }) { (_) -> Bool in
             true
         }
-        textField.setKeyboardType(.numberPad)
+        textField.keyboardType = .numberPad
         return textField
     }()
     
@@ -141,7 +141,7 @@ class CardInfoView: UIView {
         }) { (_) -> Bool in
             true
         }
-        textField.setKeyboardType(.numberPad)
+        textField.keyboardType = .numberPad
         return textField
     }()
     
@@ -179,8 +179,8 @@ class CardInfoView: UIView {
         }) { (_) -> Bool in
             true
         }
-        textField.setKeyboardType(.numberPad)
-        textField.setSecureEntry(true)
+        textField.keyboardType = .numberPad
+        textField.isSecureTextEntry = true
         return textField
     }()
     

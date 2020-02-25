@@ -19,7 +19,7 @@ public protocol UserDefaultsService {
     
     var hasAddress: Bool { get }
     
-    func setValueForKey(key: UserDefaultsKey, value: Any)
+    func setValueForKey(key: UserDefaultsKey, value: Any?)
     
     func getValueForKey(key: UserDefaultsKey) -> Any?
     
@@ -49,7 +49,7 @@ public class UserDefaultsServiceImplementation: UserDefaultsService {
         userDefaults = UserDefaults.standard
     }
     
-    public func setValueForKey(key: UserDefaultsKey, value: Any) {
+    public func setValueForKey(key: UserDefaultsKey, value: Any?) {
         userDefaults.set(value, forKey: key.rawValue)
     }
     

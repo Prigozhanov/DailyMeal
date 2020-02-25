@@ -23,6 +23,7 @@ enum Formatter {
         return attrString
     }
     
+    // MARK: - Currency
     enum Currency {
         static func toString(_ string: String) -> String {
             guard let value = fromString(string) else {
@@ -53,12 +54,14 @@ enum Formatter {
         }
     }
     
+    // MARK: - Distance
     enum Distance {
         static func toString(_ value: Double) -> String {
             return String(format: "%.1f km", value)
         }
     }
     
+    // MARK: - CreditCard
     enum CreditCard {
         static func hiddenNumber(string: String?) -> String? {
             if let string = string, string.count == 16 {
@@ -73,6 +76,7 @@ enum Formatter {
         }
     }
     
+    // MARK: - PhoneNumber
     enum PhoneNumber {
         static func formattedString(_ string: String?) -> String? {
             guard let string = string, !string.contains("+") else {
@@ -88,6 +92,30 @@ enum Formatter {
             return string.count < maxCharacters + 1 && string.isNumber
         }
         
+        static func isValid(string: String) -> Bool {
+            return string.starts(with: "+") &&
+                CharacterSet.decimalDigits.isSuperset(of: CharacterSet(
+                    charactersIn: string.replacingOccurrences(of: "+", with: "")
+                ))
+        }
+        
+    }
+    
+    enum Email {
+        static func isValid(string: String) -> Bool {
+            guard CharacterSet
+                .alphanumerics
+                .union(CharacterSet(charactersIn: "-.@"))
+                .isSuperset(of: CharacterSet(charactersIn: string)) else {
+                    return false
+            }
+            
+            guard string.contains("@"), string.split(separator: "@")[1].contains(".") else {
+                return false
+            }
+            
+            return true
+        }
     }
 }
 

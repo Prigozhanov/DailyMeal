@@ -94,4 +94,18 @@ extension UIView {
         layer.removeAnimation(forKey: "transform.rotation.z")
     }
     
+    func temporaryAppear(seconds: Double) {
+        isHidden = false
+        alpha = 0
+        UIView.animateKeyframes(withDuration: seconds, delay: 0, options: [], animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.01) { [weak self] in
+                self?.alpha = 1
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.9, relativeDuration: 0.1) { [weak self] in
+                self?.alpha = 0
+            }
+        }, completion: nil)
+    }
+    
 }

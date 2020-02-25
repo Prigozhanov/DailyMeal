@@ -7,13 +7,13 @@ import UIKit
 import Networking
 import Extensions
 
-class EnterValidationCodePhoneVerificationViewController: UIViewController {
+class PhoneVerificationViewController: UIViewController {
     
     private var viewModel: PhoneVerificationViewModel
     
     private lazy var contentView = ValidationCodeContentView(item:
         ValidationCodeContentView.Item(
-            phoneNumber: self.viewModel.phoneNumber,
+            phone: self.viewModel.phone,
             onSendCode: { [weak self] validationCode in
                 self?.viewModel.sendVerifyingCode(validationCode: validationCode)
         })
@@ -50,7 +50,7 @@ class EnterValidationCodePhoneVerificationViewController: UIViewController {
         }
         
         let resendCodeLabel = UIButton.makeCommonButton("Don’t get the code?") { [weak self] _ in
-            self?.viewModel.sendPushGeneration(phoneNumber: self?.viewModel.phoneNumber)
+            self?.viewModel.sendPushGeneration()
         }
         resendCodeLabel.setTitleColor(Colors.gray.color, for: .normal)
         resendCodeLabel.titleLabel?.font = FontFamily.Poppins.medium.font(size: 12)
@@ -59,13 +59,13 @@ class EnterValidationCodePhoneVerificationViewController: UIViewController {
             $0.top.equalTo(contentView.snp.bottom).offset(30)
             $0.centerX.equalToSuperview()
         }
+        
+        viewModel.sendPushGeneration()
     }
-    
-    
     
 }
 
-extension EnterValidationCodePhoneVerificationViewController: PhoneVerificationView {
+extension PhoneVerificationViewController: PhoneVerificationView {
     
     func onSuccessAction() {
         if viewModel.phoneVerified {

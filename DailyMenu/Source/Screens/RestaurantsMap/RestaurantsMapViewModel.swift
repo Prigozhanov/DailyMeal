@@ -106,7 +106,6 @@ final class RestaurantsMapViewModelImplementation: RestaurantsMapViewModel {
         }
         let req = context.networkService.requestFactory.menu(cityId: areaId, addressId: addressId)
         context.networkService.send(request: req) { [weak self] result, _ in
-            LoadingIndicator.hide()
             switch result {
             case let .success(response):
                 self?.restaurants = response.restaurants.filter({ $0.type == .restaurant })

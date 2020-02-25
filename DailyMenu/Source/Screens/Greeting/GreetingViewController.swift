@@ -17,64 +17,23 @@ final class GreetingViewController: UIViewController {
     private lazy var emailField: TextField = {
         let textField = TextField(
             placeholder: "E-mail",
-            image: Images.Icons.envelope.image,
-            shouldChangeCharacters: { (textField, _, _) -> Bool in
-                true
-        },
-            shouldBeginEditing: { (_) -> Bool in
-                true
-        },
-            didBeginEditing: { (_) in
-                
-        },
-            shouldEndEditing: { (_) -> Bool in
-                true
-        },
-            didEndEditing: { (_, _) in
-                
-        },
-            didChangeSelection: { (_) in
-                
-        },
-            shouldClear: { (_) -> Bool in
-                true
-        }) { textField -> Bool in
+            image: Images.Icons.envelope.image) { textField -> Bool in
             textField.resignFirstResponder()
             return true
         }
-        textField.setKeyboardType(.emailAddress)
+        textField.keyboardType = .emailAddress
+        textField.autocapitalizationType = .none
         return textField
     }()
     
     private lazy var passwordField: TextField = {
         let textField = TextField(
             placeholder: "Password",
-            image: Images.Icons.password.image,
-            shouldChangeCharacters: { (_, _, _) -> Bool in
-                true
-        },
-            shouldBeginEditing: { (_) -> Bool in
-                true
-        },
-            didBeginEditing: { (_) in
-                
-        },
-            shouldEndEditing: { (_) -> Bool in
-                true
-        },
-            didEndEditing: { (_, _) in
-                
-        },
-            didChangeSelection: { (_) in
-                
-        },
-            shouldClear: { (_) -> Bool in
-                true
-        }) { textField -> Bool in
+            image: Images.Icons.password.image) { textField -> Bool in
             textField.resignFirstResponder()
             return true
         }
-        textField.setSecureEntry(true)
+        textField.isSecureTextEntry = true
         return textField
     }()
     
@@ -109,7 +68,8 @@ final class GreetingViewController: UIViewController {
             font: FontFamily.semibold
         ) { [weak self] button in
             self?.signUpViewController = UINavigationController(rootViewController:
-                SendPhoneVerificationViewController(viewModel: PhoneVerificationViewModelImplementation()))
+                SignUpViewController(viewModel: SignUpViewModelImplementation())
+            )
             if let vc = self?.signUpViewController {
                 self?.show(vc, sender: nil)
             }
@@ -211,7 +171,7 @@ final class GreetingViewController: UIViewController {
 //MARK: -  GreetingView
 extension GreetingViewController: GreetingView {
     func showAuthorizationError() {
-        authorizationErrorLabel.isHidden = false
+        authorizationErrorLabel.temporaryAppear(seconds: 5)
     }
 }
 

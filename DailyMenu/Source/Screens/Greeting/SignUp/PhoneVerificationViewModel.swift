@@ -15,12 +15,12 @@ protocol PhoneVerificationViewModel {
     
     var view: PhoneVerificationView? { get set }
     
-    var phoneNumber: String { get set }
+    var phone: String { get set }
     
     var phoneVerified: Bool { get set }
     
     func sendVerifyingCode(validationCode: String)
-    func sendPushGeneration(phoneNumber: String?)
+    func sendPushGeneration()
     
 }
 
@@ -28,15 +28,15 @@ class PhoneVerificationViewModelImplementation: PhoneVerificationViewModel {
     
     weak var view: PhoneVerificationView?
     
-    var phoneNumber: String
+    var phone: String
     
-    var phoneVerified: Bool
+    var phoneVerified: Bool = false
     
     let context: AppContext
     
-    init() {
+    init(phone: String) {
         context = AppDelegate.shared.context
-        phoneNumber = ""
+        self.phone = phone
         phoneVerified = false
     }
     
@@ -59,13 +59,12 @@ class PhoneVerificationViewModelImplementation: PhoneVerificationViewModel {
     }
     
     
-    func sendPushGeneration(phoneNumber: String?) {
-        let req = context.networkService.requestFactory.generateToken(phone: "+\(phoneNumber ?? self.phoneNumber)")
+    func sendPushGeneration() {
+        let req = context.networkService.requestFactory.generateToken(phone: phone)
         context.networkService.send(request: req) { [weak self] result, _ in
             LoadingIndicator.hide()
             switch result {
             case .success:
-                self?.phoneNumber = phoneNumber ?? ""
                 self?.view?.onSuccessAction()
             case .failure:
                 self?.view?.onErrorAction()

@@ -78,13 +78,14 @@ public struct User: Codable {
 // MARK: - VerifyToken
 public struct LoginResponse: Codable {
     public let member: User?
+    public let model: User?
     public let success: Bool?
     public let message, jwtToken: String?
     public let token: String?
     public let responseCode: Int?
     
     enum CodingKeys: String, CodingKey {
-        case member, success, message
+        case member, model, success, message
         case jwtToken = "JWTToken"
         case token, responseCode
     }

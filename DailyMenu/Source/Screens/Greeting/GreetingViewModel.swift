@@ -28,6 +28,7 @@ final class GreetingViewModelImplementation: GreetingViewModel {
     
     private let context: AppContext
     private let keychainService: KeychainService
+    private let userDefaultsService: UserDefaultsService
     
     weak var view: GreetingView?
     
@@ -37,7 +38,9 @@ final class GreetingViewModelImplementation: GreetingViewModel {
     init() {
         context = AppDelegate.shared.context
         keychainService = context.keychainSevice
-        email = keychainService.getValueForItem(.email) ?? ""
+        userDefaultsService = context.userDefaultsService
+        
+        email = userDefaultsService.getValueForKey(key: .email) as? String ?? ""
     }
     
     func performLogin(onSuccess: @escaping VoidClosure, onFailure: @escaping VoidClosure) {
@@ -47,7 +50,7 @@ final class GreetingViewModelImplementation: GreetingViewModel {
             LoadingIndicator.hide()
             switch result {
             case let .success(response):
-                self?.keychainService.setValueForItem(.email, self?.email ?? "")
+                self?.userDefaultsService.setValueForKey(key: .email, value: self?.email)
                 
                 if let user = response.member, let _ = response.token {
                     self?.context.userDefaultsService.updateUserDetails(user: user)

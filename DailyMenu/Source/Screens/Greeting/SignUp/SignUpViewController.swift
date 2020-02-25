@@ -4,38 +4,40 @@
 //
 
 import UIKit
-import Extensions
-import Networking
 
-class SendPhoneVerificationViewController: UIViewController {
+final class SignUpViewController: UIViewController {
     
-    private var viewModel: PhoneVerificationViewModel
+    private var viewModel: SignUpViewModel
     
-    private lazy var contentView = PhoneNumberVerificationContentView(item:
-        PhoneNumberVerificationContentView.Item(onSendPhone: { [weak self] phoneNumber in
-            LoadingIndicator.show(self)
-            self?.viewModel.phoneNumber = phoneNumber
-            self?.viewModel.sendPushGeneration(phoneNumber: phoneNumber)
-        }))
+    private lazy var contentView = SignUpContentView(
+        item: SignUpContentView.Item(
+            onSignUpAction: { [weak self] email, password, phone in
+                self?.viewModel.email = email
+                self?.viewModel.password = password
+                self?.viewModel.phone = phone
+                self?.viewModel.signUp()
+            }
+        )
+    )
     
-    init(viewModel: PhoneVerificationViewModel) {
+    init(viewModel: SignUpViewModel) {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
     }
     
-    required init?(coder: NSCoder) { fatalError() }
+    required init?(coder aDecoder: NSCoder) { fatalError() }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.view = self
-        
         navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        viewModel.view = self
         
         view.backgroundColor = Colors.commonBackground.color
         
-        let titleLabel = UILabel.makeText("Phone verification")
+        let titleLabel = UILabel.makeText("Sign up")
         titleLabel.font = FontFamily.Poppins.medium.font(size: 16)
         
         view.addSubviews([titleLabel, contentView])
@@ -58,19 +60,24 @@ class SendPhoneVerificationViewController: UIViewController {
     
 }
 
-extension SendPhoneVerificationViewController: PhoneVerificationView {
+//MARK: -  SignUpView
+extension SignUpViewController: SignUpView {
+    
     func onSuccessAction() {
-        navigationController?.pushViewController(
-            EnterValidationCodePhoneVerificationViewController(viewModel: self.viewModel),
-            animated: true
+        let vc = PhoneVerificationViewController(
+            viewModel: PhoneVerificationViewModelImplementation(phone: viewModel.phone)
         )
+        navigationController?.pushViewController(vc, animated: true)
     }
     
-    func onErrorAction() {
-        contentView.onErrorAction()
+    func onErrorAction(message: String?) {
+        contentView.onErrorAction(errorMessage: message)
     }
-    
-    
-    
+}
+
+//MARK: -  Private
+private extension SignUpViewController {
     
 }
+
+

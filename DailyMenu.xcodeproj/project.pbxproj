@@ -19,7 +19,6 @@
 		E70EBEF623EC191100B3D0DF /* Extensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD24B23E96E6700FB270D /* Extensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E70EBEF923EC191800B3D0DF /* Services.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD26D23E9D6A700FB270D /* Services.framework */; };
 		E70EBEFA23EC191800B3D0DF /* Services.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD26D23E9D6A700FB270D /* Services.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E70EBEFE23EC610D00B3D0DF /* SendPhoneVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70EBEFD23EC610D00B3D0DF /* SendPhoneVerificationViewController.swift */; };
 		E71139AC2346A59100889AE2 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = E71139AB2346A59100889AE2 /* scripts */; };
 		E71139B52346AA1100889AE2 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139B32346AA1100889AE2 /* RegistrationViewModel.swift */; };
 		E71139B62346AA1100889AE2 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139B42346AA1100889AE2 /* RegistrationViewController.swift */; };
@@ -29,8 +28,6 @@
 		E71139D52346AC7400889AE2 /* OrderPlacedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C12346AC7400889AE2 /* OrderPlacedViewController.swift */; };
 		E71139D72346AC7400889AE2 /* OrderStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C42346AC7400889AE2 /* OrderStatusViewModel.swift */; };
 		E71139D82346AC7400889AE2 /* OrderStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C52346AC7400889AE2 /* OrderStatusViewController.swift */; };
-		E71139D92346AC7400889AE2 /* GreetingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C72346AC7400889AE2 /* GreetingViewModel.swift */; };
-		E71139DA2346AC7400889AE2 /* GreetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139C82346AC7400889AE2 /* GreetingViewController.swift */; };
 		E71139DD2346AC7400889AE2 /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139CD2346AC7400889AE2 /* ProductViewModel.swift */; };
 		E71139DE2346AC7400889AE2 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139CE2346AC7400889AE2 /* ProductViewController.swift */; };
 		E71139E22346AC7D00889AE2 /* RestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139E02346AC7D00889AE2 /* RestaurantViewModel.swift */; };
@@ -66,7 +63,6 @@
 		E71CDC4123AEE4870059505A /* NavigationBarControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CDC4023AEE4870059505A /* NavigationBarControls.swift */; };
 		E71E75AC23EFC4C100D51EEE /* MapHeaderVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71E75AB23EFC4C100D51EEE /* MapHeaderVIew.swift */; };
 		E71E75AE23EFDF0600D51EEE /* ConfirmationDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71E75AD23EFDF0600D51EEE /* ConfirmationDialogViewController.swift */; };
-		E720291923EDE1AE000E9884 /* PhoneVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720291823EDE1AE000E9884 /* PhoneVerificationViewModel.swift */; };
 		E720292723EDF46A000E9884 /* AddCreditCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720292323EDF46A000E9884 /* AddCreditCardViewModel.swift */; };
 		E720292823EDF46A000E9884 /* AddCreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720292423EDF46A000E9884 /* AddCreditCardViewController.swift */; };
 		E720292923EDF46A000E9884 /* CardInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720292623EDF46A000E9884 /* CardInfoView.swift */; };
@@ -109,7 +105,6 @@
 		E77AD27A23E9D70600FB270D /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77AD26223E9A41C00FB270D /* KeychainService.swift */; };
 		E77AD27B23E9D71100FB270D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ADCB7D23E233E100607E8E /* NetworkService.swift */; };
 		E77D33AB23E770D5006577C2 /* PaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D33AA23E770D5006577C2 /* PaymentMethodView.swift */; };
-		E787FF7723EC89C200C14839 /* SingleInputValidationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E787FF7623EC89C200C14839 /* SingleInputValidationCodeView.swift */; };
 		E78B605123D8D6DD00389EE2 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78B605023D8D6DD00389EE2 /* GradientView.swift */; };
 		E78C382F23D760D400335887 /* CartItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78C382E23D760D400335887 /* CartItemView.swift */; };
 		E7926C6723D8C3D800768405 /* CartTitleValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7926C6623D8C3D800768405 /* CartTitleValueView.swift */; };
@@ -117,6 +112,16 @@
 		E7976CC523E9EAA700698EC9 /* URLRequestConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7976CC423E9EAA700698EC9 /* URLRequestConfigurator.swift */; };
 		E7976CC723E9F5ED00698EC9 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7976CC623E9F5ED00698EC9 /* UserDefaultsService.swift */; };
 		E7988BD923799A5600F0E8BD /* BaseCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7988BD823799A5600F0E8BD /* BaseCollectionCell.swift */; };
+		E79B97D92404A4F800F5E1BA /* GreetingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97CB2404A4F800F5E1BA /* GreetingViewModel.swift */; };
+		E79B97DA2404A4F800F5E1BA /* GreetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97CC2404A4F800F5E1BA /* GreetingViewController.swift */; };
+		E79B97EE2404A5B400F5E1BA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97E42404A5B400F5E1BA /* SignUpViewController.swift */; };
+		E79B97EF2404A5B400F5E1BA /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97E52404A5B400F5E1BA /* SignUpViewModel.swift */; };
+		E79B97F02404A5B400F5E1BA /* PhoneVerifiedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97E62404A5B400F5E1BA /* PhoneVerifiedViewController.swift */; };
+		E79B97F22404A5B400F5E1BA /* PhoneVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97E82404A5B400F5E1BA /* PhoneVerificationViewController.swift */; };
+		E79B97F32404A5B400F5E1BA /* PhoneVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97E92404A5B400F5E1BA /* PhoneVerificationViewModel.swift */; };
+		E79B97F42404A5B400F5E1BA /* ValidationCodeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97EB2404A5B400F5E1BA /* ValidationCodeContentView.swift */; };
+		E79B97F52404A5B400F5E1BA /* SingleInputValidationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97EC2404A5B400F5E1BA /* SingleInputValidationCodeView.swift */; };
+		E79B97F62404A5B400F5E1BA /* SignUpContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97ED2404A5B400F5E1BA /* SignUpContentView.swift */; };
 		E79ECD6F23EAB26E00824FC5 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79ECD6E23EAB26E00824FC5 /* TextField.swift */; };
 		E79FD751239D399900038933 /* CollectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79FD750239D399900038933 /* CollectionHeaderCell.swift */; };
 		E79FD753239D39C300038933 /* FoodItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79FD752239D39C300038933 /* FoodItemCell.swift */; };
@@ -139,12 +144,8 @@
 		E7A4459123DDE2F4003519E5 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4459023DDE2F4003519E5 /* CardView.swift */; };
 		E7A4459323DDFD3E003519E5 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4459223DDFD3E003519E5 /* SliderView.swift */; };
 		E7A942352375BDDB00450D78 /* FoodCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A942342375BDDB00450D78 /* FoodCategoryCell.swift */; };
-		E7ADA0D423EC631E00F8A83F /* PhoneNumberVerificationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ADA0D323EC631E00F8A83F /* PhoneNumberVerificationContentView.swift */; };
 		E7B7C08823EC162F0090C9DF /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD22323E96C8200FB270D /* Networking.framework */; };
 		E7B7C08923EC162F0090C9DF /* Networking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD22323E96C8200FB270D /* Networking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E7B86A4C23EC87900051703F /* EnterValidationCodePhoneVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B86A4B23EC87900051703F /* EnterValidationCodePhoneVerificationViewController.swift */; };
-		E7B86A4E23EC87DD0051703F /* ValidationCodeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B86A4D23EC87DD0051703F /* ValidationCodeContentView.swift */; };
-		E7BAE3F023ECC80700BFF5C2 /* PhoneVerifiedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BAE3EF23ECC80700BFF5C2 /* PhoneVerifiedViewController.swift */; };
 		E7C6035F233D3ECA004686DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C6035E233D3ECA004686DB /* AppDelegate.swift */; };
 		E7C60368233D3ECC004686DB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7C60367233D3ECC004686DB /* Images.xcassets */; };
 		E7C6036B233D3ECC004686DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7C60369233D3ECC004686DB /* LaunchScreen.storyboard */; };
@@ -272,7 +273,6 @@
 		E704AB1923F1CF36002203E8 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		E70BC2C023E5BEBE0039F582 /* Swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift.swift; sourceTree = "<group>"; };
 		E70C9A0D23EA191300530B3C /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
-		E70EBEFD23EC610D00B3D0DF /* SendPhoneVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPhoneVerificationViewController.swift; sourceTree = "<group>"; };
 		E71139AB2346A59100889AE2 /* scripts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scripts; sourceTree = SOURCE_ROOT; };
 		E71139B32346AA1100889AE2 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		E71139B42346AA1100889AE2 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -282,8 +282,6 @@
 		E71139C12346AC7400889AE2 /* OrderPlacedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPlacedViewController.swift; sourceTree = "<group>"; };
 		E71139C42346AC7400889AE2 /* OrderStatusViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderStatusViewModel.swift; sourceTree = "<group>"; };
 		E71139C52346AC7400889AE2 /* OrderStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderStatusViewController.swift; sourceTree = "<group>"; };
-		E71139C72346AC7400889AE2 /* GreetingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreetingViewModel.swift; sourceTree = "<group>"; };
-		E71139C82346AC7400889AE2 /* GreetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreetingViewController.swift; sourceTree = "<group>"; };
 		E71139CD2346AC7400889AE2 /* ProductViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
 		E71139CE2346AC7400889AE2 /* ProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		E71139E02346AC7D00889AE2 /* RestaurantViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantViewModel.swift; sourceTree = "<group>"; };
@@ -319,7 +317,6 @@
 		E71CDC4023AEE4870059505A /* NavigationBarControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarControls.swift; sourceTree = "<group>"; };
 		E71E75AB23EFC4C100D51EEE /* MapHeaderVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHeaderVIew.swift; sourceTree = "<group>"; };
 		E71E75AD23EFDF0600D51EEE /* ConfirmationDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationDialogViewController.swift; sourceTree = "<group>"; };
-		E720291823EDE1AE000E9884 /* PhoneVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewModel.swift; sourceTree = "<group>"; };
 		E720291A23EDF20A000E9884 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		E720292323EDF46A000E9884 /* AddCreditCardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCreditCardViewModel.swift; sourceTree = "<group>"; };
 		E720292423EDF46A000E9884 /* AddCreditCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCreditCardViewController.swift; sourceTree = "<group>"; };
@@ -364,7 +361,6 @@
 		E77AD27023E9D6A700FB270D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E77AD28123E9D77500FB270D /* KeychainAccess.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KeychainAccess.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E77D33AA23E770D5006577C2 /* PaymentMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodView.swift; sourceTree = "<group>"; };
-		E787FF7623EC89C200C14839 /* SingleInputValidationCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleInputValidationCodeView.swift; sourceTree = "<group>"; };
 		E78B605023D8D6DD00389EE2 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		E78C382E23D760D400335887 /* CartItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemView.swift; sourceTree = "<group>"; };
 		E7926C6623D8C3D800768405 /* CartTitleValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTitleValueView.swift; sourceTree = "<group>"; };
@@ -372,6 +368,16 @@
 		E7976CC423E9EAA700698EC9 /* URLRequestConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestConfigurator.swift; sourceTree = "<group>"; };
 		E7976CC623E9F5ED00698EC9 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		E7988BD823799A5600F0E8BD /* BaseCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionCell.swift; sourceTree = "<group>"; };
+		E79B97CB2404A4F800F5E1BA /* GreetingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreetingViewModel.swift; sourceTree = "<group>"; };
+		E79B97CC2404A4F800F5E1BA /* GreetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreetingViewController.swift; sourceTree = "<group>"; };
+		E79B97E42404A5B400F5E1BA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		E79B97E52404A5B400F5E1BA /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		E79B97E62404A5B400F5E1BA /* PhoneVerifiedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerifiedViewController.swift; sourceTree = "<group>"; };
+		E79B97E82404A5B400F5E1BA /* PhoneVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewController.swift; sourceTree = "<group>"; };
+		E79B97E92404A5B400F5E1BA /* PhoneVerificationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewModel.swift; sourceTree = "<group>"; };
+		E79B97EB2404A5B400F5E1BA /* ValidationCodeContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationCodeContentView.swift; sourceTree = "<group>"; };
+		E79B97EC2404A5B400F5E1BA /* SingleInputValidationCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleInputValidationCodeView.swift; sourceTree = "<group>"; };
+		E79B97ED2404A5B400F5E1BA /* SignUpContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpContentView.swift; sourceTree = "<group>"; };
 		E79ECD6E23EAB26E00824FC5 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		E79FD750239D399900038933 /* CollectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeaderCell.swift; sourceTree = "<group>"; };
 		E79FD752239D39C300038933 /* FoodItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemCell.swift; sourceTree = "<group>"; };
@@ -394,12 +400,8 @@
 		E7A4459023DDE2F4003519E5 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		E7A4459223DDFD3E003519E5 /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		E7A942342375BDDB00450D78 /* FoodCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategoryCell.swift; sourceTree = "<group>"; };
-		E7ADA0D323EC631E00F8A83F /* PhoneNumberVerificationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberVerificationContentView.swift; sourceTree = "<group>"; };
 		E7ADCB7D23E233E100607E8E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		E7ADCB8023E2346200607E8E /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
-		E7B86A4B23EC87900051703F /* EnterValidationCodePhoneVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterValidationCodePhoneVerificationViewController.swift; sourceTree = "<group>"; };
-		E7B86A4D23EC87DD0051703F /* ValidationCodeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationCodeContentView.swift; sourceTree = "<group>"; };
-		E7BAE3EF23ECC80700BFF5C2 /* PhoneVerifiedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerifiedViewController.swift; sourceTree = "<group>"; };
 		E7C6035B233D3ECA004686DB /* Daily Menu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Menu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7C6035E233D3ECA004686DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7C60367233D3ECC004686DB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -528,7 +530,7 @@
 				E720292A23EDF472000E9884 /* DeliveryLocation */,
 				E720292223EDF46A000E9884 /* AddCreditCard */,
 				E71139EC2346AF0500889AE2 /* Settings */,
-				E71139C62346AC7400889AE2 /* Greeting */,
+				E79B97CA2404A4F800F5E1BA /* Greeting */,
 				E71139F12346AFE300889AE2 /* Restaurants */,
 				E71139DF2346AC7D00889AE2 /* Restaurant */,
 				E71139CC2346AC7400889AE2 /* Product */,
@@ -577,16 +579,6 @@
 				E71139C52346AC7400889AE2 /* OrderStatusViewController.swift */,
 			);
 			path = OrderStatus;
-			sourceTree = "<group>";
-		};
-		E71139C62346AC7400889AE2 /* Greeting */ = {
-			isa = PBXGroup;
-			children = (
-				E7604570237E984700BF252E /* PhoneVerification */,
-				E71139C72346AC7400889AE2 /* GreetingViewModel.swift */,
-				E71139C82346AC7400889AE2 /* GreetingViewController.swift */,
-			);
-			path = Greeting;
 			sourceTree = "<group>";
 		};
 		E71139CC2346AC7400889AE2 /* Product */ = {
@@ -751,18 +743,6 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		E7604570237E984700BF252E /* PhoneVerification */ = {
-			isa = PBXGroup;
-			children = (
-				E7ADA0D223EC62C400F8A83F /* Views */,
-				E70EBEFD23EC610D00B3D0DF /* SendPhoneVerificationViewController.swift */,
-				E7B86A4B23EC87900051703F /* EnterValidationCodePhoneVerificationViewController.swift */,
-				E7BAE3EF23ECC80700BFF5C2 /* PhoneVerifiedViewController.swift */,
-				E720291823EDE1AE000E9884 /* PhoneVerificationViewModel.swift */,
-			);
-			path = PhoneVerification;
-			sourceTree = "<group>";
-		};
 		E76C93BA24033CAC0011552A /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -891,6 +871,40 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		E79B97CA2404A4F800F5E1BA /* Greeting */ = {
+			isa = PBXGroup;
+			children = (
+				E79B97E32404A5B400F5E1BA /* SignUp */,
+				E79B97CB2404A4F800F5E1BA /* GreetingViewModel.swift */,
+				E79B97CC2404A4F800F5E1BA /* GreetingViewController.swift */,
+			);
+			name = Greeting;
+			path = DailyMenu/Source/Screens/Greeting;
+			sourceTree = SOURCE_ROOT;
+		};
+		E79B97E32404A5B400F5E1BA /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				E79B97EA2404A5B400F5E1BA /* Views */,
+				E79B97E42404A5B400F5E1BA /* SignUpViewController.swift */,
+				E79B97E52404A5B400F5E1BA /* SignUpViewModel.swift */,
+				E79B97E82404A5B400F5E1BA /* PhoneVerificationViewController.swift */,
+				E79B97E92404A5B400F5E1BA /* PhoneVerificationViewModel.swift */,
+				E79B97E62404A5B400F5E1BA /* PhoneVerifiedViewController.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		E79B97EA2404A5B400F5E1BA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E79B97EB2404A5B400F5E1BA /* ValidationCodeContentView.swift */,
+				E79B97EC2404A5B400F5E1BA /* SingleInputValidationCodeView.swift */,
+				E79B97ED2404A5B400F5E1BA /* SignUpContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E79FD74F239D398200038933 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -933,16 +947,6 @@
 				E7A4459223DDFD3E003519E5 /* SliderView.swift */,
 				E7333EC823F34C8C004E4400 /* OptionView.swift */,
 				E729CB5E23F3785600CE01AB /* ChoiceRow.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		E7ADA0D223EC62C400F8A83F /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				E7ADA0D323EC631E00F8A83F /* PhoneNumberVerificationContentView.swift */,
-				E7B86A4D23EC87DD0051703F /* ValidationCodeContentView.swift */,
-				E787FF7623EC89C200C14839 /* SingleInputValidationCodeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1514,7 +1518,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E77D33AB23E770D5006577C2 /* PaymentMethodView.swift in Sources */,
-				E787FF7723EC89C200C14839 /* SingleInputValidationCodeView.swift in Sources */,
 				E7E04A6323CD68850045A381 /* Style.swift in Sources */,
 				E7F15DF223FF00B900E35668 /* RatingView.swift in Sources */,
 				E718B4AC23EF2706001EB7FE /* MapViewModel.swift in Sources */,
@@ -1525,11 +1528,8 @@
 				E7A03B7E2401A9EB0011C541 /* RestaurantsMapViewModel.swift in Sources */,
 				E7D722EF23A033CF007F096C /* SectionHeaderCell.swift in Sources */,
 				E703991723E36A12003E527A /* UIApplication.swift in Sources */,
-				E70EBEFE23EC610D00B3D0DF /* SendPhoneVerificationViewController.swift in Sources */,
 				E779CDB4235B72FE0004E520 /* AppCoordinator.swift in Sources */,
-				E7BAE3F023ECC80700BFF5C2 /* PhoneVerifiedViewController.swift in Sources */,
 				E779CDDB235CE9380004E520 /* Assets.swift in Sources */,
-				E7B86A4C23EC87900051703F /* EnterValidationCodePhoneVerificationViewController.swift in Sources */,
 				E7E04A5D23CCAEB20045A381 /* CartService.swift in Sources */,
 				E71E75AC23EFC4C100D51EEE /* MapHeaderVIew.swift in Sources */,
 				E71139D02346AC7400889AE2 /* CheckoutViewModel.swift in Sources */,
@@ -1556,10 +1556,13 @@
 				E7988BD923799A5600F0E8BD /* BaseCollectionCell.swift in Sources */,
 				E720292923EDF46A000E9884 /* CardInfoView.swift in Sources */,
 				E71139E32346AC7D00889AE2 /* RestaurantViewController.swift in Sources */,
+				E79B97F02404A5B400F5E1BA /* PhoneVerifiedViewController.swift in Sources */,
 				E718699A237DEE5000059766 /* Category.swift in Sources */,
+				E79B97F52404A5B400F5E1BA /* SingleInputValidationCodeView.swift in Sources */,
 				E731C71F2402AB6200779725 /* RestaurantsFilterViewModel.swift in Sources */,
 				E720292E23EDF472000E9884 /* DeliveryLocationViewModel.swift in Sources */,
 				E7926C6723D8C3D800768405 /* CartTitleValueView.swift in Sources */,
+				E79B97DA2404A4F800F5E1BA /* GreetingViewController.swift in Sources */,
 				E7EEC61123E795910066CC76 /* OrderStateRow.swift in Sources */,
 				E7A03B822401ABFC0011C541 /* RestaurantsFilterViewController.swift in Sources */,
 				E7DCBC9D2402101100770498 /* MapResultsRow.swift in Sources */,
@@ -1570,17 +1573,20 @@
 				E7A03B7F2401A9EB0011C541 /* RestaurantsMapViewController.swift in Sources */,
 				E7A03B862401AEAF0011C541 /* RestaurantsFilterHeader.swift in Sources */,
 				E76622F323FC96F4004D64BB /* RestaurantPreviewImages.swift in Sources */,
-				E71139D92346AC7400889AE2 /* GreetingViewModel.swift in Sources */,
 				E7A03B8D2401B77C0011C541 /* FoodTypeRow.swift in Sources */,
+				E79B97F42404A5B400F5E1BA /* ValidationCodeContentView.swift in Sources */,
 				E71139D72346AC7400889AE2 /* OrderStatusViewModel.swift in Sources */,
 				E7E04A3A23C8A8BB0045A381 /* NavigationController.swift in Sources */,
 				E79ECD6F23EAB26E00824FC5 /* TextField.swift in Sources */,
 				E7E04A3C23C8B9870045A381 /* ItemCounter.swift in Sources */,
+				E79B97F62404A5B400F5E1BA /* SignUpContentView.swift in Sources */,
 				E7037361234FE0D600852B04 /* UIButton.swift in Sources */,
+				E79B97EF2404A5B400F5E1BA /* SignUpViewModel.swift in Sources */,
 				E7A03B772401A9640011C541 /* RestaurantAnnotationView.swift in Sources */,
 				E7EEC60F23E7929A0066CC76 /* OrderIdView.swift in Sources */,
 				E718B4AA23EF229D001EB7FE /* MapViewController.swift in Sources */,
 				E71139E22346AC7D00889AE2 /* RestaurantViewModel.swift in Sources */,
+				E79B97F32404A5B400F5E1BA /* PhoneVerificationViewModel.swift in Sources */,
 				E78C382F23D760D400335887 /* CartItemView.swift in Sources */,
 				E748A2F92403483500CCC477 /* FilteredRestaurantPreviewCell.swift in Sources */,
 				E720292D23EDF472000E9884 /* DeliveryLocationViewController.swift in Sources */,
@@ -1588,10 +1594,8 @@
 				E7DCBC9B2402101100770498 /* MapSearchView.swift in Sources */,
 				E71139B62346AA1100889AE2 /* RegistrationViewController.swift in Sources */,
 				E71E75AE23EFDF0600D51EEE /* ConfirmationDialogViewController.swift in Sources */,
-				E71139DA2346AC7400889AE2 /* GreetingViewController.swift in Sources */,
-				E7B86A4E23EC87DD0051703F /* ValidationCodeContentView.swift in Sources */,
 				E79FD753239D39C300038933 /* FoodItemCell.swift in Sources */,
-				E7ADA0D423EC631E00F8A83F /* PhoneNumberVerificationContentView.swift in Sources */,
+				E79B97D92404A4F800F5E1BA /* GreetingViewModel.swift in Sources */,
 				E7E04A5F23CD4AE20045A381 /* Formatter.swift in Sources */,
 				E7A4458723DA2F70003519E5 /* FoodOptionCell.swift in Sources */,
 				E718691D237DC00300059766 /* BaseTableCell.swift in Sources */,
@@ -1605,7 +1609,6 @@
 				E7333EC923F34C8C004E4400 /* OptionView.swift in Sources */,
 				E7A03B7A2401A98D0011C541 /* RestaurantCalloutView.swift in Sources */,
 				E7037363234FE85D00852B04 /* Layout.swift in Sources */,
-				E720291923EDE1AE000E9884 /* PhoneVerificationViewModel.swift in Sources */,
 				E76622F523FD2C41004D64BB /* CategoryFilterBar.swift in Sources */,
 				E7DCBC9C2402101100770498 /* MapResultsTableView.swift in Sources */,
 				E7A03B932401BE470011C541 /* Slider.swift in Sources */,
@@ -1619,6 +1622,8 @@
 				E7F3171E24045D300011CC42 /* UserLocationAnnotationView.swift in Sources */,
 				E7CA200A236601EC004AA1FC /* FontFamily.swift in Sources */,
 				E7DCBC9E2402101100770498 /* MapSearchInputView.swift in Sources */,
+				E79B97EE2404A5B400F5E1BA /* SignUpViewController.swift in Sources */,
+				E79B97F22404A5B400F5E1BA /* PhoneVerificationViewController.swift in Sources */,
 				E729CB5F23F3785600CE01AB /* ChoiceRow.swift in Sources */,
 				E7C6035F233D3ECA004686DB /* AppDelegate.swift in Sources */,
 				E71139F02346AF0500889AE2 /* SettingsViewController.swift in Sources */,
@@ -1754,7 +1759,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H7553T5T52;
+				DEVELOPMENT_TEAM = 53APD5F9YQ;
 				INFOPLIST_FILE = NetworkingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1775,7 +1780,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H7553T5T52;
+				DEVELOPMENT_TEAM = 53APD5F9YQ;
 				INFOPLIST_FILE = NetworkingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1795,6 +1800,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1825,6 +1831,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1856,6 +1863,7 @@
 			baseConfigurationReference = AA4AB9F80D8F8CF262F81386 /* Pods-Services.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1886,6 +1894,7 @@
 			baseConfigurationReference = 41AAA2778B43A1759CD7069B /* Pods-Services.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2078,7 +2087,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H7553T5T52;
+				DEVELOPMENT_TEAM = 53APD5F9YQ;
 				INFOPLIST_FILE = DailyMenuTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2099,7 +2108,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H7553T5T52;
+				DEVELOPMENT_TEAM = 53APD5F9YQ;
 				INFOPLIST_FILE = DailyMenuTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

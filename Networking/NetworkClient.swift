@@ -14,6 +14,7 @@ public final class NetworkClient {
         case serverSideError
         case missingData
         case unauthorized
+        case unprocessable
     }
     
     private let sessionQueue: OperationQueue
@@ -71,6 +72,8 @@ public final class NetworkClient {
                 }
             case 403:
                 failureClosure(Error.unauthorized)
+            case 422:
+                failureClosure(Error.unprocessable)
             case 500:
                 failureClosure(Error.serverSideError)
             default:
