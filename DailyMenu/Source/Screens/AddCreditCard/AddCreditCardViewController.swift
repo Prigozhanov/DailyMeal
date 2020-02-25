@@ -50,7 +50,7 @@ final class AddCreditCardViewController: UIViewController {
             self?.updateBottomConstraint(offset: frame.height - (self?.view.safeAreaInsets.bottom ?? 0))
         }))
         
-        notificationTokens.append(Token.make(descriptor: .keyboardWillHideDescriptor, using: { [weak self] frame in
+        notificationTokens.append(Token.make(descriptor: .keyboardWillHideDescriptor, using: { [weak self] _ in
             self?.updateBottomConstraint(offset: 0)
         }))
         
@@ -90,7 +90,7 @@ final class AddCreditCardViewController: UIViewController {
     
 }
 
-//MARK: -  AddCreditCardView
+// MARK: - AddCreditCardView
 extension AddCreditCardViewController: AddCreditCardView {
     func dismissController() {
         if let navigationController = navigationController {
@@ -101,9 +101,7 @@ extension AddCreditCardViewController: AddCreditCardView {
     }
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension AddCreditCardViewController {
     
 }
-
-

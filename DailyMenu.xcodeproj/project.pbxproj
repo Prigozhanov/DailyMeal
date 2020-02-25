@@ -1206,6 +1206,7 @@
 			buildPhases = (
 				8588974FDC2B22E837D91D37 /* [CP] Check Pods Manifest.lock */,
 				E7DFC6ED235919760003C46C /* SwiftGen */,
+				E7F291382405CD89000AF60C /* SwiftLint */,
 				E7C60357233D3ECA004686DB /* Sources */,
 				E7C60358233D3ECA004686DB /* Frameworks */,
 				E7C60359233D3ECA004686DB /* Resources */,
@@ -1462,6 +1463,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "$PODS_ROOT/SwiftGen/bin/swiftgen xcassets -t swift4 -o ${SRCROOT}/DailyMenu/Resources/Generated/Assets.swift ${SRCROOT}/DailyMenu/Resources/Assets/\n\n$PODS_ROOT/SwiftGen/bin/swiftgen fonts -t swift4 -o ${SRCROOT}/DailyMenu/Resources/Fonts/Fonts.swift ${SRCROOT}/DailyMenu/Resources/Fonts\n";
+		};
+		E7F291382405CD89000AF60C /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

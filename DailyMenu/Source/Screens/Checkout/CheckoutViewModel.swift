@@ -7,12 +7,12 @@ import Foundation
 import Services
 import Networking
 
-//MARK: - View
+// MARK: - View
 protocol CheckoutView: class {
     
 }
 
-//MARK: - ViewModel
+// MARK: - ViewModel
 protocol CheckoutViewModel {
     
     var view: CheckoutView? { get set }
@@ -24,7 +24,7 @@ protocol CheckoutViewModel {
     func checkoutOrder()
 }
 
-//MARK: - Implementation
+// MARK: - Implementation
 final class CheckoutViewModelImplementation: CheckoutViewModel {
     
     weak var view: CheckoutView?
@@ -36,9 +36,7 @@ final class CheckoutViewModelImplementation: CheckoutViewModel {
     var userDefaultsService: UserDefaultsService
     
     var creditCard: CreditCard? {
-        get {
-            keychainService.getCreditCardDetails()
-        }
+        keychainService.getCreditCardDetails()
     }
     
     var paymentMethod: PaymentMethod = .cash
@@ -98,5 +96,3 @@ final class CheckoutViewModelImplementation: CheckoutViewModel {
     }
     
 }
-
-

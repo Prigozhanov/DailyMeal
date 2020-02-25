@@ -60,7 +60,7 @@ final class SignUpViewController: UIViewController {
     
 }
 
-//MARK: -  SignUpView
+// MARK: - SignUpView
 extension SignUpViewController: SignUpView {
     
     func onSuccessAction() {
@@ -75,9 +75,7 @@ extension SignUpViewController: SignUpView {
     }
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension SignUpViewController {
     
 }
-
-

@@ -40,13 +40,12 @@ final class CartViewController: UIViewController {
     
     private var itemRows: [CartItemView] = []
     
-    private lazy var promocodeView = CartPromocodeView { _ in 
-        //TODO
+    private lazy var promocodeView = CartPromocodeView { _ in  // TODO
     }
     
     private var calculationRows: [UIView] = []
     
-    private lazy var proceedActionButton = UIButton.makeActionButton("Proceed to Checkout") { [weak self] button in
+    private lazy var proceedActionButton = UIButton.makeActionButton("Proceed to Checkout") { button in
         let vm = CheckoutViewModelImplementation()
         let vc = CheckoutViewController(viewModel: vm)
         let navigation = UINavigationController(rootViewController: vc)
@@ -174,7 +173,7 @@ final class CartViewController: UIViewController {
     
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension CartViewController {
     
 }
@@ -188,4 +187,3 @@ extension CartViewController: CartView {
     }
     
 }
-

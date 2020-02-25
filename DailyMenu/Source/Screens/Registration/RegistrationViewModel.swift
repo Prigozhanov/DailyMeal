@@ -5,19 +5,19 @@
 
 import Foundation
 
-//MARK: - View
+// MARK: - View
 protocol RegistrationView: class {
 
 }
 
-//MARK: - ViewModel
+// MARK: - ViewModel
 protocol RegistrationViewModel {
 
 var view: RegistrationView? { get set }
 
 }
 
-//MARK: - Implementation
+// MARK: - Implementation
 final class RegistrationViewModelImplementation: RegistrationViewModel {
 
   weak var view: RegistrationView?
@@ -26,5 +26,3 @@ final class RegistrationViewModelImplementation: RegistrationViewModel {
   }
 
 }
-
-

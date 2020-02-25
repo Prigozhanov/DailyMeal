@@ -10,7 +10,7 @@ final class RestaurantViewController: UIViewController {
     
     private var viewModel: RestaurantViewModel
     
-    private lazy var scrollDelegate: StretchScrollDelegate = StretchScrollDelegate(view: navigationBarBackground) { [weak self] viewShouldAppear in
+    private lazy var scrollDelegate: StretchScrollDelegate? = StretchScrollDelegate(view: navigationBarBackground) { [weak self] viewShouldAppear in
         self?.navigationBarControls.alpha = !viewShouldAppear ? 0 : 1
         self?.navigationBarControls.isUserInteractionEnabled = viewShouldAppear
         self?.setNeedsStatusBarAppearanceUpdate()
@@ -33,30 +33,34 @@ final class RestaurantViewController: UIViewController {
         return collectionView
         }()
     
-    
     private lazy var headerDataSource = ArrayDataSource<Restaurant>(data: [
         self.viewModel.restaurant
     ])
-    private lazy var headerViewSource = ClosureViewSource<Restaurant, CollectionHeaderCell>(viewUpdater: { (view: CollectionHeaderCell, data: Restaurant, index: Int) in
-        let item = CollectionHeaderCell.Item(
-            label: data.chainLabel,
-            distance: "\(Formatter.Distance.toString(data.distance)) away",
-            orderDelay: "\(data.orderDelayFirst) minutes delivery time",
-            minOrderPrice: Formatter.Currency.toString(Double(data.minAmountOrder)),
-            imageURL: data.src
-        )
-        view.configure(with: item)
-    })
+    
+    private lazy var headerViewSource = ClosureViewSource<Restaurant, CollectionHeaderCell>(
+        viewUpdater: { (view: CollectionHeaderCell, data: Restaurant, _) in
+            let item = CollectionHeaderCell.Item(
+                label: data.chainLabel,
+                distance: "\(Formatter.Distance.toString(data.distance)) away",
+                orderDelay: "\(data.orderDelayFirst) minutes delivery time",
+                minOrderPrice: Formatter.Currency.toString(Double(data.minAmountOrder)),
+                imageURL: data.src
+            )
+            view.configure(with: item)
+    }
+    )
+    
     private lazy var headerSizeSource = { [weak self] (index: Int, data: Restaurant, collectionSize: CGSize) -> CGSize in
         return CGSize(width: self?.collectionView.frame.width ?? 0, height: 160)
     }
+    
     private lazy var headerProvider = BasicProvider<Restaurant, CollectionHeaderCell>(
         dataSource: headerDataSource,
         viewSource: headerViewSource,
         sizeSource: headerSizeSource
     )
     
-    private lazy var itemViewSource = ClosureViewSource(viewUpdater: { (view: FoodItemCell, data: Product, index: Int) in
+    private lazy var itemViewSource = ClosureViewSource(viewUpdater: { (view: FoodItemCell, data: Product, _) in
         view.configure(with: FoodItemCell.Item(
             title: data.label,
             description: data.content.orEmpty.withRemovedHtmlTags,
@@ -87,7 +91,7 @@ final class RestaurantViewController: UIViewController {
                     view.configure(item: SectionHeaderCell.Item(section: self.viewModel.categories[index - 1].label.orEmpty, itemsCount: data.section.numberOfItems))
                 }
         },
-            headerSizeSource: { (index, data, maxSize) -> CGSize in
+            headerSizeSource: { (index, _, maxSize) -> CGSize in
                 if index == 0 {
                     return .zero
                 }
@@ -179,7 +183,7 @@ final class RestaurantViewController: UIViewController {
     
 }
 
-//MARK: -  RestaurantView
+// MARK: - RestaurantView
 extension RestaurantViewController: RestaurantView {
     func reloadItems() {
         composedSectionProvider.sections = sections
@@ -187,6 +191,6 @@ extension RestaurantViewController: RestaurantView {
     }
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension RestaurantViewController {
 }

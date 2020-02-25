@@ -11,7 +11,6 @@ extension FontFamily {
         return Poppins.bold.font(size: 15)
     }
     
-    
     public static var light: UIFont? {
         return Poppins.light.font(size: 15)
     }

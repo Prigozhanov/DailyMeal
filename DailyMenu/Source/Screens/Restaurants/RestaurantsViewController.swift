@@ -113,7 +113,6 @@ final class RestaurantsViewController: UIViewController {
         statusBarBackground.backgroundColor = Colors.commonBackground.color
         view.addSubview(statusBarBackground)
         
-        
         tableView.contentInset = UIEdgeInsets(top: 200, left: 0, bottom: 0, right: 0)
         tableView.scrollIndicatorInsets = tableView.contentInset
         tableView.setContentOffset(CGPoint(x: 0, y: -200), animated: false)
@@ -129,7 +128,7 @@ final class RestaurantsViewController: UIViewController {
     
 }
 
-//MARK: -  RestaurantsView
+// MARK: - RestaurantsView
 extension RestaurantsViewController: RestaurantsView {
     func reloadScreen() {
         tableDirector.clear()
@@ -188,12 +187,12 @@ extension RestaurantsViewController: RestaurantsView {
     }
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension RestaurantsViewController {
     
 }
 
-//MARK: - TableView
+// MARK: - TableView
 extension RestaurantsViewController: UIScrollViewDelegate {
     
     private enum ScrollDirection {

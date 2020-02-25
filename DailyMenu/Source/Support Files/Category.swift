@@ -46,7 +46,6 @@ public enum FoodCategory: String, CaseIterable {
         return .unknown
     }
     
-    
 }
 
 public enum FoodOption: String {

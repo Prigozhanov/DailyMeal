@@ -18,9 +18,7 @@ public class CartItem: Comparable, Equatable {
     }
     
     var overallPrice: Double {
-        get {
-            product.overallPrice
-        }
+        product.overallPrice
     }
     
     public static func < (lhs: CartItem, rhs: CartItem) -> Bool {

@@ -135,9 +135,9 @@ final class DeliveryLocationViewController: UIViewController {
             self?.viewModel.saveAddressInfo()
             NotificationCenter.default.post(name: .userAddressChanged, object: nil)
             self?.dismiss(animated: true)
-        }) { [weak self] in
-            self?.confirmationDiaglogIsVisible = false
-        }
+            }, onDismiss: { [weak self] in
+                self?.confirmationDiaglogIsVisible = false
+        })
         vc.subtitleLabel.attributedText = Formatter.getHighlightedAttributtedString(
             string: "Do you want to choose \(address) as your delivery address, please confirm if it's correct, and start to choose your meal.",
             keyWord: address,
@@ -160,14 +160,12 @@ final class DeliveryLocationViewController: UIViewController {
     
 }
 
-//MARK: -  DeliveryLocationView
+// MARK: - DeliveryLocationView
 extension DeliveryLocationViewController: DeliveryLocationView {
     
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension DeliveryLocationViewController {
     
 }
-
-

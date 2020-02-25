@@ -95,6 +95,4 @@ extension RestaurantsSearchView: UITextFieldDelegate {
         return true
     }
     
-    
-    
 }

@@ -9,7 +9,7 @@ class FoodTypeRow: UIView {
     
     struct Item {
         var selectedCategories: [FoodCategory]
-        let didChange: ([FoodCategory]) -> ()
+        let didChange: ([FoodCategory]) -> Void
     }
     
     private var item: Item
@@ -18,7 +18,7 @@ class FoodTypeRow: UIView {
     
     private lazy var dataSource = ArrayDataSource(data: categories)
     
-    private lazy var viewSource = ClosureViewSource { [weak self] (view: CategoryCell, data: FoodCategory, index: Int) in
+    private lazy var viewSource = ClosureViewSource { [weak self] (view: CategoryCell, data: FoodCategory, _) in
         guard let self = self else { return }
         view.configure(item: data)
         view.setSelected( self.item.selectedCategories.contains(data))
@@ -70,39 +70,39 @@ class FoodTypeRow: UIView {
     
     required init?(coder: NSCoder) { fatalError() }
     
-    internal class CategoryCell: UICollectionViewCell {
+}
+
+class CategoryCell: UICollectionViewCell {
+    
+    typealias Item = FoodCategory
+    
+    let label: UILabel = {
+        let label = UILabel.makeText()
+        label.textColor = Colors.smoke.color
+        label.font = FontFamily.Poppins.regular.font(size: 11)
+        return label
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        typealias Item = FoodCategory
-        
-        let label: UILabel = {
-            let label = UILabel.makeText()
-            label.textColor = Colors.smoke.color
-            label.font = FontFamily.Poppins.regular.font(size: 11)
-            return label
-        }()
-        
-        override init(frame: CGRect) {
-            super.init(frame: frame)
-            
-            addSubview(label)
-            label.snp.makeConstraints {
-                $0.center.equalToSuperview()
-            }
+        addSubview(label)
+        label.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
-        
-        required init?(coder: NSCoder) { fatalError() }
-        
-        func configure(item: Item) {
-            setRoundCorners(3)
-            backgroundColor = Colors.backgroundGray.color
-            label.text = item.humanReadableValue
-        }
-        
-        func setSelected(_ selected: Bool) {
-            backgroundColor = selected ? Colors.blue.color : Colors.backgroundGray.color
-            label.textColor = selected ? Colors.white.color : Colors.smoke.color
-        }
-        
+    }
+    
+    required init?(coder: NSCoder) { fatalError() }
+    
+    func configure(item: Item) {
+        setRoundCorners(3)
+        backgroundColor = Colors.backgroundGray.color
+        label.text = item.humanReadableValue
+    }
+    
+    func setSelected(_ selected: Bool) {
+        backgroundColor = selected ? Colors.blue.color : Colors.backgroundGray.color
+        label.textColor = selected ? Colors.white.color : Colors.smoke.color
     }
     
 }

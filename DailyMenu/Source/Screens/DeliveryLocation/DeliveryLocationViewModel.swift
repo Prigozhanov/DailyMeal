@@ -7,12 +7,12 @@ import Foundation
 import Networking
 import Services
 
-//MARK: - View
+// MARK: - View
 protocol DeliveryLocationView: class {
     
 }
 
-//MARK: - ViewModel
+// MARK: - ViewModel
 protocol DeliveryLocationViewModel {
     
     var view: DeliveryLocationView? { get set }
@@ -24,7 +24,7 @@ protocol DeliveryLocationViewModel {
     func saveAddressInfo()
 }
 
-//MARK: - Implementation
+// MARK: - Implementation
 final class DeliveryLocationViewModelImplementation: DeliveryLocationViewModel {
     
     weak var view: DeliveryLocationView?
@@ -42,7 +42,6 @@ final class DeliveryLocationViewModelImplementation: DeliveryLocationViewModel {
         locationService = context.locationService
         userDefaultsService = context.userDefaultsService
     }
-    
     
     // Search addresses
     func getAddressesList(string: String, completion: @escaping ([String]) -> Void) {
@@ -146,5 +145,3 @@ final class DeliveryLocationViewModelImplementation: DeliveryLocationViewModel {
     }
     
 }
-
-

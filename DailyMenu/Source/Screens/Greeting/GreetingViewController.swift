@@ -60,13 +60,12 @@ final class GreetingViewController: UIViewController {
             $0.leading.top.bottom.equalTo(view)
         }
         
-        
         let signUpButton = UIButton.makeCustomButton(
             title: "Sign up",
             titleColor: Colors.blue.color,
             cornerRadius: 5,
             font: FontFamily.semibold
-        ) { [weak self] button in
+        ) { [weak self] _ in
             self?.signUpViewController = UINavigationController(rootViewController:
                 SignUpViewController(viewModel: SignUpViewModelImplementation())
             )
@@ -168,14 +167,14 @@ final class GreetingViewController: UIViewController {
     
 }
 
-//MARK: -  GreetingView
+// MARK: - GreetingView
 extension GreetingViewController: GreetingView {
     func showAuthorizationError() {
         authorizationErrorLabel.temporaryAppear(seconds: 5)
     }
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension GreetingViewController {
     
 }
@@ -183,14 +182,13 @@ private extension GreetingViewController {
 extension NotificationDescriptor {
     
     static var userSignedUpDescriptor: NotificationDescriptor<Void> {
-            return NotificationDescriptor<Void>(name: .userSignedUp) { notification in
+            return NotificationDescriptor<Void>(name: .userSignedUp) { _ in
         }
     }
     
     static var userInvalidAddress: NotificationDescriptor<Void> {
-            return NotificationDescriptor<Void>(name: .userInvalidAddress) { notification in
+            return NotificationDescriptor<Void>(name: .userInvalidAddress) { _ in
         }
     }
     
 }
-

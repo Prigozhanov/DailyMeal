@@ -101,7 +101,6 @@ class TextField: UIView {
         
         addSubviews([leftImageView, textField, clearButton])
         
-        
         textField.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(leftInset).priority(.high)
             $0.trailing.equalToSuperview().inset(4).priority(.high)

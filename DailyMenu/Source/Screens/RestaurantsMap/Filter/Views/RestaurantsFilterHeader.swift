@@ -53,6 +53,4 @@ class RestaurantsFilterHeader: UIView {
     
     required init?(coder: NSCoder) { fatalError() }
     
-    
-    
 }

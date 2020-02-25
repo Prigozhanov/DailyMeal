@@ -29,13 +29,11 @@ class RestaurantCell: BaseTableCell {
         return view
     }()
     
-    
     var restaurantImageView: UIImageView = {
         let view = UIImageView(image: Images.Category.placeholder.image)
         view.setRoundCorners(15, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
         return view
     }()
-    
     
     private var restaurantDescriptionLabel: UILabel = {
         let label = UILabel.makeExtraSmallText()

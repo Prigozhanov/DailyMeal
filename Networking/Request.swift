@@ -15,7 +15,6 @@ public struct Request<Response: Codable> {
         self.params = params
     }
     
-    
     public enum Method: String {
         case GET, POST
         var hasBody: Bool {
@@ -48,7 +47,7 @@ public class RequestFactory {
             method: .POST,
             baseUrlString: secondaryUrlString,
             path: "index/authenticate",
-            params: .json(["user": userName, "pwd" : password])
+            params: .json(["user": userName, "pwd": password])
         )
     }
     
@@ -61,7 +60,7 @@ public class RequestFactory {
             params: .json([
                 "email": email,
                 "phone": phone,
-                "password" : password,
+                "password": password,
                 "repassword": password
             ])
         )
@@ -83,7 +82,7 @@ public class RequestFactory {
             method: .POST,
             baseUrlString: baseUrlString,
             path: "sms-verification/generate-token",
-            params: .json(["phone" : phone])
+            params: .json(["phone": phone])
         )
     }
     
@@ -93,7 +92,7 @@ public class RequestFactory {
             method: .POST,
             baseUrlString: baseUrlString,
             path: "sms-verification/verify-token",
-            params: .json(["verify_code" : validationCode])
+            params: .json(["verify_code": validationCode])
         )
     }
     
@@ -118,7 +117,7 @@ public class RequestFactory {
                 "delivery_type": "delivery",
                 "city_id": "\(cityId)",
                 "localization": "1",
-                "addressId": "\(addressId)",
+                "addressId": "\(addressId)"
             ])
         )
     }
@@ -129,7 +128,7 @@ public class RequestFactory {
             method: .GET,
             baseUrlString: baseUrlString,
             path: "get-restaurant-menu-categories",
-            params: .query(["rest" : "\(id)", "lng": "7"])
+            params: .query(["rest": "\(id)", "lng": "7"])
         )
     }
     
@@ -140,7 +139,7 @@ public class RequestFactory {
             baseUrlString: baseUrlString,
             path: "get-restaurant-menu",
             params: .query([
-                "rest" : "\(id)",
+                "rest": "\(id)",
                 "lng": "7" // TODO link with category id
             ])
         )

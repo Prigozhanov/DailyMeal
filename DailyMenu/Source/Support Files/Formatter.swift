@@ -14,9 +14,9 @@ enum Formatter {
                                                 highlightingColor: UIColor? = nil) -> NSAttributedString {
         let range = (string as NSString).range(of: keyWord, options: [.caseInsensitive])
         let attrString = NSMutableAttributedString(
-            string: string, attributes: [.font : font]
+            string: string, attributes: [.font: font]
         )
-        attrString.addAttributes([.font : highlightingFont], range: range)
+        attrString.addAttributes([.font: highlightingFont], range: range)
         if let highlightingColor = highlightingColor {
             attrString.addAttributes([.foregroundColor: highlightingColor], range: range)
         }
@@ -118,4 +118,3 @@ enum Formatter {
         }
     }
 }
-

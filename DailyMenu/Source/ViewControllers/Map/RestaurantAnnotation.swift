@@ -20,5 +20,4 @@ class RestaurantAnnotation: MKPointAnnotation {
         self.coordinate = coordinate
     }
     
-    
 }

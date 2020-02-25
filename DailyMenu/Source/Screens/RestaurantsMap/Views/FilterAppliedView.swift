@@ -58,6 +58,4 @@ class FilterAppliedView: UIView {
     
     required init?(coder: NSCoder) { fatalError() }
     
-    
-    
 }

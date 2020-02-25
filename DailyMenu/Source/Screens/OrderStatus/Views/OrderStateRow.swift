@@ -7,7 +7,6 @@ import UIKit
 
 class OrderStateRow: UIView {
     
-    
     init(title: String, time: String, checked: Bool) {
         super.init(frame: .zero)
         
@@ -36,8 +35,6 @@ class OrderStateRow: UIView {
             $0.leading.equalTo(titleLabel.snp.trailing)
         }
     }
-    
-    
     
     required init?(coder: NSCoder) { fatalError() }
     

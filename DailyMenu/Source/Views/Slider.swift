@@ -51,6 +51,4 @@ class Slider: UISlider {
         return super.continueTracking(touch, with: event)
     }
 
-    
-    
 }

@@ -10,7 +10,7 @@ class FoodOptionCell: UICollectionViewCell {
     
     public struct Item {
         public let option: Choice
-        public let onRemoveOption: ((UIButton) -> ())
+        public let onRemoveOption: ((UIButton) -> Void)
     }
     
     private let label: UILabel = {
@@ -54,4 +54,3 @@ class FoodOptionCell: UICollectionViewCell {
     }
     
 }
-

@@ -65,7 +65,6 @@ class RatingRangeControl: UIControl {
         updateLayerFrames()
     }
     
-    
     internal class RatingRangeThumb: UIView {
         
         var isHighlighted: Bool = false
@@ -103,7 +102,6 @@ extension RatingRangeControl {
             upperValue = boundValue(upperValue, toLowerValue: lowerValue,
                                     upperValue: maximumValue)
         }
-        
         
         CATransaction.begin()
         CATransaction.setDisableActions(true)

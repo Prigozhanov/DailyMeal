@@ -24,7 +24,6 @@ class RadiusRow: UIView {
         
         slider.value = initialValue
      
-        
         slider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         return slider
     }()

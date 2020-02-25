@@ -15,7 +15,7 @@ class ItemCounter: UIView {
     
     let valueLabel = UILabel()
     
-    init(axis: Axis, valueChanged: @escaping (Int) -> ()) {
+    init(axis: Axis, valueChanged: @escaping (Int) -> Void) {
         super.init(frame: .zero)
         
         let plusButton = UIButton()

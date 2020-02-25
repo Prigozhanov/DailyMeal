@@ -7,12 +7,12 @@ import Foundation
 import Services
 import Networking
 
-//MARK: - View
+// MARK: - View
 protocol RestaurantsMapView: class {
     func reloadScreen()
 }
 
-//MARK: - ViewModel
+// MARK: - ViewModel
 protocol RestaurantsMapViewModel {
     
     var view: RestaurantsMapView? { get set }
@@ -25,13 +25,12 @@ protocol RestaurantsMapViewModel {
     
     var categories: [Int: [ProductCategory]] { get }
     var products: [Int: [Product]] { get }
-    
-    
+
     func loadRestaurants()
     
 }
 
-//MARK: - Implementation
+// MARK: - Implementation
 final class RestaurantsMapViewModelImplementation: RestaurantsMapViewModel {
     
     weak var view: RestaurantsMapView?
@@ -62,7 +61,7 @@ final class RestaurantsMapViewModelImplementation: RestaurantsMapViewModel {
                     return nil
                 }
                 return price > 0 ? price : nil
-            }) ?? [] as Array<Int>
+            }) ?? [] as [Int]
 
             let priceFilterRange = filter.priceRange.lowerValue...filter.priceRange.upperValue
             return allPricesArray.contains { priceFilterRange.contains($0) }
@@ -86,12 +85,12 @@ final class RestaurantsMapViewModelImplementation: RestaurantsMapViewModel {
         }
     }
     
-    var categories: [Int : [ProductCategory]] = [:]
+    var categories: [Int: [ProductCategory]] = [:]
     var convertedCategories: [Int: Set<FoodCategory>] {
         return categories.compactMapValues({ Set($0.compactMap({ FoodCategory.fromProductCategory(category: $0) })) })
     }
     
-    var products: [Int : [Product]] = [:]
+    var products: [Int: [Product]] = [:]
     
     init() {
         context = AppDelegate.shared.context
@@ -150,7 +149,7 @@ final class RestaurantsMapViewModelImplementation: RestaurantsMapViewModel {
         }
     }
     
-    private func loadMenu(restId: Int,completion: @escaping VoidClosure) {
+    private func loadMenu(restId: Int, completion: @escaping VoidClosure) {
         let req = context.networkService.requestFactory.restaurantMenu(id: restId)
         context.networkService.send(request: req, completion: { [weak self] result, _ in
             switch result {

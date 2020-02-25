@@ -9,11 +9,10 @@ import os.log
 typealias Colors = Asset.Colors
 typealias Images = Asset.Images
 
-typealias VoidClosure = () -> ()
-typealias BoolClosure = (Bool) -> ()
-typealias IntClosure = (Int) -> ()
-typealias StringClosure = (String) -> ()
-
+typealias VoidClosure = () -> Void
+typealias BoolClosure = (Bool) -> Void
+typealias IntClosure = (Int) -> Void
+typealias StringClosure = (String) -> Void
 
 func logMessage(message: String) {
     os_log("[INFO] %s", message)

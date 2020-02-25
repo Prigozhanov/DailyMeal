@@ -97,6 +97,4 @@ class RestaurantsFilterControls: UIView {
     
     required init?(coder: NSCoder) { fatalError() }
     
-    
-    
 }

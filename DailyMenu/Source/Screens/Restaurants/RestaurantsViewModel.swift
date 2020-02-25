@@ -7,14 +7,14 @@ import Foundation
 import Networking
 import Services
 
-//MARK: - View
+// MARK: - View
 protocol RestaurantsView: class {
     func reloadScreen()
     func showLoadingIndicator()
     func hideLoadingIndicator()
 }
 
-//MARK: - ViewModel
+// MARK: - ViewModel
 protocol RestaurantsViewModel {
     
     var view: RestaurantsView? { get set }
@@ -45,7 +45,7 @@ protocol RestaurantsViewModel {
     
 }
 
-//MARK: - Implementation
+// MARK: - Implementation
 final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     
     let context: AppContext
@@ -73,9 +73,7 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     var categoryFilter: FoodCategory?
     
     var userName: String {
-        get {
-            userDefaultsService.getValueForKey(key: .name) as? String ?? ""
-        }
+        userDefaultsService.getValueForKey(key: .name) as? String ?? ""
     }
     
     var restaurantsChain: [Restaurant] {
@@ -177,5 +175,3 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     }
     
 }
-
-

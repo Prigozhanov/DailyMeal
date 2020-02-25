@@ -129,14 +129,12 @@ final class CheckoutViewController: UIViewController {
     
 }
 
-//MARK: -  CheckoutView
+// MARK: - CheckoutView
 extension CheckoutViewController: CheckoutView {
     
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension CheckoutViewController {
     
 }
-
-

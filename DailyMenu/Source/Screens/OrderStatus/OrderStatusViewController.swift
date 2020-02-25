@@ -83,14 +83,12 @@ final class OrderStatusViewController: UIViewController {
     
 }
 
-//MARK: -  OrderStatusView
+// MARK: - OrderStatusView
 extension OrderStatusViewController: OrderStatusView {
     
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension OrderStatusViewController {
     
 }
-
-

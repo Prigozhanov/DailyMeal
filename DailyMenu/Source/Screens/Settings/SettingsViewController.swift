@@ -72,11 +72,10 @@ final class SettingsViewController: UIViewController {
                 title: "Address",
                 text: viewModel.address,
                 type: .address,
-                didEndEdititng: { string in
+                didEndEdititng: { _ in
                     
             })
         )
-        
         
         let nameField: EditableTextFieldView = EditableTextFieldView(
             item: EditableTextFieldView.Item(
@@ -87,7 +86,6 @@ final class SettingsViewController: UIViewController {
                     self?.viewModel.userName = name
             })
         )
-        
         
         let phoneField: EditableTextFieldView = EditableTextFieldView(
             item: EditableTextFieldView.Item(
@@ -131,14 +129,12 @@ final class SettingsViewController: UIViewController {
     
 }
 
-//MARK: -  SettingsView
+// MARK: - SettingsView
 extension SettingsViewController: SettingsView {
     
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension SettingsViewController {
     
 }
-
-

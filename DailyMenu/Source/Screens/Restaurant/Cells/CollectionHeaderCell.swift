@@ -98,7 +98,6 @@ class CollectionHeaderCell: UIView {
             $0.top.equalTo(restaurantNameLabel.snp.bottom).offset(Layout.largeMargin)
         }
         
-        
         cardView.contentView.addSubview(minOrderValueLabel)
         minOrderValueLabel.snp.makeConstraints {
             $0.top.trailing.equalToSuperview().inset(Layout.largeMargin)

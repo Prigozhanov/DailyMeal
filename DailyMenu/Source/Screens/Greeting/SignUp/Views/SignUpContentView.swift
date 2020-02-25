@@ -28,10 +28,11 @@ class SignUpContentView: UIView {
             shouldChangeCharacters: { [weak self] (textField, _, string) -> Bool in
                 self?.item.email = textField.text?.appending(string) ?? ""
                 return true
-        }) { textField -> Bool in
-            textField.resignFirstResponder()
-            return true
-        }
+            },
+            shouldReturn: { textField -> Bool in
+                textField.resignFirstResponder()
+                return true
+        })
         field.keyboardType = .emailAddress
         field.autocapitalizationType = .none
         return field
@@ -44,10 +45,11 @@ class SignUpContentView: UIView {
             shouldChangeCharacters: { [weak self] (textField, _, string) -> Bool in
                 self?.item.password = textField.text?.appending(string) ?? ""
                 return true
-        }) { textField -> Bool in
-            textField.resignFirstResponder()
-            return true
-        }
+            },
+            shouldReturn: { textField -> Bool in
+                textField.resignFirstResponder()
+                return true
+        })
         field.isSecureTextEntry = true
         return field
     }()
@@ -68,10 +70,10 @@ class SignUpContentView: UIView {
                     return false
                 }
                 return false
-        }) { textField -> Bool in
-            textField.resignFirstResponder()
-            return true
-        }
+            }, shouldReturn: { textField -> Bool in
+                textField.resignFirstResponder()
+                return true
+        })
         field.keyboardType = .phonePad
         return field
     }()
@@ -88,7 +90,6 @@ class SignUpContentView: UIView {
         label.textAlignment = .center
         return label
     }()
-    
     
     init(item: Item) {
         self.item = item

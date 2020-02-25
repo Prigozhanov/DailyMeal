@@ -1,0 +1,20 @@
+disabled_rules: # rule identifiers to exclude from running
+  - line_length
+  - opening_brace
+  - identifier_name
+  - file_length
+  - orphaned_doc_comment
+  - todo
+  - function_body_length
+  - weak_delegate
+  
+  - force_try
+  - force_cast
+  # Find all the available rules by running:
+  # swiftlint rules
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Pods
+
+trailing_whitespace:
+  ignores_empty_lines: true
+  ignores_comments: true

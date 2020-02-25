@@ -35,7 +35,7 @@ public final class NetworkClient {
         
         os_log("[NETWORK] [REQUEST] %s", urlRequest.debugDescription)
         os_log("[NETWORK] [REQUEST] [BODY] %s", String(describing: String(data: urlRequest.httpBody ?? Data(), encoding: .utf8)))
-        os_log("[NETWORK] [REQUEST] [HEADERS] %s",String(describing: urlRequest.allHTTPHeaderFields))
+        os_log("[NETWORK] [REQUEST] [HEADERS] %s", String(describing: urlRequest.allHTTPHeaderFields))
         
         let task = session.dataTask(with: urlRequest) { (data, response, error) in
             let uuid = UUID().uuidString

@@ -5,10 +5,10 @@
 
 import UIKit
 
-fileprivate var pointer = NSObject()
+private var pointer = NSObject()
 
 extension UIButton {
-    func setActionHandler(controlEvents control :UIControl.Event, ForAction action: @escaping (UIButton) -> Void) {
+    func setActionHandler(controlEvents control: UIControl.Event, ForAction action: @escaping (UIButton) -> Void) {
         let actionWrapper = ActionWrapper(action)
         
         objc_setAssociatedObject(self, &pointer, actionWrapper, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)

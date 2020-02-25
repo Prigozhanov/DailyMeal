@@ -23,7 +23,6 @@ public enum KeychainItem: String {
     case creditCardCVV
 }
 
-
 public protocol KeychainService {
     
     func setValueForItem(_ item: KeychainItem, _ value: String)

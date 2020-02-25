@@ -7,8 +7,7 @@ import UIKit
 
 class PhoneVerifiedViewController: UIViewController {
 
-    
-    private lazy var exploreButton = UIButton.makeActionButton("Explore restaurants") { [weak self] button in
+    private lazy var exploreButton = UIButton.makeActionButton("Explore restaurants") { button in
         button.tapAnimation()
         NotificationCenter.default.post(Notification(name: .userSignedUp))
     }

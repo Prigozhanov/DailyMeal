@@ -7,13 +7,13 @@ import Foundation
 import Networking
 import Services
 
-//MARK: - View
+// MARK: - View
 protocol SignUpView: class {
     func onSuccessAction()
     func onErrorAction(message: String?)
 }
 
-//MARK: - ViewModel
+// MARK: - ViewModel
 protocol SignUpViewModel {
     
     var view: SignUpView? { get set }
@@ -26,7 +26,7 @@ protocol SignUpViewModel {
     
 }
 
-//MARK: - Implementation
+// MARK: - Implementation
 final class SignUpViewModelImplementation: SignUpViewModel {
     
     weak var view: SignUpView?
@@ -88,5 +88,3 @@ final class SignUpViewModelImplementation: SignUpViewModel {
     }
     
 }
-
-

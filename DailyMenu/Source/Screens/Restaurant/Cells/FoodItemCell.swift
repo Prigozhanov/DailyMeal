@@ -75,7 +75,6 @@ class FoodItemCell: UIView {
             $0.top.equalToSuperview().inset(Layout.largeMargin)
         }
         
-        
         cardView.contentView.addSubview(priceLabel)
         priceLabel.textAlignment = .right
         priceLabel.snp.makeConstraints {
@@ -85,7 +84,6 @@ class FoodItemCell: UIView {
         }
         priceLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
 
-        
         cardView.contentView.addSubview(foodDescription)
         
         foodDescription.snp.makeConstraints {

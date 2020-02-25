@@ -38,27 +38,7 @@ class CardInfoView: UIView {
                     }
                 }
                 return false
-        },
-            shouldBeginEditing: { (_) -> Bool in
-                true
-        },
-            didBeginEditing: { (_) in
-                
-        },
-            shouldEndEditing: { (_) -> Bool in
-                true
-        },
-            didEndEditing: { (_, _) in
-                
-        },
-            didChangeSelection: { (_) in
-                
-        },
-            shouldClear: { (_) -> Bool in
-                true
-        }) { [weak self] (_) -> Bool in
-            return true
-        }
+        })
         textField.keyboardType = .numberPad
         return textField
     }()
@@ -79,27 +59,7 @@ class CardInfoView: UIView {
                     }
                 }
                 return false
-        },
-            shouldBeginEditing: { (_) -> Bool in
-                true
-        },
-            didBeginEditing: { (_) in
-                
-        },
-            shouldEndEditing: { (_) -> Bool in
-                true
-        },
-            didEndEditing: { (_, _) in
-                
-        },
-            didChangeSelection: { (_) in
-                
-        },
-            shouldClear: { (_) -> Bool in
-                true
-        }) { (_) -> Bool in
-            true
-        }
+        })
         textField.keyboardType = .numberPad
         return textField
     }()
@@ -120,27 +80,7 @@ class CardInfoView: UIView {
                     }
                 }
                 return false
-        },
-            shouldBeginEditing: { (_) -> Bool in
-                true
-        },
-            didBeginEditing: { (_) in
-                
-        },
-            shouldEndEditing: { (_) -> Bool in
-                true
-        },
-            didEndEditing: { (_, _) in
-                
-        },
-            didChangeSelection: { (_) in
-                
-        },
-            shouldClear: { (_) -> Bool in
-                true
-        }) { (_) -> Bool in
-            true
-        }
+        })
         textField.keyboardType = .numberPad
         return textField
     }()
@@ -150,7 +90,7 @@ class CardInfoView: UIView {
             placeholder: "CVV",
             shouldShowClearButton: false,
             textAlignment: .center,
-            shouldChangeCharacters: { [weak self] (textField, range, string) -> Bool in
+            shouldChangeCharacters: { [weak self] (textField, _, string) -> Bool in
                 if let text = textField.text {
                     if Formatter.CreditCard.shouldChange(string: text.appending(string), maxCharacters: 3) {
                         self?.details.cvv = text.appending(string)
@@ -158,27 +98,7 @@ class CardInfoView: UIView {
                     }
                 }
                 return false
-        },
-            shouldBeginEditing: { (_) -> Bool in
-                true
-        },
-            didBeginEditing: { (_) in
-                
-        },
-            shouldEndEditing: { (_) -> Bool in
-                true
-        },
-            didEndEditing: { (_, _) in
-                
-        },
-            didChangeSelection: { (_) in
-                
-        },
-            shouldClear: { (_) -> Bool in
-                true
-        }) { (_) -> Bool in
-            true
-        }
+        })
         textField.keyboardType = .numberPad
         textField.isSecureTextEntry = true
         return textField

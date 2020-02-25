@@ -54,14 +54,13 @@ public class LocationServiceImplementation: NSObject, LocationService {
     }
     
     public func getAddressesListByString(string: String, completion: @escaping ([String]) -> Void) {
-        geocoder.geocodeAddressString(string) { (placemarks, error) in
+        geocoder.geocodeAddressString(string) { (placemarks, _) in
             let addresses = placemarks?.map({ "\($0.country ?? ""), \($0.name ?? "")" })
             completion(addresses ?? [])
         }
     }
     
 }
-
 
 extension LocationServiceImplementation: CLLocationManagerDelegate {
     

@@ -7,12 +7,12 @@ import Foundation
 import Networking
 import Extensions
 
-//MARK: - View
+// MARK: - View
 protocol RestaurantView: class {
     func reloadItems()
 }
 
-//MARK: - ViewModel
+// MARK: - ViewModel
 protocol RestaurantViewModel {
     
     var view: RestaurantView? { get set }
@@ -27,7 +27,7 @@ protocol RestaurantViewModel {
     func loadInfo()
 }
 
-//MARK: - Implementation
+// MARK: - Implementation
 final class RestaurantViewModelImplementation: RestaurantViewModel {
     
     weak var view: RestaurantView?
@@ -80,8 +80,7 @@ final class RestaurantViewModelImplementation: RestaurantViewModel {
                 }
                 self?.products = products
             case let .failure(error):
-                print(error)
-                break // TODO
+                logDebug(message: error.localizedDescription)
             }
             completion()
         })
@@ -97,8 +96,7 @@ final class RestaurantViewModelImplementation: RestaurantViewModel {
                 } else {
                 }
             case let .failure(error):
-                print(error)
-                break // TODO
+                logDebug(message: error.localizedDescription)
             }
             completion()
         })

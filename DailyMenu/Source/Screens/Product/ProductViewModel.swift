@@ -6,12 +6,12 @@
 import Foundation
 import Networking
 
-//MARK: - View
+// MARK: - View
 protocol ProductView: class {
     func updateTotalValue()
 }
 
-//MARK: - ViewModel
+// MARK: - ViewModel
 protocol ProductViewModel {
     
     var view: ProductView? { get set }
@@ -27,7 +27,7 @@ protocol ProductViewModel {
     
 }
 
-//MARK: - Implementation
+// MARK: - Implementation
 final class ProductViewModelImplementation: ProductViewModel {
     
     weak var view: ProductView?
@@ -60,5 +60,3 @@ final class ProductViewModelImplementation: ProductViewModel {
     }
     
 }
-
-

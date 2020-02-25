@@ -12,16 +12,13 @@ public extension NotificationDescriptor {
     static var keyboardWillHideDescriptor: NotificationDescriptor<KeyboardFrame> {
         return NotificationDescriptor<KeyboardFrame>(name: UIResponder.keyboardWillHideNotification) { (notification) -> KeyboardFrame in
             return notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? KeyboardFrame ?? .zero
-            
         }
     }
     
     static var keyboardWillChangeFrameDescriptor: NotificationDescriptor<KeyboardFrame> {
         return NotificationDescriptor<KeyboardFrame>(name: UIResponder.keyboardWillChangeFrameNotification) { (notification) -> KeyboardFrame in
             return notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? KeyboardFrame ?? .zero
-            
         }
     }
-    
     
 }

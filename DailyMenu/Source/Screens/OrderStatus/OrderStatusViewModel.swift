@@ -5,19 +5,19 @@
 
 import Foundation
 
-//MARK: - View
+// MARK: - View
 protocol OrderStatusView: class {
 
 }
 
-//MARK: - ViewModel
+// MARK: - ViewModel
 protocol OrderStatusViewModel {
 
 var view: OrderStatusView? { get set }
 
 }
 
-//MARK: - Implementation
+// MARK: - Implementation
 final class OrderStatusViewModelImplementation: OrderStatusViewModel {
 
   weak var view: OrderStatusView?
@@ -26,5 +26,3 @@ final class OrderStatusViewModelImplementation: OrderStatusViewModel {
   }
 
 }
-
-

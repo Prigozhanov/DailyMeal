@@ -67,7 +67,7 @@ class CartPromocodeView: UIView {
     
 }
 
-extension CartPromocodeView : UITextFieldDelegate {
+extension CartPromocodeView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

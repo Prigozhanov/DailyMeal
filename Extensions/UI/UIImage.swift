@@ -10,7 +10,6 @@ public extension UIImage {
     func withHorizontalFill(ratio: CGFloat, highlightingColor: UIColor, fillColor: UIColor) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         
-        
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         draw(in: rect)
         
@@ -36,7 +35,6 @@ public extension UIImage {
                             upperBound: CGFloat,
                             highlightingColor: UIColor) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        
         
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         draw(in: rect)

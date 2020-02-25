@@ -169,17 +169,14 @@ final class ProductViewController: UIViewController {
     }
 }
 
-//MARK: -  ProductView
+// MARK: - ProductView
 extension ProductViewController: ProductView {
     func updateTotalValue() {
         totalValueLabel.text = Formatter.Currency.toString(viewModel.product.overallPrice * Double(viewModel.count))
     }
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension ProductViewController {
     
 }
-
-
-

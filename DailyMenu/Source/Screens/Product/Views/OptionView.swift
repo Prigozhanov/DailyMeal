@@ -67,5 +67,4 @@ class OptionView: UIView {
     
     required init?(coder: NSCoder) { fatalError() }
     
-    
 }

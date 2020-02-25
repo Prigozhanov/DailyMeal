@@ -33,7 +33,6 @@ class PriceRangeControl: UIControl {
         }
     }
 
-    
     private let trackLayer = PriceRangeTrackLayer()
     
     let trackTintColor = Colors.lightGray.color
@@ -152,7 +151,6 @@ extension PriceRangeControl {
             )
         }
         
-        
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         
@@ -174,7 +172,6 @@ extension PriceRangeControl {
                             upperValue: CGFloat) -> CGFloat {
         return min(max(value, lowerValue), upperValue)
     }
-    
     
 }
 

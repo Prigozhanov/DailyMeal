@@ -32,7 +32,6 @@ class CartTitleValueView: UIView {
         return label
     }()
     
-    
     init(item: Item) {
         self.item = item
         

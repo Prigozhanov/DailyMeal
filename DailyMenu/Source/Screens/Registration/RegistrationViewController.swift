@@ -26,14 +26,12 @@ final class RegistrationViewController: UIViewController {
 
 }
 
-//MARK: -  RegistrationView
+// MARK: - RegistrationView
 extension RegistrationViewController: RegistrationView {
 
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension RegistrationViewController {
 
 }
-
-

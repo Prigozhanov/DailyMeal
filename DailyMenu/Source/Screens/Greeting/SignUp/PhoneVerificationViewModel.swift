@@ -58,7 +58,6 @@ class PhoneVerificationViewModelImplementation: PhoneVerificationViewModel {
         }
     }
     
-    
     func sendPushGeneration() {
         let req = context.networkService.requestFactory.generateToken(phone: phone)
         context.networkService.send(request: req) { [weak self] result, _ in

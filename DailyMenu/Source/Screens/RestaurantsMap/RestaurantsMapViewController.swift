@@ -126,7 +126,7 @@ final class RestaurantsMapViewController: UIViewController {
     
 }
 
-//MARK: -  RestaurantsMapView
+// MARK: - RestaurantsMapView
 extension RestaurantsMapViewController: RestaurantsMapView {
     
     func reloadScreen() {
@@ -168,7 +168,7 @@ extension RestaurantsMapViewController: RestaurantsMapView {
     
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension RestaurantsMapViewController {
     
     func makeRestaurantsPreviewItem(restaurant: Restaurant) -> FilteredRestaurantsPreviewCell.Item {
@@ -214,5 +214,3 @@ private extension RestaurantsMapViewController {
     }
 
 }
-
-

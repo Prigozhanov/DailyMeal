@@ -41,9 +41,9 @@ class AppCoordinator {
             } else {
                 NotificationCenter.default.post(name: .userInvalidAddress, object: nil)
             }
-        }) { [weak self] in
-            self?.showGreeting()
-        }
+            }, onFailure: { [weak self] in
+                self?.showGreeting()
+        })
         
         notificationTokens.append(Token.make(descriptor: .userLoggedOutDescriptor, using: { [weak self] _ in
             self?.showGreeting()

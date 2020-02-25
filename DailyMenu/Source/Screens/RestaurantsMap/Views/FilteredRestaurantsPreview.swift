@@ -20,7 +20,7 @@ class FilteredRestaurantsPreview: CollectionView {
     
     private lazy var dataSource = ArrayDataSource(data: items)
     
-    private lazy var viewSource = ClosureViewSource { [weak self] (view: FilteredRestaurantsPreviewCell, data: FilteredRestaurantsPreviewCell.Item, index: Int) in
+    private lazy var viewSource = ClosureViewSource { (view: FilteredRestaurantsPreviewCell, data: FilteredRestaurantsPreviewCell.Item, _) in
         view.configure(item: data)
     }
     

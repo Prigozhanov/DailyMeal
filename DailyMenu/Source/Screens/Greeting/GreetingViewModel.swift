@@ -7,12 +7,12 @@ import Foundation
 import Networking
 import Services
 
-//MARK: - View
+// MARK: - View
 protocol GreetingView: class {
     func showAuthorizationError()
 }
 
-//MARK: - ViewModel
+// MARK: - ViewModel
 protocol GreetingViewModel {
     
     var view: GreetingView? { get set }
@@ -23,7 +23,7 @@ protocol GreetingViewModel {
     func performLogin(onSuccess: @escaping VoidClosure, onFailure: @escaping VoidClosure)
 }
 
-//MARK: - Implementation
+// MARK: - Implementation
 final class GreetingViewModelImplementation: GreetingViewModel {
     
     private let context: AppContext
@@ -52,9 +52,9 @@ final class GreetingViewModelImplementation: GreetingViewModel {
             case let .success(response):
                 self?.userDefaultsService.setValueForKey(key: .email, value: self?.email)
                 
-                if let user = response.member, let _ = response.token {
+                if let user = response.member {
                     self?.context.userDefaultsService.updateUserDetails(user: user)
-                    self?.context.networkService.fetchUserData(onSuccess: { (user) in
+                    self?.context.networkService.fetchUserData(onSuccess: { user in
                         if strongSelf.context.userDefaultsService.hasAddress {
                             NotificationCenter.default.post(name: .userLoggedIn, object: nil)
                         } else {
@@ -77,5 +77,3 @@ final class GreetingViewModelImplementation: GreetingViewModel {
     }
     
 }
-
-

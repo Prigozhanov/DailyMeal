@@ -39,9 +39,8 @@ class ConfirmationDiagloViewController: UIViewController {
         return button
     }()
     
-   
     private lazy var cancelButton: UIButton = {
-        let button = UIButton.makeCommonButton("Cancel") { [weak self] button in
+        let button = UIButton.makeCommonButton("Cancel") { [weak self] _ in
             self?.dismiss(animated: true, completion: nil)
         }
         button.setTitleColor(Colors.gray.color, for: .normal)
@@ -67,7 +66,6 @@ class ConfirmationDiagloViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = Colors.black.color.withAlphaComponent(0.2)
-        
         
         view.addSubview(cardView)
         cardView.snp.makeConstraints {

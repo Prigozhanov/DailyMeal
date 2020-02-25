@@ -42,7 +42,6 @@ class SingleInputValidationCodeView: UIView {
             $0.bottom.top.equalToSuperview().inset(10)
         }
         
-
         underline.backgroundColor = Colors.gray.color
         addSubview(underline)
         underline.snp.makeConstraints {
