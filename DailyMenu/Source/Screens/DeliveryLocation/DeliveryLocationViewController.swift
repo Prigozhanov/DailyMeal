@@ -8,13 +8,18 @@ import UIKit
 import Extensions
 import Services
 import SnapKit
+import RxSwift
 
-final class DeliveryLocationViewController: UIViewController {
+final class DeliveryLocationViewController: UIViewController, KeyboardObservable {
     
     private var viewModel: DeliveryLocationViewModel
     
     private var confirmationDiaglogIsVisible: Bool = false
     
+	let bag = DisposeBag()
+	
+	var observableConstraints: [ObservableConstraint] = []
+	
     private let headerView = MapHeaderView(
         title: "Delivery location",
         shouldShowBackButton: false,
@@ -29,8 +34,6 @@ final class DeliveryLocationViewController: UIViewController {
             })
         })
     )
-    
-    private var notificationTokens: [Token] = []
     
     private var locationSearchViewBottomConstraint: Constraint?
     private let locationSearchBottomInset: CGFloat = 60
@@ -62,6 +65,7 @@ final class DeliveryLocationViewController: UIViewController {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
+		
     }
     
     required init?(coder aDecoder: NSCoder) { fatalError() }
@@ -72,46 +76,45 @@ final class DeliveryLocationViewController: UIViewController {
         viewModel.view = self
         
         view.backgroundColor = Colors.white.color
-
-        notificationTokens.append(Token.make(descriptor: .keyboardWillChangeFrameDescriptor, using: { [weak self] keyboardFrame in
-            guard let self = self else { return }
-            self.updateConstraint(constraint: self.mapControllerViewBottomConstraint, inset: keyboardFrame.height + Layout.commonInset - self.locationSearchBottomInset)
-            self.updateConstraint(constraint: self.locationSearchViewBottomConstraint, inset: keyboardFrame.height)
-         
-        }))
-
-        notificationTokens.append(Token.make(descriptor: .keyboardWillHideDescriptor, using: { [weak self] _ in
-            guard let self = self else { return }
-            self.updateConstraint(constraint: self.mapControllerViewBottomConstraint, inset: 0)
-            self.updateConstraint(constraint: self.locationSearchViewBottomConstraint, inset: self.locationSearchBottomInset)
-        }))
         
         addChild(mapController)
         
-        view.addSubview(mapController.view)
-        mapController.view.snp.makeConstraints {
-            $0.leading.trailing.top.equalToSuperview()
-            self.mapControllerViewBottomConstraint = $0.bottom.equalToSuperview().constraint
-        }
-        
-        view.addSubview(headerView)
-        headerView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(150)
-        }
-        
-        view.addSubview(locationSearchView)
-        locationSearchView.snp.makeConstraints {
-            self.locationSearchViewBottomConstraint = $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(locationSearchBottomInset).constraint
-            $0.leading.trailing.equalToSuperview().inset(20)
-        }
-        Style.addShadow(for: locationSearchView, in: self.view, cornerRadius: Layout.cornerRadius)
+		view.addSubview(mapController.view)
+		mapController.view.snp.makeConstraints {
+			$0.leading.trailing.top.equalToSuperview()
+			observableConstraints.append(
+				ObservableConstraint(
+					constraint: $0.bottom.equalToSuperview().constraint,
+					inset: 0
+				)
+			)
+		}
+		
+		view.addSubview(headerView)
+		headerView.snp.makeConstraints {
+			$0.leading.trailing.equalToSuperview()
+			$0.height.equalTo(150)
+		}
+		
+		view.addSubview(locationSearchView)
+		locationSearchView.snp.makeConstraints {
+			observableConstraints.append(
+				ObservableConstraint(
+					constraint: $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(60).constraint,
+					inset: 60,
+					keyboardOffset: 20
+				)
+			)
+			$0.leading.trailing.equalToSuperview().inset(20)
+		}
+		Style.addShadow(for: locationSearchView, in: self.view, cornerRadius: Layout.cornerRadius)
         
         headerView.backButton.setActionHandler(controlEvents: .touchUpInside) { [weak self] _ in
             self?.dismiss(animated: true, completion: {
                 NotificationCenter.default.post(name: .userLoggedOut, object: nil)
             })
         }
+		
     }
     
     override func viewDidLayoutSubviews() {
@@ -128,6 +131,8 @@ final class DeliveryLocationViewController: UIViewController {
                 self?.showConfiramtionDialog(address: string)
             }
         }
+		
+		startObserveKeyboard()
     }
     
     func showConfiramtionDialog(address: String) {
@@ -149,15 +154,7 @@ final class DeliveryLocationViewController: UIViewController {
             show(vc, sender: nil)
         }
     }
-    
-    private func updateConstraint(constraint: Constraint?, inset: CGFloat) {
-        constraint?.update(inset: inset)
-        UIView.transition(with: self.view, duration: 0.3, options: [], animations: { [weak self] in
-            self?.view.layoutSubviews()
-            self?.mapController.view.layoutSubviews()
-            }, completion: nil)
-    }
-    
+	
 }
 
 // MARK: - DeliveryLocationView
@@ -168,4 +165,12 @@ extension DeliveryLocationViewController: DeliveryLocationView {
 // MARK: - Private
 private extension DeliveryLocationViewController {
     
+	func updateConstraint(constraint: Constraint?, inset: CGFloat) {
+		constraint?.update(inset: inset)
+		UIView.transition(with: self.view, duration: 0.3, options: [], animations: { [weak self] in
+			self?.view.layoutSubviews()
+			self?.mapController.view.layoutSubviews()
+			}, completion: nil)
+	}
+	
 }

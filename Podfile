@@ -7,6 +7,7 @@ pod 'SwiftLint'
 
 target 'DailyMenu' do
 
+ pod 'RxKeyboard'
  pod 'SwiftGen'
  pod 'TableKit'
  pod "CollectionKit"

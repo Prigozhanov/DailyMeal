@@ -36,7 +36,6 @@
 		E71139F02346AF0500889AE2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139EE2346AF0500889AE2 /* SettingsViewController.swift */; };
 		E71139F42346AFE300889AE2 /* RestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139F22346AFE300889AE2 /* RestaurantsViewController.swift */; };
 		E71139F52346AFE300889AE2 /* RestaurantsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139F32346AFE300889AE2 /* RestaurantsViewModel.swift */; };
-		E71708B923EB29C900D444BD /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71708B823EB29C900D444BD /* KeyboardHandler.swift */; };
 		E718691D237DC00300059766 /* BaseTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E718691C237DC00300059766 /* BaseTableCell.swift */; };
 		E7186983237DCC1400059766 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7186970237DCC1400059766 /* Poppins-ExtraLight.ttf */; };
 		E7186984237DCC1400059766 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7186971237DCC1400059766 /* Poppins-ThinItalic.ttf */; };
@@ -174,6 +173,7 @@
 		E7F15DF823FF66DE00E35668 /* RatingRangeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F15DF723FF66DE00E35668 /* RatingRangeControl.swift */; };
 		E7F15DFB2400469F00E35668 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD22323E96C8200FB270D /* Networking.framework */; };
 		E7F15DFC2400469F00E35668 /* Networking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD22323E96C8200FB270D /* Networking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E7F2913B2406E942000AF60C /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71708B823EB29C900D444BD /* KeyboardObserver.swift */; };
 		E7F3171C240417490011CC42 /* FilterAppliedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3171B240417490011CC42 /* FilterAppliedView.swift */; };
 		E7F3171E24045D300011CC42 /* UserLocationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3171D24045D300011CC42 /* UserLocationAnnotationView.swift */; };
 /* End PBXBuildFile section */
@@ -290,7 +290,7 @@
 		E71139EE2346AF0500889AE2 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E71139F22346AFE300889AE2 /* RestaurantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantsViewController.swift; sourceTree = "<group>"; };
 		E71139F32346AFE300889AE2 /* RestaurantsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantsViewModel.swift; sourceTree = "<group>"; };
-		E71708B823EB29C900D444BD /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
+		E71708B823EB29C900D444BD /* KeyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
 		E718691C237DC00300059766 /* BaseTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableCell.swift; sourceTree = "<group>"; };
 		E7186970237DCC1400059766 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
 		E7186971237DCC1400059766 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
@@ -818,7 +818,6 @@
 				E70BC2C023E5BEBE0039F582 /* Swift.swift */,
 				E77AD26423E9A52D00FB270D /* Bundle.swift */,
 				E70C9A0D23EA191300530B3C /* NotificationCenter.swift */,
-				E71708B823EB29C900D444BD /* KeyboardHandler.swift */,
 				E77AD24D23E96E6700FB270D /* Extensions.h */,
 				E77AD24E23E96E6700FB270D /* Info.plist */,
 			);
@@ -1033,6 +1032,7 @@
 				E7D15C2E23DF18F4001E24EF /* BlockTap.swift */,
 				E7CA2009236601EC004AA1FC /* FontFamily.swift */,
 				E77AD25F23E9790E00FB270D /* Globals.swift */,
+				E71708B823EB29C900D444BD /* KeyboardObserver.swift */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -1513,7 +1513,6 @@
 				E77AD25923E96E8400FB270D /* String.swift in Sources */,
 				E77AD26523E9A52D00FB270D /* Bundle.swift in Sources */,
 				E70C9A0E23EA191300530B3C /* NotificationCenter.swift in Sources */,
-				E71708B923EB29C900D444BD /* KeyboardHandler.swift in Sources */,
 				E77AD25723E96E8400FB270D /* Common.swift in Sources */,
 				E77AD25823E96E8400FB270D /* Swift.swift in Sources */,
 				E7F15DF423FF063D00E35668 /* UIImage.swift in Sources */,
@@ -1607,6 +1606,7 @@
 				E71139E22346AC7D00889AE2 /* RestaurantViewModel.swift in Sources */,
 				E79B97F32404A5B400F5E1BA /* PhoneVerificationViewModel.swift in Sources */,
 				E78C382F23D760D400335887 /* CartItemView.swift in Sources */,
+				E7F2913B2406E942000AF60C /* KeyboardObserver.swift in Sources */,
 				E748A2F92403483500CCC477 /* FilteredRestaurantPreviewCell.swift in Sources */,
 				E720292D23EDF472000E9884 /* DeliveryLocationViewController.swift in Sources */,
 				E76A67412385DBA6001FEF9B /* RestaurantsSearchView.swift in Sources */,

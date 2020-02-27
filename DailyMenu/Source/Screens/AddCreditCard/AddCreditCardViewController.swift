@@ -5,11 +5,16 @@
 import UIKit
 import Extensions
 import SnapKit
+import RxSwift
 
-final class AddCreditCardViewController: UIViewController {
-    
+final class AddCreditCardViewController: UIViewController, KeyboardObservable {
+	
     private var viewModel: AddCreditCardViewModel
-    
+	
+	var bag = DisposeBag()
+	
+	var observableConstraints: [ObservableConstraint] = []
+	
     private lazy var cardInfoView = CardInfoView { [weak self] (details) in
         guard let self = self else { return }
         self.viewModel.saveCreditCardDetails(
@@ -24,11 +29,7 @@ final class AddCreditCardViewController: UIViewController {
             
         }
     }
-    
-    private var notificationTokens: [Token] = []
-    
-    private var bottomConstraint: Constraint?
-    
+	
     init(viewModel: AddCreditCardViewModel) {
         self.viewModel = viewModel
         
@@ -39,20 +40,12 @@ final class AddCreditCardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+		
         viewModel.view = self
         
         view.backgroundColor = Colors.commonBackground.color
         
         Style.addBlueCorner(self)
-        
-        notificationTokens.append(Token.make(descriptor: .keyboardWillChangeFrameDescriptor, using: { [weak self] frame in
-            self?.updateBottomConstraint(offset: frame.height - (self?.view.safeAreaInsets.bottom ?? 0))
-        }))
-        
-        notificationTokens.append(Token.make(descriptor: .keyboardWillHideDescriptor, using: { [weak self] _ in
-            self?.updateBottomConstraint(offset: 0)
-        }))
         
         let placeholderImage = UIImageView(image: Images.Placeholders.creditCard.image)
         placeholderImage.contentMode = .scaleAspectFit
@@ -61,14 +54,16 @@ final class AddCreditCardViewController: UIViewController {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
         }
         
-        var bottomConstraint: Constraint?
         view.addSubview(cardInfoView)
         cardInfoView.snp.makeConstraints {
             $0.top.equalTo(placeholderImage.snp.bottom).offset(20)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            bottomConstraint = $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).constraint
+			observableConstraints.append(
+          	  ObservableConstraint(
+					constraint: $0.bottom.equalTo(view.safeAreaLayoutGuide).constraint,
+					inset: 0)
+			)
         }
-        self.bottomConstraint = bottomConstraint
         
         Style.addTitle(title: "Add Credit Card", self)
         Style.addBackButton(self) { [weak self] _ in
@@ -80,13 +75,11 @@ final class AddCreditCardViewController: UIViewController {
         super.viewDidLayoutSubviews()
         cardInfoView.setupGradient()
     }
-    
-    private func updateBottomConstraint(offset: CGFloat) {
-        UIView.transition(with: self.cardInfoView, duration: 0.3, options: [], animations: { [weak self] in
-            self?.bottomConstraint?.update(inset: offset)
-            self?.view.layoutIfNeeded()
-            }, completion: nil)
-    }
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		startObserveKeyboard()
+	}
     
 }
 

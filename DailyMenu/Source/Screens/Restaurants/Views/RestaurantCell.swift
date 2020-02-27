@@ -31,6 +31,7 @@ class RestaurantCell: BaseTableCell {
     
     var restaurantImageView: UIImageView = {
         let view = UIImageView(image: Images.Category.placeholder.image)
+		view.contentMode = .scaleAspectFill
         view.setRoundCorners(15, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
         return view
     }()

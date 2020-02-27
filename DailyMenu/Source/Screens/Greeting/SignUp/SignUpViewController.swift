@@ -4,11 +4,16 @@
 //
 
 import UIKit
+import RxSwift
 
-final class SignUpViewController: UIViewController {
+final class SignUpViewController: UIViewController, KeyboardObservable {
     
     private var viewModel: SignUpViewModel
     
+	var bag = DisposeBag()
+	
+	var observableConstraints: [ObservableConstraint] = []
+	
     private lazy var contentView = SignUpContentView(
         item: SignUpContentView.Item(
             onSignUpAction: { [weak self] email, password, phone in
@@ -30,7 +35,7 @@ final class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+		
         navigationController?.setNavigationBarHidden(true, animated: false)
         
         viewModel.view = self
@@ -48,15 +53,27 @@ final class SignUpViewController: UIViewController {
         }
         
         contentView.snp.makeConstraints {
-            $0.top.greaterThanOrEqualTo(titleLabel.snp.bottom).offset(50)
             $0.leading.trailing.equalToSuperview()
+			$0.height.equalTo(500)
+			observableConstraints.append(
+				ObservableConstraint(
+					constraint: $0.bottom.equalTo(view.safeAreaLayoutGuide).constraint,
+					inset: 100
+				)
+			)
         }
+		
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         contentView.setupGradient()
     }
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		startObserveKeyboard()
+	}
     
 }
 

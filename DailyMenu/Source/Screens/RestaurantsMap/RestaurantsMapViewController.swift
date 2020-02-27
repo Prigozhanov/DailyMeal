@@ -5,10 +5,15 @@
 
 import UIKit
 import Networking
+import RxSwift
 
-final class RestaurantsMapViewController: UIViewController {
-    
+final class RestaurantsMapViewController: UIViewController, KeyboardObservable {
+	
     private var viewModel: RestaurantsMapViewModel
+	
+	var bag = DisposeBag()
+	
+	var observableConstraints: [ObservableConstraint] = []
     
     private lazy var mapHeaderView: MapHeaderView = {
         let view = MapHeaderView(
@@ -101,8 +106,15 @@ final class RestaurantsMapViewController: UIViewController {
         
         viewModel.loadRestaurants()
         addChild(mapController)
-        view.addSubview(mapController.mapView)
-        mapController.mapView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        view.addSubview(mapController.view)
+        mapController.view.snp.makeConstraints {
+			$0.top.leading.trailing.equalToSuperview()
+			observableConstraints.append(
+				ObservableConstraint(
+					constraint: $0.bottom.equalToSuperview().constraint,
+					inset: 0)
+			)
+		}
         
         view.addSubview(mapHeaderView)
         mapHeaderView.snp.makeConstraints {
@@ -113,16 +125,26 @@ final class RestaurantsMapViewController: UIViewController {
         view.addSubview(searchView)
         searchView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(Layout.largeMargin)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(50)
+			observableConstraints.append(
+				ObservableConstraint(
+					constraint: $0.bottom.equalTo(view.safeAreaLayoutGuide).constraint,
+					inset: 50)
+			)
         }
-        
+
         mapController.moveCameraToUserLocation(fromDistance: 15000)
+		
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         mapHeaderView.setupGradient()
     }
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		startObserveKeyboard()
+	}
     
 }
 
