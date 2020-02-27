@@ -8,6 +8,7 @@ import AloeStackView
 class FilteredRestaurantsPreviewCell: UICollectionViewCell {
     
     struct Item {
+		let id: Int
         let title: String
         let rating: Double
         let imageSrc: String

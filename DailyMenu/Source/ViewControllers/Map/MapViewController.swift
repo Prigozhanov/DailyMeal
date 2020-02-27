@@ -127,6 +127,13 @@ extension MapViewController {
         mapView.removeAnnotations(restaurantAnnotations)
     }
     
+	func selectRestaurant(_ id: Int) {
+		if let restaurantAnnotation = restaurantAnnotations.first(where: { $0.restaurant.id == id }) {
+			moveToCoordinates(lat: restaurantAnnotation.coordinate.latitude, lon: restaurantAnnotation.coordinate.longitude)
+			mapView.selectAnnotation(restaurantAnnotation, animated: true)
+		}
+	}
+	
     func selectAnnotation(_ annotation: RestaurantAnnotation) {
         moveToCoordinates(lat: annotation.coordinate.latitude, lon: annotation.coordinate.longitude)
         mapView.selectAnnotation(annotation, animated: true)
@@ -181,7 +188,7 @@ extension MapViewController: MKMapViewDelegate {
             
             return circleRenderer
         }
-        return MKOverlayRenderer()
+        return MKOverlayRenderer(overlay: overlay)
     }
     
 }

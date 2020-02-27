@@ -37,11 +37,13 @@ final class RestaurantsMapViewController: UIViewController, KeyboardObservable {
                 placeholder: "Type restaurant name",
                 results: [],
                 onSelectItem: { [weak self] (string, view) in
-                    if let annotation = self?
+                    if let restId = self?
                         .mapController
                         .restaurantAnnotations
-                        .first(where: { $0.restaurant.chainLabel == string }) {
-                        self?.mapController.selectAnnotation(annotation)
+						.first(where: { $0.restaurant.chainLabel == string })?
+						.restaurant
+						.id {
+						self?.mapController.selectRestaurant(restId)
                     }
                 },
                 onLocationButtonTap: { [weak self] in
@@ -69,28 +71,33 @@ final class RestaurantsMapViewController: UIViewController, KeyboardObservable {
         },
             onTapAction: { [weak self] in
                 self?.showFilterConfigurationView()
-        }))
-    
-    private lazy var filteredRestaurantsPreview = FilteredRestaurantsPreview(
-        items: self.viewModel.filteredRestaurants.map { rest in
-            FilteredRestaurantsPreviewCell.Item(
-                title: rest.chainLabel,
-                rating: Double(rest.rate) ?? 0,
-                imageSrc: rest.src,
-                categories: self.viewModel.categories[rest.id]?
-                    .compactMap({ FoodCategory.fromProductCategory(category: $0) }) ?? [],
-                minOrderPrice: String(rest.minAmountOrder)) { [weak self] in
-                    let vc = RestaurantViewController(
-                        viewModel: RestaurantViewModelImplementation(
-                            restaurant: rest,
-                            categories: []
-                        )
-                    )
-                    self?.navigationController?.pushViewController(vc, animated: true)
-            }
-        }
-    )
-    
+		}))
+	
+	private lazy var filteredRestaurantsPreview = FilteredRestaurantsPreview(
+		item: { [weak self] restId in
+			guard let self = self else { return }
+			self.mapController.selectRestaurant(restId)
+		},
+		cellItems: self.viewModel.filteredRestaurants.map { rest in
+			FilteredRestaurantsPreviewCell.Item(
+				id: rest.id,
+				title: rest.chainLabel,
+				rating: Double(rest.rate) ?? 0,
+				imageSrc: rest.src,
+				categories: self.viewModel.categories[rest.id]?
+					.compactMap({ FoodCategory.fromProductCategory(category: $0) }) ?? [],
+				minOrderPrice: String(rest.minAmountOrder)) { [weak self] in
+					let vc = RestaurantViewController(
+						viewModel: RestaurantViewModelImplementation(
+							restaurant: rest,
+							categories: []
+						)
+					)
+					self?.navigationController?.pushViewController(vc, animated: true)
+			}
+		}
+	)
+	
     init(viewModel: RestaurantsMapViewModel) {
         self.viewModel = viewModel
         
@@ -141,8 +148,8 @@ final class RestaurantsMapViewController: UIViewController, KeyboardObservable {
         mapHeaderView.setupGradient()
     }
 	
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
 		startObserveKeyboard()
 	}
     
@@ -176,12 +183,15 @@ extension RestaurantsMapViewController: RestaurantsMapView {
                 $0.height.equalTo(50)
             }
             
-            filteredRestaurantsPreview.configure(items: viewModel.filteredRestaurants.map {
+            filteredRestaurantsPreview.configure(cellItems: viewModel.filteredRestaurants.map {
                 makeRestaurantsPreviewItem(restaurant: $0)
             })
             
             mapController.addRestaurants(viewModel.filteredRestaurants)
             mapController.addRadiusCircle(radius: (viewModel.filterViewModel?.radius ?? 0) * 1000)
+			if let restId = viewModel.filteredRestaurants.first?.id {
+				mapController.selectRestaurant(restId)
+			}
         } else {
             searchView.isHidden = false
             mapController.addRestaurants(viewModel.restaurants)
@@ -195,6 +205,7 @@ private extension RestaurantsMapViewController {
     
     func makeRestaurantsPreviewItem(restaurant: Restaurant) -> FilteredRestaurantsPreviewCell.Item {
         FilteredRestaurantsPreviewCell.Item(
+			id: restaurant.id,
             title: restaurant.chainLabel,
             rating: Double(restaurant.rate) ?? 0,
             imageSrc: restaurant.src,

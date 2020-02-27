@@ -131,9 +131,12 @@ final class DeliveryLocationViewController: UIViewController, KeyboardObservable
                 self?.showConfiramtionDialog(address: string)
             }
         }
-		
-		startObserveKeyboard()
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		startObserveKeyboard()
+	}
     
     func showConfiramtionDialog(address: String) {
         let vc = ConfirmationDiagloViewController(title: "Address confirmation", subtitle: "", onConfirm: { [weak self] in

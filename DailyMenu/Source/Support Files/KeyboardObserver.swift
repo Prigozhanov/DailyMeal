@@ -26,7 +26,7 @@ protocol KeyboardObservable: UIViewController {
 
 extension KeyboardObservable {
 	
-	// Use this method in viewDidAppear. First call will always perfom even keyboard is hidden.
+	// Use this method in viewWillAppear. First call will always perfom even keyboard is hidden.
 	func startObserveKeyboard() {
 		RxKeyboard.instance.visibleHeight.drive(onNext: { [weak self] height in
 			if height <= 0 {

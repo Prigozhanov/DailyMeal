@@ -20,6 +20,7 @@ class FilterSearchView: UIView {
         textField.textColor = Colors.charcoal.color
         textField.placeholder = item.placeholder
         textField.font = FontFamily.regular
+		textField.delegate = self
         return textField
     }()
     
@@ -69,6 +70,7 @@ class FilterSearchView: UIView {
 extension FilterSearchView: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		textField.resignFirstResponder()
         return true
     }
     
