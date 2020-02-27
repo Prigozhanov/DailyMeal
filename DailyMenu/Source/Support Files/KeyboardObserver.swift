@@ -28,17 +28,17 @@ extension KeyboardObservable {
 	
 	// Use this method in viewDidAppear. First call will always perfom even keyboard is hidden.
 	func startObserveKeyboard() {
-		RxKeyboard.instance.visibleHeight.drive(onNext: { height in
+		RxKeyboard.instance.visibleHeight.drive(onNext: { [weak self] height in
 			if height <= 0 {
-				self.observableConstraints.forEach {
+				self?.observableConstraints.forEach {
 					$0.constraint.update(inset: $0.inset)
 				}
 			} else {
-				self.observableConstraints.forEach {
+				self?.observableConstraints.forEach {
 					$0.constraint.update(inset: height + $0.keyboardOffset)
 				}
 			}
-			self.view.setNeedsLayout()
+			self?.view.setNeedsLayout()
 			UIView.animate(withDuration: 0) { [weak self] in
 				self?.view.layoutIfNeeded()
 				self?.children.forEach { $0.view.layoutIfNeeded() }
