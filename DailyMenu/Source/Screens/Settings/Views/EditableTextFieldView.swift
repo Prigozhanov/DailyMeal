@@ -34,8 +34,7 @@ class EditableTextFieldView: UIView {
     }()
     
     lazy var changeButton: UIButton = {
-        let button = UIButton.makeActionButton("Change") { [weak self] button in
-            button.tapAnimation()
+        let button = ActionButton("Change") { [weak self] _ in
             self?.textField.becomeFirstResponder()
         }
         button.titleLabel?.font = FontFamily.Poppins.light.font(size: 13)
@@ -112,10 +111,6 @@ class EditableTextFieldView: UIView {
             
             break
         }
-    }
-    
-    func setupGradient() {
-        Style.addBlueGradient(changeButton)
     }
     
     override func resignFirstResponder() -> Bool {

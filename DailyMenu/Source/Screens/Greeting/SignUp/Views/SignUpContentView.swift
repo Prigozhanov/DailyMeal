@@ -78,8 +78,7 @@ class SignUpContentView: UIView {
         return field
     }()
     
-    private lazy var signUpButton = UIButton.makeActionButton("Sign Up") { [unowned self] button in
-        button.tapAnimation()
+    private lazy var signUpButton = ActionButton("Sign Up") { [unowned self] _ in
         self.item.onSignUpAction(self.item.email, self.item.password, "+\(self.item.phone)")
     }
     
@@ -161,10 +160,6 @@ class SignUpContentView: UIView {
     }
     
     required init?(coder: NSCoder) { fatalError() }
-    
-    func setupGradient() {
-        Style.addBlueGradient(signUpButton)
-    }
     
     func onErrorAction(errorMessage: String?) {
         shakeAnimation()

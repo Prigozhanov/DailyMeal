@@ -24,13 +24,9 @@ class FilterSearchView: UIView {
         return textField
     }()
     
-    private lazy var searchActionButton: UIButton = {
-        let button = UIButton.makeActionButton("Search") { [weak self] button in
-            button.tapAnimation()
-            self?.item.onSearchAction(self?.textField.text ?? "")
-        }
-        return button
-    }()
+	private lazy var searchActionButton = ActionButton("Search") { [weak self] button in
+		self?.item.onSearchAction(self?.textField.text ?? "")
+	}
     
     init(item: Item) {
         self.item = item
@@ -60,11 +56,7 @@ class FilterSearchView: UIView {
     }
     
     required init?(coder: NSCoder) { fatalError() }
-    
-    func setupGradient() {
-        Style.addBlueGradient(searchActionButton)
-    }
-    
+
 }
 
 extension FilterSearchView: UITextFieldDelegate {

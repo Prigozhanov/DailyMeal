@@ -67,12 +67,19 @@ final class ProductViewController: UIViewController {
         label.text = Formatter.Currency.toString(viewModel.product.overallPrice * Double(viewModel.count))
         return label
     }()
-    
-    private lazy var addToCartButton = UIButton.makeActionButton("Add to Cart") { [weak self] view in
-        guard let self = self else { return }
-        let item = CartItem(id: self.viewModel.product.id, product: self.viewModel.product, count: self.viewModel.count)
-        self.viewModel.cartService.addItem(item: item)
-        view.tapAnimation()
+
+    private lazy var addToCartButton = ActionButton("Add to Cart") { [weak self] _ in
+		guard let self = self else { return }
+		self.viewModel.addToCart {
+			let vc = ConfirmationDiaglogViewController(
+				title: "Restaurants conflict",
+				subtitle: "You trying to add food from another restaurant, all your cart items will be removed after add this one",
+				onConfirm: { [weak self] in
+					self?.viewModel.reloadCart()
+					self?.viewModel.addToCart {}
+			})
+			self.present(vc, animated: true)
+		}
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -95,11 +102,6 @@ final class ProductViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Style.addBlackGradient(navigationBarBackground)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        Style.addBlueGradient(addToCartButton)
     }
     
     private func setupScreen() {

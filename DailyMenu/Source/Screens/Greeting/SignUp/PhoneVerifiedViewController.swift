@@ -7,8 +7,7 @@ import UIKit
 
 class PhoneVerifiedViewController: UIViewController {
 
-    private lazy var exploreButton = UIButton.makeActionButton("Explore restaurants") { button in
-        button.tapAnimation()
+    private lazy var exploreButton = ActionButton("Explore restaurants") { _ in
         NotificationCenter.default.post(Notification(name: .userSignedUp))
     }
     
@@ -53,9 +52,5 @@ class PhoneVerifiedViewController: UIViewController {
         }
         
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        Style.addBlueGradient(exploreButton)
-    }
+	
 }

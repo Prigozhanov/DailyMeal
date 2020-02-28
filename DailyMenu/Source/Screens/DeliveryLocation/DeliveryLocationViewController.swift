@@ -139,7 +139,7 @@ final class DeliveryLocationViewController: UIViewController, KeyboardObservable
 	}
     
     func showConfiramtionDialog(address: String) {
-        let vc = ConfirmationDiagloViewController(title: "Address confirmation", subtitle: "", onConfirm: { [weak self] in
+        let vc = ConfirmationDiaglogViewController(title: "Address confirmation", subtitle: "", onConfirm: { [weak self] in
             self?.viewModel.saveAddressInfo()
             NotificationCenter.default.post(name: .userAddressChanged, object: nil)
             self?.dismiss(animated: true)

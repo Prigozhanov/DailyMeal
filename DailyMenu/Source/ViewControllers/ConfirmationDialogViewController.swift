@@ -5,7 +5,7 @@
 
 import UIKit
 
-class ConfirmationDiagloViewController: UIViewController {
+class ConfirmationDiaglogViewController: UIViewController {
     
     private let dialogTitle: String
     private let dialogSubtitle: String
@@ -29,16 +29,12 @@ class ConfirmationDiagloViewController: UIViewController {
         return label
     }()
     
-    private lazy var confirmButton: UIButton = {
-        let button = UIButton.makeActionButton("Confirm") { [weak self] button in
-            button.tapAnimation()
-            self?.dismiss(animated: true, completion: { [weak self] in
-                self?.onConfirm()
-            })
-        }
-        return button
-    }()
-    
+	private lazy var confirmButton = ActionButton("Confirm") { [weak self] _ in
+		self?.dismiss(animated: true, completion: { [weak self] in
+			self?.onConfirm()
+		})
+	}
+	
     private lazy var cancelButton: UIButton = {
         let button = UIButton.makeCommonButton("Cancel") { [weak self] _ in
             self?.dismiss(animated: true, completion: nil)
@@ -92,11 +88,6 @@ class ConfirmationDiagloViewController: UIViewController {
             $0.height.equalTo(50)
             $0.trailing.bottom.leading.equalToSuperview().inset(Layout.commonInset)
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        Style.addBlueGradient(confirmButton)
     }
     
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {

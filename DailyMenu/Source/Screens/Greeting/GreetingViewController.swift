@@ -37,12 +37,11 @@ final class GreetingViewController: UIViewController {
         return textField
     }()
     
-    private lazy var signInButton = UIButton.makeActionButton("Sign in") { [weak self] button in
+    private lazy var signInButton = ActionButton("Sign in") { [weak self] button in
         self?.viewModel.email = self?.emailField.text ?? ""
         self?.viewModel.password = self?.passwordField.text ?? ""
         LoadingIndicator.show(self)
         self?.viewModel.performLogin(onSuccess: {
-            button.tapAnimation()
             self?.dismiss(animated: true, completion: nil)
         }, onFailure: {
             button.shakeAnimation()
@@ -158,12 +157,7 @@ final class GreetingViewController: UIViewController {
             $0.bottom.equalTo(emailField.snp.top).inset(-20)
             $0.centerX.equalToSuperview()
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        Style.addBlueGradient(signInButton)
-    }
+	}
     
 }
 

@@ -7,8 +7,7 @@ import UIKit
 
 final class OrderPlacedViewController: UIViewController {
     
-    private lazy var orderAgainButton = UIButton.makeActionButton("View order status") { [weak self] button in
-        button.tapAnimation()
+    private lazy var orderAgainButton = ActionButton("View order status") { [weak self] button in
         self?.navigationController?.dismiss(animated: true, completion: {
         })
     }
@@ -58,11 +57,6 @@ final class OrderPlacedViewController: UIViewController {
         }
         Style.addTitle(title: "Order placed", self)
         
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        Style.addBlueGradient(orderAgainButton)
     }
     
 }

@@ -60,15 +60,6 @@ extension UIButton {
         return button
     }
     
-    static func makeActionButton(_ text: String, action: @escaping (UIButton) -> Void) -> UIButton {
-        let button = UIButton()
-        button.layer.cornerRadius = Layout.cornerRadius
-        button.titleLabel?.font = FontFamily.Poppins.medium.font(size: 14)
-        button.setTitle(text, for: .normal)
-        button.setActionHandler(controlEvents: .touchUpInside, ForAction: action)
-        return button
-    }
-    
     static func makeNotificationButton() -> UIButton {
         let button = UIButton.makeCommonButton { _ in }
         button.setImage(Images.Icons.notification.image.withRenderingMode(.alwaysTemplate), for: .normal)

@@ -112,11 +112,6 @@ class RestaurantsFilterViewController: UIViewController, KeyboardObservable {
         stackView.addRows([restaurantsFilterHeader, restaurantsFilterControls])
 
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        filterSearchView.setupGradient()
-    }
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)

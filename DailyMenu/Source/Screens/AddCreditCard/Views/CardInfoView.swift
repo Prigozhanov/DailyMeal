@@ -105,8 +105,7 @@ class CardInfoView: UIView {
     }()
     
     private lazy var saveCreditCardDetailsButton: UIButton = {
-        let button = UIButton.makeActionButton("Save Card details") { [weak self] view in
-            view.tapAnimation()
+        let button = ActionButton("Save Card details") { [weak self] view in
             guard let self = self else { return }
             self.item(self.details)
         }
@@ -206,10 +205,6 @@ class CardInfoView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setupGradient() {
-        Style.addBlueGradient(saveCreditCardDetailsButton)
     }
     
 }

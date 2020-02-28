@@ -70,11 +70,6 @@ final class AddCreditCardViewController: UIViewController, KeyboardObservable {
             self?.dismissController()
         }
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        cardInfoView.setupGradient()
-    }
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)

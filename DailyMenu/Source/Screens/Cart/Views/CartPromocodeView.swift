@@ -20,8 +20,7 @@ class CartPromocodeView: UIView {
         return field
     }()
     
-    private lazy var applyButton = UIButton.makeActionButton("Apply") { [weak self] button in
-        button.tapAnimation()
+	private lazy var applyButton = ActionButton("Apply") { [weak self] _ in
         self?.item(self?.promoCode)
     }
     
@@ -54,10 +53,7 @@ class CartPromocodeView: UIView {
             $0.width.equalTo(116)
         }
         
-    }
-    
-    public func setupGradient() {
-        Style.addBlueGradient(applyButton)
+		applyButton.isEnabled = false // temporary
     }
     
     @discardableResult

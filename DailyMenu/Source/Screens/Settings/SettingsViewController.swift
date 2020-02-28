@@ -54,11 +54,6 @@ final class SettingsViewController: UIViewController {
         }))
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        stackView.getAllRows().forEach({ ($0 as? EditableTextFieldView)?.setupGradient() })
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadRows()

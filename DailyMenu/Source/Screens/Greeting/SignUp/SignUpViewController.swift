@@ -64,11 +64,6 @@ final class SignUpViewController: UIViewController, KeyboardObservable {
         }
 		
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        contentView.setupGradient()
-    }
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)

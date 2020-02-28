@@ -5,6 +5,16 @@
 
 import Foundation
 
+public protocol CartRestaurantData {
+	var id: Int { get }
+	var chainID: Int { get }
+	var label: String { get }
+	var minAmountOrder: Int { get }
+	var deliveryFee: Double { get }
+	var isOpen: Bool { get }
+	var src: String { get }
+}
+
 public protocol CartView: AnyObject {
     func reloadCalculationsRows()
 }
@@ -15,6 +25,8 @@ public protocol CartServiceHolder {
 
 public protocol CartService {
     
+	var restaurant: CartRestaurantData? { get set }
+	
     var view: CartView? { get set }
     
     var items: [Int: CartItem] { get }
@@ -25,14 +37,19 @@ public protocol CartService {
     var promoDiscount: Double { get }
     
     var subtotal: Double { get }
+	
+	var isValid: Bool { get }
     
-    func addItem(item: CartItem)
+    func addItem(validatedItemClosure: @escaping () -> CartItem?)
     func removeItem(item: CartItem)
     
+	func reload()
 }
 
 public final class CartServiceImplementation: CartService {
-    
+	
+	public var restaurant: CartRestaurantData?
+	
     public weak var view: CartView?
     
     public var cartTotal: Double {
@@ -43,21 +60,42 @@ public final class CartServiceImplementation: CartService {
     
     public var tax: Double = 0.0
     
-    public var deliveryPrice: Double = 0.0
+	public var deliveryPrice: Double {
+		return Double(restaurant?.deliveryFee ?? 0)
+	}
     
     public var promoDiscount: Double = 0.0
     
     public var subtotal: Double {
-        return cartTotal + tax + deliveryPrice + promoDiscount
+		return cartTotal + tax + deliveryPrice + promoDiscount
     }
+	
+	public var isValid: Bool {
+		guard let restaurant = restaurant else {
+			return false
+		}
+		return cartTotal > Double(restaurant.minAmountOrder)
+	}
 
     public var items: [Int: CartItem] = [:]
     
-    public func addItem(item: CartItem) {
-        items[item.id] = item
+	public func addItem(validatedItemClosure: @escaping () -> CartItem?) {
+		guard let item = validatedItemClosure() else {
+			return
+		}
+		if items[item.id] != nil {
+			items[item.id]?.count += item.count
+		} else {
+        	items[item.id] = item
+		}
     }
     
     public func removeItem(item: CartItem) {
         items.removeValue(forKey: item.id)
     }
+	
+	public func reload() {
+		items.removeAll()
+		restaurant = nil
+	}
 }

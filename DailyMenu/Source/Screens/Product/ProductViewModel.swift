@@ -25,6 +25,8 @@ protocol ProductViewModel {
     
     var availableChoices: [Choice] { get }
     
+	func addToCart(onFailure: @escaping VoidClosure)
+	func reloadCart()
 }
 
 // MARK: - Implementation
@@ -39,6 +41,15 @@ final class ProductViewModelImplementation: ProductViewModel {
     let availableChoices: [Choice]
     
     var product: Product
+	
+	var cartItem: CartItem {
+		return CartItem(
+			id: self.product.id,
+			product: self.product,
+			count: self.count,
+			restId: self.restaurant.chainID
+		)
+	}
     
     var count: Int = 1 {
         didSet {
@@ -58,5 +69,41 @@ final class ProductViewModelImplementation: ProductViewModel {
             option.choices
         }) ?? []
     }
+	
+	func addToCart(onFailure: @escaping VoidClosure) {
+		cartService.addItem { [weak self] in
+			guard let self = self else { return nil }
+			if self.cartService.restaurant == nil {
+				self.cartService.restaurant = self.restaurant
+			}
+			if (self.cartService.restaurant?.chainID ?? -1) == self.restaurant.chainID {
+				return self.cartItem
+			} else {
+				onFailure()
+				return nil
+			}
+		}
+	}
+	
+	func reloadCart() {
+		cartService.reload()
+	}
     
+}
+
+extension Restaurant: CartRestaurantData {
+	
+	public var deliveryFee: Double {
+		return Double(restDeliveryFee) ?? 0
+	}
+	
+	public var isOpen: Bool {
+		switch status {
+		case .open:
+			return true
+		case .close:
+			return false
+		}
+	}
+	
 }
