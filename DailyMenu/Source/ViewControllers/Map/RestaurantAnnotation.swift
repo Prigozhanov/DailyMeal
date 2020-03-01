@@ -8,10 +8,10 @@ import Networking
 
 class RestaurantAnnotation: MKPointAnnotation {
     
-    let restaurant: Restaurant
-    let onSelectAction: (Restaurant) -> Void
+    let restaurant: RestaurantData
+    let onSelectAction: (RestaurantData) -> Void
     
-    init(restaurant: Restaurant, coordinate: CLLocationCoordinate2D, onSelectAction: @escaping (Restaurant) -> Void) {
+    init(restaurant: RestaurantData, coordinate: CLLocationCoordinate2D, onSelectAction: @escaping (RestaurantData) -> Void) {
         self.restaurant = restaurant
         self.onSelectAction = onSelectAction
         

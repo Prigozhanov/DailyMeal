@@ -33,28 +33,29 @@ final class RestaurantViewController: UIViewController {
         return collectionView
         }()
     
-    private lazy var headerDataSource = ArrayDataSource<Restaurant>(data: [
+    private lazy var headerDataSource = ArrayDataSource<RestaurantData>(data: [
         self.viewModel.restaurant
     ])
     
-    private lazy var headerViewSource = ClosureViewSource<Restaurant, CollectionHeaderCell>(
-        viewUpdater: { (view: CollectionHeaderCell, data: Restaurant, _) in
+    private lazy var headerViewSource = ClosureViewSource<RestaurantData, CollectionHeaderCell>(
+        viewUpdater: { (view: CollectionHeaderCell, data: RestaurantData, _) in
             let item = CollectionHeaderCell.Item(
                 label: data.chainLabel,
                 distance: "\(Formatter.Distance.toString(data.distance)) away",
                 orderDelay: "\(data.orderDelayFirst) minutes delivery time",
-                minOrderPrice: Formatter.Currency.toString(Double(data.minAmountOrder)),
+				minOrderPrice: Formatter.Currency.toString(Double(data.minAmountOrder)),
+				rating: data.rating,
                 imageURL: data.src
             )
             view.configure(with: item)
     }
     )
     
-    private lazy var headerSizeSource = { [weak self] (index: Int, data: Restaurant, collectionSize: CGSize) -> CGSize in
+    private lazy var headerSizeSource = { [weak self] (index: Int, data: RestaurantData, collectionSize: CGSize) -> CGSize in
         return CGSize(width: self?.collectionView.frame.width ?? 0, height: 160)
     }
     
-    private lazy var headerProvider = BasicProvider<Restaurant, CollectionHeaderCell>(
+    private lazy var headerProvider = BasicProvider<RestaurantData, CollectionHeaderCell>(
         dataSource: headerDataSource,
         viewSource: headerViewSource,
         sizeSource: headerSizeSource

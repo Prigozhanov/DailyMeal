@@ -5,14 +5,20 @@
 
 import Foundation
 
-public protocol CartRestaurantData {
+public protocol RestaurantData {
 	var id: Int { get }
 	var chainID: Int { get }
 	var label: String { get }
+	var chainLabel: String { get }
 	var minAmountOrder: Int { get }
 	var deliveryFee: Double { get }
 	var isOpen: Bool { get }
 	var src: String { get }
+	var latitude: Double { get }
+	var longitude: Double { get }
+	var rating: Double { get }
+	var orderDelayFirst: Int { get }
+	var distance: Double { get }
 }
 
 public protocol CartView: AnyObject {
@@ -25,7 +31,7 @@ public protocol CartServiceHolder {
 
 public protocol CartService {
     
-	var restaurant: CartRestaurantData? { get set }
+	var restaurant: RestaurantData? { get set }
 	
     var view: CartView? { get set }
     
@@ -48,7 +54,7 @@ public protocol CartService {
 
 public final class CartServiceImplementation: CartService {
 	
-	public var restaurant: CartRestaurantData?
+	public var restaurant: RestaurantData?
 	
     public weak var view: CartView?
     

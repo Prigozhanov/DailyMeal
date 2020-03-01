@@ -50,7 +50,7 @@ public class LocationServiceImplementation: NSObject, LocationService {
     
     public func stopUpdatingLocation() {
         locationManager.stopUpdatingLocation()
-        os_log("[LOCATION] %s", "Location manager started updating locations")
+        os_log("[LOCATION] %s", "Location manager stopped updating locations")
     }
     
     public func getAddressesListByString(string: String, completion: @escaping ([String]) -> Void) {

@@ -11,7 +11,7 @@ class AppCoordinator {
     
     let window: UIWindow
     
-    private let tabBarController: UITabBarController = UITabBarController()
+    private let tabBarController: UITabBarController = DailyTabBarController()
     
     private var notificationTokens: [Token]
     
@@ -80,6 +80,7 @@ private extension AppCoordinator {
         vc.tabBarItem.image = Images.tabExploreInactive.image.withRenderingMode(.alwaysOriginal)
         vc.tabBarItem.selectedImage = Images.tabExploreActive.image.withRenderingMode(.alwaysOriginal)
         vc.tabBarItem.title = "Explore"
+		vc.tabBarItem.setTitleTextAttributes([.font: FontFamily.extraSmallMedium!, .foregroundColor: Colors.blue.color], for: .normal)
         return NavigationController(rootViewController: vc)
     }
     
@@ -89,6 +90,7 @@ private extension AppCoordinator {
         vc.tabBarItem.image = Images.tabSettingsInactive.image.withRenderingMode(.alwaysOriginal)
         vc.tabBarItem.selectedImage = Images.tabSettingsActive.image.withRenderingMode(.alwaysOriginal)
         vc.tabBarItem.title = "Settings"
+		vc.tabBarItem.setTitleTextAttributes([.font: FontFamily.extraSmallMedium!, .foregroundColor: Colors.blue.color], for: .normal)
         return NavigationController(rootViewController: vc)
     }
     
@@ -97,6 +99,7 @@ private extension AppCoordinator {
         vc.tabBarItem.image = Images.tabCartInactive.image.withRenderingMode(.alwaysOriginal)
         vc.tabBarItem.selectedImage = Images.tabCartActive.image.withRenderingMode(.alwaysOriginal)
         vc.tabBarItem.title = "Cart"
+		vc.tabBarItem.setTitleTextAttributes([.font: FontFamily.extraSmallMedium!, .foregroundColor: Colors.blue.color], for: .normal)
         return NavigationController(rootViewController: vc)
     }
     

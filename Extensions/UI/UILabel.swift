@@ -62,4 +62,10 @@ extension UILabel {
         return label
     }
     
+	static func makeSemiboldTitle(_ text: String? = nil) -> UILabel {
+		let label = UILabel.makeText(text)
+		label.font = FontFamily.semibold
+		return label
+	}
+	
 }

@@ -20,6 +20,8 @@ protocol CheckoutViewModel {
     var paymentMethod: PaymentMethod { get set }
     
     var creditCard: CreditCard? { get }
+	
+	var restaurant: RestaurantData? { get }
     
     func checkoutOrder()
 }
@@ -40,6 +42,8 @@ final class CheckoutViewModelImplementation: CheckoutViewModel {
     }
     
     var paymentMethod: PaymentMethod = .cash
+	
+	lazy var restaurant: RestaurantData? = cartService.restaurant
     
     init() {
         context = AppDelegate.shared.context

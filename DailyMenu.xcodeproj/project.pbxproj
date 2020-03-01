@@ -110,6 +110,8 @@
 		E77D33AB23E770D5006577C2 /* PaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D33AA23E770D5006577C2 /* PaymentMethodView.swift */; };
 		E78B605123D8D6DD00389EE2 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78B605023D8D6DD00389EE2 /* GradientView.swift */; };
 		E78C382F23D760D400335887 /* CartItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78C382E23D760D400335887 /* CartItemView.swift */; };
+		E78F320F240BF10E004A844C /* OrederRouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78F320E240BF10E004A844C /* OrederRouteViewController.swift */; };
+		E78F3211240C0521004A844C /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78F3210240C0521004A844C /* Map.swift */; };
 		E792166D24092C430048C6C9 /* DailyTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E792166C24092C430048C6C9 /* DailyTabBar.swift */; };
 		E7926C6723D8C3D800768405 /* CartTitleValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7926C6623D8C3D800768405 /* CartTitleValueView.swift */; };
 		E7926C6923D8C40600768405 /* CartPromocodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7926C6823D8C40600768405 /* CartPromocodeView.swift */; };
@@ -148,6 +150,7 @@
 		E7A4459123DDE2F4003519E5 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4459023DDE2F4003519E5 /* CardView.swift */; };
 		E7A4459323DDFD3E003519E5 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4459223DDFD3E003519E5 /* SliderView.swift */; };
 		E7A942352375BDDB00450D78 /* FoodCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A942342375BDDB00450D78 /* FoodCategoryCell.swift */; };
+		E7ACE46A240C0D990012BC5B /* OrderRouteDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACE469240C0D990012BC5B /* OrderRouteDetailsView.swift */; };
 		E7B7C08823EC162F0090C9DF /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD22323E96C8200FB270D /* Networking.framework */; };
 		E7B7C08923EC162F0090C9DF /* Networking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD22323E96C8200FB270D /* Networking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E7C6035F233D3ECA004686DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C6035E233D3ECA004686DB /* AppDelegate.swift */; };
@@ -372,6 +375,8 @@
 		E77D33AA23E770D5006577C2 /* PaymentMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodView.swift; sourceTree = "<group>"; };
 		E78B605023D8D6DD00389EE2 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		E78C382E23D760D400335887 /* CartItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemView.swift; sourceTree = "<group>"; };
+		E78F320E240BF10E004A844C /* OrederRouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrederRouteViewController.swift; sourceTree = "<group>"; };
+		E78F3210240C0521004A844C /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		E792166C24092C430048C6C9 /* DailyTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTabBar.swift; sourceTree = "<group>"; };
 		E7926C6623D8C3D800768405 /* CartTitleValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTitleValueView.swift; sourceTree = "<group>"; };
 		E7926C6823D8C40600768405 /* CartPromocodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartPromocodeView.swift; sourceTree = "<group>"; };
@@ -410,6 +415,7 @@
 		E7A4459023DDE2F4003519E5 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		E7A4459223DDFD3E003519E5 /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		E7A942342375BDDB00450D78 /* FoodCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategoryCell.swift; sourceTree = "<group>"; };
+		E7ACE469240C0D990012BC5B /* OrderRouteDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderRouteDetailsView.swift; sourceTree = "<group>"; };
 		E7ADCB7D23E233E100607E8E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		E7ADCB8023E2346200607E8E /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		E7C6035B233D3ECA004686DB /* Daily Menu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Menu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -565,6 +571,7 @@
 			isa = PBXGroup;
 			children = (
 				E77D33A923E770C1006577C2 /* Views */,
+				E78F320E240BF10E004A844C /* OrederRouteViewController.swift */,
 				E71139B82346AC7400889AE2 /* CheckoutViewController.swift */,
 				E71139B92346AC7400889AE2 /* CheckoutViewModel.swift */,
 				E71139C12346AC7400889AE2 /* OrderPlacedViewController.swift */,
@@ -841,6 +848,7 @@
 				E70BC2C023E5BEBE0039F582 /* Swift.swift */,
 				E77AD26423E9A52D00FB270D /* Bundle.swift */,
 				E70C9A0D23EA191300530B3C /* NotificationCenter.swift */,
+				E78F3210240C0521004A844C /* Map.swift */,
 				E77AD24D23E96E6700FB270D /* Extensions.h */,
 				E77AD24E23E96E6700FB270D /* Info.plist */,
 			);
@@ -865,6 +873,7 @@
 			isa = PBXGroup;
 			children = (
 				E77D33AA23E770D5006577C2 /* PaymentMethodView.swift */,
+				E7ACE469240C0D990012BC5B /* OrderRouteDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1535,6 +1544,7 @@
 			files = (
 				E77AD25923E96E8400FB270D /* String.swift in Sources */,
 				E77AD26523E9A52D00FB270D /* Bundle.swift in Sources */,
+				E78F3211240C0521004A844C /* Map.swift in Sources */,
 				E70C9A0E23EA191300530B3C /* NotificationCenter.swift in Sources */,
 				E77AD25723E96E8400FB270D /* Common.swift in Sources */,
 				E75C882424090B7000FFD295 /* CAShapeLayer.swift in Sources */,
@@ -1560,6 +1570,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E77D33AB23E770D5006577C2 /* PaymentMethodView.swift in Sources */,
+				E7ACE46A240C0D990012BC5B /* OrderRouteDetailsView.swift in Sources */,
+				E78F320F240BF10E004A844C /* OrederRouteViewController.swift in Sources */,
 				E7E04A6323CD68850045A381 /* Style.swift in Sources */,
 				E7F15DF223FF00B900E35668 /* RatingView.swift in Sources */,
 				E718B4AC23EF2706001EB7FE /* MapViewModel.swift in Sources */,

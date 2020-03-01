@@ -18,7 +18,7 @@ protocol ProductViewModel {
     
     var cartService: CartService { get }
     
-    var restaurant: Restaurant { get }
+    var restaurant: RestaurantData { get }
     var originalProduct: Product { get }
     var product: Product { get set }
     var count: Int { get set }
@@ -36,7 +36,7 @@ final class ProductViewModelImplementation: ProductViewModel {
     
     var cartService: CartService = AppDelegate.shared.context.cartService
     
-    let restaurant: Restaurant
+    let restaurant: RestaurantData
     let originalProduct: Product
     let availableChoices: [Choice]
     
@@ -57,7 +57,7 @@ final class ProductViewModelImplementation: ProductViewModel {
         }
     }
     
-    init(product: Product, restaurant: Restaurant) {
+    init(product: Product, restaurant: RestaurantData) {
         self.restaurant = restaurant
         self.originalProduct = product
         self.product = product
@@ -91,7 +91,7 @@ final class ProductViewModelImplementation: ProductViewModel {
     
 }
 
-extension Restaurant: CartRestaurantData {
+extension Restaurant: RestaurantData {
 	
 	public var deliveryFee: Double {
 		return Double(restDeliveryFee) ?? 0
@@ -106,4 +106,7 @@ extension Restaurant: CartRestaurantData {
 		}
 	}
 	
+	public var rating: Double {
+		return Double(rate) ?? 0
+	}
 }

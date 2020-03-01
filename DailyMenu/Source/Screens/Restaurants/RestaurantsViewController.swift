@@ -161,7 +161,7 @@ extension RestaurantsViewController: RestaurantsView {
         restaurants.enumerated().map { [weak self] (index, item) -> TableRow<RestaurantCell> in
                 TableRow<RestaurantCell>(item: restaurants[index])
                     .on(.click) { [weak self] data in
-                        let vc = RestaurantViewController(viewModel: RestaurantViewModelImplementation(restaurant: data.item, categories: data.cell?.categories ?? []))
+                        let vc = RestaurantViewController(viewModel: RestaurantViewModelImplementation(restaurant: data.item, categories: []))
                         self?.navigationController?.pushViewController(vc, animated: true)
                 }
                 .on(.configure) { [weak self] data in

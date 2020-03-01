@@ -8,12 +8,15 @@ import AloeStackView
 final class CheckoutViewController: UIViewController {
     
     private var viewModel: CheckoutViewModel
-    
+
+	private var orderRouteViewController: OrderRouteViewController?
+	
     private let stackView: AloeStackView = {
         let stack = AloeStackView()
         stack.hidesSeparatorsByDefault = true
         stack.separatorInset = .zero
-        stack.rowInset = .zero
+		stack.rowInset = .zero
+		stack.backgroundColor = .clear
         return stack
     }()
     
@@ -76,26 +79,35 @@ final class CheckoutViewController: UIViewController {
         Style.addBlueCorner(self)
         
         view.backgroundColor = Colors.commonBackground.color
-        
+		
         view.addSubview(stackView)
         stackView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(150)
-            $0.leading.trailing.equalToSuperview()
+			$0.top.equalTo(view.safeAreaLayoutGuide).inset(50)
+			$0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
-        
+		
+		if let restaurant = viewModel.restaurant {
+			orderRouteViewController = OrderRouteViewController(item: restaurant)
+			addChild(orderRouteViewController!)
+			orderRouteViewController!.didMove(toParent: self)
+			orderRouteViewController!.view.snp.makeConstraints { $0.height.equalTo(340) }
+			stackView.addRow(orderRouteViewController!.view)
+		}
+		
         let paymentMethodLabel = UILabel.makeText("Payment method")
         stackView.addRow(paymentMethodLabel)
         stackView.addRow(creditCardRow)
         stackView.addRow(cashRow)
         stackView.addRow(submitButton)
         
-        stackView.setInset(forRow: paymentMethodLabel, inset: UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20))
-        stackView.setInset(forRow: submitButton, inset: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
         submitButton.snp.makeConstraints {
             $0.height.equalTo(50)
         }
-        
+		
+		stackView.setInset(forRow: paymentMethodLabel, inset: UIEdgeInsets(top: 20, left: 20, bottom: 10, right: 20))
+		stackView.setInset(forRow: submitButton, inset: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+		
         updateCreditCardLabel(with: self.viewModel.creditCard?.number)
         
         Style.addTitle(title: "Checkout", self)
@@ -109,7 +121,6 @@ final class CheckoutViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        Style.addBlueGradient(submitButton)
     }
     
     private func selectCreditCardPaymentType() {

@@ -19,7 +19,7 @@ class RestaurantAnnotationView: MKAnnotationView {
                 item: RestaurantCalloutView.Item(
                     imageSrc: annotation.restaurant.src,
                     title: annotation.restaurant.chainLabel,
-                    rating: Double(annotation.restaurant.rate) ?? 0
+                    rating: annotation.restaurant.rating
                 )
             )
             annotationCalloutView.addGestureRecognizer(BlockTap(action: { _ in

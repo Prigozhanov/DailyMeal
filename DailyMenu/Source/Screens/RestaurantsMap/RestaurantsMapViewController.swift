@@ -77,24 +77,6 @@ final class RestaurantsMapViewController: UIViewController, KeyboardObservable {
 		item: { [weak self] restId in
 			guard let self = self else { return }
 			self.mapController.selectRestaurant(restId)
-		},
-		cellItems: self.viewModel.filteredRestaurants.map { rest in
-			FilteredRestaurantsPreviewCell.Item(
-				id: rest.id,
-				title: rest.chainLabel,
-				rating: Double(rest.rate) ?? 0,
-				imageSrc: rest.src,
-				categories: self.viewModel.categories[rest.id]?
-					.compactMap({ FoodCategory.fromProductCategory(category: $0) }) ?? [],
-				minOrderPrice: String(rest.minAmountOrder)) { [weak self] in
-					let vc = RestaurantViewController(
-						viewModel: RestaurantViewModelImplementation(
-							restaurant: rest,
-							categories: []
-						)
-					)
-					self?.navigationController?.pushViewController(vc, animated: true)
-			}
 		}
 	)
 	
@@ -175,8 +157,8 @@ extension RestaurantsMapViewController: RestaurantsMapView {
                 $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(Layout.commonInset)
                 $0.leading.trailing.equalToSuperview()
                 $0.height.equalTo(150)
-            }
-            
+			}
+			
             filterAppliedView.snp.makeConstraints {
                 $0.top.equalTo(mapHeaderView.snp.bottom)
                 $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(Layout.commonInset)

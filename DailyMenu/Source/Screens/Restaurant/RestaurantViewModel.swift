@@ -17,7 +17,7 @@ protocol RestaurantViewModel {
     
     var view: RestaurantView? { get set }
     
-    var restaurant: Restaurant { get }
+    var restaurant: RestaurantData { get }
     
     var products: [Product] { get set }
     
@@ -34,13 +34,13 @@ final class RestaurantViewModelImplementation: RestaurantViewModel {
     
     var context: AppContext
     
-    var restaurant: Restaurant
+    var restaurant: RestaurantData
     
     var products: [Product] = []
     
     var categories: [ProductCategory] = []
     
-    init(restaurant: Restaurant, categories: [ProductCategory]) {
+    init(restaurant: RestaurantData, categories: [ProductCategory]) {
         context = AppDelegate.shared.context
         self.restaurant = restaurant
         self.categories = categories

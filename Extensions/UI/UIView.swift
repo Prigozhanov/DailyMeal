@@ -53,6 +53,18 @@ extension UIView {
 		layer.sublayers?.compactMap({ $0 as? CAShapeLayer }).first?.removeFromSuperlayer()
 	}
 	
+	func createDottedLine(from: CGPoint, to: CGPoint, width: CGFloat, color: UIColor) {
+		let shape = CAShapeLayer()
+		shape.strokeColor = color.cgColor
+		shape.lineWidth = width
+		shape.lineDashPattern = [4, 2]
+		let path = CGMutablePath()
+		let points = [from, to]
+		path.addLines(between: points)
+		shape.path = path
+		layer.insertSublayer(shape, at: 0)
+	}
+	
 }
 
 // MARK: - Factory

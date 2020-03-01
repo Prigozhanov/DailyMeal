@@ -5,13 +5,15 @@
 
 import CollectionKit
 
-class FilteredRestaurantsPreview: CollectionView {
+class FilteredRestaurantsPreview: UIView {
 	
 	typealias Item = IntClosure
 	
 	private var item: Item
 	
-	private var cellItems: [FilteredRestaurantsPreviewCell.Item]
+	private lazy var collectionView = CollectionView(provider: basicProvider)
+	
+	private var cellItems: [FilteredRestaurantsPreviewCell.Item] = []
 	
 	private var currentPage = 0
 	private let cellWidth: CGFloat = 200
@@ -46,27 +48,36 @@ class FilteredRestaurantsPreview: CollectionView {
 			self?.cellItems[handler.index].onSelectAction()
 	})
 	
-	init(item: @escaping Item, cellItems: [FilteredRestaurantsPreviewCell.Item]) {
+	init(item: @escaping Item) {
 		self.item = item
-		self.cellItems = cellItems
 		
 		super.init(frame: .zero)
 		
-		provider = basicProvider
-		showsHorizontalScrollIndicator = false
-		alwaysBounceHorizontal = true
-		delegate = self
+		addSubview(collectionView)
+		collectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
+		
+		collectionView.provider = basicProvider
+		collectionView.showsHorizontalScrollIndicator = false
+		collectionView.alwaysBounceHorizontal = true
+		collectionView.delegate = self
 	}
 	
 	required init?(coder aDecoder: NSCoder) { fatalError() }
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
+		edgeInset = frame.width / 2 - CGFloat(cellWidth / 2)
+		collectionView.contentInset = UIEdgeInsets(top: 0, left: edgeInset, bottom: 0, right: edgeInset)
+		collectionView.scrollTo(edge: .left, animated: false)
+	}
 	
 	func configure(cellItems: [FilteredRestaurantsPreviewCell.Item]) {
 		isUserInteractionEnabled = true
 		emptyStateView.removeFromSuperview()
 		self.cellItems = cellItems
 		dataSource.data = cellItems
-		reloadData()
-		scrollTo(edge: .left, animated: false)
+		collectionView.reloadData()
+		collectionView.scrollTo(edge: .left, animated: false)
 		
 		if cellItems.isEmpty {
 			showEmptyState()
@@ -83,24 +94,18 @@ class FilteredRestaurantsPreview: CollectionView {
 		}
 	}
 	
-	override func layoutSubviews() {
-		super.layoutSubviews()
-		edgeInset = frame.width / 2 - CGFloat(cellWidth / 2)
-		contentInset = UIEdgeInsets(top: 0, left: edgeInset, bottom: 0, right: edgeInset)
-	}
-	
 }
 
 extension FilteredRestaurantsPreview: UIScrollViewDelegate {
 	
 	func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
 		let targetXContentOffset = CGFloat(targetContentOffset.pointee.x)
-		let currentOffset = contentOffset
+		let currentOffset = collectionView.contentOffset
 		let pageCount = dataSource.data.count
 		let pageWidth = cellWidth + 10
 		
 		if velocity.x == 0 {
-			if  contentOffset.x - targetPoint.x <  pageWidth / 2 {
+			if  collectionView.contentOffset.x - targetPoint.x <  pageWidth / 2 {
 				currentPage -= 1
 				let point = CGPoint(x: CGFloat(CGFloat(currentPage) * pageWidth) - edgeInset, y: targetContentOffset.pointee.y)
 				targetContentOffset.pointee = point
