@@ -11,6 +11,7 @@ extension UIView {
     }
 }
 
+// MARK: - Graphics
 extension UIView {
     
     func setRoundCorners(_ cornerRadius: CGFloat) {
@@ -37,9 +38,26 @@ extension UIView {
         layer.borderColor = color.cgColor
         layer.borderWidth = width
     }
+	
+	func addBadge(offset: CGPoint = CGPoint.zero, color: UIColor = UIColor.red) {
+		removeBadge()
+
+		let badge = CAShapeLayer()
+		let radius = CGFloat(4)
+		let location = CGPoint(x: frame.width - (radius + offset.x), y: (radius + offset.y))
+		badge.drawCircleAtLocation(location: location, radius: radius, color: color)
+		layer.addSublayer(badge)
+	}
+	
+	func removeBadge() {
+		layer.sublayers?.compactMap({ $0 as? CAShapeLayer }).first?.removeFromSuperlayer()
+	}
+	
 }
 
+// MARK: - Factory
 extension UIView {
+	
     static func makeSeparator() -> UIView {
         let view = UIView()
         view.backgroundColor = Colors.lightGray.color
@@ -54,9 +72,12 @@ extension UIView {
         
         return view
     }
+	
 }
 
+// MARK: - Animations
 extension UIView {
+	
     func tapAnimation(completion: VoidClosure? = nil) {
         let animation = CABasicAnimation(keyPath: "transform.scale")
         animation.repeatCount = 1

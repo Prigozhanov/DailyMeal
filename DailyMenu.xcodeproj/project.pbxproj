@@ -19,6 +19,7 @@
 		E70EBEF623EC191100B3D0DF /* Extensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD24B23E96E6700FB270D /* Extensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E70EBEF923EC191800B3D0DF /* Services.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD26D23E9D6A700FB270D /* Services.framework */; };
 		E70EBEFA23EC191800B3D0DF /* Services.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD26D23E9D6A700FB270D /* Services.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E70F562124092D48002FB89F /* DailyTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70F562024092D48002FB89F /* DailyTabBarButton.swift */; };
 		E71139AC2346A59100889AE2 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = E71139AB2346A59100889AE2 /* scripts */; };
 		E71139B52346AA1100889AE2 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139B32346AA1100889AE2 /* RegistrationViewModel.swift */; };
 		E71139B62346AA1100889AE2 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139B42346AA1100889AE2 /* RegistrationViewController.swift */; };
@@ -81,6 +82,8 @@
 		E748A2F92403483500CCC477 /* FilteredRestaurantPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E748A2F82403483500CCC477 /* FilteredRestaurantPreviewCell.swift */; };
 		E7525CF223E0ECC100730AC9 /* StretchScrollDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7525CF123E0ECC100730AC9 /* StretchScrollDelegate.swift */; };
 		E75C8822240834C900FFD295 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75C8821240834C900FFD295 /* ActionButton.swift */; };
+		E75C882424090B7000FFD295 /* CAShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75C882324090B7000FFD295 /* CAShapeLayer.swift */; };
+		E75C88262409296400FFD295 /* DailyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75C88252409296400FFD295 /* DailyTabBarController.swift */; };
 		E7650E9224047DC300170F9A /* RestaurantsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7650E9124047DC300170F9A /* RestaurantsHeaderView.swift */; };
 		E76622F323FC96F4004D64BB /* RestaurantPreviewImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76622F223FC96F4004D64BB /* RestaurantPreviewImages.swift */; };
 		E76622F523FD2C41004D64BB /* CategoryFilterBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76622F423FD2C41004D64BB /* CategoryFilterBar.swift */; };
@@ -107,6 +110,7 @@
 		E77D33AB23E770D5006577C2 /* PaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D33AA23E770D5006577C2 /* PaymentMethodView.swift */; };
 		E78B605123D8D6DD00389EE2 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78B605023D8D6DD00389EE2 /* GradientView.swift */; };
 		E78C382F23D760D400335887 /* CartItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78C382E23D760D400335887 /* CartItemView.swift */; };
+		E792166D24092C430048C6C9 /* DailyTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E792166C24092C430048C6C9 /* DailyTabBar.swift */; };
 		E7926C6723D8C3D800768405 /* CartTitleValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7926C6623D8C3D800768405 /* CartTitleValueView.swift */; };
 		E7926C6923D8C40600768405 /* CartPromocodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7926C6823D8C40600768405 /* CartPromocodeView.swift */; };
 		E7976CC523E9EAA700698EC9 /* URLRequestConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7976CC423E9EAA700698EC9 /* URLRequestConfigurator.swift */; };
@@ -274,6 +278,7 @@
 		E704AB1923F1CF36002203E8 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		E70BC2C023E5BEBE0039F582 /* Swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift.swift; sourceTree = "<group>"; };
 		E70C9A0D23EA191300530B3C /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
+		E70F562024092D48002FB89F /* DailyTabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTabBarButton.swift; sourceTree = "<group>"; };
 		E71139AB2346A59100889AE2 /* scripts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scripts; sourceTree = SOURCE_ROOT; };
 		E71139B32346AA1100889AE2 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		E71139B42346AA1100889AE2 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -338,6 +343,8 @@
 		E7525CF123E0ECC100730AC9 /* StretchScrollDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchScrollDelegate.swift; sourceTree = "<group>"; };
 		E75A303B23E5BCD9001423FD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		E75C8821240834C900FFD295 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
+		E75C882324090B7000FFD295 /* CAShapeLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAShapeLayer.swift; sourceTree = "<group>"; };
+		E75C88252409296400FFD295 /* DailyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTabBarController.swift; sourceTree = "<group>"; };
 		E7650E9124047DC300170F9A /* RestaurantsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsHeaderView.swift; sourceTree = "<group>"; };
 		E76622F223FC96F4004D64BB /* RestaurantPreviewImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantPreviewImages.swift; sourceTree = "<group>"; };
 		E76622F423FD2C41004D64BB /* CategoryFilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFilterBar.swift; sourceTree = "<group>"; };
@@ -365,6 +372,7 @@
 		E77D33AA23E770D5006577C2 /* PaymentMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodView.swift; sourceTree = "<group>"; };
 		E78B605023D8D6DD00389EE2 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		E78C382E23D760D400335887 /* CartItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemView.swift; sourceTree = "<group>"; };
+		E792166C24092C430048C6C9 /* DailyTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTabBar.swift; sourceTree = "<group>"; };
 		E7926C6623D8C3D800768405 /* CartTitleValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTitleValueView.swift; sourceTree = "<group>"; };
 		E7926C6823D8C40600768405 /* CartPromocodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartPromocodeView.swift; sourceTree = "<group>"; };
 		E7976CC423E9EAA700698EC9 /* URLRequestConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestConfigurator.swift; sourceTree = "<group>"; };
@@ -739,11 +747,22 @@
 		E748320B2372198900216927 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				E75C8827240929C700FFD295 /* TabBar */,
 				E78A5D1723EE45E300D20922 /* Map */,
 				E71E75AD23EFDF0600D51EEE /* ConfirmationDialogViewController.swift */,
 				E7E04A3923C8A8BB0045A381 /* NavigationController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E75C8827240929C700FFD295 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				E75C88252409296400FFD295 /* DailyTabBarController.swift */,
+				E792166C24092C430048C6C9 /* DailyTabBar.swift */,
+				E70F562024092D48002FB89F /* DailyTabBarButton.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 		E76C93BA24033CAC0011552A /* Views */ = {
@@ -766,6 +785,7 @@
 				E74832072371CBD400216927 /* UIStackView.swift */,
 				E703991623E36A12003E527A /* UIApplication.swift */,
 				E7F15DF323FF063D00E35668 /* UIImage.swift */,
+				E75C882324090B7000FFD295 /* CAShapeLayer.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1517,6 +1537,7 @@
 				E77AD26523E9A52D00FB270D /* Bundle.swift in Sources */,
 				E70C9A0E23EA191300530B3C /* NotificationCenter.swift in Sources */,
 				E77AD25723E96E8400FB270D /* Common.swift in Sources */,
+				E75C882424090B7000FFD295 /* CAShapeLayer.swift in Sources */,
 				E77AD25823E96E8400FB270D /* Swift.swift in Sources */,
 				E7F15DF423FF063D00E35668 /* UIImage.swift in Sources */,
 			);
@@ -1566,6 +1587,8 @@
 				E7926C6923D8C40600768405 /* CartPromocodeView.swift in Sources */,
 				E7A03B892401B4F60011C541 /* RadiusRow.swift in Sources */,
 				E7A03B842401AE900011C541 /* RestaurantsFilterControls.swift in Sources */,
+				E75C88262409296400FFD295 /* DailyTabBarController.swift in Sources */,
+				E70F562124092D48002FB89F /* DailyTabBarButton.swift in Sources */,
 				E72327022402C34200C429B4 /* FilterSearchView.swift in Sources */,
 				E75C8822240834C900FFD295 /* ActionButton.swift in Sources */,
 				E71139F52346AFE300889AE2 /* RestaurantsViewModel.swift in Sources */,
@@ -1620,6 +1643,7 @@
 				E79FD753239D39C300038933 /* FoodItemCell.swift in Sources */,
 				E79B97D92404A4F800F5E1BA /* GreetingViewModel.swift in Sources */,
 				E7E04A5F23CD4AE20045A381 /* Formatter.swift in Sources */,
+				E792166D24092C430048C6C9 /* DailyTabBar.swift in Sources */,
 				E7A4458723DA2F70003519E5 /* FoodOptionCell.swift in Sources */,
 				E718691D237DC00300059766 /* BaseTableCell.swift in Sources */,
 				E77AD26023E9790E00FB270D /* Globals.swift in Sources */,

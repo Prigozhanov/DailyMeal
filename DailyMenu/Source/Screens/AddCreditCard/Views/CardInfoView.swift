@@ -105,7 +105,7 @@ class CardInfoView: UIView {
     }()
     
     private lazy var saveCreditCardDetailsButton: UIButton = {
-        let button = ActionButton("Save Card details") { [weak self] view in
+        let button = ActionButton("Save Card details") { [weak self] _ in
             guard let self = self else { return }
             self.item(self.details)
         }

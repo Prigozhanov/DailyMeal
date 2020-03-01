@@ -81,15 +81,14 @@ final class CartViewController: UIViewController {
 	
     private func setupScreen() {
         Style.addBlueCorner(self)
-        
+		
         view.backgroundColor = Colors.commonBackground.color
         navigationController?.setNavigationBarHidden(true, animated: false)
         
         view.addSubview(aloeStackView)
         aloeStackView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+			$0.bottom.top.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
@@ -123,11 +122,13 @@ final class CartViewController: UIViewController {
                 onRemoveItem: { [weak self] (itemView) in
 					guard let self = self else { return }
                     self.cartService.removeItem(item: item)
-                    self.reloadCalculationsRows()
                     self.aloeStackView.removeRow(itemView, animated: true)
                     if self.cartService.items.isEmpty {
                         self.aloeStackView.showRow(self.emptyCartRow, animated: true)
+						self.tabBarController?.mainTabBar?.setBadgeVisible(false, at: 0)
+						self.cartService.restaurant = nil
                     }
+					self.reloadCalculationsRows()
 					self.proceedActionButton.isEnabled = self.cartService.isValid
                 },
                 onChangeCount: { [weak self] value in

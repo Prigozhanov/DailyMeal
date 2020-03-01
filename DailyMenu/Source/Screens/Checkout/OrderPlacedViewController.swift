@@ -7,7 +7,7 @@ import UIKit
 
 final class OrderPlacedViewController: UIViewController {
     
-    private lazy var orderAgainButton = ActionButton("View order status") { [weak self] button in
+    private lazy var orderAgainButton = ActionButton("View order status") { [weak self] _ in
         self?.navigationController?.dismiss(animated: true, completion: {
         })
     }

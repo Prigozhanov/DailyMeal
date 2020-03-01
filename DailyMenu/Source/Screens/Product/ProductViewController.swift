@@ -70,6 +70,7 @@ final class ProductViewController: UIViewController {
 
     private lazy var addToCartButton = ActionButton("Add to Cart") { [weak self] _ in
 		guard let self = self else { return }
+		self.tabBarController?.mainTabBar?.setBadgeVisible(true, at: 0)
 		self.viewModel.addToCart {
 			let vc = ConfirmationDiaglogViewController(
 				title: "Restaurants conflict",

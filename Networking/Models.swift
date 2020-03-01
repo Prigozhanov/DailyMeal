@@ -254,8 +254,7 @@ public struct AltWorkHour: Codable {
 }
 
 public enum Status: String, Codable {
-    case close = "close"
-    case open = "open"
+    case close, open
 }
 
 public enum StatusLabel: String, Codable {
