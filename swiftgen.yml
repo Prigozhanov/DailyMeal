@@ -1,0 +1,19 @@
+strings:
+  inputs:
+  - DailyMenu/Resources/Localization/en.lproj
+  filter: .+\.strings$
+  outputs:
+    - templateName: structured-swift4
+      output: DailyMenu/Resources/Generated/Strings.swift
+xcassets:
+  inputs:
+    - DailyMenu/Resources/Assets/Images.xcassets
+    - DailyMenu/Resources/Assets/Colors.xcassets
+  outputs:
+    - templateName: swift4
+      output: DailyMenu/Resources/Generated/Assets.swift
+fonts:
+  inputs: DailyMenu/Resources/Fonts
+  outputs:
+    - templateName: swift4
+      output: DailyMenu/Resources/Fonts/Fonts.swift

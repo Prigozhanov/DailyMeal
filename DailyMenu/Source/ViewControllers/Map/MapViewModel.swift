@@ -13,7 +13,7 @@ protocol MapViewModel {
     
     func getUserLocation() -> CLLocationCoordinate2D?
 	func updateUserLocation(completion: @escaping (CLLocationCoordinate2D) -> Void)
-	func getAddresByCoordinates(lat: Double, lon: Double, completion: @escaping (String) -> Void) 
+	func getAddresByCoordinates(lat: Double, lon: Double, completion: @escaping (String) -> Void)
 }
 
 class MapViewModelImplementation: MapViewModel {

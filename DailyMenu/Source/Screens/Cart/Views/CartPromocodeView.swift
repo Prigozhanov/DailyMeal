@@ -15,12 +15,12 @@ class CartPromocodeView: UIView {
     
     private lazy var textField: UITextField = {
         let field = UITextField()
-        field.placeholder = "Promo Code"
+		field.placeholder = Localizable.Cart.promo
         field.delegate = self
         return field
     }()
     
-	private lazy var applyButton = ActionButton("Apply") { [weak self] _ in
+	private lazy var applyButton = ActionButton(Localizable.Cart.apply) { [weak self] _ in
         self?.item(self?.promoCode)
     }
     

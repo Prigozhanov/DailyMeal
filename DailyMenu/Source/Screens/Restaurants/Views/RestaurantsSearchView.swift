@@ -48,7 +48,7 @@ class RestaurantsSearchView: UITextField {
             $0.edges.equalToSuperview().inset(20)
         }
         
-        placeholder = "Search Restaurent"
+		placeholder = Localizable.Restaurants.search
         font = FontFamily.regular
         textColor = Colors.black.color
         tintColor = Colors.gray.color

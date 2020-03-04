@@ -53,9 +53,9 @@ class OptionView: UIView {
                     (self.choicesStack.arrangedSubviews as? [ChoiceRow])?.forEach({ $0.setSelected(false) })
                     choiceView.setSelected()
                 } else if self.selectedChoicesCount >= self.item.maxChoices, !choiceView.item.isSelected {
-                    print("TODO")
+                    print("TODO") // TODO
                 } else if self.selectedChoicesCount <= self.item.minChoices, choiceView.item.isSelected {
-                    print("TODO")
+                    print("TODO") // TODO
                 } else {
                     choiceView.setSelected()
                     self.selectedChoicesCount = choiceView.item.isSelected ? self.selectedChoicesCount + 1 : self.selectedChoicesCount - 1

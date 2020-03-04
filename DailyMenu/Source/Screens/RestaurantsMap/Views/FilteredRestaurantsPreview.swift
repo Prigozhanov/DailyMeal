@@ -22,7 +22,7 @@ class FilteredRestaurantsPreview: UIView {
 	
 	private let emptyStateViewHeight: CGFloat = 40
 	private lazy var emptyStateView: UILabel = {
-		let label = UILabel.makeText("No restaurants found")
+		let label = UILabel.makeText(Localizable.RestaurantsMap.noRestFound)
 		label.backgroundColor = Colors.white.color
 		label.setRoundCorners(emptyStateViewHeight / 2)
 		label.textAlignment = .center

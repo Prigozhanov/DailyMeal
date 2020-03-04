@@ -34,7 +34,7 @@ class PhoneVerificationViewController: UIViewController {
         
         view.backgroundColor = Colors.commonBackground.color
         
-        let titleLabel = UILabel.makeText("Enter verification code")
+		let titleLabel = UILabel.makeText(Localizable.PhoneVerification.enterCodeTitle)
         titleLabel.font = FontFamily.Poppins.medium.font(size: 16)
         
         view.addSubviews([titleLabel, contentView])
@@ -49,7 +49,7 @@ class PhoneVerificationViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
         }
         
-        let resendCodeLabel = UIButton.makeCommonButton("Don’t get the code?") { [weak self] _ in
+		let resendCodeLabel = UIButton.makeCommonButton(Localizable.PhoneVerification.dontGetTheCode) { [weak self] _ in
             self?.viewModel.sendPushGeneration()
         }
         resendCodeLabel.setTitleColor(Colors.gray.color, for: .normal)

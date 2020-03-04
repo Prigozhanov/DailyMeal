@@ -61,10 +61,10 @@ class AppCoordinator {
 private extension AppCoordinator {
     
     func configureRootViewController() {
-         let vc = SignUpViewController(viewModel: SignUpViewModelImplementation())
-        let nav = UINavigationController(rootViewController: vc)
-        nav.isNavigationBarHidden = true
-         tabBarController.viewControllers = [nav]
+//         let vc = SignUpViewController(viewModel: SignUpViewModelImplementation())
+//        let nav = UINavigationController(rootViewController: vc)
+//        nav.isNavigationBarHidden = true
+//         tabBarController.viewControllers = [nav]
         
         tabBarController.setViewControllers([
             cartTab,
@@ -79,8 +79,7 @@ private extension AppCoordinator {
         let vc = RestaurantsViewController(viewModel: vm)
         vc.tabBarItem.image = Images.tabExploreInactive.image.withRenderingMode(.alwaysOriginal)
         vc.tabBarItem.selectedImage = Images.tabExploreActive.image.withRenderingMode(.alwaysOriginal)
-        vc.tabBarItem.title = "Explore"
-		vc.tabBarItem.setTitleTextAttributes([.font: FontFamily.extraSmallMedium!, .foregroundColor: Colors.blue.color], for: .normal)
+		vc.tabBarItem.title = Localizable.Tabbar.explore
         return NavigationController(rootViewController: vc)
     }
     
@@ -89,8 +88,7 @@ private extension AppCoordinator {
         let vc = SettingsViewController(viewModel: vm)
         vc.tabBarItem.image = Images.tabSettingsInactive.image.withRenderingMode(.alwaysOriginal)
         vc.tabBarItem.selectedImage = Images.tabSettingsActive.image.withRenderingMode(.alwaysOriginal)
-        vc.tabBarItem.title = "Settings"
-		vc.tabBarItem.setTitleTextAttributes([.font: FontFamily.extraSmallMedium!, .foregroundColor: Colors.blue.color], for: .normal)
+		vc.tabBarItem.title = Localizable.Tabbar.settings
         return NavigationController(rootViewController: vc)
     }
     
@@ -98,8 +96,7 @@ private extension AppCoordinator {
         let vc = CartViewController()
         vc.tabBarItem.image = Images.tabCartInactive.image.withRenderingMode(.alwaysOriginal)
         vc.tabBarItem.selectedImage = Images.tabCartActive.image.withRenderingMode(.alwaysOriginal)
-        vc.tabBarItem.title = "Cart"
-		vc.tabBarItem.setTitleTextAttributes([.font: FontFamily.extraSmallMedium!, .foregroundColor: Colors.blue.color], for: .normal)
+		vc.tabBarItem.title = Localizable.Tabbar.cart
         return NavigationController(rootViewController: vc)
     }
     

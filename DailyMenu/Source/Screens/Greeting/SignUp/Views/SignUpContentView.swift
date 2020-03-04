@@ -23,7 +23,7 @@ class SignUpContentView: UIView {
     
     private lazy var emailTextField: TextField = {
         let field = TextField(
-            placeholder: "Email",
+			placeholder: Localizable.Greeting.email,
             shouldShowClearButton: true,
             shouldChangeCharacters: { [weak self] (textField, _, string) -> Bool in
                 self?.item.email = textField.text?.appending(string) ?? ""
@@ -40,7 +40,7 @@ class SignUpContentView: UIView {
     
     private lazy var passwordTextField: TextField = {
         let field = TextField(
-            placeholder: "Password",
+			placeholder: Localizable.Greeting.password,
             shouldShowClearButton: true,
             shouldChangeCharacters: { [weak self] (textField, _, string) -> Bool in
                 self?.item.password = textField.text?.appending(string) ?? ""
@@ -78,7 +78,7 @@ class SignUpContentView: UIView {
         return field
     }()
     
-    private lazy var signUpButton = ActionButton("Sign Up") { [unowned self] _ in
+	private lazy var signUpButton = ActionButton(Localizable.Greeting.signup) { [unowned self] _ in
         self.item.onSignUpAction(self.item.email, self.item.password, "+\(self.item.phone)")
     }
     
@@ -87,6 +87,7 @@ class SignUpContentView: UIView {
         label.textColor = Colors.red.color
         label.alpha = 0
         label.textAlignment = .center
+		label.numberOfLines = 2
         return label
     }()
     
@@ -96,10 +97,10 @@ class SignUpContentView: UIView {
         super.init(frame: .zero)
         
         let cardView = CardView(shadowSize: .large, customInsets: UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20))
-        let titleLabel = UILabel.makeText("Create your account")
+		let titleLabel = UILabel.makeText(Localizable.Signup.createAccount)
         titleLabel.font = FontFamily.Poppins.medium.font(size: 16)
         titleLabel.textAlignment = .center
-        let subtitleLabel = UILabel.makeText("We will send a code to your number. Standard data charge may apply")
+        let subtitleLabel = UILabel.makeText(Localizable.Signup.willSendCode)
         subtitleLabel.font = FontFamily.Poppins.regular.font(size: 12)
         subtitleLabel.textColor = Colors.gray.color
         subtitleLabel.textAlignment = .center
@@ -129,7 +130,7 @@ class SignUpContentView: UIView {
         
         errorMessageLabel.snp.makeConstraints {
             $0.top.equalTo(subtitleLabel.snp.bottom).offset(25)
-            $0.leading.trailing.greaterThanOrEqualToSuperview()
+			$0.leading.trailing.greaterThanOrEqualToSuperview().inset(Layout.commonInset)
             $0.centerX.equalToSuperview()
         }
         

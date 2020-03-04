@@ -112,7 +112,7 @@ class CollectionHeaderCell: UIView {
             $0.leading.equalTo(restaurantInfoView.snp.trailing)
         }
         
-        let minOrderLabel = UILabel.makeExtraSmallText("Min order")
+		let minOrderLabel = UILabel.makeExtraSmallText(Localizable.RestaurantInfo.minOrder)
         cardView.contentView.addSubview(minOrderLabel)
         minOrderLabel.snp.makeConstraints {
             $0.top.equalTo(minOrderValueLabel.snp.bottom)

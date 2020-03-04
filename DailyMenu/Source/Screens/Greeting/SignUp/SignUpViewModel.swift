@@ -6,6 +6,7 @@
 import Foundation
 import Networking
 import Services
+import Extensions
 
 // MARK: - View
 protocol SignUpView: class {
@@ -39,15 +40,15 @@ final class SignUpViewModelImplementation: SignUpViewModel {
     
     private var isValid: Bool {
         guard Formatter.Email.isValid(string: email) else {
-            view?.onErrorAction(message: "Invalid email format")
+			view?.onErrorAction(message: Localizable.Signup.invalidEmailFormat)
             return false
         }
         guard Formatter.PhoneNumber.isValid(string: phone) else {
-            view?.onErrorAction(message: "Invalid phone format")
+			view?.onErrorAction(message: Localizable.Signup.invalidPhoneFormat)
             return false
         }
         guard password.count >= 6 else {
-            view?.onErrorAction(message: "Password minimum length should be at least 6")
+			view?.onErrorAction(message: Localizable.Signup.passwordMinimumLengthError)
             return false
         }
         return true
@@ -79,10 +80,12 @@ final class SignUpViewModelImplementation: SignUpViewModel {
             case let .failure(error):
                 logDebug(message: error.localizedDescription)
                 if error == .unprocessable {
-                    self.view?.onErrorAction(message: "Account with email \(self.email) is already exists")
+					self.view?.onErrorAction(
+						message: Localizable.Signup.accountExists(self.email)
+					)
                     return
                 }
-                self.view?.onErrorAction(message: "Error, please try again")
+				self.view?.onErrorAction(message: Localizable.Signup.error)
             }
         }
     }

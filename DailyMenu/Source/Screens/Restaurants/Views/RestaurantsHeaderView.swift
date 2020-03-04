@@ -12,7 +12,7 @@ class RestaurantsHeaderView: UIView {
     private let item: Item
     
     private lazy var titleLabel: UILabel = {
-        let label = UILabel.makeText("\(item)What would you like to eat?")
+		let label = UILabel.makeText(item.appending(Localizable.Restaurants.whatWouldYouLikeToEat))
         label.numberOfLines = 3
         label.font = FontFamily.Poppins.bold.font(size: 24)
         label.textColor = Colors.charcoal.color

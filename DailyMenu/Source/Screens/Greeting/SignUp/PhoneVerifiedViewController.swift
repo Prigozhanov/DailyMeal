@@ -7,7 +7,7 @@ import UIKit
 
 class PhoneVerifiedViewController: UIViewController {
 
-    private lazy var exploreButton = ActionButton("Explore restaurants") { _ in
+	private lazy var exploreButton = ActionButton(Localizable.PhoneVerification.explore) { _ in
         NotificationCenter.default.post(Notification(name: .userSignedUp))
     }
     
@@ -19,11 +19,11 @@ class PhoneVerifiedViewController: UIViewController {
         let imagePlaceholder = UIImageView(image: Images.Placeholders.phoneVerified.image)
         imagePlaceholder.contentMode = .scaleAspectFit
         
-        let titleLabel = UILabel.makeText("Your phone number is verified!")
+		let titleLabel = UILabel.makeText(Localizable.PhoneVerification.phoneVerified)
         titleLabel.font = FontFamily.Poppins.semiBold.font(size: 18)
         titleLabel.numberOfLines = 2
         
-        let subtitleLabel = UILabel.makeText("Bushwick meh Blue Bottle pork belly mustache skateboard 3 wolf moon. Actually")
+        let subtitleLabel = UILabel.makeText(Localizable.PhoneVerification.phoneVerifiedSubtitle)
         subtitleLabel.font = FontFamily.Poppins.regular.font(size: 12)
         subtitleLabel.numberOfLines = 3
         subtitleLabel.textColor = Colors.gray.color

@@ -29,7 +29,7 @@ final class RestaurantsViewController: UIViewController {
     private var notificationTokens: [Token] = []
     
     private lazy var headerView = RestaurantsHeaderView(
-        item: viewModel.userName.isEmpty ? "" : "Hello, \(viewModel.userName)."
+		item: viewModel.userName.isEmpty ? "" : Localizable.Restaurants.hello(viewModel.userName)
     )
     
     private lazy var filterBar = CategoryFilterBar(item: CategoryFilterBar.Item(onSelectAction: { [weak self] selectedCategory in

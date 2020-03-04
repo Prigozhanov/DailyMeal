@@ -54,7 +54,7 @@ class ValidationCodeContentView: UIView {
         super.init(frame: .zero)
         
         let cardView = CardView(shadowSize: .large, customInsets: UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20))
-        let titleLabel = UILabel.makeText("Enter validation code")
+		let titleLabel = UILabel.makeText(Localizable.PhoneVerification.enterCode)
         titleLabel.font = FontFamily.Poppins.medium.font(size: 16)
         titleLabel.textAlignment = .center
         let subtitleLabel = UILabel()
@@ -62,7 +62,7 @@ class ValidationCodeContentView: UIView {
         subtitleLabel.textAlignment = .center
         subtitleLabel.numberOfLines = 3
         subtitleLabel.attributedText = Formatter.getHighlightedAttributtedString(
-            string: "A verification code is sent to your number provided \(item.phone)",
+			string: Localizable.PhoneVerification.codeIsSentToNumber(item.phone),
             keyWord: item.phone,
             font: FontFamily.Poppins.regular.font(size: 12),
             highlightingFont: FontFamily.Poppins.semiBold.font(size: 12),

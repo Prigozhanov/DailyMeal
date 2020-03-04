@@ -15,7 +15,7 @@ class FilterAppliedView: UIView {
     private let item: Item
     
     private let label: UILabel = {
-        let label = UILabel.makeText("Filter Applied")
+		let label = UILabel.makeText(Localizable.RestaurantsMap.filterApplied)
         label.font = FontFamily.medium
         label.textColor = Colors.blue.color
         return label

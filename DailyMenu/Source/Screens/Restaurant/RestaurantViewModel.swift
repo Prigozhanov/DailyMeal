@@ -71,7 +71,7 @@ final class RestaurantViewModelImplementation: RestaurantViewModel {
     }
     
     func loadMenu(completion: @escaping VoidClosure) {
-        let req = context.networkService.requestFactory.restaurantMenu(id: restaurant.id)
+		let req = context.networkService.requestFactory.restaurantMenu(id: restaurant.id, language: menuByLanguage)
         context.networkService.send(request: req, completion: { [weak self] result, _ in
             switch result {
             case let .success(response):
@@ -87,7 +87,7 @@ final class RestaurantViewModelImplementation: RestaurantViewModel {
     }
     
     func loadCategories(completion: @escaping VoidClosure) {
-        let req = context.networkService.requestFactory.restaurantCategories(id: restaurant.id)
+		let req = context.networkService.requestFactory.restaurantCategories(id: restaurant.id, language: menuByLanguage)
         context.networkService.send(request: req, completion: { [weak self] result, _ in
             switch result {
             case let .success(response):

@@ -41,8 +41,8 @@ final class RestaurantViewController: UIViewController {
         viewUpdater: { (view: CollectionHeaderCell, data: RestaurantData, _) in
             let item = CollectionHeaderCell.Item(
                 label: data.chainLabel,
-                distance: "\(Formatter.Distance.toString(data.distance)) away",
-                orderDelay: "\(data.orderDelayFirst) minutes delivery time",
+				distance: Localizable.RestaurantInfo.kmAway(Formatter.Distance.toString(data.distance)),
+				orderDelay: Localizable.RestaurantInfo.minutesDeliveryTime(data.orderDelayFirst),
 				minOrderPrice: Formatter.Currency.toString(Double(data.minAmountOrder)),
 				rating: data.rating,
                 imageURL: data.src

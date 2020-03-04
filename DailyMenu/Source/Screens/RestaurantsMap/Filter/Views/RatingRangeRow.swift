@@ -27,7 +27,7 @@ class RatingRangeRow: UIView {
         return control
     }()
     
-    private lazy var titleLabel = UILabel.makeSmallText("Rating")
+	private lazy var titleLabel = UILabel.makeSmallText(Localizable.RestaurantsMap.rating)
     
     init(item: Item) {
         self.item = item

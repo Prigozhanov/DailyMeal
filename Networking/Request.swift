@@ -106,14 +106,14 @@ public class RequestFactory {
         )
     }
     
-    public func menu(cityId: Int, addressId: Int) -> Request<MenuResponse> {
+    public func menu(cityId: Int, addressId: Int, language: Language) -> Request<MenuResponse> {
         return Request<MenuResponse>(
             method: .GET,
             baseUrlString: baseUrlString,
             path: "get-RestDataByType",
             params: .query([
                 "type": "all",
-                "lng": "7",
+				"lng": language.rawValue,
                 "delivery_type": "delivery",
                 "city_id": "\(cityId)",
                 "localization": "1",
@@ -123,24 +123,24 @@ public class RequestFactory {
     }
     
     //https://v2.menu.by/api/get-restaurant-menu-categories?rest=84&lng=7
-    public func restaurantCategories(id: Int) -> Request<SingleKeyResponseWrapper<[ProductCategory]>> {
+    public func restaurantCategories(id: Int, language: Language) -> Request<SingleKeyResponseWrapper<[ProductCategory]>> {
         return Request<SingleKeyResponseWrapper<[ProductCategory]>>(
             method: .GET,
             baseUrlString: baseUrlString,
             path: "get-restaurant-menu-categories",
-            params: .query(["rest": "\(id)", "lng": "7"])
+			params: .query(["rest": "\(id)", "lng": language.rawValue])
         )
     }
     
     //https://v2.menu.by/api/get-restaurant-menu?rest=1595&lng=7&restaurant_menu_categories=4729
-    public func restaurantMenu(id: Int) -> Request<SingleKeyResponseWrapper<[Product]>> {
+	public func restaurantMenu(id: Int, language: Language) -> Request<SingleKeyResponseWrapper<[Product]>> {
         return Request<SingleKeyResponseWrapper<[Product]>>(
             method: .GET,
             baseUrlString: baseUrlString,
             path: "get-restaurant-menu",
             params: .query([
                 "rest": "\(id)",
-                "lng": "7" // TODO link with category id
+				"lng": language.rawValue // TODO link with category id
             ])
         )
     }

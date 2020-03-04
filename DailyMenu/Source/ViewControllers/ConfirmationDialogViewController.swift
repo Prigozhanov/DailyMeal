@@ -29,14 +29,14 @@ class ConfirmationDiaglogViewController: UIViewController {
         return label
     }()
     
-	private lazy var confirmButton = ActionButton("Confirm") { [weak self] _ in
+	private lazy var confirmButton = ActionButton(Localizable.Common.confirm) { [weak self] _ in
 		self?.dismiss(animated: true, completion: { [weak self] in
 			self?.onConfirm()
 		})
 	}
 	
     private lazy var cancelButton: UIButton = {
-        let button = UIButton.makeCommonButton("Cancel") { [weak self] _ in
+		let button = UIButton.makeCommonButton(Localizable.Common.cancel) { [weak self] _ in
             self?.dismiss(animated: true, completion: nil)
         }
         button.setTitleColor(Colors.gray.color, for: .normal)

@@ -34,7 +34,7 @@ class RadiusRow: UIView {
         return label
     }()
     
-    private lazy var titleLabel = UILabel.makeSmallText("Radius")
+	private lazy var titleLabel = UILabel.makeSmallText(Localizable.RestaurantsMap.radius)
     
     init(item: Item) {
         self.item = item

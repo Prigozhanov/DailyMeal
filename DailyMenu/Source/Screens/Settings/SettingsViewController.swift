@@ -64,7 +64,7 @@ final class SettingsViewController: UIViewController {
         
         let addressField: EditableTextFieldView = EditableTextFieldView(
             item: EditableTextFieldView.Item(
-                title: "Address",
+				title: Localizable.Settings.address,
                 text: viewModel.address,
                 type: .address,
                 didEndEdititng: { _ in
@@ -74,7 +74,7 @@ final class SettingsViewController: UIViewController {
         
         let nameField: EditableTextFieldView = EditableTextFieldView(
             item: EditableTextFieldView.Item(
-                title: "Name",
+				title: Localizable.Settings.name,
                 text: viewModel.userName,
                 type: .standard,
                 didEndEdititng: { [weak self] name in
@@ -84,7 +84,7 @@ final class SettingsViewController: UIViewController {
         
         let phoneField: EditableTextFieldView = EditableTextFieldView(
             item: EditableTextFieldView.Item(
-                title: "Phone",
+				title: Localizable.Settings.phone,
                 text: viewModel.phone,
                 type: .phone,
                 didEndEdititng: { [weak self] phone in
@@ -94,7 +94,7 @@ final class SettingsViewController: UIViewController {
         
         let creditCardField: EditableTextFieldView = EditableTextFieldView(
             item: EditableTextFieldView.Item(
-                title: "Credit Card",
+				title: Localizable.Settings.creditCard,
                 text: Formatter.CreditCard.hiddenNumber(string: viewModel.creditCardNumber) ?? "",
                 type: .creditCard,
                 didEndEdititng: { _ in })
@@ -104,16 +104,16 @@ final class SettingsViewController: UIViewController {
         
         // App info
         
-        let signOutButton = UIButton.makeCommonButton("Sign out") { [weak self] _ in
+		let signOutButton = UIButton.makeCommonButton(Localizable.Settings.signOut) { [weak self] _ in
             NotificationCenter.default.post(Notification(name: .userLoggedOut))
             self?.viewModel.clearUserInfo()
         }
         signOutButton.setTitleColor(Colors.red.color, for: .normal)
         signOutButton.titleLabel?.font = FontFamily.regular
         
-        let appInfoLabel = UILabel.makeSmallText("Daily Menu. Version \(Bundle.versionNumber)")
+		let appInfoLabel = UILabel.makeSmallText("Daily Menu. \(Localizable.Settings.version) \(Bundle.versionNumber)")
         #if DEBUG
-        appInfoLabel.text = "Daily Menu Version \(Bundle.versionNumber). Build \(Bundle.buildNumber)"
+		appInfoLabel.text = "Daily Menu \(Localizable.Settings.version) \(Bundle.versionNumber). \(Localizable.Settings.build) \(Bundle.buildNumber)"
         #endif
         appInfoLabel.textColor = Colors.gray.color
         appInfoLabel.textAlignment = .center

@@ -138,7 +138,7 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
                 return
         }
         
-        let req = context.networkService.requestFactory.menu(cityId: areaId, addressId: addressId)
+		let req = context.networkService.requestFactory.menu(cityId: areaId, addressId: addressId, language: menuByLanguage)
         view?.showLoadingIndicator()
         context.networkService.send(request: req) { [weak self] result, _ in
             switch result {
@@ -168,7 +168,7 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     }
     
     func loadCategory(restId: Int, onCompletion: @escaping (Result<SingleKeyResponseWrapper<[ProductCategory]>, NetworkClient.Error>) -> Void) {
-        let req = context.networkService.requestFactory.restaurantCategories(id: restId)
+		let req = context.networkService.requestFactory.restaurantCategories(id: restId, language: menuByLanguage)
         context.networkService.send(request: req) { result, _ in
             onCompletion(result)
         }

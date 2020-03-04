@@ -103,7 +103,7 @@ final class RestaurantsMapViewModelImplementation: RestaurantsMapViewModel {
             let addressId = userDefaultsService.getValueForKey(key: .addressesId) as? Int else {
                 return
         }
-        let req = context.networkService.requestFactory.menu(cityId: areaId, addressId: addressId)
+        let req = context.networkService.requestFactory.menu(cityId: areaId, addressId: addressId, language: menuByLanguage)
         context.networkService.send(request: req) { [weak self] result, _ in
             switch result {
             case let .success(response):
@@ -135,7 +135,7 @@ final class RestaurantsMapViewModelImplementation: RestaurantsMapViewModel {
     }
     
     private func loadCategory(restId: Int, completion: @escaping VoidClosure) {
-        let req = context.networkService.requestFactory.restaurantCategories(id: restId)
+		let req = context.networkService.requestFactory.restaurantCategories(id: restId, language: menuByLanguage)
         
         context.networkService.send(request: req) { [weak self] (result, _) in
             guard let self = self else { return }
@@ -150,7 +150,7 @@ final class RestaurantsMapViewModelImplementation: RestaurantsMapViewModel {
     }
     
     private func loadMenu(restId: Int, completion: @escaping VoidClosure) {
-        let req = context.networkService.requestFactory.restaurantMenu(id: restId)
+		let req = context.networkService.requestFactory.restaurantMenu(id: restId, language: menuByLanguage)
         context.networkService.send(request: req, completion: { [weak self] result, _ in
             switch result {
             case let .success(response):

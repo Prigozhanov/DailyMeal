@@ -36,14 +36,14 @@ enum Formatter {
             guard let value = value else {
                 return "Error"
             }
-            return value < 0 ? String(format: "- BYN %.2f", abs(value)) : String(format: "BYN %.2f", value)
+			return value < 0 ? String(format: "- \(Localizable.Common.currency) %.2f", abs(value)) : String(format: "\(Localizable.Common.currency) %.2f", value)
         }
         
         static func toString(_ value: Int?) -> String {
             guard let value = value else {
                 return "Error"
             }
-            return value < 0 ? "- BYN \(abs(value))" : "BYN \(value)"
+            return value < 0 ? "- \(Localizable.Common.currency) \(abs(value))" : "\(Localizable.Common.currency) \(value)"
         }
         
         static func fromString(_ string: String?) -> Double? {
@@ -57,7 +57,7 @@ enum Formatter {
     // MARK: - Distance
     enum Distance {
         static func toString(_ value: Double) -> String {
-            return String(format: "%.1f km", value)
+			return String(format: "%.1f \(Localizable.Common.km)", value)
         }
     }
     

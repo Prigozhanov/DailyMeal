@@ -16,7 +16,7 @@ final class GreetingViewController: UIViewController {
     
     private lazy var emailField: TextField = {
         let textField = TextField(
-            placeholder: "E-mail",
+			placeholder: Localizable.Greeting.email,
             image: Images.Icons.envelope.image) { textField -> Bool in
             textField.resignFirstResponder()
             return true
@@ -28,7 +28,7 @@ final class GreetingViewController: UIViewController {
     
     private lazy var passwordField: TextField = {
         let textField = TextField(
-            placeholder: "Password",
+			placeholder: Localizable.Greeting.password,
             image: Images.Icons.password.image) { textField -> Bool in
             textField.resignFirstResponder()
             return true
@@ -37,7 +37,7 @@ final class GreetingViewController: UIViewController {
         return textField
     }()
     
-    private lazy var signInButton = ActionButton("Sign in") { [weak self] button in
+	private lazy var signInButton = ActionButton(Localizable.Greeting.login) { [weak self] button in
         self?.viewModel.email = self?.emailField.text ?? ""
         self?.viewModel.password = self?.passwordField.text ?? ""
         LoadingIndicator.show(self)
@@ -53,14 +53,14 @@ final class GreetingViewController: UIViewController {
     private lazy var signUpRow: UIView = {
         let view = UIView()
         
-        let dontHaveAccountLabel = UILabel.makeMediumText("Don't have an account?")
+		let dontHaveAccountLabel = UILabel.makeMediumText(Localizable.Greeting.dontHaveAccount)
         view.addSubview(dontHaveAccountLabel)
         dontHaveAccountLabel.snp.makeConstraints {
             $0.leading.top.bottom.equalTo(view)
         }
         
         let signUpButton = UIButton.makeCustomButton(
-            title: "Sign up",
+			title: Localizable.Greeting.signup,
             titleColor: Colors.blue.color,
             cornerRadius: 5,
             font: FontFamily.semibold
@@ -82,7 +82,7 @@ final class GreetingViewController: UIViewController {
     }()
     
     private lazy var skipButton = UIButton.makeCustomButton(
-        title: "Skip >",
+		title: NSLocalizedString(Localizable.Greeting.skip, comment: ""), // TODO arrow
         titleColor: Colors.gray.color,
         font: FontFamily.light) { [weak self] _ in
             self?.dismiss(animated: true, completion: {
@@ -91,7 +91,7 @@ final class GreetingViewController: UIViewController {
     }
     
     private lazy var authorizationErrorLabel: UILabel = {
-        let label = UILabel.makeText("Incorrect email or password")
+		let label = UILabel.makeText(Localizable.Greeting.incorrectCredentials)
         label.textColor = Colors.red.color
         label.isHidden = true
         return label

@@ -17,7 +17,7 @@ final class RestaurantsMapViewController: UIViewController, KeyboardObservable {
     
     private lazy var mapHeaderView: MapHeaderView = {
         let view = MapHeaderView(
-            title: "Nearby restaurants",
+            title: Localizable.RestaurantsMap.nerbyRestaurants,
             shouldShowBackButton: true,
             shouldShowNotificationsButton: true
         )
@@ -34,7 +34,7 @@ final class RestaurantsMapViewController: UIViewController, KeyboardObservable {
     private lazy var searchView: MapSearchView = {
         let view = MapSearchView(
             item: MapSearchView.Item(
-                placeholder: "Type restaurant name",
+				placeholder: Localizable.RestaurantsMap.typeRestName,
                 results: [],
                 onSelectItem: { [weak self] (string, view) in
                     if let restId = self?

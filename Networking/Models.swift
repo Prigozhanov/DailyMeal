@@ -710,3 +710,7 @@ public struct UserInfo: Codable {
         self.details = details
     }
 }
+
+public enum Language: String {
+	case ru = "6", en = "7"
+}

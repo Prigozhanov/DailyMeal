@@ -11,23 +11,23 @@ public enum FoodCategory: String, CaseIterable {
     case burger = "Burgers", chicken = "Chicken", desert = "Desserts", fries, hotdog = "Hot Dogs", lobastar, pizza = "Pizza", sandwich, steak = "Steak", sushi = "Sushi", taco, pasta = "Pasta", shawarma = "Shawarma", unknown
     
     var humanReadableValue: String {
-        switch self {
-        case .burger: return "Burgers"
-        case .chicken: return "Chicken"
-        case .desert: return "Deserts"
-        case .fries: return "Fries"
-        case .hotdog: return "Hotdog"
-        case .lobastar: return "Lobstar"
-        case .pizza: return "Pizza"
-        case .sandwich: return "Sandwich"
-        case .steak: return "Steak"
-        case .sushi: return "Sushi"
-        case .taco: return "Taco"
-        case .pasta: return "Pasta"
-        case .shawarma: return "Shaurma"
-        case .unknown: return "Unknown"
-        }
-    }
+		switch self {
+		case .burger: return Localizable.Categories.burger
+		case .chicken: return Localizable.Categories.chicken
+		case .desert: return Localizable.Categories.desert
+		case .fries: return Localizable.Categories.fries
+		case .hotdog: return Localizable.Categories.hotdog
+		case .lobastar: return Localizable.Categories.lobstar
+		case .pizza: return Localizable.Categories.pizza
+		case .sandwich: return Localizable.Categories.sandwich
+		case .steak: return Localizable.Categories.steak
+		case .sushi: return Localizable.Categories.sushi
+		case .taco: return Localizable.Categories.taco
+		case .pasta: return Localizable.Categories.pasta
+		case .shawarma: return Localizable.Categories.shaurma
+		case .unknown: return Localizable.Categories.unknown
+		}
+	}
     
     static func fromProductCategory(category: ProductCategory) -> FoodCategory? {
         return FoodCategory(rawValue: category.label.orEmpty.onlyLetters)
@@ -51,3 +51,5 @@ public enum FoodCategory: String, CaseIterable {
 public enum FoodOption: String {
     case cheese = "Cheese", petty = "Petty", hot = "Hot", dummy = "Dummy"
 }
+
+

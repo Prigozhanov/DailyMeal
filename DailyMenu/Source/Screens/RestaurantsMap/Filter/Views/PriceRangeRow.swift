@@ -37,7 +37,7 @@ class PriceRangeRow: UIView {
         return label
     }()
     
-    private lazy var titleLabel = UILabel.makeSmallText("Price range")
+    private lazy var titleLabel = UILabel.makeSmallText(Localizable.RestaurantsMap.priceRange)
     
     init(item: Item) {
         self.item = item

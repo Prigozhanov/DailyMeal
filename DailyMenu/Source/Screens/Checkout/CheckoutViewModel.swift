@@ -87,16 +87,14 @@ final class CheckoutViewModelImplementation: CheckoutViewModel {
         
         let req = networkService.requestFactory.shoppingCart(shoppingCartRequest: requestObject)
         
-        networkService.send(request: req) { (result, _) in
-            switch result {
-            case let .success(response):
-                print(response)
-            case let .failure(error):
-                logDebug(message: error.localizedDescription)
-            }
-        }
-        print(requestObject)
-        print(cartService.items)
+//        networkService.send(request: req) { (result, _) in
+//            switch result {
+//            case let .success(response):
+//                print(response)
+//            case let .failure(error):
+//                logDebug(message: error.localizedDescription)
+//            }
+//        }
     }
     
 }

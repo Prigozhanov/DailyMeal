@@ -54,7 +54,10 @@ class DailyTabBarController: UITabBarController {
 			let viewSize = fromView.frame
 			let scrollRight = controllerIndex > tabBarController.selectedIndex
 			
-			if fromView.superview?.subviews.contains(toView) == true { return false }
+			if fromView.superview?.subviews.contains(toView) == true {
+				toView.removeFromSuperview()
+				return false
+			}
 			
 			viewController.viewWillAppear(false)
 			fromView.superview?.addSubview(toView)
@@ -62,7 +65,7 @@ class DailyTabBarController: UITabBarController {
 			let screenWidth = UIScreen.main.bounds.size.width
 			toView.frame = CGRect(x: (scrollRight ? screenWidth : -screenWidth), y: viewSize.origin.y, width: screenWidth, height: viewSize.size.height)
 			
-			UIView.animate(withDuration: 0.25, delay: TimeInterval(0.0), options: [.curveEaseOut, .preferredFramesPerSecond60], animations: {
+			UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseOut, .preferredFramesPerSecond60], animations: {
 				fromView.frame = CGRect(x: (scrollRight ? -screenWidth : screenWidth), y: viewSize.origin.y, width: screenWidth, height: viewSize.size.height)
 				toView.frame = CGRect(x: 0, y: viewSize.origin.y, width: screenWidth, height: viewSize.size.height)
 			}, completion: { finished in

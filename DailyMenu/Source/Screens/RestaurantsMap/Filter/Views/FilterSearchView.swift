@@ -24,7 +24,7 @@ class FilterSearchView: UIView {
         return textField
     }()
     
-	private lazy var searchActionButton = ActionButton("Search") { [weak self] button in
+	private lazy var searchActionButton = ActionButton(Localizable.RestaurantsMap.search) { [weak self] _ in
 		self?.item.onSearchAction(self?.textField.text ?? "")
 	}
     

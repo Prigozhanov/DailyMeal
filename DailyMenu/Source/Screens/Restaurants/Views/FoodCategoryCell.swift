@@ -33,7 +33,7 @@ class FoodCategoryCell: BaseCollectionCell {
     private let filterNameLabel = UILabel.makeSmallText()
     
     private let restaurantCountLabel: UILabel = {
-        let label = UILabel.makeExtraSmallText("{count} Restaurants")
+		let label = UILabel.makeExtraSmallText(Localizable.Restaurants.restaurantsCategoryCount(0))
         label.textColor = Colors.gray.color
         return label
     }()
@@ -100,7 +100,7 @@ class FoodCategoryCell: BaseCollectionCell {
         self.item = item
         
         imageView.image = item.image
-        filterNameLabel.text = item.category.rawValue
+        filterNameLabel.text = item.category.humanReadableValue
         restaurantCountLabel.text = item.subtitle
         if isSelected {
             setState(.selected)

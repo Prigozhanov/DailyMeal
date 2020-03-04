@@ -46,7 +46,7 @@ class FoodTypeRow: UIView {
     
     private lazy var collectionView = CollectionView(provider: basicProvider)
     
-    private lazy var titleLabel = UILabel.makeSmallText("Food type")
+    private lazy var titleLabel = UILabel.makeSmallText(Localizable.RestaurantsMap.foodType)
     
     init(item: Item) {
         self.item = item

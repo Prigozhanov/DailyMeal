@@ -137,7 +137,7 @@ class RestaurantCell: BaseTableCell {
             $0.top.equalToSuperview()
         }
         
-        let deliveryFeeLabel = UILabel.makeSmallText("Delivery fee")
+		let deliveryFeeLabel = UILabel.makeSmallText(Localizable.RestaurantInfo.deliveryFee)
         restaurantInfoView.addSubview(deliveryFeeLabel)
         deliveryFeeLabel.snp.makeConstraints {
             $0.top.equalTo(deliveryFeeValueLabel.snp.bottom)

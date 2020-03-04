@@ -22,7 +22,7 @@ class OrderRouteViewController: UIViewController {
 			item: OrderRouteDetailsView.Item(
 				restImageSrc: item.src,
 				restTitle: item.chainLabel,
-				restAddress: "TODO",
+				restAddress: "", // Will be fetched from geocoder
 				userImage: Images.Placeholders.home.image,
 				userName: userName.isEmpty ? "You" : userName,
 				userAddress: context?.userDefaultsService.getValueForKey(key: .addressName) as? String ?? ""

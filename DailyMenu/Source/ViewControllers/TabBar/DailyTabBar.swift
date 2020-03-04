@@ -23,7 +23,7 @@ class DailyTabBar: UIView {
 	
 	private let sliderHeight: CGFloat = 18
 	private lazy var sliderView: UIView = {
-		let label = UIView(frame: CGRect(x: 0, y: 0, width: 65, height: sliderHeight))
+		let label = UIView(frame: CGRect(x: 0, y: 0, width: 75, height: sliderHeight))
 		label.setRoundCorners(sliderHeight / 2)
 		label.backgroundColor = Colors.blue.color
 		return label
@@ -47,7 +47,7 @@ class DailyTabBar: UIView {
 		sliderView.snp.makeConstraints {
 			underlineLeadingConstraint = $0.leading.equalToSuperview().constraint
 			$0.height.equalTo(sliderHeight)
-			$0.width.equalTo(65)
+			$0.width.equalTo(75)
 			$0.bottom.equalToSuperview().inset(1)
 		}
 	}

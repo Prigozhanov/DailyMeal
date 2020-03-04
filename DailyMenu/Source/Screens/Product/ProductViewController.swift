@@ -54,7 +54,7 @@ final class ProductViewController: UIViewController {
     private lazy var sliderView = SliderView(title: "Spicy Level", sliderValues: ["Regular", "Spicy", "Naga"]) // TODO
     
     private var totalLabel: UILabel = {
-        let label = UILabel.makeSmallText("Total")
+		let label = UILabel.makeSmallText(Localizable.Product.total)
         label.textAlignment = .center
         return label
     }()
@@ -68,13 +68,13 @@ final class ProductViewController: UIViewController {
         return label
     }()
 
-    private lazy var addToCartButton = ActionButton("Add to Cart") { [weak self] _ in
+	private lazy var addToCartButton = ActionButton(Localizable.Product.addToCart) { [weak self] _ in
 		guard let self = self else { return }
 		self.tabBarController?.mainTabBar?.setBadgeVisible(true, at: 0)
 		self.viewModel.addToCart {
 			let vc = ConfirmationDiaglogViewController(
-				title: "Restaurants conflict",
-				subtitle: "You trying to add food from another restaurant, all your cart items will be removed after add this one",
+				title: Localizable.Product.restaurantsConflict,
+				subtitle: Localizable.Product.restaurantsConflictMessage,
 				onConfirm: { [weak self] in
 					self?.viewModel.reloadCart()
 					self?.viewModel.addToCart {}

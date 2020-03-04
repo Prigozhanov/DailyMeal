@@ -21,7 +21,7 @@ final class DeliveryLocationViewController: UIViewController, KeyboardObservable
 	var observableConstraints: [ObservableConstraint] = []
 	
     private let headerView = MapHeaderView(
-        title: "Delivery location",
+		title: Localizable.DeliveryLocation.deliveryLocation,
         shouldShowBackButton: false,
         shouldShowNotificationsButton: false
     )
@@ -39,7 +39,7 @@ final class DeliveryLocationViewController: UIViewController, KeyboardObservable
     private let locationSearchBottomInset: CGFloat = 60
     private lazy var locationSearchView = MapSearchView(
         item: MapSearchView.Item(
-            placeholder: "Type delivery location",
+            placeholder: Localizable.DeliveryLocation.typeDeliveryLocation,
             results: [],
             onSelectItem: { [weak self] address, searchView in
                 self?.viewModel.requestGeodcode(string: address, onSuccess: { address in
@@ -139,7 +139,7 @@ final class DeliveryLocationViewController: UIViewController, KeyboardObservable
 	}
     
     func showConfiramtionDialog(address: String) {
-        let vc = ConfirmationDiaglogViewController(title: "Address confirmation", subtitle: "", onConfirm: { [weak self] in
+		let vc = ConfirmationDiaglogViewController(title: Localizable.DeliveryLocation.addressConfirmation, subtitle: "", onConfirm: { [weak self] in
             self?.viewModel.saveAddressInfo()
             NotificationCenter.default.post(name: .userAddressChanged, object: nil)
             self?.dismiss(animated: true)
@@ -147,7 +147,7 @@ final class DeliveryLocationViewController: UIViewController, KeyboardObservable
                 self?.confirmationDiaglogIsVisible = false
         })
         vc.subtitleLabel.attributedText = Formatter.getHighlightedAttributtedString(
-            string: "Do you want to choose \(address) as your delivery address, please confirm if it's correct, and start to choose your meal.",
+            string: Localizable.DeliveryLocation.doYouWantToChooseAddress(address),
             keyWord: address,
             font: FontFamily.smallMedium!,
             highlightingFont: FontFamily.Poppins.semiBold.font(size: 12),

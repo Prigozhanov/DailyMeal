@@ -7,9 +7,9 @@ import UIKit
 
 final class OrderPlacedViewController: UIViewController {
     
-    private lazy var orderAgainButton = ActionButton("View order status") { [weak self] _ in
-        self?.navigationController?.dismiss(animated: true, completion: {
-        })
+	private lazy var viewOrderStatusButton = ActionButton(Localizable.OrderPlaced.viewOrderStatus) { [weak self] _ in
+		let vc = OrderStatusViewController(viewModel: OrderStatusViewModelImplementation())
+		self?.navigationController?.pushViewController(vc, animated: true)
     }
     
     override func viewDidLoad() {
@@ -21,14 +21,14 @@ final class OrderPlacedViewController: UIViewController {
         
         let imageView = UIImageView(image: Images.Placeholders.orderPlaced.image)
         imageView.contentMode = .scaleAspectFit
-        let messageTitle = UILabel.makeText("Your Food order have been placed")
+		let messageTitle = UILabel.makeText(Localizable.OrderPlaced.yourOrderPlaced)
         messageTitle.numberOfLines = 2
         messageTitle.font = FontFamily.Poppins.semiBold.font(size: 18)
-        let messageLabel = UILabel.makeText("Bushwick meh Blue Bottle pork belly mustache skateboard 3 wolf moon. Actually") // TODO change text
+		let messageLabel = UILabel.makeText(Localizable.OrderPlaced.waitForCourier(0)) // TODO set minutes
         messageLabel.font = FontFamily.Poppins.regular.font(size: 12)
         messageLabel.textColor = Colors.gray.color
         messageLabel.numberOfLines = 5
-        view.addSubviews([imageView, messageTitle, messageLabel, orderAgainButton])
+        view.addSubviews([imageView, messageTitle, messageLabel, viewOrderStatusButton])
         
         imageView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(100)
@@ -44,7 +44,7 @@ final class OrderPlacedViewController: UIViewController {
             $0.leading.equalTo(messageTitle)
             $0.width.equalToSuperview().multipliedBy(0.7)
         }
-        orderAgainButton.snp.makeConstraints {
+        viewOrderStatusButton.snp.makeConstraints {
             $0.top.greaterThanOrEqualTo(messageLabel.snp.bottom).offset(30)
             $0.height.equalTo(50)
             $0.centerX.equalToSuperview()
@@ -55,7 +55,7 @@ final class OrderPlacedViewController: UIViewController {
         Style.addNotificationButton(self) { (_) in
             
         }
-        Style.addTitle(title: "Order placed", self)
+		Style.addTitle(title: Localizable.OrderPlaced.orderPlacedTitle, self)
         
     }
     

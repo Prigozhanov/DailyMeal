@@ -57,17 +57,17 @@ final class OrderStatusViewController: UIViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
         
-        Style.addTitle(title: "Order status", self)
+		Style.addTitle(title: Localizable.OrderStatus.orderStatus, self)
         Style.addBackButton(self) { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
         }
     }
     
     private func setupStackView() {
-        let orderConfirmedRow = OrderStateRow(title: "Order confirmed", time: "12:11", checked: true)
-        let prepearingFoodRow = OrderStateRow(title: "Preparing food", time: "12:11", checked: true)
-        let foodOnTheWayRow = OrderStateRow(title: "Food on the way", time: "12:11", checked: false)
-        let DeliveredToYouRow = OrderStateRow(title: "Delivered to you", time: "12:11", checked: false)
+		let orderConfirmedRow = OrderStateRow(title: Localizable.OrderStatus.orderConfirmed, time: "12:11", checked: true)
+		let prepearingFoodRow = OrderStateRow(title: Localizable.OrderStatus.preparingFood, time: "12:11", checked: true)
+		let foodOnTheWayRow = OrderStateRow(title: Localizable.OrderStatus.foodOnTheWay, time: "12:11", checked: false)
+		let DeliveredToYouRow = OrderStateRow(title: Localizable.OrderStatus.deliveredToYou, time: "12:11", checked: false)
         stackView.addRow(orderIdView)
         stackView.addRow(orderConfirmedRow)
         stackView.addRow(prepearingFoodRow)

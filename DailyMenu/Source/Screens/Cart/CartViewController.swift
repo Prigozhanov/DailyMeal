@@ -20,7 +20,7 @@ final class CartViewController: UIViewController {
     
     private lazy var titleRow: UIView = {
         let view = UIView()
-        let title = UILabel.makeText("Your Food Cart")
+		let title = UILabel.makeText(Localizable.Cart.yourCart)
         title.font = FontFamily.Poppins.bold.font(size: 18)
         view.addSubview(title)
         title.snp.makeConstraints {
@@ -31,7 +31,7 @@ final class CartViewController: UIViewController {
     }()
     
     private lazy var emptyCartRow: UILabel = {
-        let label = UILabel.makeText("Cart is empty")
+		let label = UILabel.makeText(Localizable.Cart.cartIsEmpty)
         label.font = FontFamily.smallMedium
         label.textColor = Colors.gray.color
         label.textAlignment = .center
@@ -45,7 +45,7 @@ final class CartViewController: UIViewController {
     
     private var calculationRows: [UIView] = []
     
-	private lazy var proceedActionButton = ActionButton("Proceed to Checkout") { _ in
+	private lazy var proceedActionButton = ActionButton(Localizable.Cart.proceedToCheckout) { _ in
 		let vm = CheckoutViewModelImplementation()
 		let vc = CheckoutViewController(viewModel: vm)
 		let navigation = UINavigationController(rootViewController: vc)
@@ -150,13 +150,12 @@ final class CartViewController: UIViewController {
     }
     
     private func setupCalculationsRows() {
-        let cartTotalRow = CartTitleValueView(item: CartTitleValueView.Item(title: "Cart total", value: Formatter.Currency.toString(cartService.cartTotal)))
-        let taxRow = CartTitleValueView(item: CartTitleValueView.Item(title: "Tax", value: Formatter.Currency.toString(cartService.tax)))
-        let deliveryRow = CartTitleValueView(item: CartTitleValueView.Item(title: "Delivery", value: Formatter.Currency.toString(cartService.deliveryPrice)))
-        let promoDiscauntRow = CartTitleValueView(item: CartTitleValueView.Item(title: "Promo discaunt", value: Formatter.Currency.toString(cartService.promoDiscount)))
-        let subtotalRow = CartTitleValueView(item: CartTitleValueView.Item(title: "Subtotal", value: Formatter.Currency.toString(cartService.subtotal), preferesLargeValueLabel: true))
+		let cartTotalRow = CartTitleValueView(item: CartTitleValueView.Item(title: Localizable.Cart.cartTotal, value: Formatter.Currency.toString(cartService.cartTotal)))
+		let deliveryRow = CartTitleValueView(item: CartTitleValueView.Item(title: Localizable.Cart.delivery, value: Formatter.Currency.toString(cartService.deliveryPrice)))
+		let promoDiscauntRow = CartTitleValueView(item: CartTitleValueView.Item(title: Localizable.Cart.promoDiscaunt, value: Formatter.Currency.toString(cartService.promoDiscount)))
+		let subtotalRow = CartTitleValueView(item: CartTitleValueView.Item(title: Localizable.Cart.subtotal, value: Formatter.Currency.toString(cartService.subtotal), preferesLargeValueLabel: true))
         
-        calculationRows.append(contentsOf: [cartTotalRow, taxRow, deliveryRow, promoDiscauntRow, separator, subtotalRow])
+        calculationRows.append(contentsOf: [cartTotalRow, deliveryRow, promoDiscauntRow, separator, subtotalRow])
         aloeStackView.insertRows(calculationRows, after: promocodeView)
     }
     

@@ -59,7 +59,7 @@ class FilteredRestaurantsPreviewCell: UICollectionViewCell {
         let view = UIView()
         view.addSubview(minOrderLabel)
         
-        let descritionLabel = UILabel.makeExtraSmallText("Min order")
+		let descritionLabel = UILabel.makeExtraSmallText(Localizable.RestaurantInfo.minOrder)
         view.addSubview(descritionLabel)
         
         minOrderLabel.snp.makeConstraints {

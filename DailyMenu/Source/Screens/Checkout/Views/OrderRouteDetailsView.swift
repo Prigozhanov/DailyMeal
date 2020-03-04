@@ -80,7 +80,7 @@ class OrderRouteDetailsView: UIView {
 			userImageView,
 			userTitleLabel,
 			userAddressLabel,
-			userPinImageView,
+			userPinImageView
 		])
 		
 		restImageView.snp.makeConstraints {

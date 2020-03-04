@@ -46,7 +46,9 @@ class SectionHeaderCell: UIView {
     
     func configure(item: Item) {
         sectionLabel.text = item.section
-        itemsCountLabel.text = item.itemsCount == 1 ? "\(item.itemsCount) item" : "\(item.itemsCount) items"
+		let localizedString = NSLocalizedString("items_count", comment: "Plural localized string")
+		let formattedString = String.localizedStringWithFormat(localizedString, item.itemsCount)
+		itemsCountLabel.text = formattedString
     }
     
 }

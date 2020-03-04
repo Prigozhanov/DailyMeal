@@ -59,7 +59,7 @@ class RestaurantsFilterViewController: UIViewController, KeyboardObservable {
     
     private lazy var filterSearchView = FilterSearchView(
         item: FilterSearchView.Item(
-            placeholder: "Type restaurant name",
+			placeholder: Localizable.RestaurantsMap.typeRestName,
             onSearchAction: { [weak self] searchString in
                 self?.viewModel.restaurantName = searchString
                 self?.dismiss(animated: true) { [weak self] in

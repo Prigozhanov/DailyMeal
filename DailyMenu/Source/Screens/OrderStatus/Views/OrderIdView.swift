@@ -10,7 +10,7 @@ class OrderIdView: UIView {
     init(id: String) {
         super.init(frame: .zero)
         
-        let titleLabel = UILabel.makeSmallText("Your order ID")
+		let titleLabel = UILabel.makeSmallText(Localizable.OrderStatus.yourOrderId)
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()

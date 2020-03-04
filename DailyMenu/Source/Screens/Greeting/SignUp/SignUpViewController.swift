@@ -42,7 +42,7 @@ final class SignUpViewController: UIViewController, KeyboardObservable {
         
         view.backgroundColor = Colors.commonBackground.color
         
-        let titleLabel = UILabel.makeText("Sign up")
+		let titleLabel = UILabel.makeText(Localizable.Signup.signup)
         titleLabel.font = FontFamily.Poppins.medium.font(size: 16)
         
         view.addSubviews([titleLabel, contentView])
