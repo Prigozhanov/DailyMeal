@@ -169,6 +169,8 @@ internal enum L10n {
   }
 
   internal enum RestaurantInfo {
+    /// Closed
+    internal static let closed = L10n.tr("Localizable", "restaurant_info.closed")
     /// Delivery Fee
     internal static let deliveryFee = L10n.tr("Localizable", "restaurant_info.delivery_fee")
     /// %@ away
@@ -181,6 +183,8 @@ internal enum L10n {
     internal static func minutesDeliveryTime(_ p1: Int) -> String {
       return L10n.tr("Localizable", "restaurant_info.minutes_delivery_time", p1)
     }
+    /// Open
+    internal static let `open` = L10n.tr("Localizable", "restaurant_info.open")
   }
 
   internal enum Restaurants {

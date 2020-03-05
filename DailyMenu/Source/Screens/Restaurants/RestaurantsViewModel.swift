@@ -96,7 +96,6 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     
     var filteredRestaurants: [Restaurant] {
         let restaurants = restaurantsChain.filter({
-            
             $0.chainLabel.containsCaseIgnoring(searchFilter)
         })
         var sizeToBeLoaded = pageSize * pageNumber

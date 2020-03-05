@@ -19,6 +19,8 @@ public protocol RestaurantData {
 	var rating: Double { get }
 	var orderDelayFirst: Int { get }
 	var distance: Double { get }
+	var openTime: String { get }
+	var closeTime: String { get }
 }
 
 public protocol CartView: AnyObject {

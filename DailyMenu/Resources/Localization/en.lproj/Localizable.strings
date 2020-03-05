@@ -27,6 +27,8 @@
 "categories.unknown"                              = "Unknown";
 
 /* Restaurant info */
+"restaurant_info.closed"                          = "Closed";
+"restaurant_info.open"                            = "Open";
 "restaurant_info.min_order"                       = "Min order";
 "restaurant_info.delivery_fee"                    = "Delivery Fee";
 "restaurant_info.km_away"                         = "%@ away";

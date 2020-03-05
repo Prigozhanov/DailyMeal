@@ -14,7 +14,8 @@ class SectionHeaderCell: UIView {
     
     private let sectionLabel: UILabel = {
         let label = UILabel.makeLargeText()
-        label.font = FontFamily.Poppins.semiBold.font(size: 22)
+        label.font = FontFamily.Poppins.semiBold.font(size: 18)
+		label.numberOfLines = 2
         return label
     }()
     
@@ -40,8 +41,10 @@ class SectionHeaderCell: UIView {
         addSubview(itemsCountLabel)
         itemsCountLabel.snp.makeConstraints {
             $0.bottom.equalTo(sectionLabel.snp.bottom).inset(4)
-            $0.leading.equalTo(sectionLabel.snp.trailing).offset(Layout.largeMargin)
+			$0.leading.equalTo(sectionLabel.snp.trailing).offset(Layout.largeMargin)
+			$0.trailing.lessThanOrEqualToSuperview().inset(Layout.commonInset)
         }
+		itemsCountLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
     
     func configure(item: Item) {

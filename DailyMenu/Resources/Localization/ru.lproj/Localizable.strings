@@ -27,6 +27,8 @@
 "categories.unknown"                              = "Неизвестно";
 
 /* Restaurant info */
+"restaurant_info.closed"                          = "Закрыт";
+"restaurant_info.open"                            = "Открыт";
 "restaurant_info.min_order"                       = "Минимальный заказ";
 "restaurant_info.delivery_fee"                    = "Стоимость доставки";
 "restaurant_info.km_away"                         = "%@ от вас";

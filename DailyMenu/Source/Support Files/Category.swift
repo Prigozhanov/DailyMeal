@@ -51,5 +51,3 @@ public enum FoodCategory: String, CaseIterable {
 public enum FoodOption: String {
     case cheese = "Cheese", petty = "Petty", hot = "Hot", dummy = "Dummy"
 }
-
-

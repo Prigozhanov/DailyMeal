@@ -21,8 +21,13 @@ class RestaurantCell: BaseTableCell {
         label.font = FontFamily.smallMedium
         return label
     }()
-    private var restaurantNameLabel = UILabel.makeText()
-    
+	
+	private var restaurantNameLabel: UILabel = {
+		let label = UILabel.makeText()
+		label.numberOfLines = 2
+		return label
+	}()
+	
     private var restaurantLogoImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFit
@@ -59,6 +64,12 @@ class RestaurantCell: BaseTableCell {
         return label
     }()
     
+	private lazy var closedTimeView: RestaurantStatusView = {
+		let view = RestaurantStatusView()
+		view.rectColor = Colors.commonBackground.color
+		return view
+	}()
+	
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: nil)
     }
@@ -69,7 +80,7 @@ class RestaurantCell: BaseTableCell {
         let shadowView = UIView(frame: .zero)
         let cardView = CardView(shadowSize: .medium, customInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
         let restaurantInfoView: UIView = UIView(frame: .zero)
-        
+		
         selectionStyle = .none
         contentView.backgroundColor = Colors.commonBackground.color
         
@@ -90,7 +101,15 @@ class RestaurantCell: BaseTableCell {
             $0.leading.equalToSuperview()
             $0.height.equalTo(150)
         }
-        
+		
+		cardView.contentView.addSubview(closedTimeView)
+		closedTimeView.snp.makeConstraints {
+			$0.top.trailing.equalToSuperview()
+			$0.height.equalTo(50)
+			$0.width.equalTo(100)
+		}
+		closedTimeView.setRoundCorners(Layout.cornerRadius)
+		
         cardView.contentView.addSubview(restaurantInfoView)
         restaurantInfoView.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(Layout.commonInset)
@@ -142,7 +161,9 @@ class RestaurantCell: BaseTableCell {
         deliveryFeeLabel.snp.makeConstraints {
             $0.top.equalTo(deliveryFeeValueLabel.snp.bottom)
             $0.trailing.equalToSuperview()
+			$0.leading.greaterThanOrEqualTo(restaurantNameLabel.snp.trailing)
         }
+		deliveryFeeLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         
         cardView.contentView.addSubview(restaurantDescriptionLabel)
         restaurantDescriptionLabel.snp.makeConstraints {
@@ -189,7 +210,14 @@ extension RestaurantCell: ConfigurableCell {
         restaurantDescriptionLabel.text = item.restaurantDescription
         if let url = URL(string: item.src) {
             self.restaurantLogoImageView.kf.setImage(with: url)
-        }
-    }
-    
+		}
+		closedTimeView.configure(
+			item: RestaurantStatusView.Item(
+				status: RestaurantStatusView.Status.fromString(item.status.rawValue),
+				openTime: Date.fromString(item.openTime)?.toString(formatter: Date.timeFormatter) ?? "",
+				closedTime: Date.fromString(item.closeTime)?.toString(formatter: Date.timeFormatter) ?? ""
+			)
+		)
+	}
+	
 }
