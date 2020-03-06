@@ -116,6 +116,13 @@
 
 /* OrderChecout */
 "order_checkout.you"                              = "Вы";
+"order_checkout.payment_method"                   = "Способ оплаты";
+"order_checkout.credit_card"                      = "Кредитная карта";
+"order_checkout.cash"                             = "Наличные";
+"order_checkout.submit_order"                     = "Заказать";
+"order_checkout.checkout"                         = "Оформление заказа";
+"order_checkout.delivery_time"                    = "Время доставки";
+"order_checkout.minutes"                          = "%d минут";
 
 /* OrderPlaced */
 "order_placed.view_order_status"                  = "Посмотреть статус заказа";

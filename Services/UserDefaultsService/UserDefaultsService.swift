@@ -77,6 +77,9 @@ public class UserDefaultsServiceImplementation: UserDefaultsService {
         setValueForKey(key: .addressesId, value: info?.addressesId as Any)
         setValueForKey(key: .regionId, value: info?.regionId as Any)
         setValueForKey(key: .streetId, value: info?.streetId as Any)
+		setValueForKey(key: .addressLat, value: info?.addressLat as Any)
+		setValueForKey(key: .addressLon, value: info?.addressLon as Any)
+		
     }
     
 }
@@ -93,7 +96,9 @@ public enum UserDefaultsKey: String, CaseIterable {
     areaId,
     addressesId,
     regionId,
-    streetId
+    streetId,
+	addressLat,
+	addressLon
 }
 
 public enum PaymentMethod: Int {

@@ -35,6 +35,7 @@
 		E71139F02346AF0500889AE2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139EE2346AF0500889AE2 /* SettingsViewController.swift */; };
 		E71139F42346AFE300889AE2 /* RestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139F22346AFE300889AE2 /* RestaurantsViewController.swift */; };
 		E71139F52346AFE300889AE2 /* RestaurantsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71139F32346AFE300889AE2 /* RestaurantsViewModel.swift */; };
+		E714A9DC2412523C002074E8 /* UserAddressAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E714A9DB2412523C002074E8 /* UserAddressAnnotation.swift */; };
 		E718691D237DC00300059766 /* BaseTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E718691C237DC00300059766 /* BaseTableCell.swift */; };
 		E7186983237DCC1400059766 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7186970237DCC1400059766 /* Poppins-ExtraLight.ttf */; };
 		E7186984237DCC1400059766 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7186971237DCC1400059766 /* Poppins-ThinItalic.ttf */; };
@@ -111,7 +112,7 @@
 		E77D33AB23E770D5006577C2 /* PaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D33AA23E770D5006577C2 /* PaymentMethodView.swift */; };
 		E78B605123D8D6DD00389EE2 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78B605023D8D6DD00389EE2 /* GradientView.swift */; };
 		E78C382F23D760D400335887 /* CartItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78C382E23D760D400335887 /* CartItemView.swift */; };
-		E78F320F240BF10E004A844C /* OrederRouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78F320E240BF10E004A844C /* OrederRouteViewController.swift */; };
+		E78F320F240BF10E004A844C /* OrderRouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78F320E240BF10E004A844C /* OrderRouteViewController.swift */; };
 		E78F3211240C0521004A844C /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78F3210240C0521004A844C /* Map.swift */; };
 		E792166D24092C430048C6C9 /* DailyTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E792166C24092C430048C6C9 /* DailyTabBar.swift */; };
 		E7926C6723D8C3D800768405 /* CartTitleValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7926C6623D8C3D800768405 /* CartTitleValueView.swift */; };
@@ -300,6 +301,7 @@
 		E71139EE2346AF0500889AE2 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E71139F22346AFE300889AE2 /* RestaurantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantsViewController.swift; sourceTree = "<group>"; };
 		E71139F32346AFE300889AE2 /* RestaurantsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantsViewModel.swift; sourceTree = "<group>"; };
+		E714A9DB2412523C002074E8 /* UserAddressAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAddressAnnotation.swift; sourceTree = "<group>"; };
 		E71708B823EB29C900D444BD /* KeyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
 		E718691C237DC00300059766 /* BaseTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableCell.swift; sourceTree = "<group>"; };
 		E7186970237DCC1400059766 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -380,7 +382,7 @@
 		E77D33AA23E770D5006577C2 /* PaymentMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodView.swift; sourceTree = "<group>"; };
 		E78B605023D8D6DD00389EE2 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		E78C382E23D760D400335887 /* CartItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemView.swift; sourceTree = "<group>"; };
-		E78F320E240BF10E004A844C /* OrederRouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrederRouteViewController.swift; sourceTree = "<group>"; };
+		E78F320E240BF10E004A844C /* OrderRouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderRouteViewController.swift; sourceTree = "<group>"; };
 		E78F3210240C0521004A844C /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		E792166C24092C430048C6C9 /* DailyTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTabBar.swift; sourceTree = "<group>"; };
 		E7926C6623D8C3D800768405 /* CartTitleValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTitleValueView.swift; sourceTree = "<group>"; };
@@ -569,7 +571,7 @@
 			isa = PBXGroup;
 			children = (
 				E77D33A923E770C1006577C2 /* Views */,
-				E78F320E240BF10E004A844C /* OrederRouteViewController.swift */,
+				E78F320E240BF10E004A844C /* OrderRouteViewController.swift */,
 				E71139B82346AC7400889AE2 /* CheckoutViewController.swift */,
 				E71139B92346AC7400889AE2 /* CheckoutViewModel.swift */,
 				E71139C12346AC7400889AE2 /* OrderPlacedViewController.swift */,
@@ -646,6 +648,18 @@
 				E71139F32346AFE300889AE2 /* RestaurantsViewModel.swift */,
 			);
 			path = Restaurants;
+			sourceTree = "<group>";
+		};
+		E714A9DA2412520F002074E8 /* Annotations */ = {
+			isa = PBXGroup;
+			children = (
+				E7F3171D24045D300011CC42 /* UserLocationAnnotationView.swift */,
+				E7A03B762401A9640011C541 /* RestaurantAnnotation.swift */,
+				E7A03B752401A9630011C541 /* RestaurantAnnotationView.swift */,
+				E7A03B792401A98D0011C541 /* RestaurantCalloutView.swift */,
+				E714A9DB2412523C002074E8 /* UserAddressAnnotation.swift */,
+			);
+			path = Annotations;
 			sourceTree = "<group>";
 		};
 		E718696F237DCC1400059766 /* Fonts */ = {
@@ -882,12 +896,9 @@
 		E78A5D1723EE45E300D20922 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				E714A9DA2412520F002074E8 /* Annotations */,
 				E718B4A923EF229D001EB7FE /* MapViewController.swift */,
 				E718B4AB23EF2706001EB7FE /* MapViewModel.swift */,
-				E7A03B762401A9640011C541 /* RestaurantAnnotation.swift */,
-				E7A03B752401A9630011C541 /* RestaurantAnnotationView.swift */,
-				E7A03B792401A98D0011C541 /* RestaurantCalloutView.swift */,
-				E7F3171D24045D300011CC42 /* UserLocationAnnotationView.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -1606,7 +1617,7 @@
 			files = (
 				E77D33AB23E770D5006577C2 /* PaymentMethodView.swift in Sources */,
 				E7ACE46A240C0D990012BC5B /* OrderRouteDetailsView.swift in Sources */,
-				E78F320F240BF10E004A844C /* OrederRouteViewController.swift in Sources */,
+				E78F320F240BF10E004A844C /* OrderRouteViewController.swift in Sources */,
 				E7E04A6323CD68850045A381 /* Style.swift in Sources */,
 				E7F15DF223FF00B900E35668 /* RatingView.swift in Sources */,
 				E718B4AC23EF2706001EB7FE /* MapViewModel.swift in Sources */,
@@ -1702,6 +1713,7 @@
 				E71139EF2346AF0500889AE2 /* SettingsViewModel.swift in Sources */,
 				E7333EC923F34C8C004E4400 /* OptionView.swift in Sources */,
 				E7A03B7A2401A98D0011C541 /* RestaurantCalloutView.swift in Sources */,
+				E714A9DC2412523C002074E8 /* UserAddressAnnotation.swift in Sources */,
 				E7037363234FE85D00852B04 /* Layout.swift in Sources */,
 				E76622F523FD2C41004D64BB /* CategoryFilterBar.swift in Sources */,
 				E7DCBC9C2402101100770498 /* MapResultsTableView.swift in Sources */,

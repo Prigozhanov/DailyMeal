@@ -23,7 +23,7 @@ final class CheckoutViewController: UIViewController {
     private lazy var creditCardRow: PaymentMethodView = {
         let view = PaymentMethodView(item:
             PaymentMethodView.Item(
-                title: "Credit/Debt cart",
+				title: Localizable.OrderCheckout.creditCard,
                 image: Images.Placeholders.creditCardSecond.image,
                 isSelected: viewModel.creditCard != nil,
                 tapHandler: { [unowned self] view in
@@ -46,7 +46,7 @@ final class CheckoutViewController: UIViewController {
     private lazy var cashRow: PaymentMethodView = {
         PaymentMethodView(item:
             PaymentMethodView.Item(
-                title: "Cash",
+				title: Localizable.OrderCheckout.cash,
                 image: Images.Placeholders.cash.image,
                 tapHandler: { [unowned self] view in
                     self.selectCashPaymentType()
@@ -56,7 +56,7 @@ final class CheckoutViewController: UIViewController {
         )
     }()
     
-    private lazy var submitButton = ActionButton("Submit Order") { [weak self] _ in
+	private lazy var submitButton = ActionButton(Localizable.OrderCheckout.submitOrder) { [weak self] _ in
         self?.viewModel.checkoutOrder()
         let vc = OrderPlacedViewController()
         self?.navigationController?.pushViewController(vc, animated: true)
@@ -95,7 +95,7 @@ final class CheckoutViewController: UIViewController {
 			stackView.addRow(orderRouteViewController!.view)
 		}
 		
-        let paymentMethodLabel = UILabel.makeText("Payment method")
+		let paymentMethodLabel = UILabel.makeText(Localizable.OrderCheckout.paymentMethod)
         stackView.addRow(paymentMethodLabel)
         stackView.addRow(creditCardRow)
         stackView.addRow(cashRow)
@@ -110,7 +110,7 @@ final class CheckoutViewController: UIViewController {
 		
         updateCreditCardLabel(with: self.viewModel.creditCard?.number)
         
-        Style.addTitle(title: "Checkout", self)
+		Style.addTitle(title: Localizable.OrderCheckout.checkout, self)
         Style.addNotificationButton(self) { (_) in
             
         }
@@ -134,7 +134,7 @@ final class CheckoutViewController: UIViewController {
     }
     
     private func updateCreditCardLabel(with cardNumber: String?) {
-        creditCardRow.titleLabel.text = Formatter.CreditCard.hiddenNumber(string: cardNumber) ?? "Credit/Debt cart"
+		creditCardRow.titleLabel.text = Formatter.CreditCard.hiddenNumber(string: cardNumber) ?? Localizable.OrderCheckout.creditCard
     }
     
 }

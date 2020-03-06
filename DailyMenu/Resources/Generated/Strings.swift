@@ -106,6 +106,22 @@ internal enum L10n {
   }
 
   internal enum OrderCheckout {
+    /// Cash
+    internal static let cash = L10n.tr("Localizable", "order_checkout.cash")
+    /// Checkout
+    internal static let checkout = L10n.tr("Localizable", "order_checkout.checkout")
+    /// Credit/Debt cart"
+    internal static let creditCard = L10n.tr("Localizable", "order_checkout.credit_card")
+    /// Delivery time
+    internal static let deliveryTime = L10n.tr("Localizable", "order_checkout.delivery_time")
+    /// %d minutes
+    internal static func minutes(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "order_checkout.minutes", p1)
+    }
+    /// Payment method
+    internal static let paymentMethod = L10n.tr("Localizable", "order_checkout.payment_method")
+    /// Submit Order
+    internal static let submitOrder = L10n.tr("Localizable", "order_checkout.submit_order")
     /// You
     internal static let you = L10n.tr("Localizable", "order_checkout.you")
   }

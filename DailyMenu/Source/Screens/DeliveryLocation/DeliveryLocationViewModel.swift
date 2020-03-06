@@ -131,7 +131,9 @@ final class DeliveryLocationViewModelImplementation: DeliveryLocationViewModel {
                         areaId: addressExists.areaID,
                         addressesId: addressExists.id,
                         regionId: addressExists.regionID,
-                        streetId: addressExists.streetID
+						streetId: addressExists.streetID,
+						addressLat: Double(addressExists.lat ?? ""),
+						addressLon: Double(addressExists.long ?? "")
                     )
                 }
             case let .failure(error):

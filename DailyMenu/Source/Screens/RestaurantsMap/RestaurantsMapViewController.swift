@@ -122,6 +122,7 @@ final class RestaurantsMapViewController: UIViewController, KeyboardObservable {
         }
 
         mapController.moveCameraToUserLocation(fromDistance: 15000)
+		mapController.showUserAddressAnnotation()
 		
     }
     

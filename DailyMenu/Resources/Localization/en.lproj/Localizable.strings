@@ -116,6 +116,13 @@
 
 /* OrderChecout */
 "order_checkout.you"                              = "You";
+"order_checkout.payment_method"                   = "Payment method";
+"order_checkout.credit_card"                      = "Credit/Debt cart\"";
+"order_checkout.cash"                             = "Cash";
+"order_checkout.submit_order"                     = "Submit Order";
+"order_checkout.checkout"                         = "Checkout";
+"order_checkout.delivery_time"                    = "Delivery time";
+"order_checkout.minutes"                          = "%d minutes";
 
 /* OrderPlaced */
 "order_placed.view_order_status"                  = "View order status";
