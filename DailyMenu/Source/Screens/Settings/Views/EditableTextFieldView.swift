@@ -45,7 +45,7 @@ class EditableTextFieldView: UIView {
         self.item = item
         
         super.init(frame: .zero)
-        
+		
         let textFieldContainer = UIView()
         textFieldContainer.backgroundColor = Colors.white.color
         textFieldContainer.setRoundCorners(Layout.cornerRadius)

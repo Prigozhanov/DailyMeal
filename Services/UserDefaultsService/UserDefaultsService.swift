@@ -98,7 +98,10 @@ public enum UserDefaultsKey: String, CaseIterable {
     regionId,
     streetId,
 	addressLat,
-	addressLon
+	addressLon,
+	lastOrderId,
+	lastOrderDate,
+	lastOrderDeliveryTimeSeconds
 }
 
 public enum PaymentMethod: Int {

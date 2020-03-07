@@ -46,9 +46,7 @@ class CategoryFilterBar: UIView {
             with: FoodCategoryCell.Item(
                 image: data.image,
 				category: data.category,
-				subtitle: Localizable.Restaurants.restaurantsCategoryCount(
-					self?.item.categoryRestaurantsCount(data.category) ?? 0
-				),
+				restaurantsCount: self?.item.categoryRestaurantsCount(data.category) ?? 0,
                 onSelectAction: { [weak self] category in
                     self?.item.selectedCategory = category
                     self?.item.onSelectAction(category)

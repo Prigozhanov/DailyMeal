@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import Extensions
 
 public protocol RestaurantData {
 	var id: Int { get }
@@ -105,5 +106,16 @@ public final class CartServiceImplementation: CartService {
 	public func reload() {
 		items.removeAll()
 		restaurant = nil
+		NotificationCenter.default.post(name: .cartDidReload, object: nil)
+	}
+}
+
+public extension Notification.Name {
+	static var cartDidReload = Notification.Name("cartDidReload")
+}
+
+public extension NotificationDescriptor {
+	static var cartDidReloadDescriptor: NotificationDescriptor<Void> {
+		return NotificationDescriptor<Void>(name: .cartDidReload) { _ in }
 	}
 }

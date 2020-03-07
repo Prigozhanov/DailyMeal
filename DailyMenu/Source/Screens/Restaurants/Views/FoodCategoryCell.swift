@@ -10,7 +10,7 @@ class FoodCategoryCell: BaseCollectionCell {
     struct Item {
         let image: UIImage
         let category: FoodCategory
-        let subtitle: String
+        let restaurantsCount: Int
         let onSelectAction: (FoodCategory?) -> Void
     }
     
@@ -33,7 +33,10 @@ class FoodCategoryCell: BaseCollectionCell {
     private let filterNameLabel = UILabel.makeSmallText()
     
     private let restaurantCountLabel: UILabel = {
-		let label = UILabel.makeExtraSmallText(Localizable.Restaurants.restaurantsCategoryCount(0))
+		
+		let label = UILabel.makeExtraSmallText(
+			String.localizedStringWithFormat("categories_restaurants_count".localized, 0)
+		)
         label.textColor = Colors.gray.color
         return label
     }()
@@ -101,7 +104,9 @@ class FoodCategoryCell: BaseCollectionCell {
         
         imageView.image = item.image
         filterNameLabel.text = item.category.humanReadableValue
-        restaurantCountLabel.text = item.subtitle
+		restaurantCountLabel.text = String.localizedStringWithFormat(
+			"categories_restaurants_count".localized, item.restaurantsCount
+		) 
         if isSelected {
             setState(.selected)
         } else {

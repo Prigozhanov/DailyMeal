@@ -61,7 +61,10 @@ extension UIButton {
     }
     
     static func makeNotificationButton() -> UIButton {
-        let button = UIButton.makeCommonButton { _ in }
+        let button = UIButton.makeCommonButton { button in
+			let vc = OrderStatusViewController(viewModel: OrderStatusViewModelImplementation())
+			button.parentViewController?.present(vc, animated: true)
+		}
         button.setImage(Images.Icons.notification.image.withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = Colors.white.color
         return button

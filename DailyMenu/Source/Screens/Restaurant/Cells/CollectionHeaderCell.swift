@@ -47,7 +47,7 @@ class CollectionHeaderCell: UIView {
     }()
     
     private let restaurantLogo: UIImageView = {
-        let view = UIImageView(image: Images.restaurantLogoPlaceholder.image)
+        let view = UIImageView()
         view.contentMode = .scaleAspectFit
         return view
     }()

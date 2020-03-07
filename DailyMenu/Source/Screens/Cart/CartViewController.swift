@@ -4,10 +4,14 @@
 //
 
 import AloeStackView
+import Extensions
+import Services
 
 final class CartViewController: UIViewController {
     
     private var cartService: CartService = AppDelegate.shared.context.cartService
+	
+	private var notificationTokens: [Token] = []
     
     private var aloeStackView: AloeStackView = {
         let stack = AloeStackView()
@@ -66,6 +70,11 @@ final class CartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+		
+		notificationTokens.append(Token.make(descriptor: .cartDidReloadDescriptor, using: { [weak self] _ in
+			self?.reloadScreen()
+		}))
+		
         setupScreen()
         reloadScreen()
         
@@ -100,7 +109,7 @@ final class CartViewController: UIViewController {
         setupItemsRows()
         setupPromoRow()
         setupCalculationsRows()
-        setupCheckoutRow()
+		setupCheckoutRow()
     }
     
     private func setupTitleRow() {
@@ -112,7 +121,9 @@ final class CartViewController: UIViewController {
         aloeStackView.setInset(forRow: emptyCartRow, inset: UIEdgeInsets(top: 50, left: 0, bottom: 50, right: 0))
         if !cartService.items.isEmpty {
             aloeStackView.hideRow(emptyCartRow)
-        }
+		} else {
+			tabBarController?.mainTabBar?.setBadgeVisible(false, at: 0)
+		}
     }
     
     private func setupItemsRows() {

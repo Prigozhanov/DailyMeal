@@ -174,6 +174,8 @@ internal enum L10n {
     internal static let deliveredToYou = L10n.tr("Localizable", "order_status.delivered_to_you")
     /// Food on the way
     internal static let foodOnTheWay = L10n.tr("Localizable", "order_status.food_on_the_way")
+    /// No orders found
+    internal static let noOrdersFound = L10n.tr("Localizable", "order_status.no_orders_found")
     /// Order confirmed
     internal static let orderConfirmed = L10n.tr("Localizable", "order_status.order_confirmed")
     /// Order status
@@ -237,10 +239,6 @@ internal enum L10n {
     /// Hello, %@. 
     internal static func hello(_ p1: String) -> String {
       return L10n.tr("Localizable", "restaurants.hello", p1)
-    }
-    /// %d Restaurants
-    internal static func restaurantsCategoryCount(_ p1: Int) -> String {
-      return L10n.tr("Localizable", "restaurants.restaurants_category_count", p1)
     }
     /// Search Restaurant
     internal static let search = L10n.tr("Localizable", "restaurants.search")

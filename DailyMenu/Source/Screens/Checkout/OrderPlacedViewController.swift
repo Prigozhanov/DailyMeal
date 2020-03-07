@@ -7,11 +7,21 @@ import UIKit
 
 final class OrderPlacedViewController: UIViewController {
     
+	private var deliveryTime: Int
+	
 	private lazy var viewOrderStatusButton = ActionButton(Localizable.OrderPlaced.viewOrderStatus) { [weak self] _ in
 		let vc = OrderStatusViewController(viewModel: OrderStatusViewModelImplementation())
 		self?.navigationController?.pushViewController(vc, animated: true)
     }
     
+	init(deliveryTime: Int) {
+		self.deliveryTime = deliveryTime
+		
+		super.init(nibName: nil, bundle: nil)
+	}
+	
+	required init?(coder: NSCoder) { fatalError() }
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,7 +34,7 @@ final class OrderPlacedViewController: UIViewController {
 		let messageTitle = UILabel.makeText(Localizable.OrderPlaced.yourOrderPlaced)
         messageTitle.numberOfLines = 2
         messageTitle.font = FontFamily.Poppins.semiBold.font(size: 18)
-		let messageLabel = UILabel.makeText(Localizable.OrderPlaced.waitForCourier(0)) // TODO set minutes
+		let messageLabel = UILabel.makeText(Localizable.OrderPlaced.waitForCourier(deliveryTime))
         messageLabel.font = FontFamily.Poppins.regular.font(size: 12)
         messageLabel.textColor = Colors.gray.color
         messageLabel.numberOfLines = 5
@@ -56,7 +66,6 @@ final class OrderPlacedViewController: UIViewController {
             
         }
 		Style.addTitle(title: Localizable.OrderPlaced.orderPlacedTitle, self)
-        
     }
     
 }

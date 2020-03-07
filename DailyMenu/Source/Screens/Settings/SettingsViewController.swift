@@ -19,6 +19,19 @@ final class SettingsViewController: UIViewController {
         stack.separatorHeight = 0
         return stack
     }()
+	
+	private let headerView: UIView = {
+		let view = UIView()
+		let imageView = UIImageView(image: Images.Placeholders.dailyLogo.image)
+		
+		view.addSubview(imageView)
+		imageView.snp.makeConstraints {
+			$0.top.equalTo(view.safeAreaLayoutGuide)
+			$0.leading.trailing.bottom.equalToSuperview()
+		}
+		imageView.contentMode = .scaleAspectFit
+		return view
+	}()
     
     init(viewModel: SettingsViewModel) {
         self.viewModel = viewModel
@@ -41,12 +54,18 @@ final class SettingsViewController: UIViewController {
             self?.reloadRows()
         }))
         
-        view.addSubview(stackView)
-        stackView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(100)
-            $0.leading.trailing.bottom.equalToSuperview().inset(Layout.commonInset)
-        }
+        view.addSubviews([headerView, stackView])
+		
+		headerView.snp.makeConstraints {
+			$0.top.leading.trailing.equalToSuperview()
+			$0.height.equalTo(150)
+		}
         
+		stackView.snp.makeConstraints {
+			$0.top.equalTo(headerView.snp.bottom)
+			$0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+		}
+		
         reloadRows()
         
         view.addGestureRecognizer(BlockTap(action: { [weak self] _ in
@@ -58,10 +77,14 @@ final class SettingsViewController: UIViewController {
         super.viewWillAppear(animated)
         reloadRows()
     }
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		Style.addBlueGradient(headerView)
+	}
     
     func reloadRows() {
         stackView.removeAllRows()
-        
         let addressField: EditableTextFieldView = EditableTextFieldView(
             item: EditableTextFieldView.Item(
 				title: Localizable.Settings.address,

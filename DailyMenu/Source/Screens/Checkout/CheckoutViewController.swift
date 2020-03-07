@@ -58,9 +58,6 @@ final class CheckoutViewController: UIViewController {
     
 	private lazy var submitButton = ActionButton(Localizable.OrderCheckout.submitOrder) { [weak self] _ in
         self?.viewModel.checkoutOrder()
-        let vc = OrderPlacedViewController()
-        self?.navigationController?.pushViewController(vc, animated: true)
-        
     }
     
     init(viewModel: CheckoutViewModel) {
@@ -141,6 +138,15 @@ final class CheckoutViewController: UIViewController {
 
 // MARK: - CheckoutView
 extension CheckoutViewController: CheckoutView {
+	func onSuccessSubmit() {
+		let vc = OrderPlacedViewController(deliveryTime: viewModel.restaurant?.orderDelayFirst ?? 0)
+		self.navigationController?.pushViewController(vc, animated: true)
+	}
+	
+	func onFailedSubmit() {
+		
+	}
+	
     
 }
 

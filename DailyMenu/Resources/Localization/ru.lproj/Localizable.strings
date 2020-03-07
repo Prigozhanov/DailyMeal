@@ -27,7 +27,7 @@
 "categories.unknown"                              = "Неизвестно";
 "categories.compatible.burger"                    = "Бургер";
 "categories.compatible.chicken"                   = "Курица";
-"categories.compatible.desert"                    = "Десерт";
+"categories.compatible.desert"                    = "Десерты";
 "categories.compatible.fries"                     = "Картофель";
 "categories.compatible.hotdog"                    = "Хотдог";
 "categories.compatible.lobstar"                   = "Лобстер";
@@ -106,7 +106,6 @@
 "settings.build"                                  = "Сборка";
 
 /* Restaurants */
-"restaurants.restaurants_category_count"          = "%d Ресторанов";
 "restaurants.search"                              = "Поиск ресторанов";
 "restaurants.what_would_you_like_to_eat"          = "Что будете кушать?";
 "restaurants.hello"                               = "Здравсвуйте, %@. ";
@@ -151,3 +150,4 @@
 "order_status.preparing_food"                     = "Заказ готовится";
 "order_status.food_on_the_way"                    = "Заказ в пути";
 "order_status.delivered_to_you"                   = "Заказ получен";
+"order_status.no_orders_found"                    = "Нет заказов";

@@ -106,7 +106,6 @@
 "settings.build"                                  = "Build";
 
 /* Restaurants */
-"restaurants.restaurants_category_count"          = "%d Restaurants";
 "restaurants.search"                              = "Search Restaurant";
 "restaurants.what_would_you_like_to_eat"          = "What would you like to eat?";
 "restaurants.hello"                               = "Hello, %@. ";
@@ -151,3 +150,4 @@
 "order_status.preparing_food"                     = "Preparing food";
 "order_status.food_on_the_way"                    = "Food on the way";
 "order_status.delivered_to_you"                   = "Delivered to you";
+"order_status.no_orders_found"                    = "No orders found";

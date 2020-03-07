@@ -9,7 +9,8 @@ import Networking
 
 // MARK: - View
 protocol CheckoutView: class {
-    
+    func onSuccessSubmit()
+	func onFailedSubmit()
 }
 
 // MARK: - ViewModel
@@ -86,7 +87,11 @@ final class CheckoutViewModelImplementation: CheckoutViewModel {
         )
         
         let req = networkService.requestFactory.shoppingCart(shoppingCartRequest: requestObject)
-        
+		userDefaultsService.setValueForKey(key: .lastOrderId, value: "TEST")
+		userDefaultsService.setValueForKey(key: .lastOrderDate, value: Date())
+		userDefaultsService.setValueForKey(key: .lastOrderDeliveryTimeSeconds, value: (restaurant?.orderDelayFirst ?? 0) * 60)
+		cartService.reload()
+		view?.onSuccessSubmit()
 //        networkService.send(request: req) { (result, _) in
 //            switch result {
 //            case let .success(response):
