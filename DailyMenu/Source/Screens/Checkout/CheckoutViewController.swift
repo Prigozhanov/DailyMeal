@@ -106,7 +106,8 @@ final class CheckoutViewController: UIViewController {
 		stackView.setInset(forRow: submitButton, inset: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
 		
         updateCreditCardLabel(with: self.viewModel.creditCard?.number)
-        
+		selectCashPaymentType()
+		
 		Style.addTitle(title: Localizable.OrderCheckout.checkout, self)
         Style.addNotificationButton(self) { (_) in
             
