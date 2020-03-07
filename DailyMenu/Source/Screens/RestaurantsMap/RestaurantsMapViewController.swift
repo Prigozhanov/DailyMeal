@@ -92,8 +92,7 @@ final class RestaurantsMapViewController: UIViewController, KeyboardObservable {
         super.viewDidLoad()
         
         viewModel.view = self
-        
-        viewModel.loadRestaurants()
+		
         addChild(mapController)
         view.addSubview(mapController.view)
         mapController.view.snp.makeConstraints {
@@ -134,6 +133,15 @@ final class RestaurantsMapViewController: UIViewController, KeyboardObservable {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		startObserveKeyboard()
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		LoadingIndicator.show(mapController)
+		viewModel.loadRestaurants {
+			LoadingIndicator.hide()
+		}
 	}
     
 }

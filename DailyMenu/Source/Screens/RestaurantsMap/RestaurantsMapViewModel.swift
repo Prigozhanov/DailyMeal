@@ -27,7 +27,7 @@ protocol RestaurantsMapViewModel {
     var products: [Int: [Product]] { get }
 
 	func filterRestaurants(completion: @escaping VoidClosure)
-    func loadRestaurants()
+    func loadRestaurants(completion: @escaping VoidClosure)
     
 }
 
@@ -62,7 +62,7 @@ final class RestaurantsMapViewModelImplementation: RestaurantsMapViewModel {
         restaurants = []
     }
     
-    func loadRestaurants() {
+	func loadRestaurants(completion: @escaping VoidClosure) {
         guard let areaId = userDefaultsService.getValueForKey(key: .areaId) as? Int,
             let addressId = userDefaultsService.getValueForKey(key: .addressesId) as? Int else {
                 return
@@ -73,10 +73,11 @@ final class RestaurantsMapViewModelImplementation: RestaurantsMapViewModel {
             case let .success(response):
                 self?.restaurants = response.restaurants.filter({ $0.type == .restaurant })
                 self?.view?.reloadScreen()
-                self?.loadRestaurantsDetails()
+				self?.loadRestaurantsDetails()
             case let .failure(error):
-                print(error)
+				logDebug(message: error.localizedDescription)
             }
+			completion()
         }
     }
 	
@@ -139,7 +140,6 @@ final class RestaurantsMapViewModelImplementation: RestaurantsMapViewModel {
         }
         
         group.notify(queue: .global(qos: .background)) {
-            
         }
     }
     
