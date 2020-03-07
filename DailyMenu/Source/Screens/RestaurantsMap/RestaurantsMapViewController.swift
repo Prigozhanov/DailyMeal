@@ -166,15 +166,22 @@ extension RestaurantsMapViewController: RestaurantsMapView {
                 $0.height.equalTo(50)
             }
             
-            filteredRestaurantsPreview.configure(cellItems: viewModel.filteredRestaurants.map {
-                makeRestaurantsPreviewItem(restaurant: $0)
-            })
-            
-            mapController.addRestaurants(viewModel.filteredRestaurants)
-            mapController.addRadiusCircle(radius: (viewModel.filterViewModel?.radius ?? 0) * 1000)
-			if let restId = viewModel.filteredRestaurants.first?.id {
-				mapController.selectRestaurant(restId)
+			LoadingIndicator.show(self)
+			viewModel.filterRestaurants {
+				DispatchQueue.main.async {
+					LoadingIndicator.hide()
+					self.filteredRestaurantsPreview.configure(cellItems: self.viewModel.filteredRestaurants.map {
+						self.makeRestaurantsPreviewItem(restaurant: $0)
+					})
+					
+					self.mapController.addRestaurants(self.viewModel.filteredRestaurants)
+					self.mapController.addRadiusCircle(radius: (self.viewModel.filterViewModel?.radius ?? 0) * 1000)
+					if let restId = self.viewModel.filteredRestaurants.first?.id {
+						self.mapController.selectRestaurant(restId)
+					}
+				}
 			}
+			
         } else {
             searchView.isHidden = false
             mapController.addRestaurants(viewModel.restaurants)

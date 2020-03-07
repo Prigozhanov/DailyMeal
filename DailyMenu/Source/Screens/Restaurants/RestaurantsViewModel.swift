@@ -117,7 +117,7 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     func getRestaurantsFilteredByCategory(_ category: FoodCategory) -> [Restaurant] {
         restaurantsChain.filter({
             let restId = $0.id
-            if categories[restId]?.contains(where: { ($0.label?.containsCaseIgnoring(category.rawValue) ?? false) }) ?? false {
+            if categories[restId]?.contains(where: { ($0.label?.containsCaseIgnoring(category.compatibleValue) ?? false) }) ?? false {
                 return true
             }
             return false

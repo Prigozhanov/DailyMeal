@@ -25,6 +25,20 @@
 "categories.pasta"                                = "Pasta";
 "categories.shaurma"                              = "Shaurma";
 "categories.unknown"                              = "Unknown";
+"categories.compatible.burger"                    = "Burgers";
+"categories.compatible.chicken"                   = "Chicken";
+"categories.compatible.desert"                    = "Desserts";
+"categories.compatible.fries"                     = "Fries";
+"categories.compatible.hotdog"                    = "Hot Dogs";
+"categories.compatible.lobstar"                   = "Lobstar";
+"categories.compatible.pizza"                     = "Pizza";
+"categories.compatible.sandwich"                  = "Sandwich";
+"categories.compatible.steak"                     = "Steak";
+"categories.compatible.sushi"                     = "Sushi";
+"categories.compatible.taco"                      = "Taco";
+"categories.compatible.pasta"                     = "Pasta";
+"categories.compatible.shaurma"                   = "Shaurma";
+"categories.compatible.unknown"                   = "Unknown";
 
 /* Restaurant info */
 "restaurant_info.closed"                          = "Closed";

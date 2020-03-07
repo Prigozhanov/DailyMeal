@@ -62,6 +62,36 @@ internal enum L10n {
     internal static let taco = L10n.tr("Localizable", "categories.taco")
     /// Unknown
     internal static let unknown = L10n.tr("Localizable", "categories.unknown")
+    internal enum Compatible {
+      /// Burgers
+      internal static let burger = L10n.tr("Localizable", "categories.compatible.burger")
+      /// Chicken
+      internal static let chicken = L10n.tr("Localizable", "categories.compatible.chicken")
+      /// Desserts
+      internal static let desert = L10n.tr("Localizable", "categories.compatible.desert")
+      /// Fries
+      internal static let fries = L10n.tr("Localizable", "categories.compatible.fries")
+      /// Hot Dogs
+      internal static let hotdog = L10n.tr("Localizable", "categories.compatible.hotdog")
+      /// Lobstar
+      internal static let lobstar = L10n.tr("Localizable", "categories.compatible.lobstar")
+      /// Pasta
+      internal static let pasta = L10n.tr("Localizable", "categories.compatible.pasta")
+      /// Pizza
+      internal static let pizza = L10n.tr("Localizable", "categories.compatible.pizza")
+      /// Sandwich
+      internal static let sandwich = L10n.tr("Localizable", "categories.compatible.sandwich")
+      /// Shaurma
+      internal static let shaurma = L10n.tr("Localizable", "categories.compatible.shaurma")
+      /// Steak
+      internal static let steak = L10n.tr("Localizable", "categories.compatible.steak")
+      /// Sushi
+      internal static let sushi = L10n.tr("Localizable", "categories.compatible.sushi")
+      /// Taco
+      internal static let taco = L10n.tr("Localizable", "categories.compatible.taco")
+      /// Unknown
+      internal static let unknown = L10n.tr("Localizable", "categories.compatible.unknown")
+    }
   }
 
   internal enum Common {

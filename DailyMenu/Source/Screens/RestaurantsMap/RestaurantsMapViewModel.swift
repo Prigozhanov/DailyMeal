@@ -26,6 +26,7 @@ protocol RestaurantsMapViewModel {
     var categories: [Int: [ProductCategory]] { get }
     var products: [Int: [Product]] { get }
 
+	func filterRestaurants(completion: @escaping VoidClosure)
     func loadRestaurants()
     
 }
@@ -46,44 +47,7 @@ final class RestaurantsMapViewModelImplementation: RestaurantsMapViewModel {
         return filterViewModel != nil
     }
     
-    var filteredRestaurants: [Restaurant] {
-        guard let filter = filterViewModel else {
-            return []
-        }
-        
-        let categoriesFilteredRestaurants = restaurants.filter {
-            convertedCategories[$0.id]?.isSuperset(of: filter.filterCategories) ?? false
-        }
-        
-        let priceFilteredRestaurants = categoriesFilteredRestaurants.filter {
-            let allPricesArray = products[$0.id]?.compactMap({
-                guard let price = Double($0.price)?.intValue else {
-                    return nil
-                }
-                return price > 0 ? price : nil
-            }) ?? [] as [Int]
-
-            let priceFilterRange = filter.priceRange.lowerValue...filter.priceRange.upperValue
-            return allPricesArray.contains { priceFilterRange.contains($0) }
-        }
-        
-        let ratingFilteredRestaurants = priceFilteredRestaurants.filter {
-            guard let rate = Double($0.rate) else {
-                return false
-            }
-            return Int($0.distance) < filter.radius &&
-                rate > filter.ratingRagne.lowerValue &&
-                rate < filter.ratingRagne.upperValue
-        }
-        
-        guard !filter.restaurantName.isEmpty else {
-            return ratingFilteredRestaurants
-        }
-        
-        return ratingFilteredRestaurants.filter {
-            $0.chainLabel.containsCaseIgnoring(filter.restaurantName)
-        }
-    }
+    var filteredRestaurants: [Restaurant] = []
     
     var categories: [Int: [ProductCategory]] = [:]
     var convertedCategories: [Int: Set<FoodCategory>] {
@@ -115,6 +79,51 @@ final class RestaurantsMapViewModelImplementation: RestaurantsMapViewModel {
             }
         }
     }
+	
+	func filterRestaurants(completion: @escaping VoidClosure) {
+		DispatchQueue.global(qos: .userInitiated).async {
+			guard let filter = self.filterViewModel else {
+				self.filteredRestaurants.removeAll()
+				return
+			}
+			
+			let categoriesFilteredRestaurants = self.restaurants.filter {
+				self.convertedCategories[$0.id]?.isSuperset(of: filter.filterCategories) ?? false
+			}
+			
+			let priceFilteredRestaurants = categoriesFilteredRestaurants.filter {
+				let allPricesArray = self.products[$0.id]?.compactMap({
+					guard let price = Double($0.price)?.intValue else {
+						return nil
+					}
+					return price > 0 ? price : nil
+				}) ?? [] as [Int]
+				
+				let priceFilterRange = filter.priceRange.lowerValue...filter.priceRange.upperValue
+				return allPricesArray.contains { priceFilterRange.contains($0) }
+			}
+			
+			let ratingFilteredRestaurants = priceFilteredRestaurants.filter {
+				guard let rate = Double($0.rate) else {
+					return false
+				}
+				return Int($0.distance) < filter.radius &&
+					rate > filter.ratingRagne.lowerValue &&
+					rate < filter.ratingRagne.upperValue
+			}
+			
+			guard !filter.restaurantName.isEmpty else {
+				self.filteredRestaurants = ratingFilteredRestaurants
+				completion()
+				return
+			}
+			
+			self.filteredRestaurants = ratingFilteredRestaurants.filter {
+				$0.chainLabel.containsCaseIgnoring(filter.restaurantName)
+			}
+			completion()
+		}
+	}
     
     private func loadRestaurantsDetails() {
         let group = DispatchGroup()

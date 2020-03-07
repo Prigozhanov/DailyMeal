@@ -25,6 +25,20 @@
 "categories.pasta"                                = "Паста";
 "categories.shaurma"                              = "Шаурма";
 "categories.unknown"                              = "Неизвестно";
+"categories.compatible.burger"                    = "Бургер";
+"categories.compatible.chicken"                   = "Курица";
+"categories.compatible.desert"                    = "Десерт";
+"categories.compatible.fries"                     = "Картофель";
+"categories.compatible.hotdog"                    = "Хотдог";
+"categories.compatible.lobstar"                   = "Лобстер";
+"categories.compatible.pizza"                     = "Пицца";
+"categories.compatible.sandwich"                  = "Сэндвич";
+"categories.compatible.steak"                     = "Стейк";
+"categories.compatible.sushi"                     = "Суши";
+"categories.compatible.taco"                      = "Тако";
+"categories.compatible.pasta"                     = "Паста";
+"categories.compatible.shaurma"                   = "Шаурма";
+"categories.compatible.unknown"                   = "Неизвестно";
 
 /* Restaurant info */
 "restaurant_info.closed"                          = "Закрыт";
