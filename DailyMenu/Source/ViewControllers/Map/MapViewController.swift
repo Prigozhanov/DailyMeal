@@ -69,9 +69,7 @@ class MapViewController: UIViewController {
             }
         }
 		
-		viewModel.updateUserLocation { [weak self] _ in
-			self?.moveCameraToUserLocation(fromDistance: 1500)
-		}
+		viewModel.updateUserLocation { _ in }
     }
     
     func moveCameraToUserLocation(fromDistance: Double? = nil) {
