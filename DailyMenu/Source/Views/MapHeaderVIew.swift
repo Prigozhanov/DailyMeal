@@ -26,17 +26,20 @@ class MapHeaderView: UIView {
         addSubviews([backButton, headerTitleLabel, notificationButton])
         
         backButton.snp.makeConstraints {
-            $0.leading.top.equalTo(safeAreaLayoutGuide).inset(20)
+            $0.leading.top.equalTo(safeAreaLayoutGuide)
+			$0.size.equalTo(60)
         }
         
         headerTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide).inset(20)
             $0.centerX.equalToSuperview()
+			$0.centerY.equalTo(backButton)
         }
         headerTitleLabel.font = FontFamily.Poppins.medium.font(size: 16)
         
         notificationButton.snp.makeConstraints {
-            $0.top.trailing.equalTo(safeAreaLayoutGuide).inset(20)
+			$0.trailing.equalToSuperview()
+			$0.centerY.equalTo(backButton)
+			$0.size.equalTo(60)
         }
         
     }
