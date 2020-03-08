@@ -1,6 +1,6 @@
 //
-//  DailyMenuTests.swift
-//  DailyMenuTests
+//  DailyMealTests.swift
+//  DailyMealTests
 //
 //  Created by Vladimir on 9/27/19.
 //  Copyright © 2019 epam. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class DailyMenuTests: XCTestCase {
+class DailyMealTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

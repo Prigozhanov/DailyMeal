@@ -5,7 +5,7 @@ use_frameworks!
 
 pod 'SwiftLint'
 
-target 'DailyMenu' do
+target 'DailyMeal' do
 
  pod 'RxKeyboard'
  pod 'SwiftGen'

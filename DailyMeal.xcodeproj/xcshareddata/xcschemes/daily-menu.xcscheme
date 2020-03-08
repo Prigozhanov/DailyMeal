@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E7C6035A233D3ECA004686DB"
                BuildableName = "Daily Menu.app"
-               BlueprintName = "DailyMenu"
-               ReferencedContainer = "container:DailyMenu.xcodeproj">
+               BlueprintName = "DailyMeal"
+               ReferencedContainer = "container:DailyMeal.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "E77AD22A23E96C8200FB270D"
                BuildableName = "NetworkingTests.xctest"
                BlueprintName = "NetworkingTests"
-               ReferencedContainer = "container:DailyMenu.xcodeproj">
+               ReferencedContainer = "container:DailyMeal.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E7C6038B233D5F5B004686DB"
-               BuildableName = "DailyMenuTests.xctest"
-               BlueprintName = "DailyMenuTests"
-               ReferencedContainer = "container:DailyMenu.xcodeproj">
+               BuildableName = "DailyMealTests.xctest"
+               BlueprintName = "DailyMealTests"
+               ReferencedContainer = "container:DailyMeal.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -67,8 +67,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E7C6035A233D3ECA004686DB"
             BuildableName = "Daily Menu.app"
-            BlueprintName = "DailyMenu"
-            ReferencedContainer = "container:DailyMenu.xcodeproj">
+            BlueprintName = "DailyMeal"
+            ReferencedContainer = "container:DailyMeal.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -84,8 +84,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E7C6035A233D3ECA004686DB"
             BuildableName = "Daily Menu.app"
-            BlueprintName = "DailyMenu"
-            ReferencedContainer = "container:DailyMenu.xcodeproj">
+            BlueprintName = "DailyMeal"
+            ReferencedContainer = "container:DailyMeal.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

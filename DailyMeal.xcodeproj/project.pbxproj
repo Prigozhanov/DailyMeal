@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1577F5CAFB63789A51829A53 /* Pods_Services.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00620682C25724FDD6927D7 /* Pods_Services.framework */; };
-		CA1ABEC819735E48E730DDCF /* Pods_DailyMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73EA815EF778920E6E79C0E4 /* Pods_DailyMenu.framework */; };
+		C68A9CC013CAD9CE578FE98F /* Pods_DailyMeal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B280A192B054A415995C5D2 /* Pods_DailyMeal.framework */; };
 		E7037361234FE0D600852B04 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7037360234FE0D600852B04 /* UIButton.swift */; };
 		E7037363234FE85D00852B04 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7037362234FE85D00852B04 /* Layout.swift */; };
 		E703991323E2577A003E527A /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E703991223E2577A003E527A /* LoadingIndicator.swift */; };
@@ -68,6 +68,9 @@
 		E720292923EDF46A000E9884 /* CardInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720292623EDF46A000E9884 /* CardInfoView.swift */; };
 		E720292D23EDF472000E9884 /* DeliveryLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720292B23EDF472000E9884 /* DeliveryLocationViewController.swift */; };
 		E720292E23EDF472000E9884 /* DeliveryLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720292C23EDF472000E9884 /* DeliveryLocationViewModel.swift */; };
+		E722658324154FA200443E1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E722657D24154FA100443E1B /* Localizable.strings */; };
+		E722658424154FA200443E1B /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = E722657F24154FA100443E1B /* Localizable.stringsdict */; };
+		E722658624154FD600443E1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E722658524154FD600443E1B /* LaunchScreen.storyboard */; };
 		E72327022402C34200C429B4 /* FilterSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72327012402C34200C429B4 /* FilterSearchView.swift */; };
 		E727B99E23EE4BEE00E2549E /* GeodataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727B99D23EE4BEE00E2549E /* GeodataModels.swift */; };
 		E727B9A023EE508000E2549E /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720291A23EDF20A000E9884 /* LocationService.swift */; };
@@ -85,7 +88,6 @@
 		E75C882424090B7000FFD295 /* CAShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75C882324090B7000FFD295 /* CAShapeLayer.swift */; };
 		E75C88262409296400FFD295 /* DailyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75C88252409296400FFD295 /* DailyTabBarController.swift */; };
 		E764FB27240ECB2900A945DE /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E764FB26240ECB2900A945DE /* Strings.swift */; };
-		E764FB2F2410246F00A945DE /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = E764FB312410246F00A945DE /* Localizable.stringsdict */; };
 		E764FB342411279B00A945DE /* RestaurantStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E764FB332411279A00A945DE /* RestaurantStatusView.swift */; };
 		E7650E9224047DC300170F9A /* RestaurantsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7650E9124047DC300170F9A /* RestaurantsHeaderView.swift */; };
 		E76622F323FC96F4004D64BB /* RestaurantPreviewImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76622F223FC96F4004D64BB /* RestaurantPreviewImages.swift */; };
@@ -121,16 +123,6 @@
 		E7976CC523E9EAA700698EC9 /* URLRequestConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7976CC423E9EAA700698EC9 /* URLRequestConfigurator.swift */; };
 		E7976CC723E9F5ED00698EC9 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7976CC623E9F5ED00698EC9 /* UserDefaultsService.swift */; };
 		E7988BD923799A5600F0E8BD /* BaseCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7988BD823799A5600F0E8BD /* BaseCollectionCell.swift */; };
-		E79B97D92404A4F800F5E1BA /* GreetingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97CB2404A4F800F5E1BA /* GreetingViewModel.swift */; };
-		E79B97DA2404A4F800F5E1BA /* GreetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97CC2404A4F800F5E1BA /* GreetingViewController.swift */; };
-		E79B97EE2404A5B400F5E1BA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97E42404A5B400F5E1BA /* SignUpViewController.swift */; };
-		E79B97EF2404A5B400F5E1BA /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97E52404A5B400F5E1BA /* SignUpViewModel.swift */; };
-		E79B97F02404A5B400F5E1BA /* PhoneVerifiedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97E62404A5B400F5E1BA /* PhoneVerifiedViewController.swift */; };
-		E79B97F22404A5B400F5E1BA /* PhoneVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97E82404A5B400F5E1BA /* PhoneVerificationViewController.swift */; };
-		E79B97F32404A5B400F5E1BA /* PhoneVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97E92404A5B400F5E1BA /* PhoneVerificationViewModel.swift */; };
-		E79B97F42404A5B400F5E1BA /* ValidationCodeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97EB2404A5B400F5E1BA /* ValidationCodeContentView.swift */; };
-		E79B97F52404A5B400F5E1BA /* SingleInputValidationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97EC2404A5B400F5E1BA /* SingleInputValidationCodeView.swift */; };
-		E79B97F62404A5B400F5E1BA /* SignUpContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B97ED2404A5B400F5E1BA /* SignUpContentView.swift */; };
 		E79ECD6F23EAB26E00824FC5 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79ECD6E23EAB26E00824FC5 /* TextField.swift */; };
 		E79FD751239D399900038933 /* CollectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79FD750239D399900038933 /* CollectionHeaderCell.swift */; };
 		E79FD753239D39C300038933 /* FoodItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79FD752239D39C300038933 /* FoodItemCell.swift */; };
@@ -155,8 +147,6 @@
 		E7A4459323DDFD3E003519E5 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4459223DDFD3E003519E5 /* SliderView.swift */; };
 		E7A942352375BDDB00450D78 /* FoodCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A942342375BDDB00450D78 /* FoodCategoryCell.swift */; };
 		E7ACE46A240C0D990012BC5B /* OrderRouteDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACE469240C0D990012BC5B /* OrderRouteDetailsView.swift */; };
-		E7ACE479240D8AD20012BC5B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7ACE476240D8AD10012BC5B /* Localizable.strings */; };
-		E7ACE47B240D8D5B0012BC5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7ACE47A240D8D5B0012BC5B /* LaunchScreen.storyboard */; };
 		E7B7C08823EC162F0090C9DF /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD22323E96C8200FB270D /* Networking.framework */; };
 		E7B7C08923EC162F0090C9DF /* Networking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD22323E96C8200FB270D /* Networking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E7C6035F233D3ECA004686DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C6035E233D3ECA004686DB /* AppDelegate.swift */; };
@@ -189,6 +179,16 @@
 		E7F2913B2406E942000AF60C /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71708B823EB29C900D444BD /* KeyboardObserver.swift */; };
 		E7F3171C240417490011CC42 /* FilterAppliedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3171B240417490011CC42 /* FilterAppliedView.swift */; };
 		E7F3171E24045D300011CC42 /* UserLocationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3171D24045D300011CC42 /* UserLocationAnnotationView.swift */; };
+		E7FCE9F724154D7A0046C852 /* GreetingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FCE9E824154D790046C852 /* GreetingViewModel.swift */; };
+		E7FCE9F824154D7A0046C852 /* GreetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FCE9E924154D790046C852 /* GreetingViewController.swift */; };
+		E7FCE9F924154D7A0046C852 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FCE9EB24154D7A0046C852 /* SignUpViewController.swift */; };
+		E7FCE9FA24154D7A0046C852 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FCE9EC24154D7A0046C852 /* SignUpViewModel.swift */; };
+		E7FCE9FB24154D7A0046C852 /* PhoneVerifiedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FCE9ED24154D7A0046C852 /* PhoneVerifiedViewController.swift */; };
+		E7FCE9FC24154D7A0046C852 /* PhoneVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FCE9EE24154D7A0046C852 /* PhoneVerificationViewController.swift */; };
+		E7FCE9FD24154D7A0046C852 /* PhoneVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FCE9EF24154D7A0046C852 /* PhoneVerificationViewModel.swift */; };
+		E7FCE9FE24154D7A0046C852 /* ValidationCodeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FCE9F124154D7A0046C852 /* ValidationCodeContentView.swift */; };
+		E7FCE9FF24154D7A0046C852 /* SingleInputValidationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FCE9F224154D7A0046C852 /* SingleInputValidationCodeView.swift */; };
+		E7FCEA0024154D7A0046C852 /* SignUpContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FCE9F324154D7A0046C852 /* SignUpContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -271,8 +271,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		38CCECA2F50DB0B1C120F422 /* Pods-DailyMeal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyMeal.debug.xcconfig"; path = "Target Support Files/Pods-DailyMeal/Pods-DailyMeal.debug.xcconfig"; sourceTree = "<group>"; };
 		41AAA2778B43A1759CD7069B /* Pods-Services.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Services.release.xcconfig"; path = "Target Support Files/Pods-Services/Pods-Services.release.xcconfig"; sourceTree = "<group>"; };
-		73EA815EF778920E6E79C0E4 /* Pods_DailyMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DailyMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		47F1DCF99036D6592C72A9ED /* Pods-DailyMeal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyMeal.release.xcconfig"; path = "Target Support Files/Pods-DailyMeal/Pods-DailyMeal.release.xcconfig"; sourceTree = "<group>"; };
+		6B280A192B054A415995C5D2 /* Pods_DailyMeal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DailyMeal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F490B44B3E77573DC08F59 /* Pods-DailyMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyMenu.release.xcconfig"; path = "Target Support Files/Pods-DailyMenu/Pods-DailyMenu.release.xcconfig"; sourceTree = "<group>"; };
 		AA4AB9F80D8F8CF262F81386 /* Pods-Services.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Services.debug.xcconfig"; path = "Target Support Files/Pods-Services/Pods-Services.debug.xcconfig"; sourceTree = "<group>"; };
 		B0B68DEC79CF8D03B3B222C7 /* Pods-DailyMenu-Services.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyMenu-Services.debug.xcconfig"; path = "Target Support Files/Pods-DailyMenu-Services/Pods-DailyMenu-Services.debug.xcconfig"; sourceTree = "<group>"; };
@@ -337,6 +339,11 @@
 		E720292623EDF46A000E9884 /* CardInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardInfoView.swift; sourceTree = "<group>"; };
 		E720292B23EDF472000E9884 /* DeliveryLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryLocationViewController.swift; sourceTree = "<group>"; };
 		E720292C23EDF472000E9884 /* DeliveryLocationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryLocationViewModel.swift; sourceTree = "<group>"; };
+		E722657E24154FA100443E1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E722658024154FA100443E1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		E722658124154FA100443E1B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E722658224154FA100443E1B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		E722658524154FD600443E1B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E72327012402C34200C429B4 /* FilterSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSearchView.swift; sourceTree = "<group>"; };
 		E727B99D23EE4BEE00E2549E /* GeodataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeodataModels.swift; sourceTree = "<group>"; };
 		E729CB5E23F3785600CE01AB /* ChoiceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceRow.swift; sourceTree = "<group>"; };
@@ -354,8 +361,6 @@
 		E75C882324090B7000FFD295 /* CAShapeLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAShapeLayer.swift; sourceTree = "<group>"; };
 		E75C88252409296400FFD295 /* DailyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTabBarController.swift; sourceTree = "<group>"; };
 		E764FB26240ECB2900A945DE /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
-		E764FB302410246F00A945DE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
-		E764FB32241029C500A945DE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		E764FB332411279A00A945DE /* RestaurantStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantStatusView.swift; sourceTree = "<group>"; };
 		E7650E9124047DC300170F9A /* RestaurantsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsHeaderView.swift; sourceTree = "<group>"; };
 		E76622F223FC96F4004D64BB /* RestaurantPreviewImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantPreviewImages.swift; sourceTree = "<group>"; };
@@ -392,16 +397,6 @@
 		E7976CC423E9EAA700698EC9 /* URLRequestConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestConfigurator.swift; sourceTree = "<group>"; };
 		E7976CC623E9F5ED00698EC9 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		E7988BD823799A5600F0E8BD /* BaseCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionCell.swift; sourceTree = "<group>"; };
-		E79B97CB2404A4F800F5E1BA /* GreetingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreetingViewModel.swift; sourceTree = "<group>"; };
-		E79B97CC2404A4F800F5E1BA /* GreetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreetingViewController.swift; sourceTree = "<group>"; };
-		E79B97E42404A5B400F5E1BA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		E79B97E52404A5B400F5E1BA /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
-		E79B97E62404A5B400F5E1BA /* PhoneVerifiedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerifiedViewController.swift; sourceTree = "<group>"; };
-		E79B97E82404A5B400F5E1BA /* PhoneVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewController.swift; sourceTree = "<group>"; };
-		E79B97E92404A5B400F5E1BA /* PhoneVerificationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewModel.swift; sourceTree = "<group>"; };
-		E79B97EB2404A5B400F5E1BA /* ValidationCodeContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationCodeContentView.swift; sourceTree = "<group>"; };
-		E79B97EC2404A5B400F5E1BA /* SingleInputValidationCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleInputValidationCodeView.swift; sourceTree = "<group>"; };
-		E79B97ED2404A5B400F5E1BA /* SignUpContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpContentView.swift; sourceTree = "<group>"; };
 		E79ECD6E23EAB26E00824FC5 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		E79FD750239D399900038933 /* CollectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeaderCell.swift; sourceTree = "<group>"; };
 		E79FD752239D39C300038933 /* FoodItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemCell.swift; sourceTree = "<group>"; };
@@ -426,15 +421,12 @@
 		E7A4459223DDFD3E003519E5 /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		E7A942342375BDDB00450D78 /* FoodCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategoryCell.swift; sourceTree = "<group>"; };
 		E7ACE469240C0D990012BC5B /* OrderRouteDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderRouteDetailsView.swift; sourceTree = "<group>"; };
-		E7ACE477240D8AD10012BC5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E7ACE478240D8AD10012BC5B /* ru */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; usesTabs = 1; wrapsLines = 0; };
-		E7ACE47A240D8D5B0012BC5B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = DailyMenu/Resources/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		E7ADCB7D23E233E100607E8E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		E7ADCB8023E2346200607E8E /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
-		E7C6035B233D3ECA004686DB /* Daily Menu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Menu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7C6035B233D3ECA004686DB /* Daily Meal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Meal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7C6035E233D3ECA004686DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7C60367233D3ECC004686DB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		E7C6038C233D5F5B004686DB /* DailyMenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DailyMenuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7C6038C233D5F5B004686DB /* DailyMealTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DailyMealTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7C6038E233D5F5B004686DB /* DailyMenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyMenuTests.swift; sourceTree = "<group>"; };
 		E7C60390233D5F5B004686DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7C60396233D5FA3004686DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -464,6 +456,16 @@
 		E7F15DF723FF66DE00E35668 /* RatingRangeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingRangeControl.swift; sourceTree = "<group>"; };
 		E7F3171B240417490011CC42 /* FilterAppliedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAppliedView.swift; sourceTree = "<group>"; };
 		E7F3171D24045D300011CC42 /* UserLocationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationAnnotationView.swift; sourceTree = "<group>"; };
+		E7FCE9E824154D790046C852 /* GreetingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreetingViewModel.swift; sourceTree = "<group>"; };
+		E7FCE9E924154D790046C852 /* GreetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreetingViewController.swift; sourceTree = "<group>"; };
+		E7FCE9EB24154D7A0046C852 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		E7FCE9EC24154D7A0046C852 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		E7FCE9ED24154D7A0046C852 /* PhoneVerifiedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerifiedViewController.swift; sourceTree = "<group>"; };
+		E7FCE9EE24154D7A0046C852 /* PhoneVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewController.swift; sourceTree = "<group>"; };
+		E7FCE9EF24154D7A0046C852 /* PhoneVerificationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewModel.swift; sourceTree = "<group>"; };
+		E7FCE9F124154D7A0046C852 /* ValidationCodeContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationCodeContentView.swift; sourceTree = "<group>"; };
+		E7FCE9F224154D7A0046C852 /* SingleInputValidationCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleInputValidationCodeView.swift; sourceTree = "<group>"; };
+		E7FCE9F324154D7A0046C852 /* SignUpContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpContentView.swift; sourceTree = "<group>"; };
 		F6978153A996CCA2C94A5A5E /* Pods-DailyMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyMenu.debug.xcconfig"; path = "Target Support Files/Pods-DailyMenu/Pods-DailyMenu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -506,7 +508,7 @@
 				E70EBEF523EC191100B3D0DF /* Extensions.framework in Frameworks */,
 				E7B7C08823EC162F0090C9DF /* Networking.framework in Frameworks */,
 				E70EBEF923EC191800B3D0DF /* Services.framework in Frameworks */,
-				CA1ABEC819735E48E730DDCF /* Pods_DailyMenu.framework in Frameworks */,
+				C68A9CC013CAD9CE578FE98F /* Pods_DailyMeal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,17 +531,19 @@
 				C541C746BEE721F0A9BA8826 /* Pods-DailyMenu-Services.release.xcconfig */,
 				AA4AB9F80D8F8CF262F81386 /* Pods-Services.debug.xcconfig */,
 				41AAA2778B43A1759CD7069B /* Pods-Services.release.xcconfig */,
+				38CCECA2F50DB0B1C120F422 /* Pods-DailyMeal.debug.xcconfig */,
+				47F1DCF99036D6592C72A9ED /* Pods-DailyMeal.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		E7037349234FB54000852B04 /* DailyMenu */ = {
+		E7037349234FB54000852B04 /* DailyMeal */ = {
 			isa = PBXGroup;
 			children = (
 				E7C60379233D57AD004686DB /* Source */,
 				E7C60378233D57A8004686DB /* Resources */,
 			);
-			path = DailyMenu;
+			path = DailyMeal;
 			sourceTree = "<group>";
 		};
 		E704AB1823F1CF21002203E8 /* UserDefaultsService */ = {
@@ -558,7 +562,7 @@
 				E720292A23EDF472000E9884 /* DeliveryLocation */,
 				E720292223EDF46A000E9884 /* AddCreditCard */,
 				E71139EC2346AF0500889AE2 /* Settings */,
-				E79B97CA2404A4F800F5E1BA /* Greeting */,
+				E7FCE9E724154D790046C852 /* Greeting */,
 				E71139F12346AFE300889AE2 /* Restaurants */,
 				E71139DF2346AC7D00889AE2 /* Restaurant */,
 				E71139CC2346AC7400889AE2 /* Product */,
@@ -747,6 +751,15 @@
 			path = DeliveryLocation;
 			sourceTree = "<group>";
 		};
+		E722657C24154FA100443E1B /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				E722657D24154FA100443E1B /* Localizable.strings */,
+				E722657F24154FA100443E1B /* Localizable.stringsdict */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		E731C71D2402AAF200779725 /* Filter */ = {
 			isa = PBXGroup;
 			children = (
@@ -917,40 +930,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		E79B97CA2404A4F800F5E1BA /* Greeting */ = {
-			isa = PBXGroup;
-			children = (
-				E79B97E32404A5B400F5E1BA /* SignUp */,
-				E79B97CB2404A4F800F5E1BA /* GreetingViewModel.swift */,
-				E79B97CC2404A4F800F5E1BA /* GreetingViewController.swift */,
-			);
-			name = Greeting;
-			path = DailyMenu/Source/Screens/Greeting;
-			sourceTree = SOURCE_ROOT;
-		};
-		E79B97E32404A5B400F5E1BA /* SignUp */ = {
-			isa = PBXGroup;
-			children = (
-				E79B97EA2404A5B400F5E1BA /* Views */,
-				E79B97E42404A5B400F5E1BA /* SignUpViewController.swift */,
-				E79B97E52404A5B400F5E1BA /* SignUpViewModel.swift */,
-				E79B97E82404A5B400F5E1BA /* PhoneVerificationViewController.swift */,
-				E79B97E92404A5B400F5E1BA /* PhoneVerificationViewModel.swift */,
-				E79B97E62404A5B400F5E1BA /* PhoneVerifiedViewController.swift */,
-			);
-			path = SignUp;
-			sourceTree = "<group>";
-		};
-		E79B97EA2404A5B400F5E1BA /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				E79B97EB2404A5B400F5E1BA /* ValidationCodeContentView.swift */,
-				E79B97EC2404A5B400F5E1BA /* SingleInputValidationCodeView.swift */,
-				E79B97ED2404A5B400F5E1BA /* SignUpContentView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		E79FD74F239D398200038933 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -997,20 +976,10 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		E7ACE475240D8AD10012BC5B /* Localization */ = {
-			isa = PBXGroup;
-			children = (
-				E7ACE476240D8AD10012BC5B /* Localizable.strings */,
-				E764FB312410246F00A945DE /* Localizable.stringsdict */,
-			);
-			name = Localization;
-			path = DailyMenu/Resources/Localization;
-			sourceTree = SOURCE_ROOT;
-		};
 		E7C60352233D3ECA004686DB = {
 			isa = PBXGroup;
 			children = (
-				E7037349234FB54000852B04 /* DailyMenu */,
+				E7037349234FB54000852B04 /* DailyMeal */,
 				E77AD22423E96C8200FB270D /* Networking */,
 				E77AD26E23E9D6A700FB270D /* Services */,
 				E77AD24C23E96E6700FB270D /* Extensions */,
@@ -1025,8 +994,8 @@
 		E7C6035C233D3ECA004686DB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E7C6035B233D3ECA004686DB /* Daily Menu.app */,
-				E7C6038C233D5F5B004686DB /* DailyMenuTests.xctest */,
+				E7C6035B233D3ECA004686DB /* Daily Meal.app */,
+				E7C6038C233D5F5B004686DB /* DailyMealTests.xctest */,
 				E77AD22323E96C8200FB270D /* Networking.framework */,
 				E77AD22B23E96C8200FB270D /* NetworkingTests.xctest */,
 				E77AD24B23E96E6700FB270D /* Extensions.framework */,
@@ -1038,14 +1007,14 @@
 		E7C60378233D57A8004686DB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E7ACE475240D8AD10012BC5B /* Localization */,
+				E722657C24154FA100443E1B /* Localization */,
 				E779CDD1235B86CF0004E520 /* Generated */,
 				E7DFC6F023591B950003C46C /* Assets */,
 				E718696F237DCC1400059766 /* Fonts */,
 				E71139AB2346A59100889AE2 /* scripts */,
 				E7C60397233D60C7004686DB /* fastlane */,
 				E7C60396233D5FA3004686DB /* Info.plist */,
-				E7ACE47A240D8D5B0012BC5B /* LaunchScreen.storyboard */,
+				E722658524154FD600443E1B /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1142,12 +1111,45 @@
 			path = Controls;
 			sourceTree = "<group>";
 		};
+		E7FCE9E724154D790046C852 /* Greeting */ = {
+			isa = PBXGroup;
+			children = (
+				E7FCE9EA24154D790046C852 /* SignUp */,
+				E7FCE9E824154D790046C852 /* GreetingViewModel.swift */,
+				E7FCE9E924154D790046C852 /* GreetingViewController.swift */,
+			);
+			path = Greeting;
+			sourceTree = "<group>";
+		};
+		E7FCE9EA24154D790046C852 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				E7FCE9F024154D7A0046C852 /* Views */,
+				E7FCE9EB24154D7A0046C852 /* SignUpViewController.swift */,
+				E7FCE9EC24154D7A0046C852 /* SignUpViewModel.swift */,
+				E7FCE9ED24154D7A0046C852 /* PhoneVerifiedViewController.swift */,
+				E7FCE9EE24154D7A0046C852 /* PhoneVerificationViewController.swift */,
+				E7FCE9EF24154D7A0046C852 /* PhoneVerificationViewModel.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		E7FCE9F024154D7A0046C852 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E7FCE9F124154D7A0046C852 /* ValidationCodeContentView.swift */,
+				E7FCE9F224154D7A0046C852 /* SingleInputValidationCodeView.swift */,
+				E7FCE9F324154D7A0046C852 /* SignUpContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		F8233BB71F6893F86D137C97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				E77AD28123E9D77500FB270D /* KeychainAccess.framework */,
-				73EA815EF778920E6E79C0E4 /* Pods_DailyMenu.framework */,
 				C00620682C25724FDD6927D7 /* Pods_Services.framework */,
+				6B280A192B054A415995C5D2 /* Pods_DailyMeal.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1258,9 +1260,9 @@
 			productReference = E77AD26D23E9D6A700FB270D /* Services.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E7C6035A233D3ECA004686DB /* DailyMenu */ = {
+		E7C6035A233D3ECA004686DB /* DailyMeal */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E7C6036F233D3ECC004686DB /* Build configuration list for PBXNativeTarget "DailyMenu" */;
+			buildConfigurationList = E7C6036F233D3ECC004686DB /* Build configuration list for PBXNativeTarget "DailyMeal" */;
 			buildPhases = (
 				8588974FDC2B22E837D91D37 /* [CP] Check Pods Manifest.lock */,
 				E764FB28240ED13F00A945DE /* Fetch Localizable strings */,
@@ -1280,14 +1282,14 @@
 				E70EBEF823EC191100B3D0DF /* PBXTargetDependency */,
 				E70EBEFC23EC191800B3D0DF /* PBXTargetDependency */,
 			);
-			name = DailyMenu;
+			name = DailyMeal;
 			productName = "daily-menu";
-			productReference = E7C6035B233D3ECA004686DB /* Daily Menu.app */;
+			productReference = E7C6035B233D3ECA004686DB /* Daily Meal.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E7C6038B233D5F5B004686DB /* DailyMenuTests */ = {
+		E7C6038B233D5F5B004686DB /* DailyMealTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E7C60393233D5F5B004686DB /* Build configuration list for PBXNativeTarget "DailyMenuTests" */;
+			buildConfigurationList = E7C60393233D5F5B004686DB /* Build configuration list for PBXNativeTarget "DailyMealTests" */;
 			buildPhases = (
 				E7C60388233D5F5B004686DB /* Sources */,
 				E7C60389233D5F5B004686DB /* Frameworks */,
@@ -1298,9 +1300,9 @@
 			dependencies = (
 				E7C60392233D5F5B004686DB /* PBXTargetDependency */,
 			);
-			name = DailyMenuTests;
+			name = DailyMealTests;
 			productName = DailyMenuTests;
-			productReference = E7C6038C233D5F5B004686DB /* DailyMenuTests.xctest */;
+			productReference = E7C6038C233D5F5B004686DB /* DailyMealTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1335,7 +1337,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E7C60356233D3ECA004686DB /* Build configuration list for PBXProject "DailyMenu" */;
+			buildConfigurationList = E7C60356233D3ECA004686DB /* Build configuration list for PBXProject "DailyMeal" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -1349,11 +1351,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E7C6035A233D3ECA004686DB /* DailyMenu */,
+				E7C6035A233D3ECA004686DB /* DailyMeal */,
 				E77AD22223E96C8200FB270D /* Networking */,
 				E77AD26C23E9D6A700FB270D /* Services */,
 				E77AD24A23E96E6700FB270D /* Extensions */,
-				E7C6038B233D5F5B004686DB /* DailyMenuTests */,
+				E7C6038B233D5F5B004686DB /* DailyMealTests */,
 				E77AD22A23E96C8200FB270D /* NetworkingTests */,
 			);
 		};
@@ -1400,13 +1402,13 @@
 				E7186994237DCC1400059766 /* Poppins-Italic.ttf in Resources */,
 				E7186989237DCC1400059766 /* Poppins-SemiBoldItalic.ttf in Resources */,
 				E718698E237DCC1400059766 /* Poppins-Regular.ttf in Resources */,
-				E764FB2F2410246F00A945DE /* Localizable.stringsdict in Resources */,
+				E722658624154FD600443E1B /* LaunchScreen.storyboard in Resources */,
+				E722658424154FA200443E1B /* Localizable.stringsdict in Resources */,
 				E7186990237DCC1400059766 /* Poppins-Bold.ttf in Resources */,
-				E7ACE47B240D8D5B0012BC5B /* LaunchScreen.storyboard in Resources */,
 				E7186985237DCC1400059766 /* Poppins-ExtraLightItalic.ttf in Resources */,
 				E718698F237DCC1400059766 /* Poppins-LightItalic.ttf in Resources */,
 				E7DFC6E823590EE80003C46C /* Colors.xcassets in Resources */,
-				E7ACE479240D8AD20012BC5B /* Localizable.strings in Resources */,
+				E722658324154FA200443E1B /* Localizable.strings in Resources */,
 				E7C60368233D3ECC004686DB /* Images.xcassets in Resources */,
 				E71139AC2346A59100889AE2 /* scripts in Resources */,
 				E7186993237DCC1400059766 /* Poppins-SemiBold.ttf in Resources */,
@@ -1436,15 +1438,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DailyMenu/Pods-DailyMenu-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DailyMeal/Pods-DailyMeal-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DailyMenu/Pods-DailyMenu-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DailyMeal/Pods-DailyMeal-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DailyMenu/Pods-DailyMenu-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DailyMeal/Pods-DailyMeal-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7F9B0847971C57D9BA55B914 /* [CP] Check Pods Manifest.lock */ = {
@@ -1484,7 +1486,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DailyMenu-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-DailyMeal-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1497,15 +1499,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DailyMenu/Pods-DailyMenu-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DailyMeal/Pods-DailyMeal-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DailyMenu/Pods-DailyMenu-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DailyMeal/Pods-DailyMeal-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DailyMenu/Pods-DailyMenu-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DailyMeal/Pods-DailyMeal-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E764FB28240ED13F00A945DE /* Fetch Localizable strings */ = {
@@ -1623,6 +1625,7 @@
 				E7ACE46A240C0D990012BC5B /* OrderRouteDetailsView.swift in Sources */,
 				E78F320F240BF10E004A844C /* OrderRouteViewController.swift in Sources */,
 				E7E04A6323CD68850045A381 /* Style.swift in Sources */,
+				E7FCE9FE24154D7A0046C852 /* ValidationCodeContentView.swift in Sources */,
 				E7F15DF223FF00B900E35668 /* RatingView.swift in Sources */,
 				E718B4AC23EF2706001EB7FE /* MapViewModel.swift in Sources */,
 				E7A942352375BDDB00450D78 /* FoodCategoryCell.swift in Sources */,
@@ -1630,9 +1633,11 @@
 				E7A03B782401A9640011C541 /* RestaurantAnnotation.swift in Sources */,
 				E7525CF223E0ECC100730AC9 /* StretchScrollDelegate.swift in Sources */,
 				E7A03B7E2401A9EB0011C541 /* RestaurantsMapViewModel.swift in Sources */,
+				E7FCE9F824154D7A0046C852 /* GreetingViewController.swift in Sources */,
 				E7D722EF23A033CF007F096C /* SectionHeaderCell.swift in Sources */,
 				E703991723E36A12003E527A /* UIApplication.swift in Sources */,
 				E779CDB4235B72FE0004E520 /* AppCoordinator.swift in Sources */,
+				E7FCE9FB24154D7A0046C852 /* PhoneVerifiedViewController.swift in Sources */,
 				E779CDDB235CE9380004E520 /* Assets.swift in Sources */,
 				E7E04A5D23CCAEB20045A381 /* CartService.swift in Sources */,
 				E71E75AC23EFC4C100D51EEE /* MapHeaderVIew.swift in Sources */,
@@ -1653,6 +1658,7 @@
 				E72327022402C34200C429B4 /* FilterSearchView.swift in Sources */,
 				E75C8822240834C900FFD295 /* ActionButton.swift in Sources */,
 				E71139F52346AFE300889AE2 /* RestaurantsViewModel.swift in Sources */,
+				E7FCE9F724154D7A0046C852 /* GreetingViewModel.swift in Sources */,
 				E7D15C3223DF8D3C001E24EF /* CartItem.swift in Sources */,
 				E7E04A5823CCADB40045A381 /* AppContext.swift in Sources */,
 				E7A03B8B2401B7100011C541 /* PriceRangeRow.swift in Sources */,
@@ -1662,14 +1668,11 @@
 				E7988BD923799A5600F0E8BD /* BaseCollectionCell.swift in Sources */,
 				E720292923EDF46A000E9884 /* CardInfoView.swift in Sources */,
 				E71139E32346AC7D00889AE2 /* RestaurantViewController.swift in Sources */,
-				E79B97F02404A5B400F5E1BA /* PhoneVerifiedViewController.swift in Sources */,
 				E718699A237DEE5000059766 /* Category.swift in Sources */,
-				E79B97F52404A5B400F5E1BA /* SingleInputValidationCodeView.swift in Sources */,
 				E764FB342411279B00A945DE /* RestaurantStatusView.swift in Sources */,
 				E731C71F2402AB6200779725 /* RestaurantsFilterViewModel.swift in Sources */,
 				E720292E23EDF472000E9884 /* DeliveryLocationViewModel.swift in Sources */,
 				E7926C6723D8C3D800768405 /* CartTitleValueView.swift in Sources */,
-				E79B97DA2404A4F800F5E1BA /* GreetingViewController.swift in Sources */,
 				E7EEC61123E795910066CC76 /* OrderStateRow.swift in Sources */,
 				E7A03B822401ABFC0011C541 /* RestaurantsFilterViewController.swift in Sources */,
 				E7DCBC9D2402101100770498 /* MapResultsRow.swift in Sources */,
@@ -1681,19 +1684,17 @@
 				E7A03B862401AEAF0011C541 /* RestaurantsFilterHeader.swift in Sources */,
 				E76622F323FC96F4004D64BB /* RestaurantPreviewImages.swift in Sources */,
 				E7A03B8D2401B77C0011C541 /* FoodTypeRow.swift in Sources */,
-				E79B97F42404A5B400F5E1BA /* ValidationCodeContentView.swift in Sources */,
 				E71139D72346AC7400889AE2 /* OrderStatusViewModel.swift in Sources */,
 				E7E04A3A23C8A8BB0045A381 /* NavigationController.swift in Sources */,
 				E79ECD6F23EAB26E00824FC5 /* TextField.swift in Sources */,
 				E7E04A3C23C8B9870045A381 /* ItemCounter.swift in Sources */,
-				E79B97F62404A5B400F5E1BA /* SignUpContentView.swift in Sources */,
 				E7037361234FE0D600852B04 /* UIButton.swift in Sources */,
-				E79B97EF2404A5B400F5E1BA /* SignUpViewModel.swift in Sources */,
 				E7A03B772401A9640011C541 /* RestaurantAnnotationView.swift in Sources */,
 				E7EEC60F23E7929A0066CC76 /* OrderIdView.swift in Sources */,
+				E7FCEA0024154D7A0046C852 /* SignUpContentView.swift in Sources */,
+				E7FCE9F924154D7A0046C852 /* SignUpViewController.swift in Sources */,
 				E718B4AA23EF229D001EB7FE /* MapViewController.swift in Sources */,
 				E71139E22346AC7D00889AE2 /* RestaurantViewModel.swift in Sources */,
-				E79B97F32404A5B400F5E1BA /* PhoneVerificationViewModel.swift in Sources */,
 				E78C382F23D760D400335887 /* CartItemView.swift in Sources */,
 				E7F2913B2406E942000AF60C /* KeyboardObserver.swift in Sources */,
 				E748A2F92403483500CCC477 /* FilteredRestaurantPreviewCell.swift in Sources */,
@@ -1703,10 +1704,10 @@
 				E764FB27240ECB2900A945DE /* Strings.swift in Sources */,
 				E71E75AE23EFDF0600D51EEE /* ConfirmationDialogViewController.swift in Sources */,
 				E79FD753239D39C300038933 /* FoodItemCell.swift in Sources */,
-				E79B97D92404A4F800F5E1BA /* GreetingViewModel.swift in Sources */,
 				E7E04A5F23CD4AE20045A381 /* Formatter.swift in Sources */,
 				E792166D24092C430048C6C9 /* DailyTabBar.swift in Sources */,
 				E7A4458723DA2F70003519E5 /* FoodOptionCell.swift in Sources */,
+				E7FCE9FC24154D7A0046C852 /* PhoneVerificationViewController.swift in Sources */,
 				E718691D237DC00300059766 /* BaseTableCell.swift in Sources */,
 				E77AD26023E9790E00FB270D /* Globals.swift in Sources */,
 				E71139CF2346AC7400889AE2 /* CheckoutViewController.swift in Sources */,
@@ -1718,12 +1719,15 @@
 				E7333EC923F34C8C004E4400 /* OptionView.swift in Sources */,
 				E7A03B7A2401A98D0011C541 /* RestaurantCalloutView.swift in Sources */,
 				E714A9DC2412523C002074E8 /* UserAddressAnnotation.swift in Sources */,
+				E7FCE9FF24154D7A0046C852 /* SingleInputValidationCodeView.swift in Sources */,
 				E7037363234FE85D00852B04 /* Layout.swift in Sources */,
 				E76622F523FD2C41004D64BB /* CategoryFilterBar.swift in Sources */,
 				E7DCBC9C2402101100770498 /* MapResultsTableView.swift in Sources */,
 				E7A03B932401BE470011C541 /* Slider.swift in Sources */,
 				E71139DE2346AC7400889AE2 /* ProductViewController.swift in Sources */,
 				E7F15DF823FF66DE00E35668 /* RatingRangeControl.swift in Sources */,
+				E7FCE9FA24154D7A0046C852 /* SignUpViewModel.swift in Sources */,
+				E7FCE9FD24154D7A0046C852 /* PhoneVerificationViewModel.swift in Sources */,
 				E74832042371CA8100216927 /* UITextField.swift in Sources */,
 				E746675223F1E1DC00A802BA /* EditableTextFieldView.swift in Sources */,
 				E74832062371CBB200216927 /* UIView.swift in Sources */,
@@ -1732,8 +1736,6 @@
 				E7F3171E24045D300011CC42 /* UserLocationAnnotationView.swift in Sources */,
 				E7CA200A236601EC004AA1FC /* FontFamily.swift in Sources */,
 				E7DCBC9E2402101100770498 /* MapSearchInputView.swift in Sources */,
-				E79B97EE2404A5B400F5E1BA /* SignUpViewController.swift in Sources */,
-				E79B97F22404A5B400F5E1BA /* PhoneVerificationViewController.swift in Sources */,
 				E729CB5F23F3785600CE01AB /* ChoiceRow.swift in Sources */,
 				E7C6035F233D3ECA004686DB /* AppDelegate.swift in Sources */,
 				E71139F02346AF0500889AE2 /* SettingsViewController.swift in Sources */,
@@ -1770,7 +1772,7 @@
 		};
 		E77AD23023E96C8200FB270D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E7C6035A233D3ECA004686DB /* DailyMenu */;
+			target = E7C6035A233D3ECA004686DB /* DailyMeal */;
 			targetProxy = E77AD22F23E96C8200FB270D /* PBXContainerItemProxy */;
 		};
 		E7B7C08B23EC162F0090C9DF /* PBXTargetDependency */ = {
@@ -1780,7 +1782,7 @@
 		};
 		E7C60392233D5F5B004686DB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E7C6035A233D3ECA004686DB /* DailyMenu */;
+			target = E7C6035A233D3ECA004686DB /* DailyMeal */;
 			targetProxy = E7C60391233D5F5B004686DB /* PBXContainerItemProxy */;
 		};
 		E7F15DFE2400469F00E35668 /* PBXTargetDependency */ = {
@@ -1791,22 +1793,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		E764FB312410246F00A945DE /* Localizable.stringsdict */ = {
+		E722657D24154FA100443E1B /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				E764FB302410246F00A945DE /* ru */,
-				E764FB32241029C500A945DE /* en */,
-			);
-			name = Localizable.stringsdict;
-			sourceTree = "<group>";
-		};
-		E7ACE476240D8AD10012BC5B /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E7ACE477240D8AD10012BC5B /* en */,
-				E7ACE478240D8AD10012BC5B /* ru */,
+				E722657E24154FA100443E1B /* en */,
+				E722658124154FA100443E1B /* ru */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		E722657F24154FA100443E1B /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E722658024154FA100443E1B /* en */,
+				E722658224154FA100443E1B /* ru */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1815,12 +1817,12 @@
 		E77AD23B23E96C8200FB270D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
-				DEVELOPMENT_TEAM = 53APD5F9YQ;
+				DEVELOPMENT_TEAM = H7553T5T52;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1834,6 +1836,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.epam.Networking;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
@@ -1846,12 +1849,12 @@
 		E77AD23C23E96C8200FB270D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
-				DEVELOPMENT_TEAM = 53APD5F9YQ;
+				DEVELOPMENT_TEAM = H7553T5T52;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1865,6 +1868,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.epam.Networking;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
@@ -1878,8 +1882,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 53APD5F9YQ;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = H7553T5T52;
 				INFOPLIST_FILE = NetworkingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1889,6 +1893,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.epam.NetworkingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Daily Menu.app/Daily Menu";
@@ -1899,8 +1905,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 53APD5F9YQ;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = H7553T5T52;
 				INFOPLIST_FILE = NetworkingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1910,6 +1916,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.epam.NetworkingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Daily Menu.app/Daily Menu";
@@ -1919,12 +1927,12 @@
 		E77AD25523E96E6700FB270D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 53APD5F9YQ;
+				DEVELOPMENT_TEAM = H7553T5T52;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1938,6 +1946,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.epam.Extensions;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
@@ -1950,12 +1960,12 @@
 		E77AD25623E96E6700FB270D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 53APD5F9YQ;
+				DEVELOPMENT_TEAM = H7553T5T52;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1969,6 +1979,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.epam.Extensions;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
@@ -1982,12 +1994,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AA4AB9F80D8F8CF262F81386 /* Pods-Services.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 53APD5F9YQ;
+				DEVELOPMENT_TEAM = H7553T5T52;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -2001,6 +2013,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.epam.Services;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2013,12 +2027,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 41AAA2778B43A1759CD7069B /* Pods-Services.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 53APD5F9YQ;
+				DEVELOPMENT_TEAM = H7553T5T52;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -2032,6 +2046,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.epam.Services;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2158,23 +2174,23 @@
 		};
 		E7C60370233D3ECC004686DB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F6978153A996CCA2C94A5A5E /* Pods-DailyMenu.debug.xcconfig */;
+			baseConfigurationReference = 38CCECA2F50DB0B1C120F422 /* Pods-DailyMeal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 53APD5F9YQ;
-				INFOPLIST_FILE = DailyMenu/Resources/Info.plist;
+				DEVELOPMENT_TEAM = H7553T5T52;
+				INFOPLIST_FILE = DailyMeal/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.epam.daily-menu";
-				PRODUCT_NAME = "Daily Menu";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "by.daily-meal";
+				PRODUCT_NAME = "Daily Meal";
+				PROVISIONING_PROFILE_SPECIFIER = DailyMealProvisioningProfile;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2182,23 +2198,23 @@
 		};
 		E7C60371233D3ECC004686DB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 75F490B44B3E77573DC08F59 /* Pods-DailyMenu.release.xcconfig */;
+			baseConfigurationReference = 47F1DCF99036D6592C72A9ED /* Pods-DailyMeal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 53APD5F9YQ;
-				INFOPLIST_FILE = DailyMenu/Resources/Info.plist;
+				DEVELOPMENT_TEAM = H7553T5T52;
+				INFOPLIST_FILE = DailyMeal/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.epam.daily-menu";
-				PRODUCT_NAME = "Daily Menu";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "by.daily-meal";
+				PRODUCT_NAME = "Daily Meal";
+				PROVISIONING_PROFILE_SPECIFIER = DailyMealProvisioningProfile;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2208,20 +2224,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 53APD5F9YQ;
-				INFOPLIST_FILE = DailyMenuTests/Info.plist;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = H7553T5T52;
+				INFOPLIST_FILE = DailyMealTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.epam.DailyMenuTests;
+				PRODUCT_BUNDLE_IDENTIFIER = by.DailyMealTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Daily Menu.app/Daily Menu";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Daily Meal.app/Daily Meal";
 			};
 			name = Debug;
 		};
@@ -2229,20 +2247,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 53APD5F9YQ;
-				INFOPLIST_FILE = DailyMenuTests/Info.plist;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = H7553T5T52;
+				INFOPLIST_FILE = DailyMealTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.epam.DailyMenuTests;
+				PRODUCT_BUNDLE_IDENTIFIER = by.DailyMealTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Daily Menu.app/Daily Menu";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Daily Meal.app/Daily Meal";
 			};
 			name = Release;
 		};
@@ -2285,7 +2305,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E7C60356233D3ECA004686DB /* Build configuration list for PBXProject "DailyMenu" */ = {
+		E7C60356233D3ECA004686DB /* Build configuration list for PBXProject "DailyMeal" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E7C6036D233D3ECC004686DB /* Debug */,
@@ -2294,7 +2314,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E7C6036F233D3ECC004686DB /* Build configuration list for PBXNativeTarget "DailyMenu" */ = {
+		E7C6036F233D3ECC004686DB /* Build configuration list for PBXNativeTarget "DailyMeal" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E7C60370233D3ECC004686DB /* Debug */,
@@ -2303,7 +2323,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E7C60393233D5F5B004686DB /* Build configuration list for PBXNativeTarget "DailyMenuTests" */ = {
+		E7C60393233D5F5B004686DB /* Build configuration list for PBXNativeTarget "DailyMealTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E7C60394233D5F5B004686DB /* Debug */,

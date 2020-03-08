@@ -25,20 +25,20 @@ platform :ios do
   
   lane :build do
 # ensure_git_status_clean
-  build_number = get_build_number(xcodeproj: "DailyMenu.xcodeproj")
-  name = "DailyMenu-build_#{build_number}"
+  build_number = get_build_number(xcodeproj: "DailyMeal.xcodeproj")
+  name = "DailyMeal-build_#{build_number}"
   ipa_name = "#{name}.ipa"
   
   build_app(
-    scheme: "daily-menu",
-    workspace: "DailyMenu.xcworkspace",
+    scheme: "daily-meal",
+    workspace: "DailyMeal.xcworkspace",
     output_directory: "./fastlane-builds",
     output_name: "#{ipa_name}",
     export_method: "enterprise",
     skip_profile_detection: true,
     export_options: {
         provisioningProfiles: {
-        "com.epam.daily-menu" => "EPAM IN-HOUSE 5 Wildcard-revokable",
+        "by.daily-meal" => "EPAM IN-HOUSE 5 Wildcard-revokable",
         }
     }
   )
@@ -46,7 +46,7 @@ platform :ios do
   appcenter_upload(
       api_token: "8fecb69650ddbb0982bd4779e6dde9d7bab954a1",
       owner_name: "uladzimir_pryhazhanau",
-      app_name: "DailyMenu",
+      app_name: "DailyMeal",
       ipa: "fastlane-builds/#{ipa_name}",
       dsym: "fastlane-builds/#{name}.app.dSYM.zip",
       destinations: "Collaborators",
