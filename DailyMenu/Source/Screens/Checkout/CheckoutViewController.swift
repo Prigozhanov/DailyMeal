@@ -148,7 +148,6 @@ extension CheckoutViewController: CheckoutView {
 		
 	}
 	
-    
 }
 
 // MARK: - Private

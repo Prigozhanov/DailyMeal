@@ -138,7 +138,7 @@ final class RestaurantsMapViewController: UIViewController, KeyboardObservable {
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
-		LoadingIndicator.show(mapController)
+		LoadingIndicator.show(self)
 		viewModel.loadRestaurants {
 			LoadingIndicator.hide()
 		}

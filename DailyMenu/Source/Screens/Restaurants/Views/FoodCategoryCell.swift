@@ -106,7 +106,7 @@ class FoodCategoryCell: BaseCollectionCell {
         filterNameLabel.text = item.category.humanReadableValue
 		restaurantCountLabel.text = String.localizedStringWithFormat(
 			"categories_restaurants_count".localized, item.restaurantsCount
-		) 
+		)
         if isSelected {
             setState(.selected)
         } else {
