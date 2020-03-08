@@ -59,6 +59,7 @@
 		E718699A237DEE5000059766 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7186999237DEE5000059766 /* Category.swift */; };
 		E718B4AA23EF229D001EB7FE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E718B4A923EF229D001EB7FE /* MapViewController.swift */; };
 		E718B4AC23EF2706001EB7FE /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E718B4AB23EF2706001EB7FE /* MapViewModel.swift */; };
+		E71A62B5241526CB000140B9 /* ImpactGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A62B4241526CB000140B9 /* ImpactGenerator.swift */; };
 		E71CDC4123AEE4870059505A /* NavigationBarControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CDC4023AEE4870059505A /* NavigationBarControls.swift */; };
 		E71E75AC23EFC4C100D51EEE /* MapHeaderVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71E75AB23EFC4C100D51EEE /* MapHeaderVIew.swift */; };
 		E71E75AE23EFDF0600D51EEE /* ConfirmationDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71E75AD23EFDF0600D51EEE /* ConfirmationDialogViewController.swift */; };
@@ -326,6 +327,7 @@
 		E7186999237DEE5000059766 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		E718B4A923EF229D001EB7FE /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E718B4AB23EF2706001EB7FE /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		E71A62B4241526CB000140B9 /* ImpactGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactGenerator.swift; sourceTree = "<group>"; };
 		E71CDC4023AEE4870059505A /* NavigationBarControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarControls.swift; sourceTree = "<group>"; };
 		E71E75AB23EFC4C100D51EEE /* MapHeaderVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHeaderVIew.swift; sourceTree = "<group>"; };
 		E71E75AD23EFDF0600D51EEE /* ConfirmationDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationDialogViewController.swift; sourceTree = "<group>"; };
@@ -866,6 +868,7 @@
 				E77AD24D23E96E6700FB270D /* Extensions.h */,
 				E77AD24E23E96E6700FB270D /* Info.plist */,
 				E7A14DD12411409B0030975F /* Date.swift */,
+				E71A62B4241526CB000140B9 /* ImpactGenerator.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1596,6 +1599,7 @@
 				E77AD25823E96E8400FB270D /* Swift.swift in Sources */,
 				E7A14DD22411409B0030975F /* Date.swift in Sources */,
 				E7F15DF423FF063D00E35668 /* UIImage.swift in Sources */,
+				E71A62B5241526CB000140B9 /* ImpactGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

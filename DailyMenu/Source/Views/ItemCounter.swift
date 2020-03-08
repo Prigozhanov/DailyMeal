@@ -28,8 +28,11 @@ class ItemCounter: UIView {
 			if self.value < self.maximumValue {
 				self.value += 1
 				self.valueLabel.text = String(self.value)
+				valueChanged(self.value)
+				UISelectionFeedbackGenerator.impact()
+			} else {
+				UINotificationFeedbackGenerator.impact(.warning)
 			}
-			valueChanged(self.value)
 		}
 		addSubview(plusButton)
 		plusButton.snp.makeConstraints {
@@ -62,8 +65,11 @@ class ItemCounter: UIView {
 			if self.value > self.minimumValue {
 				self.value -= 1
 				self.valueLabel.text = String(self.value)
+				valueChanged(self.value)
+				UISelectionFeedbackGenerator.impact()
+			} else {
+				UINotificationFeedbackGenerator.impact(.warning)
 			}
-			valueChanged(self.value)
 		}
 		addSubview(minusButton)
 		minusButton.snp.makeConstraints {

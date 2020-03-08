@@ -108,6 +108,7 @@ extension UIView {
         animation.toValue = self.center.x - 5
         animation.autoreverses = true
         layer.add(animation, forKey: "postion.x")
+		UINotificationFeedbackGenerator.impact(.error)
     }
     
     func startRotating(duration: CFTimeInterval = 1, repeatCount: Float = Float.infinity, clockwise: Bool = true) {

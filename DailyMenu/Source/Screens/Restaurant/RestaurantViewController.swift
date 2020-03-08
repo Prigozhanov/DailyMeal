@@ -71,6 +71,12 @@ final class RestaurantViewController: UIViewController {
             guard let restaurant = self?.viewModel.restaurant else {
                 return
             }
+			
+			guard restaurant.isOpen else {
+				view.shakeAnimation()
+				return
+			}
+			
             let vm = ProductViewModelImplementation(product: data, restaurant: restaurant)
             let vc = ProductViewController(viewModel: vm)
             self?.navigationController?.pushViewController(vc, animated: true)

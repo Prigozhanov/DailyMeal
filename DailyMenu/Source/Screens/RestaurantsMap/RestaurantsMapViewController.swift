@@ -140,6 +140,7 @@ final class RestaurantsMapViewController: UIViewController, KeyboardObservable {
 		
 		LoadingIndicator.show(self)
 		viewModel.loadRestaurants {
+			UINotificationFeedbackGenerator.impact(.success)
 			LoadingIndicator.hide()
 		}
 	}
@@ -177,6 +178,7 @@ extension RestaurantsMapViewController: RestaurantsMapView {
 			LoadingIndicator.show(self)
 			viewModel.filterRestaurants {
 				DispatchQueue.main.async {
+					UINotificationFeedbackGenerator.impact(.success)
 					LoadingIndicator.hide()
 					self.filteredRestaurantsPreview.configure(cellItems: self.viewModel.filteredRestaurants.map {
 						self.makeRestaurantsPreviewItem(restaurant: $0)

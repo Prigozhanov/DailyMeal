@@ -6,6 +6,7 @@
 import Foundation
 import Networking
 import Services
+import Extensions
 
 // MARK: - View
 protocol GreetingView: class {

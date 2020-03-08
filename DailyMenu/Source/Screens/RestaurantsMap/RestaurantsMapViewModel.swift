@@ -6,6 +6,7 @@
 import Foundation
 import Services
 import Networking
+import Extensions
 
 // MARK: - View
 protocol RestaurantsMapView: class {

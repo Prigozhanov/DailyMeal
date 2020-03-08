@@ -42,8 +42,10 @@ final class GreetingViewController: UIViewController {
         self?.viewModel.password = self?.passwordField.text ?? ""
         LoadingIndicator.show(self)
         self?.viewModel.performLogin(onSuccess: {
+			UINotificationFeedbackGenerator.impact(.success)
             self?.dismiss(animated: true, completion: nil)
         }, onFailure: {
+			UINotificationFeedbackGenerator.impact(.error)
             button.shakeAnimation()
             self?.passwordField.text = ""
             self?.showAuthorizationError()

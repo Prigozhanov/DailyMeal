@@ -5,6 +5,7 @@
 
 import MapKit
 import Networking
+import Extensions
 
 class MapViewController: UIViewController {
     
@@ -140,6 +141,7 @@ extension MapViewController {
 		if let restaurantAnnotation = restaurantAnnotations.first(where: { $0.restaurant.id == id }) {
 			moveToCoordinates(lat: restaurantAnnotation.coordinate.latitude, lon: restaurantAnnotation.coordinate.longitude)
 			mapView.selectAnnotation(restaurantAnnotation, animated: true)
+			UISelectionFeedbackGenerator.impact()
 		}
 	}
 	

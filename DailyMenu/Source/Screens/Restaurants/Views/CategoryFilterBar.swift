@@ -4,6 +4,7 @@
 //
 
 import CollectionKit
+import Extensions
 
 class CategoryFilterBar: UIView {
     
@@ -48,6 +49,8 @@ class CategoryFilterBar: UIView {
 				category: data.category,
 				restaurantsCount: self?.item.categoryRestaurantsCount(data.category) ?? 0,
                 onSelectAction: { [weak self] category in
+					UISelectionFeedbackGenerator.impact()
+					view.tapAnimation()
                     self?.item.selectedCategory = category
                     self?.item.onSelectAction(category)
                     if category == nil {

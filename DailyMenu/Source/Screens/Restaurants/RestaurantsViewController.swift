@@ -172,6 +172,7 @@ extension RestaurantsViewController: RestaurantsView {
 	}
 	
 	func hideLoadingIndicator() {
+		UINotificationFeedbackGenerator.impact(.success)
 		LoadingIndicator.hide()
 	}
 	

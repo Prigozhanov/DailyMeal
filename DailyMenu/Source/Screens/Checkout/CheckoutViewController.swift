@@ -141,11 +141,12 @@ final class CheckoutViewController: UIViewController {
 extension CheckoutViewController: CheckoutView {
 	func onSuccessSubmit() {
 		let vc = OrderPlacedViewController(deliveryTime: viewModel.restaurant?.orderDelayFirst ?? 0)
+		UINotificationFeedbackGenerator.impact(.success)
 		self.navigationController?.pushViewController(vc, animated: true)
 	}
 	
 	func onFailedSubmit() {
-		
+		UINotificationFeedbackGenerator.impact(.error)
 	}
 	
 }

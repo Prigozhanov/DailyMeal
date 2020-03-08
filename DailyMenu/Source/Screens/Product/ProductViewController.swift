@@ -78,10 +78,13 @@ final class ProductViewController: UIViewController {
 				onConfirm: { [weak self] in
 					self?.viewModel.reloadCart()
 					self?.viewModel.addToCart {}
+					UINotificationFeedbackGenerator.impact(.success)
 					self?.navigationController?.popViewController(animated: true)
 			})
+			UINotificationFeedbackGenerator.impact(.warning)
 			self.present(vc, animated: true)
 		}
+		UINotificationFeedbackGenerator.impact(.success)
         self.navigationController?.popViewController(animated: true)
     }
     
