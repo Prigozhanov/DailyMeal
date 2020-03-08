@@ -39,7 +39,7 @@ public class KeychainServiceImplementation: KeychainService {
     var keychain: Keychain
     
     public init(identifier: String) {
-        keychain = Keychain(accessGroup: identifier)
+        keychain = Keychain(service: identifier)
     }
     
     public func setValueForItem(_ item: KeychainItem, _ value: String) {

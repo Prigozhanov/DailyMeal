@@ -43,6 +43,7 @@ public class LocationServiceImplementation: NSObject, LocationService {
     }
     
     public func startUpdatingLocation(onUpdate: @escaping (CLLocationCoordinate2D) -> Void) {
+		locationManager.requestWhenInUseAuthorization()
         self.onUpdate = onUpdate
         locationManager.startUpdatingLocation()
         os_log("[LOCATION] %s", "Location manager started updating locations")

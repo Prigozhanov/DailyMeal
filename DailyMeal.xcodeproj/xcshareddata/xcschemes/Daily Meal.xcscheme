@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E7C6035A233D3ECA004686DB"
-               BuildableName = "Daily Menu.app"
+               BuildableName = "Daily Meal.app"
                BlueprintName = "DailyMeal"
                ReferencedContainer = "container:DailyMeal.xcodeproj">
             </BuildableReference>
@@ -66,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E7C6035A233D3ECA004686DB"
-            BuildableName = "Daily Menu.app"
+            BuildableName = "Daily Meal.app"
             BlueprintName = "DailyMeal"
             ReferencedContainer = "container:DailyMeal.xcodeproj">
          </BuildableReference>
@@ -83,7 +83,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E7C6035A233D3ECA004686DB"
-            BuildableName = "Daily Menu.app"
+            BuildableName = "Daily Meal.app"
             BlueprintName = "DailyMeal"
             ReferencedContainer = "container:DailyMeal.xcodeproj">
          </BuildableReference>
@@ -94,6 +94,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "Daily Meal"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

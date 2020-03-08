@@ -87,19 +87,20 @@ final class CheckoutViewModelImplementation: CheckoutViewModel {
         )
         
         let req = networkService.requestFactory.shoppingCart(shoppingCartRequest: requestObject)
-		userDefaultsService.setValueForKey(key: .lastOrderId, value: "TEST")
-		userDefaultsService.setValueForKey(key: .lastOrderDate, value: Date())
-		userDefaultsService.setValueForKey(key: .lastOrderDeliveryTimeSeconds, value: (restaurant?.orderDelayFirst ?? 0) * 60)
-		cartService.reload()
-		view?.onSuccessSubmit()
-//        networkService.send(request: req) { (result, _) in
-//            switch result {
-//            case let .success(response):
-//                print(response)
-//            case let .failure(error):
-//                logDebug(message: error.localizedDescription)
-//            }
-//        }
+	
+        networkService.send(request: req) { [weak self] result, _ in
+            switch result {
+            case let .success(response):
+				self?.userDefaultsService.setValueForKey(key: .lastOrderId, value: response.rawResponse.orderID)
+				self?.userDefaultsService.setValueForKey(key: .lastOrderDate, value: Date())
+				self?.userDefaultsService.setValueForKey(key: .lastOrderDeliveryTimeSeconds, value: (self?.restaurant?.orderDelayFirst ?? 0) * 60)
+				self?.cartService.reload()
+				self?.view?.onSuccessSubmit()
+            case let .failure(error):
+				self?.view?.onFailedSubmit()
+                logDebug(message: error.localizedDescription)
+            }
+        }
     }
     
 }

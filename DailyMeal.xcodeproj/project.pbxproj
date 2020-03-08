@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1577F5CAFB63789A51829A53 /* Pods_Services.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00620682C25724FDD6927D7 /* Pods_Services.framework */; };
 		C68A9CC013CAD9CE578FE98F /* Pods_DailyMeal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B280A192B054A415995C5D2 /* Pods_DailyMeal.framework */; };
 		E7037361234FE0D600852B04 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7037360234FE0D600852B04 /* UIButton.swift */; };
 		E7037363234FE85D00852B04 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7037362234FE85D00852B04 /* Layout.swift */; };
@@ -175,7 +174,6 @@
 		E7F15DF423FF063D00E35668 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F15DF323FF063D00E35668 /* UIImage.swift */; };
 		E7F15DF823FF66DE00E35668 /* RatingRangeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F15DF723FF66DE00E35668 /* RatingRangeControl.swift */; };
 		E7F15DFB2400469F00E35668 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD22323E96C8200FB270D /* Networking.framework */; };
-		E7F15DFC2400469F00E35668 /* Networking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E77AD22323E96C8200FB270D /* Networking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E7F2913B2406E942000AF60C /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71708B823EB29C900D444BD /* KeyboardObserver.swift */; };
 		E7F3171C240417490011CC42 /* FilterAppliedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3171B240417490011CC42 /* FilterAppliedView.swift */; };
 		E7F3171E24045D300011CC42 /* UserLocationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3171D24045D300011CC42 /* UserLocationAnnotationView.swift */; };
@@ -253,17 +251,6 @@
 				E70EBEF623EC191100B3D0DF /* Extensions.framework in Embed Frameworks */,
 				E70EBEFA23EC191800B3D0DF /* Services.framework in Embed Frameworks */,
 				E7B7C08923EC162F0090C9DF /* Networking.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E7F15DFF2400469F00E35668 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				E7F15DFC2400469F00E35668 /* Networking.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -497,7 +484,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7F15DFB2400469F00E35668 /* Networking.framework in Frameworks */,
-				1577F5CAFB63789A51829A53 /* Pods_Services.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1248,7 +1234,6 @@
 				E77AD26923E9D6A700FB270D /* Sources */,
 				E77AD26A23E9D6A700FB270D /* Frameworks */,
 				E77AD26B23E9D6A700FB270D /* Resources */,
-				E7F15DFF2400469F00E35668 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1817,9 +1802,9 @@
 		E77AD23B23E96C8200FB270D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = H7553T5T52;
@@ -1834,7 +1819,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.epam.Networking;
+				PRODUCT_BUNDLE_IDENTIFIER = "by.daily-meal.Networking";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1849,9 +1834,9 @@
 		E77AD23C23E96C8200FB270D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = H7553T5T52;
@@ -1866,7 +1851,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.epam.Networking;
+				PRODUCT_BUNDLE_IDENTIFIER = "by.daily-meal.Networking";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1927,10 +1912,10 @@
 		E77AD25523E96E6700FB270D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = H7553T5T52;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1944,12 +1929,12 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.epam.Extensions;
+				PRODUCT_BUNDLE_IDENTIFIER = "by.daily-meal.Extensions";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1960,10 +1945,10 @@
 		E77AD25623E96E6700FB270D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = H7553T5T52;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1977,12 +1962,12 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.epam.Extensions;
+				PRODUCT_BUNDLE_IDENTIFIER = "by.daily-meal.Extensions";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1994,10 +1979,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AA4AB9F80D8F8CF262F81386 /* Pods-Services.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = H7553T5T52;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2011,11 +1996,12 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.epam.Services;
+				PRODUCT_BUNDLE_IDENTIFIER = "by.daily-meal.Services";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2027,10 +2013,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 41AAA2778B43A1759CD7069B /* Pods-Services.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = H7553T5T52;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2044,11 +2030,12 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.epam.Services;
+				PRODUCT_BUNDLE_IDENTIFIER = "by.daily-meal.Services";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2179,7 +2166,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = H7553T5T52;
 				INFOPLIST_FILE = DailyMeal/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2203,7 +2190,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = H7553T5T52;
 				INFOPLIST_FILE = DailyMeal/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
