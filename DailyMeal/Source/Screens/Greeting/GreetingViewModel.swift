@@ -55,7 +55,8 @@ final class GreetingViewModelImplementation: GreetingViewModel {
                 
                 if let user = response.member {
                     self?.context.userDefaultsService.updateUserDetails(user: user)
-                    self?.context.networkService.fetchUserData(onSuccess: { user in
+                    self?.context.networkService.fetchUserData(onSuccess: { [weak self] user in
+						self?.userDefaultsService.updateUserDetails(user: user)
                         if strongSelf.context.userDefaultsService.hasAddress {
                             NotificationCenter.default.post(name: .userLoggedIn, object: nil)
                         } else {

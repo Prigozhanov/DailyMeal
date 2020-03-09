@@ -95,6 +95,7 @@ internal enum Asset {
     internal enum Placeholders {
       internal static let cash = ImageAsset(name: "Placeholders/cash")
       internal static let creditCard = ImageAsset(name: "Placeholders/credit_card")
+      internal static let creditCardOnDelivery = ImageAsset(name: "Placeholders/credit_card_on_delivery")
       internal static let creditCardSecond = ImageAsset(name: "Placeholders/credit_card_second")
       internal static let dailyLogo = ImageAsset(name: "Placeholders/daily_logo")
       internal static let home = ImageAsset(name: "Placeholders/home")

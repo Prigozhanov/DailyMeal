@@ -20,6 +20,7 @@ public protocol NetworkService {
     @discardableResult
     func send<Response: Codable>(request: Request<Response>, completion: @escaping (Result<Response, NetworkClient.Error>, String) -> Void) -> URLSessionDataTask
     
+	func removeToken()
 }
 
 public class NetworkServiceImplementation: NetworkService {
@@ -92,6 +93,10 @@ public class NetworkServiceImplementation: NetworkService {
             }
         }
     }
+	
+	public func removeToken() {
+		requestConfigurator.removeHeader(.authorization)
+	}
     
 }
 

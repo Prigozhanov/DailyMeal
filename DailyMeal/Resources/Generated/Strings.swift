@@ -140,8 +140,10 @@ internal enum L10n {
     internal static let cash = L10n.tr("Localizable", "order_checkout.cash")
     /// Checkout
     internal static let checkout = L10n.tr("Localizable", "order_checkout.checkout")
-    /// Credit/Debt cart"
+    /// Credit/Debt card
     internal static let creditCard = L10n.tr("Localizable", "order_checkout.credit_card")
+    /// Credit card on delivery
+    internal static let creditCardOnDelviery = L10n.tr("Localizable", "order_checkout.credit_card_on_delviery")
     /// Delivery time
     internal static let deliveryTime = L10n.tr("Localizable", "order_checkout.delivery_time")
     /// %d minutes

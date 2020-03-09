@@ -9,7 +9,8 @@ import Services
 
 final class CartViewController: UIViewController {
     
-    private var cartService: CartService = AppDelegate.shared.context.cartService
+    private var cartService: CartService
+	private var userDefaultsService: UserDefaultsService
 	
 	private var notificationTokens: [Token] = []
     
@@ -61,6 +62,9 @@ final class CartViewController: UIViewController {
     private lazy var separator = UIView.makeSeparator()
     
     init() {
+		cartService = AppDelegate.shared.context.cartService
+		userDefaultsService = AppDelegate.shared.context.userDefaultsService
+		
         super.init(nibName: nil, bundle: nil)
         
         cartService.view = self
@@ -140,13 +144,13 @@ final class CartViewController: UIViewController {
 						self.cartService.restaurant = nil
                     }
 					self.reloadCalculationsRows()
-					self.proceedActionButton.isEnabled = self.cartService.isValid
+					self.proceedActionButton.isEnabled = self.cartService.isValid && self.userDefaultsService.isLoggedIn
                 },
                 onChangeCount: { [weak self] value in
 					guard let self = self else { return }
                     item.count = value
                     self.reloadCalculationsRows()
-					self.proceedActionButton.isEnabled = self.cartService.isValid
+					self.proceedActionButton.isEnabled = self.cartService.isValid && self.userDefaultsService.isLoggedIn
             })
             )
         })
@@ -177,7 +181,7 @@ final class CartViewController: UIViewController {
             aloeStackView.setInset(forRow: lastRow, inset: UIEdgeInsets(top: 10, left: 45, bottom: 30, right: 45))
         }
 		
-		proceedActionButton.isEnabled = cartService.isValid
+		proceedActionButton.isEnabled = cartService.isValid && userDefaultsService.isLoggedIn
     }
     
 }

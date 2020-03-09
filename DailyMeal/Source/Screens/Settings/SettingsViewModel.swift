@@ -69,6 +69,7 @@ final class SettingsViewModelImplementation: SettingsViewModel {
     func clearUserInfo() {
         context.userDefaultsService.removeAllValues()
         context.keychainSevice.removeValue(.authToken)
+		context.networkService.removeToken()
     }
     
     func removeCreditCardInfo() {

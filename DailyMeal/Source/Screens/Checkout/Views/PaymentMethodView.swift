@@ -43,7 +43,9 @@ class PaymentMethodView: UIView {
         cardView.contentView.addSubview(imageView)
         imageView.contentMode = .scaleAspectFit
         imageView.snp.makeConstraints {
-            $0.top.leading.bottom.equalToSuperview().inset(Layout.commonInset)
+			$0.top.bottom.equalToSuperview().inset(5)
+            $0.leading.equalToSuperview().inset(Layout.commonInset)
+			$0.size.equalTo(40)
         }
         
         cardView.contentView.addSubview(titleLabel)

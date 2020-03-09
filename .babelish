@@ -1,4 +1,4 @@
-filename: "Daily Menu Localization"
+filename: "Daily Meal Localization"
 langs:
   English: "en"
   Russian: "ru"
@@ -8,7 +8,7 @@ excluded_states: ["SKIP"]
 comments_column: 0
 keys_column: 1
 default_lang: "ENGLISH"
-output_dir: "../daily-menu/DailyMenu/Resources/Localization/"
+output_dir: "DailyMeal/Resources/Localization/"
 output_basenames:
 - Localizable
 ignore_lang_path: false

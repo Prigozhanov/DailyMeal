@@ -36,6 +36,7 @@ class AppCoordinator {
         
         networkService.fetchUserData(onSuccess: { [weak self] user in
             guard let self = self else { return }
+			self.userDefaultsService.updateUserDetails(user: user)
             if self.userDefaultsService.hasAddress {
                 NotificationCenter.default.post(name: .userLoggedIn, object: nil)
             } else {

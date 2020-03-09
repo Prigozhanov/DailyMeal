@@ -130,7 +130,8 @@
 /* OrderChecout */
 "order_checkout.you"                              = "You";
 "order_checkout.payment_method"                   = "Payment method";
-"order_checkout.credit_card"                      = "Credit/Debt cart\"";
+"order_checkout.credit_card_on_delviery"          = "Credit card on delivery";
+"order_checkout.credit_card"                      = "Credit/Debt card";
 "order_checkout.cash"                             = "Cash";
 "order_checkout.submit_order"                     = "Submit Order";
 "order_checkout.checkout"                         = "Checkout";

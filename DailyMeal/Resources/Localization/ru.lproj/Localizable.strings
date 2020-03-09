@@ -130,6 +130,7 @@
 /* OrderChecout */
 "order_checkout.you"                              = "Вы";
 "order_checkout.payment_method"                   = "Способ оплаты";
+"order_checkout.credit_card_on_delviery"          = "Кредитная карта при получении";
 "order_checkout.credit_card"                      = "Кредитная карта";
 "order_checkout.cash"                             = "Наличные";
 "order_checkout.submit_order"                     = "Заказать";

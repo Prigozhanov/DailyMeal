@@ -42,7 +42,11 @@ final class CheckoutViewModelImplementation: CheckoutViewModel {
         keychainService.getCreditCardDetails()
     }
     
-    var paymentMethod: PaymentMethod = .cash
+	var paymentMethod: PaymentMethod {
+		didSet {
+			userDefaultsService.setValueForKey(key: .paymentMethod, value: paymentMethod.rawValue)
+		}
+	}
 	
 	lazy var restaurant: RestaurantData? = cartService.restaurant
     
@@ -52,6 +56,12 @@ final class CheckoutViewModelImplementation: CheckoutViewModel {
         keychainService = context.keychainSevice
         cartService = context.cartService
         userDefaultsService = context.userDefaultsService
+		
+		if let paymentMethodValue = userDefaultsService.getValueForKey(key: .paymentMethod) as? Int {
+			paymentMethod = PaymentMethod(rawValue: paymentMethodValue) ?? .cash
+		} else {
+			paymentMethod = .cash
+		}
     }
     
     func checkoutOrder() {
@@ -61,7 +71,7 @@ final class CheckoutViewModelImplementation: CheckoutViewModel {
             memberID: userDefaultsService.getValueForKey(key: .id) as? Int ?? 0,
             intercom: "",
             phoneConfirm: 0,
-            timeMinute: "09",
+            timeMinute: "09", // Don't know what this value mean. Just leave it as is. It should work :)
             fullname: "",
             addressID: userDefaultsService.getValueForKey(key: .addressesId) as? Int ?? 0,
             deliveryDate: Date().timeIntervalSince1970 + 3600,

@@ -21,26 +21,27 @@ final class CheckoutViewController: UIViewController {
     }()
     
     private lazy var creditCardRow: PaymentMethodView = {
-        let view = PaymentMethodView(item:
+        PaymentMethodView(item:
             PaymentMethodView.Item(
 				title: Localizable.OrderCheckout.creditCard,
                 image: Images.Placeholders.creditCardSecond.image,
-                isSelected: viewModel.creditCard != nil,
+                isSelected: false,
                 tapHandler: { [unowned self] view in
                     view.tapAnimation()
                     self.viewModel.paymentMethod = .creditCard
                     if self.viewModel.creditCard == nil {
                         let vc = AddCreditCardViewController(viewModel: AddCreditCardViewModelImplementation(onSaveSuccess: { [weak self] cardNumber in
                             self?.updateCreditCardLabel(with: cardNumber)
-                            self?.selectCreditCardPaymentType()
+							self?.deselectAll()
+							view.setSelected(true)
                         }))
                         self.navigationController?.pushViewController(vc, animated: true)
                     } else {
-                        self.selectCreditCardPaymentType()
+						self.deselectAll()
+						view.setSelected(true)
                     }
             })
         )
-        return view
     }()
     
     private lazy var cashRow: PaymentMethodView = {
@@ -49,12 +50,27 @@ final class CheckoutViewController: UIViewController {
 				title: Localizable.OrderCheckout.cash,
                 image: Images.Placeholders.cash.image,
                 tapHandler: { [unowned self] view in
-                    self.selectCashPaymentType()
+                    self.deselectAll()
+					view.setSelected(true)
                     self.viewModel.paymentMethod = .cash
                     view.tapAnimation()
             })
         )
     }()
+	
+	private lazy var creditCardOnDeliveryRow: PaymentMethodView = {
+		PaymentMethodView(item:
+			PaymentMethodView.Item(
+				title: Localizable.OrderCheckout.creditCardOnDelviery,
+				image: Images.Placeholders.creditCardOnDelivery.image,
+				tapHandler: { [unowned self] view in
+					self.deselectAll()
+					view.setSelected(true)
+					self.viewModel.paymentMethod = .creditCardOnDelivery
+					view.tapAnimation()
+			})
+		)
+	}()
     
 	private lazy var submitButton = ActionButton(Localizable.OrderCheckout.submitOrder) { [weak self] _ in
         self?.viewModel.checkoutOrder()
@@ -94,8 +110,9 @@ final class CheckoutViewController: UIViewController {
 		
 		let paymentMethodLabel = UILabel.makeText(Localizable.OrderCheckout.paymentMethod)
         stackView.addRow(paymentMethodLabel)
-        stackView.addRow(creditCardRow)
+//        stackView.addRow(creditCardRow) // TODO: Will be imlemented in future
         stackView.addRow(cashRow)
+		stackView.addRow(creditCardOnDeliveryRow)
         stackView.addRow(submitButton)
         
         submitButton.snp.makeConstraints {
@@ -106,7 +123,15 @@ final class CheckoutViewController: UIViewController {
 		stackView.setInset(forRow: submitButton, inset: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
 		
         updateCreditCardLabel(with: self.viewModel.creditCard?.number)
-		selectCashPaymentType()
+		
+		switch viewModel.paymentMethod {
+		case .creditCard:
+			creditCardRow.setSelected(true)
+		case .cash:
+			cashRow.setSelected(true)
+		case .creditCardOnDelivery:
+			creditCardOnDeliveryRow.setSelected(true)
+		}
 		
 		Style.addTitle(title: Localizable.OrderCheckout.checkout, self)
         Style.addNotificationButton(self) { (_) in
@@ -120,19 +145,15 @@ final class CheckoutViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
-    
-    private func selectCreditCardPaymentType() {
-        cashRow.setSelected(false)
-        creditCardRow.setSelected(true)
-    }
-    
-    private func selectCashPaymentType() {
-        creditCardRow.setSelected(false)
-        cashRow.setSelected(true)
-    }
+	
+	private func deselectAll() {
+		cashRow.setSelected(false)
+//		creditCardRow.setSelected(false)
+		creditCardOnDeliveryRow.setSelected(false)
+	}
     
     private func updateCreditCardLabel(with cardNumber: String?) {
-		creditCardRow.titleLabel.text = Formatter.CreditCard.hiddenNumber(string: cardNumber) ?? Localizable.OrderCheckout.creditCard
+//		creditCardRow.titleLabel.text = Formatter.CreditCard.hiddenNumber(string: cardNumber) ?? Localizable.OrderCheckout.creditCard
     }
     
 }

@@ -101,12 +101,14 @@ public enum UserDefaultsKey: String, CaseIterable {
 	addressLon,
 	lastOrderId,
 	lastOrderDate,
-	lastOrderDeliveryTimeSeconds
+	lastOrderDeliveryTimeSeconds,
+	paymentMethod
 }
 
 public enum PaymentMethod: Int {
     case cash = 20
-    case creditCard = 0 // FIXME Change value to actual
+	case creditCardOnDelivery = 26
+    case creditCard = 36
 }
 
 public extension NotificationDescriptor {
