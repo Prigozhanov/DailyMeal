@@ -12,6 +12,6 @@ class Layout {
     
     static let commonInset: CGFloat = 15
     
-    static let cornerRadius: CGFloat = 7.0
+    static let cornerRadius: CGFloat = 7
     
 }

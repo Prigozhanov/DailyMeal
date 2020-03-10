@@ -3,6 +3,16 @@
     {
       "idiom" : "universal",
       "filename" : "order-delivered-placeholder.pdf"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "order-delivered-placeholder_dark.png",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ]
     }
   ],
   "info" : {

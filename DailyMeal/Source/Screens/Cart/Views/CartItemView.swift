@@ -27,13 +27,8 @@ class CartItemView: UIView {
     private lazy var optionsDataSource = ArrayDataSource<Choice>(data: choices)
     private lazy var optionsCollectionProvider = BasicProvider(
         dataSource: optionsDataSource,
-        viewSource: ClosureViewSource(viewUpdater: { [weak self] (view: FoodOptionCell, data: Choice, index: Int) in
-            view.configure(with: FoodOptionCell.Item(option: data, onRemoveOption: { [weak self] (_) in
-                guard let self = self else { return }
-                self.optionsDataSource.data.remove(at: index)
-                self.optionsDataSource.reloadData()
-                AppDelegate.shared.context.cartService.view?.reloadCalculationsRows()
-            }))
+        viewSource: ClosureViewSource(viewUpdater: { (view: FoodOptionCell, data: Choice, _: Int) in
+            view.configure(with: data)
         }),
         sizeSource: { [weak self] (_, data: Choice, _) -> CGSize in
             guard let self = self else { return .zero }
@@ -55,7 +50,7 @@ class CartItemView: UIView {
     }()
     
     private lazy var itemImage: UIImageView = {
-        let itemImage = UIImageView(image: Images.foodItemPlaceholder.image)
+        let itemImage = UIImageView()
         itemImage.setRoundCorners(Layout.cornerRadius)
         itemImage.contentMode = .scaleAspectFit
         return itemImage

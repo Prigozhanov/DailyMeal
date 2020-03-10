@@ -129,13 +129,6 @@ final class RestaurantsViewController: UIViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		tableView.setContentOffset(
-			CGPoint(
-				x: 0,
-				y: -(headerView.frame.height + filterBar.frame.height + searchView.frame.height)
-			),
-			animated: false
-		)
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -174,6 +167,7 @@ extension RestaurantsViewController: RestaurantsView {
 	func hideLoadingIndicator() {
 		UINotificationFeedbackGenerator.impact(.success)
 		LoadingIndicator.hide()
+		
 	}
 	
 	func makeRestaurantItemRows(restaurants: [Restaurant]) -> [TableRow<RestaurantCell>] {
@@ -183,7 +177,7 @@ extension RestaurantsViewController: RestaurantsView {
 					let vc = RestaurantViewController(
 						viewModel: RestaurantViewModelImplementation(
 							restaurant: data.item,
-							categories: []
+							categories: self?.viewModel.categories[data.item.id] ?? []
 						)
 					)
 					self?.navigationController?.pushViewController(vc, animated: true)
@@ -208,6 +202,17 @@ extension RestaurantsViewController: RestaurantsView {
 			}
 		}
 		
+	}
+	
+	func scrollToTop() {
+		tableView.setContentOffset(
+			CGPoint(
+				x: 0,
+				y: -(headerView.frame.height + filterBar.frame.height + searchView.frame.height)
+			),
+			animated: false
+		)
+		showFilterBar()
 	}
 }
 
@@ -244,15 +249,15 @@ extension RestaurantsViewController: UIScrollViewDelegate {
 		lastScrollOffset = 0
 		isDrugging = false
 		if tableView.contentOffset.y < -headerView.frame.height {
-			openFilterBar()
+			showFilterBar()
 			return
 		}
 		
 		if lastScrollDirection == .up,
 			(lastScrollValue >= 5 || !isHeaderAllowToOpen) {
-			closeFilterBar()
+			hideFilterBar()
 		} else {
-			openFilterBar()
+			showFilterBar()
 		}
 	}
 	
@@ -300,14 +305,14 @@ extension RestaurantsViewController: UIScrollViewDelegate {
 		lastScrollValue = scrollValue
 	}
 	
-	private func openFilterBar() {
+	private func showFilterBar() {
 		filterBarTopConstraint?.constant = 0
 		UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { [unowned self] in
 			self.view.layoutIfNeeded()
 		})
 	}
 	
-	private func closeFilterBar() {
+	private func hideFilterBar() {
 		filterBarTopConstraint?.constant = -(filterBar.frame.height + searchView.frame.height)
 		UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { [unowned self] in
 			self.view.layoutIfNeeded()

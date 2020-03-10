@@ -32,6 +32,8 @@ class PhoneVerifiedViewController: UIViewController {
         
         imagePlaceholder.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(50)
+			$0.top.greaterThanOrEqualTo(view.safeAreaLayoutGuide)
+			$0.height.lessThanOrEqualTo(200)
         }
         
         titleLabel.snp.makeConstraints {
@@ -48,7 +50,7 @@ class PhoneVerifiedViewController: UIViewController {
             $0.top.equalTo(subtitleLabel.snp.bottom).offset(100)
             $0.leading.trailing.equalTo(imagePlaceholder)
             $0.height.equalTo(50)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(40)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(40)
         }
         
     }

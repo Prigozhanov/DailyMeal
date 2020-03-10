@@ -64,9 +64,9 @@ class RestaurantCell: BaseTableCell {
         return label
     }()
     
-	private lazy var closedTimeView: RestaurantStatusView = {
+	private lazy var restaurantStatusView: RestaurantStatusView = {
 		let view = RestaurantStatusView()
-		view.rectColor = Colors.commonBackground.color
+		view.rectColor = Colors.white.color
 		return view
 	}()
 	
@@ -102,13 +102,13 @@ class RestaurantCell: BaseTableCell {
             $0.height.equalTo(150)
         }
 		
-		cardView.contentView.addSubview(closedTimeView)
-		closedTimeView.snp.makeConstraints {
+		cardView.contentView.addSubview(restaurantStatusView)
+		restaurantStatusView.snp.makeConstraints {
 			$0.top.trailing.equalToSuperview()
 			$0.height.equalTo(50)
 			$0.width.equalTo(100)
 		}
-		closedTimeView.setRoundCorners(Layout.cornerRadius)
+		restaurantStatusView.setRoundCorners(Layout.cornerRadius)
 		
         cardView.contentView.addSubview(restaurantInfoView)
         restaurantInfoView.snp.makeConstraints {
@@ -211,7 +211,7 @@ extension RestaurantCell: ConfigurableCell {
         if let url = URL(string: item.src) {
             self.restaurantLogoImageView.kf.setImage(with: url)
 		}
-		closedTimeView.configure(
+		restaurantStatusView.configure(
 			item: RestaurantStatusView.Item(
 				status: RestaurantStatusView.Status.fromString(item.status.rawValue),
 				openTime: Date.fromString(item.openTime)?.toString(formatter: Date.timeFormatter) ?? "",

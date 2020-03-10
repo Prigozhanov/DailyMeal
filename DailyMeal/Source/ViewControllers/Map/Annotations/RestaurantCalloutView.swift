@@ -43,8 +43,8 @@ class RestaurantCalloutView: UIView {
         
         super.init(frame: .zero)
         
-        backgroundColor = Colors.commonBackground.color
-        
+		backgroundColor = .clear
+		
         let restaurantLogoCardView = CardView(shadowSize: .small, customInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         addSubview(restaurantLogoCardView)
         restaurantLogoCardView.snp.makeConstraints {

@@ -37,7 +37,7 @@ class FoodItemCell: UIView {
     }()
     
     private let foodImage: UIImageView = {
-        let view = UIImageView(image: Images.foodItemPlaceholder.image)
+        let view = UIImageView()
         view.contentMode = .scaleAspectFit
         return view
     }()

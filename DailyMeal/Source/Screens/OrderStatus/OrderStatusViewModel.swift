@@ -20,6 +20,8 @@ protocol OrderStatusViewModel {
 	var orderId: String? { get }
 	var orderDeliveryDate: Date { get }
 	
+	var isDelivered: Bool { get }
+	
 	var deliveredToYouStatus: (time: String, done: Bool) { get }
 	
 }
@@ -41,11 +43,15 @@ final class OrderStatusViewModelImplementation: OrderStatusViewModel {
 	var deliveredToYouStatus: (time: String, done: Bool) {
 		var time = "--:--"
 		var state = false
-		if Date() > orderDeliveryDate {
+		if isDelivered {
 			time = orderDeliveryDate.toString(formatter: Date.timeFormatter)
 			state = true
 		}
 		return (time, state)
+	}
+	
+	var isDelivered: Bool {
+		return Date() > orderDeliveryDate
 	}
 	
 	init() {

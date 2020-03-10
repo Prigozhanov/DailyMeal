@@ -14,6 +14,7 @@ final class OrderStatusViewController: UIViewController {
         stack.rowInset = UIEdgeInsets(top: 20, left: 30, bottom: 20, right: 30)
         stack.separatorInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
         stack.hidesSeparatorsByDefault = true
+		stack.backgroundColor = .clear
         return stack
     }()
     
@@ -47,7 +48,10 @@ final class OrderStatusViewController: UIViewController {
     }
     
     private func setupScreen() {
-        let placeholderImageView = UIImageView(image: Images.Placeholders.orderPlaced.image)
+		let placeholderImageView = UIImageView(
+			image: viewModel.isDelivered ? Images.Placeholders.orderDelivered.image : Images.Placeholders.orderPlaced.image
+		)
+		
         placeholderImageView.contentMode = .scaleAspectFit
         view.addSubview(placeholderImageView)
         placeholderImageView.snp.makeConstraints {

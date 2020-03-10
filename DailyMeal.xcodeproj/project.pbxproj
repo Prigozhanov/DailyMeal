@@ -1250,7 +1250,6 @@
 			buildConfigurationList = E7C6036F233D3ECC004686DB /* Build configuration list for PBXNativeTarget "DailyMeal" */;
 			buildPhases = (
 				8588974FDC2B22E837D91D37 /* [CP] Check Pods Manifest.lock */,
-				E764FB28240ED13F00A945DE /* Fetch Localizable strings */,
 				E7DFC6ED235919760003C46C /* SwiftGen */,
 				E7F291382405CD89000AF60C /* SwiftLint */,
 				E7C60357233D3ECA004686DB /* Sources */,
@@ -1494,24 +1493,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DailyMeal/Pods-DailyMeal-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		E764FB28240ED13F00A945DE /* Fetch Localizable strings */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Fetch Localizable strings";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "sh .Localize.sh\n";
 		};
 		E7DFC6ED235919760003C46C /* SwiftGen */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1804,7 +1785,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEFINES_MODULE = YES;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = H7553T5T52;
@@ -1836,7 +1817,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEFINES_MODULE = YES;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = H7553T5T52;
@@ -1915,7 +1896,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = H7553T5T52;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1948,7 +1929,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = H7553T5T52;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1982,7 +1963,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = H7553T5T52;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2016,7 +1997,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = H7553T5T52;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2166,7 +2147,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = H7553T5T52;
 				INFOPLIST_FILE = DailyMeal/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2190,7 +2171,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = H7553T5T52;
 				INFOPLIST_FILE = DailyMeal/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

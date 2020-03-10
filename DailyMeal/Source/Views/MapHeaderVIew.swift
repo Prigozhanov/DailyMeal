@@ -19,10 +19,6 @@ class MapHeaderView: UIView {
         let notificationButton = UIButton.makeNotificationButton()
         notificationButton.tintColor = Colors.charcoal.color
         
-        notificationButton.setActionHandler(controlEvents: .touchUpInside) { _ in
-            
-        }
-        
         addSubviews([backButton, headerTitleLabel, notificationButton])
         
         backButton.snp.makeConstraints {

@@ -34,7 +34,7 @@ final class ProductViewController: UIViewController {
     }()
     
     private var navigationBarBackground: UIImageView = {
-        let image = UIImageView(image: Images.itemImagePlaceholder.image)
+        let image = UIImageView()
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         return image
@@ -103,11 +103,11 @@ final class ProductViewController: UIViewController {
         
         setupScreen()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        Style.addBlackGradient(navigationBarBackground)
-    }
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		Style.addBlackGradient(navigationBarBackground)
+	}
     
     private func setupScreen() {
         view.backgroundColor = Colors.commonBackground.color

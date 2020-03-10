@@ -3,6 +3,16 @@
     {
       "idiom" : "universal",
       "filename" : "phone-verified.pdf"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "phone-verified_dark.png",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ]
     }
   ],
   "info" : {

@@ -44,9 +44,9 @@ class NavigationBarControls: UIView {
         
         switch appearance {
         case .light:
-            titleLabel.textColor = Colors.white.color
-            backButton?.tintColor = Colors.white.color
-            notificationButton.tintColor = Colors.white.color
+			titleLabel.textColor = .white
+            backButton?.tintColor = .white
+            notificationButton.tintColor = .white
         case .dark:
             titleLabel.textColor = Colors.charcoal.color
             backButton?.tintColor = Colors.charcoal.color
@@ -60,7 +60,7 @@ class NavigationBarControls: UIView {
         super.didMoveToWindow()
         guard let vc = parentViewController else { return }
         backButton = UIButton.makeBackButton(vc)
-        backButton?.tintColor = appearance == .light ? Colors.white.color : Colors.black.color
+        backButton?.tintColor = appearance == .light ? .white : Colors.black.color
 		
         addSubview(backButton!)
 		

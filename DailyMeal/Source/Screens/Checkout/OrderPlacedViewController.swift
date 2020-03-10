@@ -43,6 +43,7 @@ final class OrderPlacedViewController: UIViewController {
         imageView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(100)
             $0.leading.trailing.equalToSuperview().inset(Layout.commonInset)
+			$0.height.lessThanOrEqualTo(300)
         }
         messageTitle.snp.makeConstraints {
             $0.top.equalTo(imageView.snp.bottom).offset(100)

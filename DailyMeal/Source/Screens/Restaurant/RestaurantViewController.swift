@@ -167,7 +167,7 @@ final class RestaurantViewController: UIViewController {
                 FoodCategory.getMainCategoryBasedOnRestaurantCategories(viewModel.categories)
             )
         }
-        
+		
         viewModel.loadInfo()
     }
     

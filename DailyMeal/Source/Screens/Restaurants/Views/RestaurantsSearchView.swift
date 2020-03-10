@@ -37,6 +37,7 @@ class RestaurantsSearchView: UITextField {
         }
         
         let searchIcon = UIImageView(image: Images.Icons.search.image)
+		searchIcon.tintColor = Colors.charcoal.color
         addSubview(searchIcon)
         searchIcon.snp.makeConstraints {
             $0.centerY.equalToSuperview()
@@ -50,7 +51,7 @@ class RestaurantsSearchView: UITextField {
         
 		placeholder = Localizable.Restaurants.search
         font = FontFamily.regular
-        textColor = Colors.black.color
+        textColor = Colors.charcoal.color
         tintColor = Colors.gray.color
         backgroundColor = Colors.commonBackground.color
     }

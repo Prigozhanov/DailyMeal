@@ -10,6 +10,7 @@ import Services
 // MARK: - View
 protocol RestaurantsView: class {
     func reloadScreen()
+	func scrollToTop()
     func showLoadingIndicator()
     func hideLoadingIndicator()
 }
@@ -41,7 +42,7 @@ protocol RestaurantsViewModel {
     func getRestaurantsFilteredByCategory(_ category: FoodCategory) -> [Restaurant]
     
     func loadRestaurants()
-    func loadCategory(restId: Int, onCompletion: @escaping (Result<SingleKeyResponseWrapper<[ProductCategory]>, NetworkClient.Error>) -> Void)
+    func loadCategory(restId: Int, completion: @escaping (Result<SingleKeyResponseWrapper<[ProductCategory]>, NetworkClient.Error>) -> Void)
     
 }
 
@@ -146,7 +147,7 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
                 let group = DispatchGroup()
                 self?.restaurants.forEach({ rest in
                     group.enter()
-                    self?.loadCategory(restId: rest.id, onCompletion: { [weak self] result in
+                    self?.loadCategory(restId: rest.id, completion: { [weak self] result in
                         switch result {
                         case let .success(response):
                             self?.categories[rest.id] = response.data
@@ -159,6 +160,7 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
                 group.notify(queue: .main) { [weak self] in
                     self?.view?.reloadScreen()
                     self?.view?.hideLoadingIndicator()
+					self?.view?.scrollToTop()
                 }
             case let .failure(error):
                 print(error)
@@ -166,10 +168,10 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
         }
     }
     
-    func loadCategory(restId: Int, onCompletion: @escaping (Result<SingleKeyResponseWrapper<[ProductCategory]>, NetworkClient.Error>) -> Void) {
+    func loadCategory(restId: Int, completion: @escaping (Result<SingleKeyResponseWrapper<[ProductCategory]>, NetworkClient.Error>) -> Void) {
 		let req = context.networkService.requestFactory.restaurantCategories(id: restId, language: menuByLanguage)
         context.networkService.send(request: req) { result, _ in
-            onCompletion(result)
+			completion(result)
         }
     }
     

@@ -51,7 +51,7 @@ class RestaurantsHeaderView: UIView {
 
 		mapButton.snp.makeConstraints {
 			$0.top.equalTo(titleLabel)
-			$0.leading.equalTo(titleLabel.snp.trailing)
+			$0.leading.equalTo(titleLabel.snp.trailing).offset(Layout.largeMargin)
 			$0.size.equalTo(24)
 			$0.bottom.lessThanOrEqualToSuperview()
 		}

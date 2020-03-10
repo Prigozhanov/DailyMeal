@@ -118,7 +118,7 @@ final class GreetingViewController: UIViewController {
         
         viewModel.view = self
         
-        view.backgroundColor = .white
+		view.backgroundColor = Colors.commonBackground.color
         
         emailField.text = viewModel.email
         

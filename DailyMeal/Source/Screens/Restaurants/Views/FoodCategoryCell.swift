@@ -122,7 +122,7 @@ class FoodCategoryCell: BaseCollectionCell {
             switch state {
             case .normal:
                 self?.borderView.alpha = 0
-                self?.filterNameLabel.textColor = Colors.black.color
+                self?.filterNameLabel.textColor = Colors.charcoal.color
                 self?.cardView.alpha = 1
             case .selected:
                 self?.borderView.isHidden = false
@@ -131,7 +131,7 @@ class FoodCategoryCell: BaseCollectionCell {
                 self?.cardView.alpha = 1
             case .outOfFocus:
                 self?.borderView.alpha = 0
-                self?.filterNameLabel.textColor = Colors.black.color
+                self?.filterNameLabel.textColor = Colors.charcoal.color
                 self?.cardView.alpha = 0.5
             }
         })
