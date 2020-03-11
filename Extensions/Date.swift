@@ -9,7 +9,8 @@ public extension Date {
 	
 	static var defaultFormatter: DateFormatter {
 		let formatter = DateFormatter()
-		formatter.dateFormat = "YYYY-MM-DD HH:mm:ss"
+		formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+		formatter.isLenient = true
 		return formatter
 	}
 	

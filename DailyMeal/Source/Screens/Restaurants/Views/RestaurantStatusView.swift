@@ -8,30 +8,9 @@ import UIKit
 class RestaurantStatusView: UIView {
 	
 	struct Item {
-		let status: Status
+		let isOpen: Bool
 		let openTime: String
 		let closedTime: String
-	}
-	
-	enum Status: String {
-		case closed, open
-		
-		static func fromString(_ string: String) -> Status {
-			if string.containsCaseIgnoring("close") {
-				return .closed
-			} else {
-				return .open
-			}
-		}
-		
-		var localizedValue: String {
-			switch self {
-			case .closed:
-				return Localizable.RestaurantInfo.closed
-			case .open:
-				return Localizable.RestaurantInfo.open
-			}
-		}
 	}
 	
 	private var item: Item?
@@ -40,7 +19,7 @@ class RestaurantStatusView: UIView {
 	var rectColor: UIColor? = Colors.commonBackground.color
 	
 	private lazy var statusLabel: UILabel = {
-		let label = UILabel.makeText(item?.status.localizedValue ?? "")
+		let label = UILabel.makeText()
 		label.textAlignment = .center
 		return label
 	}()
@@ -113,13 +92,13 @@ class RestaurantStatusView: UIView {
 	
 	func configure(item: Item) {
 		self.item = item
-		statusLabel.text = item.status.localizedValue
+		statusLabel.text = item.isOpen ? Localizable.RestaurantInfo.open : Localizable.RestaurantInfo.closed
 		workingHoursLabel.text = "\(item.openTime) - \(item.closedTime)"
 		
-		if item.status == .closed {
-			statusLabel.textColor = Colors.red.color
-		} else {
+		if item.isOpen {
 			statusLabel.textColor = Colors.charcoal.color
+		} else {
+			statusLabel.textColor = Colors.red.color
 		}
 	}
 	

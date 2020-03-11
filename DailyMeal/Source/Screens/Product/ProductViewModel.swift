@@ -109,4 +109,5 @@ extension Restaurant: RestaurantData {
 	public var rating: Double {
 		return Double(rate) ?? 0
 	}
+	
 }

@@ -9,11 +9,11 @@ import Networking
 
 class RestaurantCell: BaseTableCell {
     
-    typealias CellData = Restaurant
+    typealias CellData = RestaurantData
     
     var categories: [ProductCategory] = []
     
-    var restaurant: Restaurant?
+    var restaurant: RestaurantData?
     
     private let deliveryFeeValueLabel: UILabel = {
         let label = UILabel.makeText()
@@ -51,7 +51,7 @@ class RestaurantCell: BaseTableCell {
     private lazy var restaurantRateView: RatingView = {
         RatingView(
             item: RatingView.Item(
-                value: Double(restaurant?.rate ?? "0")!,
+				value: restaurant?.rating ?? 0,
                 maxValue: 5
             )
         )
@@ -106,7 +106,7 @@ class RestaurantCell: BaseTableCell {
 		restaurantStatusView.snp.makeConstraints {
 			$0.top.trailing.equalToSuperview()
 			$0.height.equalTo(50)
-			$0.width.equalTo(100)
+			$0.width.equalTo(110)
 		}
 		restaurantStatusView.setRoundCorners(Layout.cornerRadius)
 		
@@ -201,19 +201,20 @@ extension RestaurantCell: ConfigurableCell {
         return 300
     }
     
-    func configure(with item: Restaurant) {
+    func configure(with item: RestaurantData) {
         restaurant = item
         restaurantNameLabel.text = item.chainLabel
-        restaurantRateView.value = (Double(item.rate) ?? 0)
-        restaurantRateValueLabel.text = String(format: "%.1f", (Double(item.rate) ?? 0))
-        deliveryFeeValueLabel.text = Formatter.Currency.toString(Double(item.restDeliveryFee))
+		restaurantRateView.value = item.rating
+		restaurantRateValueLabel.text = String(format: "%.1f", item.rating)
+        deliveryFeeValueLabel.text = Formatter.Currency.toString(item.deliveryFee)
         restaurantDescriptionLabel.text = item.restaurantDescription
         if let url = URL(string: item.src) {
             self.restaurantLogoImageView.kf.setImage(with: url)
 		}
+		
 		restaurantStatusView.configure(
 			item: RestaurantStatusView.Item(
-				status: RestaurantStatusView.Status.fromString(item.status.rawValue),
+				isOpen: item.isOpen,
 				openTime: Date.fromString(item.openTime)?.toString(formatter: Date.timeFormatter) ?? "",
 				closedTime: Date.fromString(item.closeTime)?.toString(formatter: Date.timeFormatter) ?? ""
 			)

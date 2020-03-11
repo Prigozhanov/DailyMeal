@@ -22,6 +22,7 @@ public protocol RestaurantData {
 	var distance: Double { get }
 	var openTime: String { get }
 	var closeTime: String { get }
+	var restaurantDescription: String { get }
 }
 
 public protocol CartView: AnyObject {
