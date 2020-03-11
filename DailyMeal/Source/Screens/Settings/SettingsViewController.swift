@@ -134,9 +134,9 @@ final class SettingsViewController: UIViewController {
         signOutButton.setTitleColor(Colors.red.color, for: .normal)
         signOutButton.titleLabel?.font = FontFamily.book
         
-		let appInfoLabel = UILabel.makeSmallText("Daily Menu. \(Localizable.Settings.version) \(Bundle.versionNumber)")
+		let appInfoLabel = UILabel.makeSmallText("Daily Meal. \(Localizable.Settings.version) \(Bundle.versionNumber)")
         #if DEBUG
-		appInfoLabel.text = "Daily Menu \(Localizable.Settings.version) \(Bundle.versionNumber). \(Localizable.Settings.build) \(Bundle.buildNumber)"
+		appInfoLabel.text = "Daily Meal \(Localizable.Settings.version) \(Bundle.versionNumber). \(Localizable.Settings.build) \(Bundle.buildNumber)"
         #endif
         appInfoLabel.textColor = Colors.gray.color
         appInfoLabel.textAlignment = .center
