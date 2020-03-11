@@ -26,7 +26,7 @@ final class CartViewController: UIViewController {
     private lazy var titleRow: UIView = {
         let view = UIView()
 		let title = UILabel.makeText(Localizable.Cart.yourCart)
-        title.font = FontFamily.Poppins.bold.font(size: 18)
+        title.font = FontFamily.Avenir.black.font(size: 18)
         view.addSubview(title)
         title.snp.makeConstraints {
             $0.bottom.top.equalToSuperview()

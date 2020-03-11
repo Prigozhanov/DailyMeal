@@ -318,7 +318,7 @@ internal enum L10n {
     internal static let cart = L10n.tr("Localizable", "tabbar.cart")
     /// Explore
     internal static let explore = L10n.tr("Localizable", "tabbar.explore")
-    /// Setting
+    /// Settings
     internal static let settings = L10n.tr("Localizable", "tabbar.settings")
   }
 }

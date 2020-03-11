@@ -79,7 +79,7 @@ class CategoryCell: UICollectionViewCell {
     let label: UILabel = {
         let label = UILabel.makeText()
         label.textColor = Colors.smoke.color
-        label.font = FontFamily.Poppins.regular.font(size: 11)
+        label.font = FontFamily.Avenir.book.font(size: 11)
         return label
     }()
     

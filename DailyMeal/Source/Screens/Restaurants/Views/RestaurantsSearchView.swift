@@ -50,7 +50,7 @@ class RestaurantsSearchView: UITextField {
         }
         
 		placeholder = Localizable.Restaurants.search
-        font = FontFamily.regular
+        font = FontFamily.book
         textColor = Colors.charcoal.color
         tintColor = Colors.gray.color
         backgroundColor = Colors.commonBackground.color

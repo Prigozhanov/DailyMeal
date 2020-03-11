@@ -8,7 +8,7 @@
 /* Tabbar */
 "tabbar.cart"                                     = "Cart";
 "tabbar.explore"                                  = "Explore";
-"tabbar.settings"                                 = "Setting";
+"tabbar.settings"                                 = "Settings";
 
 /* Categories */
 "categories.burger"                               = "Burger";

@@ -19,7 +19,7 @@ class OrderStateRow: UIView {
         
         let titleLabel = UILabel.makeText(title)
         addSubview(titleLabel)
-        titleLabel.font = checked ? FontFamily.semibold : FontFamily.regular
+        titleLabel.font = checked ? FontFamily.black : FontFamily.book
         titleLabel.textColor = checked ? Colors.smoke.color : Colors.gray.color
         titleLabel.snp.makeConstraints {
             $0.leading.equalTo(checkMark.snp.trailing).offset(Layout.largeMargin)

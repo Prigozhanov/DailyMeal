@@ -132,7 +132,7 @@ final class SettingsViewController: UIViewController {
             self?.viewModel.clearUserInfo()
         }
         signOutButton.setTitleColor(Colors.red.color, for: .normal)
-        signOutButton.titleLabel?.font = FontFamily.regular
+        signOutButton.titleLabel?.font = FontFamily.book
         
 		let appInfoLabel = UILabel.makeSmallText("Daily Menu. \(Localizable.Settings.version) \(Bundle.versionNumber)")
         #if DEBUG

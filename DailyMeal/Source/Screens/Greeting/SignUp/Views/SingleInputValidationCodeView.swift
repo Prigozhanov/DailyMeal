@@ -14,7 +14,7 @@ class SingleInputValidationCodeView: UIView {
     lazy var textField: UITextField = {
         let textField = UITextField()
         textField.textAlignment = .center
-        textField.font = FontFamily.Poppins.medium.font(size: 20)
+        textField.font = FontFamily.Avenir.medium.font(size: 20)
         textField.tintColor = .clear
         textField.delegate = self
         textField.keyboardType = .numberPad

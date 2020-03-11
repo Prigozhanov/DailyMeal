@@ -19,13 +19,13 @@ class ProductHeaderView: UIView {
     let itemTitleLabel: UILabel = {
         let label = UILabel.makeText()
         label.numberOfLines = 3
-        label.font = FontFamily.Poppins.semiBold.font(size: 16)
+        label.font = FontFamily.Avenir.black.font(size: 16)
         return label
     }()
     
     let itemPriceLabel: UILabel = {
         let label = UILabel.makeText()
-        label.font = FontFamily.Poppins.semiBold.font(size: 12)
+        label.font = FontFamily.Avenir.black.font(size: 12)
         label.textColor = Colors.blue.color
         return label
     }()

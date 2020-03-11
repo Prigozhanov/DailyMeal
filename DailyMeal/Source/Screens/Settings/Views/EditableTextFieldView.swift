@@ -23,7 +23,7 @@ class EditableTextFieldView: UIView {
     private lazy var textField: UITextField = {
         let textField = UITextField(frame: .zero)
         textField.textColor = Colors.charcoal.color
-        textField.font = FontFamily.Poppins.light.font(size: 13)
+        textField.font = FontFamily.Avenir.light.font(size: 13)
         textField.delegate = self
         
         textField.addGestureRecognizer(BlockTap(action: { _ in
@@ -37,7 +37,7 @@ class EditableTextFieldView: UIView {
 		let button = ActionButton(Localizable.Settings.change) { [weak self] _ in
             self?.textField.becomeFirstResponder()
         }
-        button.titleLabel?.font = FontFamily.Poppins.light.font(size: 13)
+        button.titleLabel?.font = FontFamily.Avenir.light.font(size: 13)
         return button
     }()
     
@@ -52,7 +52,7 @@ class EditableTextFieldView: UIView {
         textFieldContainer.setBorder(width: 0.5, color: Colors.lightGray.color)
         
         let titleLabel = UILabel.makeText(item.title)
-        titleLabel.font = FontFamily.Poppins.light.font(size: 10)
+        titleLabel.font = FontFamily.Avenir.light.font(size: 10)
         
         addSubviews([textFieldContainer, titleLabel])
         titleLabel.snp.makeConstraints {

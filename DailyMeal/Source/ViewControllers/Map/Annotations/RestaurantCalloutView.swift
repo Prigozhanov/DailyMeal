@@ -26,7 +26,7 @@ class RestaurantCalloutView: UIView {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel.makeText(item.title)
-        label.font = FontFamily.Poppins.semiBold.font(size: 11)
+        label.font = FontFamily.Avenir.black.font(size: 11)
         return label
     }()
     

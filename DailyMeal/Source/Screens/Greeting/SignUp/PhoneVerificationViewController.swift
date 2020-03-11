@@ -35,7 +35,7 @@ class PhoneVerificationViewController: UIViewController {
         view.backgroundColor = Colors.commonBackground.color
         
 		let titleLabel = UILabel.makeText(Localizable.PhoneVerification.enterCodeTitle)
-        titleLabel.font = FontFamily.Poppins.medium.font(size: 16)
+        titleLabel.font = FontFamily.Avenir.medium.font(size: 16)
         
         view.addSubviews([titleLabel, contentView])
         
@@ -53,7 +53,7 @@ class PhoneVerificationViewController: UIViewController {
             self?.viewModel.sendPushGeneration()
         }
         resendCodeLabel.setTitleColor(Colors.gray.color, for: .normal)
-        resendCodeLabel.titleLabel?.font = FontFamily.Poppins.medium.font(size: 12)
+        resendCodeLabel.titleLabel?.font = FontFamily.Avenir.medium.font(size: 12)
         view.addSubview(resendCodeLabel)
         resendCodeLabel.snp.makeConstraints {
             $0.top.equalTo(contentView.snp.bottom).offset(30)

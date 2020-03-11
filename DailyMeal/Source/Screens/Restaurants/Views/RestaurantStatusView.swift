@@ -59,7 +59,7 @@ class RestaurantStatusView: UIView {
 		
 		addSubview(statusLabel)
 		statusLabel.snp.makeConstraints {
-			$0.top.trailing.equalToSuperview().inset(2)
+			$0.top.trailing.equalToSuperview().inset(5)
 			$0.leading.equalToSuperview().inset(cornerRadius)
 		}
 		

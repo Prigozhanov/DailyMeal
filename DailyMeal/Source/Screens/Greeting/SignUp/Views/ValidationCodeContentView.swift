@@ -55,7 +55,7 @@ class ValidationCodeContentView: UIView {
         
         let cardView = CardView(shadowSize: .large, customInsets: UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20))
 		let titleLabel = UILabel.makeText(Localizable.PhoneVerification.enterCode)
-        titleLabel.font = FontFamily.Poppins.medium.font(size: 16)
+        titleLabel.font = FontFamily.Avenir.medium.font(size: 16)
         titleLabel.textAlignment = .center
         let subtitleLabel = UILabel()
         subtitleLabel.textColor = Colors.gray.color
@@ -64,8 +64,8 @@ class ValidationCodeContentView: UIView {
         subtitleLabel.attributedText = Formatter.getHighlightedAttributtedString(
 			string: Localizable.PhoneVerification.codeIsSentToNumber(item.phone),
             keyWord: item.phone,
-            font: FontFamily.Poppins.regular.font(size: 12),
-            highlightingFont: FontFamily.Poppins.semiBold.font(size: 12),
+            font: FontFamily.Avenir.book.font(size: 12),
+            highlightingFont: FontFamily.Avenir.black.font(size: 12),
             highlightingColor: Colors.charcoal.color
         )
         

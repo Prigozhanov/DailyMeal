@@ -12,7 +12,7 @@ class FoodOptionCell: UICollectionViewCell {
     
     private let label: UILabel = {
         let label = UILabel.makeText()
-        label.font = FontFamily.Poppins.regular.font(size: 11)
+        label.font = FontFamily.Avenir.book.font(size: 11)
         label.textColor = Colors.smoke.color
         return label
     }()

@@ -98,10 +98,10 @@ class SignUpContentView: UIView {
         
         let cardView = CardView(shadowSize: .large, customInsets: UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20))
 		let titleLabel = UILabel.makeText(Localizable.Signup.createAccount)
-        titleLabel.font = FontFamily.Poppins.medium.font(size: 16)
+        titleLabel.font = FontFamily.Avenir.medium.font(size: 16)
         titleLabel.textAlignment = .center
         let subtitleLabel = UILabel.makeText(Localizable.Signup.willSendCode)
-        subtitleLabel.font = FontFamily.Poppins.regular.font(size: 12)
+        subtitleLabel.font = FontFamily.Avenir.book.font(size: 12)
         subtitleLabel.textColor = Colors.gray.color
         subtitleLabel.textAlignment = .center
         subtitleLabel.numberOfLines = 3

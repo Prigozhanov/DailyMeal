@@ -47,7 +47,7 @@ extension UIButton {
         backgroundColor: UIColor! = .clear,
         titleColor: UIColor! = Colors.black.color,
         cornerRadius: CGFloat! = 0,
-        font: UIFont? = FontFamily.regular,
+        font: UIFont? = FontFamily.book,
         action: @escaping (UIButton) -> Void
     ) -> UIButton {
         let button = UIButton(frame: .zero)

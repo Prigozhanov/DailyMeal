@@ -17,7 +17,7 @@ class CartTitleValueView: UIView {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel.makeText(item.title)
-        label.font = FontFamily.regular
+        label.font = FontFamily.book
         label.textColor = Colors.smoke.color
         return label
     }()
@@ -25,9 +25,9 @@ class CartTitleValueView: UIView {
     private lazy var valueLabel: UILabel = {
         let label = UILabel.makeText(item.value)
         label.textAlignment = .right
-        label.font = FontFamily.regular
+        label.font = FontFamily.book
         if item.preferesLargeValueLabel {
-            label.font = FontFamily.Poppins.semiBold.font(size: 20)
+            label.font = FontFamily.Avenir.black.font(size: 20)
         }
         return label
     }()

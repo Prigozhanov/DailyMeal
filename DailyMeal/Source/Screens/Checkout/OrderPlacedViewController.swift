@@ -33,9 +33,9 @@ final class OrderPlacedViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
 		let messageTitle = UILabel.makeText(Localizable.OrderPlaced.yourOrderPlaced)
         messageTitle.numberOfLines = 2
-        messageTitle.font = FontFamily.Poppins.semiBold.font(size: 18)
+        messageTitle.font = FontFamily.Avenir.black.font(size: 18)
 		let messageLabel = UILabel.makeText(Localizable.OrderPlaced.waitForCourier(deliveryTime))
-        messageLabel.font = FontFamily.Poppins.regular.font(size: 12)
+        messageLabel.font = FontFamily.Avenir.book.font(size: 12)
         messageLabel.textColor = Colors.gray.color
         messageLabel.numberOfLines = 5
         view.addSubviews([imageView, messageTitle, messageLabel, viewOrderStatusButton])

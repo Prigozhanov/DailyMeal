@@ -51,10 +51,10 @@ final class ProductViewController: UIViewController {
         }
     ))
     
-    private lazy var sliderView = SliderView(title: "Spicy Level", sliderValues: ["Regular", "Spicy", "Naga"]) // TODO
+    private lazy var sliderView = SliderView(title: "Spicy Level", sliderValues: ["book", "Spicy", "Naga"]) // TODO
     
     private var totalLabel: UILabel = {
-		let label = UILabel.makeSmallText(Localizable.Product.total)
+		let label = UILabel.makeMediumText(Localizable.Product.total)
         label.textAlignment = .center
         return label
     }()
@@ -63,7 +63,7 @@ final class ProductViewController: UIViewController {
         let label = UILabel.makeText()
         label.textColor = Colors.blue.color
         label.textAlignment = .center
-        label.font = FontFamily.Poppins.medium.font(size: 36)
+		label.font = FontFamily.Avenir.black.font(size: 36)
         label.text = Formatter.Currency.toString(viewModel.product.overallPrice * Double(viewModel.count))
         return label
     }()

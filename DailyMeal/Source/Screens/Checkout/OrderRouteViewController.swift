@@ -33,13 +33,13 @@ class OrderRouteViewController: UIViewController {
 	
 	private lazy var deliveryTimeValueLabel: UIView = {
 		let label = UILabel.makeText(Localizable.OrderCheckout.minutes(item.orderDelayFirst))
-		label.font = FontFamily.Poppins.medium.font(size: 8)
+		label.font = FontFamily.Avenir.medium.font(size: 8)
 		return label
 	}()
 	
 	private lazy var deliveryTimeLabel: UIView = {
 		let label = UILabel.makeText(Localizable.OrderCheckout.deliveryTime)
-		label.font = FontFamily.Poppins.regular.font(size: 6)
+		label.font = FontFamily.Avenir.book.font(size: 6)
 		label.textColor = Colors.blue.color
 		return label
 	}()

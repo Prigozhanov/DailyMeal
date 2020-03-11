@@ -95,7 +95,7 @@ class TextField: UIView {
         
         textField.placeholder = placeholder
         textField.textAlignment = textAlignment
-        textField.font = FontFamily.Poppins.medium.font(size: 15)
+        textField.font = FontFamily.Avenir.medium.font(size: 15)
         
         let leftInset = textAlignment == .left ? Layout.commonInset : 5
         

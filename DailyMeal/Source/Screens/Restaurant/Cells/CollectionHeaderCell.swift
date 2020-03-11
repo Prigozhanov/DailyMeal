@@ -21,28 +21,28 @@ class CollectionHeaderCell: UIView {
     
     private let restaurantNameLabel: UILabel = {
         let label = UILabel.makeText()
-        label.font = FontFamily.bold
+        label.font = FontFamily.black
         return label
     }()
     
     private let minOrderValueLabel: UILabel = {
         let label = UILabel.makeText()
         label.textColor = Colors.blue.color
-        label.font = FontFamily.smallMedium
+		label.font = FontFamily.Avenir.black.font(size: 12)
         return label
     }()
     
     private let distanceValueLabel: UILabel = {
         let label = UILabel.makeText()
         label.textColor = Colors.smoke.color
-        label.font = FontFamily.Poppins.medium.font(size: 10)
+        label.font = FontFamily.Avenir.medium.font(size: 10)
         return label
     }()
     
     private let deliveryTimeValueLabel: UILabel = {
         let label = UILabel.makeText()
         label.textColor = Colors.smoke.color
-        label.font = FontFamily.Poppins.medium.font(size: 10)
+        label.font = FontFamily.Avenir.medium.font(size: 10)
         return label
     }()
     

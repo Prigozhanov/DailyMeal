@@ -22,7 +22,7 @@ class ConfirmationDiaglogViewController: UIViewController {
     
     lazy var subtitleLabel: UILabel = {
         let label = UILabel.makeText(self.dialogSubtitle)
-        label.font = FontFamily.Poppins.regular.font(size: 12)
+        label.font = FontFamily.Avenir.book.font(size: 12)
         label.textColor = Colors.gray.color
         label.textAlignment = .center
         label.numberOfLines = 10
@@ -40,7 +40,7 @@ class ConfirmationDiaglogViewController: UIViewController {
             self?.dismiss(animated: true, completion: nil)
         }
         button.setTitleColor(Colors.gray.color, for: .normal)
-        button.titleLabel?.font = FontFamily.Poppins.regular.font(size: 12)
+        button.titleLabel?.font = FontFamily.Avenir.book.font(size: 12)
         return button
     }()
     

@@ -124,7 +124,7 @@ class CardInfoView: UIView {
         
         let titleLabel = UILabel.makeText("Enter your credit card details")
         titleLabel.numberOfLines = 2
-        titleLabel.font = FontFamily.Poppins.semiBold.font(size: 18)
+        titleLabel.font = FontFamily.Avenir.black.font(size: 18)
         titleLabel.textColor = Colors.smoke.color
         cardView.contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {

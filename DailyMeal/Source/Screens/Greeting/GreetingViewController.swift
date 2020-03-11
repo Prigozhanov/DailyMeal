@@ -65,7 +65,7 @@ final class GreetingViewController: UIViewController {
 			title: Localizable.Greeting.signup,
             titleColor: Colors.blue.color,
             cornerRadius: 5,
-            font: FontFamily.semibold
+            font: FontFamily.black
         ) { [weak self] _ in
             self?.signUpViewController = UINavigationController(rootViewController:
                 SignUpViewController(viewModel: SignUpViewModelImplementation())

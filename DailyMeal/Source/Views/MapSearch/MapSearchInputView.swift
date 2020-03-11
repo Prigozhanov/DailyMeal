@@ -37,7 +37,7 @@ class MapSearchInputView: UIView {
     
     private lazy var textField: UITextField = {
         let textField = UITextField(frame: .zero)
-        textField.font = FontFamily.Poppins.medium.font(size: 14)
+        textField.font = FontFamily.Avenir.medium.font(size: 14)
         textField.placeholder = item.placeholder
         textField.tintColor = Colors.gray.color
         textField.delegate = self

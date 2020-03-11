@@ -35,7 +35,7 @@ class CartItemView: UIView {
             return CGSize(
                 width: NSString(string: data.label)
                     .size(withAttributes: [
-                        NSAttributedString.Key.font: FontFamily.Poppins.regular.font(size: 11)!
+                        NSAttributedString.Key.font: FontFamily.Avenir.book.font(size: 11)!
                     ])
                     .width + 20,
                 height: 15)
@@ -103,7 +103,7 @@ class CartItemView: UIView {
         
         let itemNameLabel = UILabel.makeText(item.cartItem.product.label)
         itemNameLabel.numberOfLines = 2
-        itemNameLabel.font = FontFamily.semibold
+        itemNameLabel.font = FontFamily.black
         cardView.contentView.addSubview(itemNameLabel)
         itemNameLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(Layout.commonInset)
@@ -111,7 +111,7 @@ class CartItemView: UIView {
         }
         
         let itemPrice = UILabel.makeText(Formatter.Currency.toString(item.cartItem.product.price))
-        itemPrice.font = FontFamily.semibold
+        itemPrice.font = FontFamily.black
         itemPrice.textColor = Colors.blue.color
         cardView.contentView.addSubview(itemPrice)
         itemPrice.snp.makeConstraints {

@@ -26,7 +26,7 @@ extension UILabel {
     static func makeSmallText(_ text: String? = nil) -> UILabel {
         let label = UILabel()
         label.text = text
-        label.font = FontFamily.smallRegular
+		label.font = FontFamily.smallRegular
         label.textColor = Colors.charcoal.color
         return label
     }
@@ -34,7 +34,7 @@ extension UILabel {
     static func makeMediumText(_ text: String? = nil) -> UILabel {
         let label = UILabel()
         label.text = text
-        label.font = FontFamily.regular
+        label.font = FontFamily.book
         label.textColor = Colors.charcoal.color
         return label
         
@@ -51,20 +51,20 @@ extension UILabel {
     static func makeNavigationTitle(_ text: String? = nil) -> UILabel {
         let label = UILabel()
         label.text = text
-        label.font = FontFamily.semibold
+        label.font = FontFamily.black
         label.textColor = Colors.charcoal.color
         return label
     }
     
     static func makeSmallTitle(_ text: String? = nil) -> UILabel {
         let label = UILabel.makeText(text)
-        label.font = FontFamily.Poppins.light.font(size: 10)
+        label.font = FontFamily.Avenir.light.font(size: 10)
         return label
     }
     
 	static func makeSemiboldTitle(_ text: String? = nil) -> UILabel {
 		let label = UILabel.makeText(text)
-		label.font = FontFamily.semibold
+		label.font = FontFamily.black
 		return label
 	}
 	

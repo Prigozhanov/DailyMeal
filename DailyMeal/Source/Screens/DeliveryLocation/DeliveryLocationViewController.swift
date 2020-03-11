@@ -150,7 +150,7 @@ final class DeliveryLocationViewController: UIViewController, KeyboardObservable
             string: Localizable.DeliveryLocation.doYouWantToChooseAddress(address),
             keyWord: address,
             font: FontFamily.smallMedium!,
-            highlightingFont: FontFamily.Poppins.semiBold.font(size: 12),
+            highlightingFont: FontFamily.Avenir.black.font(size: 12),
             highlightingColor: Colors.charcoal.color)
         if confirmationDiaglogIsVisible != true {
             confirmationDiaglogIsVisible = true

@@ -17,7 +17,7 @@ class OrderIdView: UIView {
         }
         
         let idLabel = UILabel.makeText(id)
-        idLabel.font = FontFamily.Poppins.semiBold.font(size: 30)
+        idLabel.font = FontFamily.Avenir.black.font(size: 30)
         idLabel.textColor = Colors.blue.color
         addSubview(idLabel)
         idLabel.snp.makeConstraints {

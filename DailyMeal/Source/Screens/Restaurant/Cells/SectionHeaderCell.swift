@@ -14,7 +14,7 @@ class SectionHeaderCell: UIView {
     
     private let sectionLabel: UILabel = {
         let label = UILabel.makeLargeText()
-        label.font = FontFamily.Poppins.semiBold.font(size: 18)
+        label.font = FontFamily.Avenir.black.font(size: 18)
 		label.numberOfLines = 2
         return label
     }()

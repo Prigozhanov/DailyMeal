@@ -18,7 +18,7 @@ class FoodItemCell: UIView {
     private let foodTitle: UILabel = {
         let label = UILabel.makeText()
         label.numberOfLines = 3
-        label.font = FontFamily.semibold
+        label.font = FontFamily.black
         return label
     }()
     
@@ -32,7 +32,7 @@ class FoodItemCell: UIView {
     private let priceLabel: UILabel = {
         let label = UILabel.makeText()
         label.textColor = Colors.blue.color
-        label.font = FontFamily.semibold
+        label.font = FontFamily.black
         return label
     }()
     

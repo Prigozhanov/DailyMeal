@@ -30,7 +30,7 @@ class MapHeaderView: UIView {
             $0.centerX.equalToSuperview()
 			$0.centerY.equalTo(backButton)
         }
-        headerTitleLabel.font = FontFamily.Poppins.medium.font(size: 16)
+        headerTitleLabel.font = FontFamily.Avenir.medium.font(size: 16)
         
         notificationButton.snp.makeConstraints {
 			$0.trailing.equalToSuperview()

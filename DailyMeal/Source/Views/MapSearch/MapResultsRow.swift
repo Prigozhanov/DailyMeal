@@ -19,7 +19,7 @@ class MapResultRow: BaseTableCell, ConfigurableCell {
     
     private var label: UILabel = {
         let label = UILabel.makeText()
-        label.font = FontFamily.Poppins.medium.font(size: 14)
+        label.font = FontFamily.Avenir.medium.font(size: 14)
         label.numberOfLines = 2
         return label
     }()
@@ -39,8 +39,8 @@ class MapResultRow: BaseTableCell, ConfigurableCell {
         label.attributedText = Formatter.getHighlightedAttributtedString(
             string: item.string,
             keyWord: item.searchText,
-            font: FontFamily.Poppins.regular.font(size: 14),
-            highlightingFont: FontFamily.Poppins.bold.font(size: 14)
+            font: FontFamily.Avenir.book.font(size: 14),
+            highlightingFont: FontFamily.Avenir.black.font(size: 14)
         )
     }
     

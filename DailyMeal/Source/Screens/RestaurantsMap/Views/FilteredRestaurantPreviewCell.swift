@@ -25,7 +25,7 @@ class FilteredRestaurantsPreviewCell: UICollectionViewCell {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel.makeText()
-        label.font = FontFamily.Poppins.semiBold.font(size: 18)
+        label.font = FontFamily.Avenir.black.font(size: 18)
         return label
     }()
     

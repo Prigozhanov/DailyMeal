@@ -18,7 +18,7 @@ class RestaurantCell: BaseTableCell {
     private let deliveryFeeValueLabel: UILabel = {
         let label = UILabel.makeText()
         label.textColor = Colors.blue.color
-        label.font = FontFamily.smallMedium
+		label.font = FontFamily.Avenir.black.font(size: 12)
         return label
     }()
 	
@@ -59,7 +59,7 @@ class RestaurantCell: BaseTableCell {
     
     private lazy var restaurantRateValueLabel: UILabel = {
         let label = UILabel.makeText()
-        label.font = FontFamily.Poppins.semiBold.font(size: 12)
+        label.font = FontFamily.Avenir.black.font(size: 12)
         label.textColor = Colors.blue.color
         return label
     }()
@@ -131,7 +131,7 @@ class RestaurantCell: BaseTableCell {
         }
         
         restaurantInfoView.addSubview(restaurantNameLabel)
-        restaurantNameLabel.font = FontFamily.semibold
+		restaurantNameLabel.font = FontFamily.Avenir.black.font(size: 15)
         restaurantNameLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.equalTo(restaurantLogoImageView.snp.trailing).offset(20)

@@ -20,11 +20,11 @@ class PhoneVerifiedViewController: UIViewController {
         imagePlaceholder.contentMode = .scaleAspectFit
         
 		let titleLabel = UILabel.makeText(Localizable.PhoneVerification.phoneVerified)
-        titleLabel.font = FontFamily.Poppins.semiBold.font(size: 18)
+        titleLabel.font = FontFamily.Avenir.black.font(size: 18)
         titleLabel.numberOfLines = 2
         
         let subtitleLabel = UILabel.makeText(Localizable.PhoneVerification.phoneVerifiedSubtitle)
-        subtitleLabel.font = FontFamily.Poppins.regular.font(size: 12)
+        subtitleLabel.font = FontFamily.Avenir.book.font(size: 12)
         subtitleLabel.numberOfLines = 3
         subtitleLabel.textColor = Colors.gray.color
         

@@ -19,7 +19,7 @@ class FilterSearchView: UIView {
         textField.tintColor = Colors.lightGray.color
         textField.textColor = Colors.charcoal.color
         textField.placeholder = item.placeholder
-        textField.font = FontFamily.regular
+        textField.font = FontFamily.book
 		textField.delegate = self
         return textField
     }()

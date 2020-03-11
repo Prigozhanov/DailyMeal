@@ -21,7 +21,7 @@ class SliderView: UIView {
         stack.distribution = .equalCentering
         sliderValues.forEach { value in
             let label = UILabel.makeText(value)
-            label.font = FontFamily.Poppins.regular.font(size: 10)
+            label.font = FontFamily.Avenir.book.font(size: 10)
             label.textColor = Colors.smoke.color
             stack.addArrangedSubview(label)
         }
