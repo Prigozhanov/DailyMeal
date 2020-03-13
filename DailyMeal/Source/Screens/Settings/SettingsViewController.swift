@@ -32,6 +32,24 @@ final class SettingsViewController: UIViewController {
 		imageView.contentMode = .scaleAspectFit
 		return view
 	}()
+	
+	private lazy var signOutButton: UIButton = {
+		let button = UIButton.makeCommonButton(Localizable.Settings.signOut) { [weak self] _ in
+			NotificationCenter.default.post(Notification(name: .userLoggedOut))
+			self?.viewModel.clearUserInfo()
+		}
+		button.setTitleColor(Colors.red.color, for: .normal)
+		button.titleLabel?.font = FontFamily.book
+		return button
+	}()
+	
+	private lazy var signInButton: UIButton = {
+		let button = ActionButton(Localizable.Settings.signIn) { [weak self] _ in
+			NotificationCenter.default.post(Notification(name: .userLoggedOut))
+			self?.viewModel.clearUserInfo()
+		}
+		return button
+	}()
     
     init(viewModel: SettingsViewModel) {
         self.viewModel = viewModel
@@ -127,12 +145,16 @@ final class SettingsViewController: UIViewController {
         
         // App info
         
-		let signOutButton = UIButton.makeCommonButton(Localizable.Settings.signOut) { [weak self] _ in
-            NotificationCenter.default.post(Notification(name: .userLoggedOut))
-            self?.viewModel.clearUserInfo()
-        }
-        signOutButton.setTitleColor(Colors.red.color, for: .normal)
-        signOutButton.titleLabel?.font = FontFamily.book
+		if viewModel.isUserLoggedIn {
+			stackView.addRow(signOutButton)
+			stackView.setInset(forRow: signOutButton, inset: UIEdgeInsets(top: 100, left: 0, bottom: 0, right: 0))
+		} else {
+			stackView.addRow(signInButton)
+			stackView.setInset(forRow: signInButton, inset: UIEdgeInsets(top: 100, left: Layout.largeMargin, bottom: 0, right: Layout.largeMargin))
+			signInButton.snp.makeConstraints {
+				$0.height.equalTo(50)
+			}
+		}
         
 		let appInfoLabel = UILabel.makeSmallText("Daily Meal. \(Localizable.Settings.version) \(Bundle.versionNumber)")
         #if DEBUG
@@ -141,8 +163,7 @@ final class SettingsViewController: UIViewController {
         appInfoLabel.textColor = Colors.gray.color
         appInfoLabel.textAlignment = .center
         
-        stackView.addRows([signOutButton, appInfoLabel])
-        stackView.setInset(forRow: signOutButton, inset: UIEdgeInsets(top: 100, left: 0, bottom: 0, right: 0))
+        stackView.addRow(appInfoLabel)
     }
     
 }

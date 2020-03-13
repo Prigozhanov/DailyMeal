@@ -101,6 +101,7 @@
 "settings.name"                                   = "Имя";
 "settings.phone"                                  = "Телефон";
 "settings.credit_card"                            = "Кредитная карта";
+"settings.sign_in"                                = "Войти";
 "settings.sign_out"                               = "Выйти";
 "settings.version"                                = "Версия";
 "settings.build"                                  = "Сборка";

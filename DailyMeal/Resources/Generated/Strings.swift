@@ -286,6 +286,8 @@ internal enum L10n {
     internal static let name = L10n.tr("Localizable", "settings.name")
     /// Phone
     internal static let phone = L10n.tr("Localizable", "settings.phone")
+    /// Sign in
+    internal static let signIn = L10n.tr("Localizable", "settings.sign_in")
     /// Sign out
     internal static let signOut = L10n.tr("Localizable", "settings.sign_out")
     /// Version

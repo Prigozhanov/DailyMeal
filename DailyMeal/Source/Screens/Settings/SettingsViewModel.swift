@@ -20,7 +20,9 @@ protocol SettingsViewModel {
     var phone: String { get set }
     var creditCardNumber: String { get }
     var address: String { get }
-    
+	
+	var isUserLoggedIn: Bool { get }
+	
     func clearUserInfo()
     func removeCreditCardInfo()
 }
@@ -59,6 +61,10 @@ final class SettingsViewModelImplementation: SettingsViewModel {
     var address: String {
             return userDefaultsService.getValueForKey(key: .addressName) as? String ?? ""
     }
+	
+	var isUserLoggedIn: Bool {
+		return userDefaultsService.isLoggedIn
+	}
     
     init() {
         context = AppDelegate.shared.context

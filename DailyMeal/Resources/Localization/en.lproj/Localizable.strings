@@ -101,6 +101,7 @@
 "settings.name"                                   = "Name";
 "settings.phone"                                  = "Phone";
 "settings.credit_card"                            = "Credit Card";
+"settings.sign_in"                                = "Sign in";
 "settings.sign_out"                               = "Sign out";
 "settings.version"                                = "Version";
 "settings.build"                                  = "Build";
