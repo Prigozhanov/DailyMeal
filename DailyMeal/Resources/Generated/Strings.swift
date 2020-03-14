@@ -27,6 +27,8 @@ internal enum L10n {
     internal static let promo = L10n.tr("Localizable", "cart.promo")
     /// Promo discaunt
     internal static let promoDiscaunt = L10n.tr("Localizable", "cart.promo_discaunt")
+    /// Sign In to proceed
+    internal static let singInToProceed = L10n.tr("Localizable", "cart.sing_in_to_proceed")
     /// Subtotal
     internal static let subtotal = L10n.tr("Localizable", "cart.subtotal")
     /// Your Food Cart
@@ -108,12 +110,16 @@ internal enum L10n {
   internal enum DeliveryLocation {
     /// Address confirmation
     internal static let addressConfirmation = L10n.tr("Localizable", "delivery_location.address_confirmation")
+    /// Apt. no (optional)
+    internal static let apartments = L10n.tr("Localizable", "delivery_location.apartments")
     /// Delivery location
     internal static let deliveryLocation = L10n.tr("Localizable", "delivery_location.delivery_location")
     /// Do you want to choose %@ as your delivery address, please confirm if it's correct, and start choosing your meal.
     internal static func doYouWantToChooseAddress(_ p1: String) -> String {
       return L10n.tr("Localizable", "delivery_location.do_you_want_to_choose_address", p1)
     }
+    /// Floor no (optional)
+    internal static let floor = L10n.tr("Localizable", "delivery_location.floor")
     /// Type delivery location
     internal static let typeDeliveryLocation = L10n.tr("Localizable", "delivery_location.type_delivery_location")
   }

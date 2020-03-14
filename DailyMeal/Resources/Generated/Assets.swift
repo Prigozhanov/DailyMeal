@@ -107,6 +107,7 @@ internal enum Asset {
       internal static let mcdonalds = ImageAsset(name: "Restaurants/mcdonalds")
       internal static let pzz = ImageAsset(name: "Restaurants/pzz")
     }
+    internal static let patternImage = ImageAsset(name: "pattern_image")
     internal static let priceRangeBackground = ImageAsset(name: "price_range_background")
     internal static let spinner = ImageAsset(name: "spinner")
     internal static let starsStack = ImageAsset(name: "stars_stack")

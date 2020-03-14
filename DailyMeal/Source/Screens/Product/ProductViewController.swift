@@ -51,7 +51,7 @@ final class ProductViewController: UIViewController {
         }
     ))
     
-    private lazy var sliderView = SliderView(title: "Spicy Level", sliderValues: ["book", "Spicy", "Naga"]) // TODO
+    private lazy var sliderView = SliderView(title: "Spicy Level", sliderValues: ["Regular", "Spicy", "Naga"]) // TODO
     
     private var totalLabel: UILabel = {
 		let label = UILabel.makeMediumText(Localizable.Product.total)
@@ -79,6 +79,7 @@ final class ProductViewController: UIViewController {
 					self?.viewModel.reloadCart()
 					self?.viewModel.addToCart {}
 					UINotificationFeedbackGenerator.impact(.success)
+					self?.tabBarController?.mainTabBar?.setBadgeVisible(true, at: 0)
 					self?.navigationController?.popViewController(animated: true)
 			})
 			UINotificationFeedbackGenerator.impact(.warning)

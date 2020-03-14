@@ -93,6 +93,8 @@
 "delivery_location.type_delivery_location"        = "Type delivery location";
 "delivery_location.address_confirmation"          = "Address confirmation";
 "delivery_location.do_you_want_to_choose_address" = "Do you want to choose %@ as your delivery address, please confirm if it's correct, and start choosing your meal.";
+"delivery_location.apartments"                    = "Apt. no (optional)";
+"delivery_location.floor"                         = "Floor no (optional)";
 
 /* Settings */
 "settings.change"                                 = "Change";
@@ -122,6 +124,7 @@
 "cart.apply"                                      = "Apply";
 "cart.your_cart"                                  = "Your Food Cart";
 "cart.cart_is_empty"                              = "Cart is empty";
+"cart.sing_in_to_proceed"                         = "Sign In to proceed";
 "cart.proceed_to_checkout"                        = "Proceed to Checkout";
 "cart.cart_total"                                 = "Cart total";
 "cart.delivery"                                   = "Delivery";

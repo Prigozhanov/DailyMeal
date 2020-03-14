@@ -164,6 +164,7 @@
 		E7F2913B2406E942000AF60C /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71708B823EB29C900D444BD /* KeyboardObserver.swift */; };
 		E7F3171C240417490011CC42 /* FilterAppliedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3171B240417490011CC42 /* FilterAppliedView.swift */; };
 		E7F3171E24045D300011CC42 /* UserLocationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3171D24045D300011CC42 /* UserLocationAnnotationView.swift */; };
+		E7FA896B241C123C00AE66D0 /* AddressDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FA896A241C123C00AE66D0 /* AddressDetailsView.swift */; };
 		E7FCE9F724154D7A0046C852 /* GreetingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FCE9E824154D790046C852 /* GreetingViewModel.swift */; };
 		E7FCE9F824154D7A0046C852 /* GreetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FCE9E924154D790046C852 /* GreetingViewController.swift */; };
 		E7FCE9F924154D7A0046C852 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FCE9EB24154D7A0046C852 /* SignUpViewController.swift */; };
@@ -417,6 +418,7 @@
 		E7F15DF723FF66DE00E35668 /* RatingRangeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingRangeControl.swift; sourceTree = "<group>"; };
 		E7F3171B240417490011CC42 /* FilterAppliedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAppliedView.swift; sourceTree = "<group>"; };
 		E7F3171D24045D300011CC42 /* UserLocationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationAnnotationView.swift; sourceTree = "<group>"; };
+		E7FA896A241C123C00AE66D0 /* AddressDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDetailsView.swift; sourceTree = "<group>"; };
 		E7FCE9E824154D790046C852 /* GreetingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreetingViewModel.swift; sourceTree = "<group>"; };
 		E7FCE9E924154D790046C852 /* GreetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreetingViewController.swift; sourceTree = "<group>"; };
 		E7FCE9EB24154D7A0046C852 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -692,6 +694,7 @@
 		E720292A23EDF472000E9884 /* DeliveryLocation */ = {
 			isa = PBXGroup;
 			children = (
+				E7FA8969241C121A00AE66D0 /* Views */,
 				E720292B23EDF472000E9884 /* DeliveryLocationViewController.swift */,
 				E720292C23EDF472000E9884 /* DeliveryLocationViewModel.swift */,
 			);
@@ -1056,6 +1059,14 @@
 				E7A03B7124016D240011C541 /* PriceRangeControl.swift */,
 			);
 			path = Controls;
+			sourceTree = "<group>";
+		};
+		E7FA8969241C121A00AE66D0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E7FA896A241C123C00AE66D0 /* AddressDetailsView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		E7FCE9E724154D790046C852 /* Greeting */ = {
@@ -1571,6 +1582,7 @@
 				E70F562124092D48002FB89F /* DailyTabBarButton.swift in Sources */,
 				E72327022402C34200C429B4 /* FilterSearchView.swift in Sources */,
 				E75C8822240834C900FFD295 /* ActionButton.swift in Sources */,
+				E7FA896B241C123C00AE66D0 /* AddressDetailsView.swift in Sources */,
 				E71139F52346AFE300889AE2 /* RestaurantsViewModel.swift in Sources */,
 				E7FCE9F724154D7A0046C852 /* GreetingViewModel.swift in Sources */,
 				E7D15C3223DF8D3C001E24EF /* CartItem.swift in Sources */,
@@ -1733,7 +1745,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEFINES_MODULE = YES;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = H7553T5T52;
@@ -1765,7 +1777,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEFINES_MODULE = YES;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = H7553T5T52;
@@ -1844,7 +1856,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = H7553T5T52;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1877,7 +1889,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = H7553T5T52;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1911,7 +1923,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = H7553T5T52;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1945,7 +1957,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = H7553T5T52;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2095,7 +2107,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = H7553T5T52;
 				INFOPLIST_FILE = DailyMeal/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2119,7 +2131,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = H7553T5T52;
 				INFOPLIST_FILE = DailyMeal/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

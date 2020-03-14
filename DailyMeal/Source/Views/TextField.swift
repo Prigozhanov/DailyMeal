@@ -28,7 +28,7 @@ class TextField: UIView {
         return textField
     }()
     
-    private lazy var leftImageView: UIImageView = {
+	lazy var leftImageView: UIImageView = {
         let view = UIImageView(image: image?.withRenderingMode(.alwaysTemplate))
         view.setRoundCorners(Layout.cornerRadius, maskedCorners: [.layerMaxXMaxYCorner, .layerMinXMinYCorner])
         view.contentMode = .scaleAspectFit
@@ -95,7 +95,7 @@ class TextField: UIView {
         
         textField.placeholder = placeholder
         textField.textAlignment = textAlignment
-        textField.font = FontFamily.Avenir.medium.font(size: 15)
+        textField.font = FontFamily.Avenir.medium.font(size: 14)
         
         let leftInset = textAlignment == .left ? Layout.commonInset : 5
         
@@ -109,7 +109,7 @@ class TextField: UIView {
         
         if image != nil {
             leftImageView.snp.makeConstraints {
-                $0.top.bottom.equalToSuperview().inset(10)
+                $0.top.bottom.equalToSuperview().inset(15)
                 $0.leading.equalToSuperview()
                 $0.width.equalTo(snp.height)
                 $0.trailing.equalTo(textField.snp.leading).offset(-leftInset).priority(.required)

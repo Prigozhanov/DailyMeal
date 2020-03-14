@@ -18,7 +18,7 @@ class MapSearchView: UIView {
     
     private var item: Item
     
-    private lazy var searchTextField = MapSearchInputView(
+	lazy var searchTextField = MapSearchInputView(
         item: MapSearchInputView.Item(
             placeholder: item.placeholder,
             onFilterButtonTap: item.onFilterButtonTap,

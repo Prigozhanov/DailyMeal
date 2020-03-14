@@ -15,8 +15,10 @@ public struct UserAddressMeta {
     public var streetId: Int?
 	public var addressLat: Double?
 	public var addressLon: Double?
+	public var apartments: String?
+	public var floor: String?
     
-	public init(addressName: String?, streetName: String?, areaId: Int?, addressesId: Int?, regionId: Int?, streetId: Int?, addressLat: Double?, addressLon: Double?) {
+	public init(addressName: String?, streetName: String?, areaId: Int?, addressesId: Int?, regionId: Int?, streetId: Int?, addressLat: Double?, addressLon: Double?, apartments: String?, floor: String?) {
         self.addressName = addressName
         self.streetName = streetName
         self.areaId = areaId
@@ -25,6 +27,8 @@ public struct UserAddressMeta {
         self.streetId = streetId
 		self.addressLat = addressLat
 		self.addressLon = addressLon
+		self.apartments = apartments
+		self.floor = floor
     }
     
 }

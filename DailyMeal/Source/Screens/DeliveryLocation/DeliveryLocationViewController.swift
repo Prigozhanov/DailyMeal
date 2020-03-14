@@ -37,29 +37,38 @@ final class DeliveryLocationViewController: UIViewController, KeyboardObservable
     
     private var locationSearchViewBottomConstraint: Constraint?
     private let locationSearchBottomInset: CGFloat = 60
-    private lazy var locationSearchView = MapSearchView(
-        item: MapSearchView.Item(
-            placeholder: Localizable.DeliveryLocation.typeDeliveryLocation,
-            results: [],
-            onSelectItem: { [weak self] address, searchView in
-                self?.viewModel.requestGeodcode(string: address, onSuccess: { address in
-                    self?.showConfiramtionDialog(address: address)
-                })
-        }, onLocationButtonTap: { [weak self] in
-            self?.mapController.moveCameraToUserLocation()
-            let currentLocation = self?.mapController.viewModel.getUserLocation()
-            
-            let formattedPositionString = "\(currentLocation?.longitude ?? 0),\(currentLocation?.latitude ?? 0)"
-            
-            self?.viewModel.requestGeodcode(string: formattedPositionString, onSuccess: { [weak self] address in
-                self?.showConfiramtionDialog(address: address)
-            })
-        }, shouldChangeCharacters: { [weak self] string, searchView in
-            self?.viewModel.getAddressesList(string: string, completion: { addresses in
-                searchView?.updateResults(with: addresses, searchString: string)
-            })
-        })
-    )
+	
+	private lazy var addressDetailsView = AddressDetailsView(
+		item: AddressDetailsView.Item(
+			onSelectAddress: { [weak self] address in
+				self?.viewModel.requestGeodcode(string: address, onSuccess: { address in
+					self?.showConfiramtionDialog(address: address)
+				})
+			},
+			onLocationButtonTap: { [weak self] in
+				self?.mapController.moveCameraToUserLocation()
+				let currentLocation = self?.mapController.viewModel.getUserLocation()
+				
+				let formattedPositionString = "\(currentLocation?.longitude ?? 0),\(currentLocation?.latitude ?? 0)"
+				
+				self?.viewModel.requestGeodcode(string: formattedPositionString, onSuccess: { [weak self] address in
+					self?.showConfiramtionDialog(address: address)
+				})
+			},
+			shouldChangeCharacters: { [weak self] string, searchView in
+				self?.viewModel.getAddressesList(string: string, completion: { addresses in
+					searchView?.updateResults(with: addresses, searchString: string)
+				})
+			},
+			onSaveDetails: { [weak self] address, apartments, floor in
+				self?.viewModel.userAddressMeta?.apartments = apartments
+				self?.viewModel.userAddressMeta?.floor = floor
+				self?.viewModel.userAddressMeta?.addressName = address
+				self?.viewModel.saveAddressInfo()
+				NotificationCenter.default.post(name: .userAddressChanged, object: nil)
+				self?.dismiss(animated: true, completion: nil)
+		})
+	)
     
     init(viewModel: DeliveryLocationViewModel) {
         self.viewModel = viewModel
@@ -96,8 +105,8 @@ final class DeliveryLocationViewController: UIViewController, KeyboardObservable
 			$0.height.equalTo(150)
 		}
 		
-		view.addSubview(locationSearchView)
-		locationSearchView.snp.makeConstraints {
+		view.addSubview(addressDetailsView)
+		addressDetailsView.snp.makeConstraints {
 			observableConstraints.append(
 				ObservableConstraint(
 					constraint: $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(60).constraint,
@@ -107,7 +116,6 @@ final class DeliveryLocationViewController: UIViewController, KeyboardObservable
 			)
 			$0.leading.trailing.equalToSuperview().inset(20)
 		}
-		Style.addShadow(for: locationSearchView, in: self.view, cornerRadius: Layout.cornerRadius)
         
         headerView.backButton.setActionHandler(controlEvents: .touchUpInside) { [weak self] _ in
             self?.dismiss(animated: true, completion: {
@@ -140,9 +148,8 @@ final class DeliveryLocationViewController: UIViewController, KeyboardObservable
     
     func showConfiramtionDialog(address: String) {
 		let vc = ConfirmationDiaglogViewController(title: Localizable.DeliveryLocation.addressConfirmation, subtitle: "", onConfirm: { [weak self] in
-            self?.viewModel.saveAddressInfo()
-            NotificationCenter.default.post(name: .userAddressChanged, object: nil)
-            self?.dismiss(animated: true)
+			self?.addressDetailsView.item.address = address
+			self?.addressDetailsView.showDetailedView()
             }, onDismiss: { [weak self] in
                 self?.confirmationDiaglogIsVisible = false
         })

@@ -93,6 +93,8 @@
 "delivery_location.type_delivery_location"        = "Введите адрес доставки";
 "delivery_location.address_confirmation"          = "Подтверждение адреса";
 "delivery_location.do_you_want_to_choose_address" = "Вы хотите выбрать %@ в качестве вашего адреса доставки? Пожалуйста, подтвердите, если адрес указан верно.";
+"delivery_location.apartments"                    = "Квартира (опц.)";
+"delivery_location.floor"                         = "Этаж (опц.)";
 
 /* Settings */
 "settings.change"                                 = "Изменить";
@@ -122,6 +124,7 @@
 "cart.apply"                                      = "Применить";
 "cart.your_cart"                                  = "Ваша корзина";
 "cart.cart_is_empty"                              = "Корзина пуста";
+"cart.sing_in_to_proceed"                         = "Войдите для продолжения";
 "cart.proceed_to_checkout"                        = "Перейти к оформлению";
 "cart.cart_total"                                 = "Стоимость";
 "cart.delivery"                                   = "Доставка";

@@ -58,6 +58,10 @@ final class CartViewController: UIViewController {
 		navigation.modalPresentationStyle = .overCurrentContext
 		UIApplication.topViewController?.show(navigation, sender: nil)
 	}
+	
+	private lazy var signInButton = ActionButton(Localizable.Cart.singInToProceed) { _ in
+		NotificationCenter.default.post(name: .userLoggedOut, object: nil)
+	}
     
     private lazy var separator = UIView.makeSeparator()
     
@@ -77,6 +81,14 @@ final class CartViewController: UIViewController {
 		
 		notificationTokens.append(Token.make(descriptor: .cartDidReloadDescriptor, using: { [weak self] _ in
 			self?.reloadScreen()
+		}))
+		
+		notificationTokens.append(Token.make(descriptor: .userLoggedOutDescriptor, using: { [weak self] _ in
+			self?.cartService.reload()
+		}))
+		
+		notificationTokens.append(Token.make(descriptor: .userLoggedInDescriptor, using: { [weak self] _ in
+			self?.cartService.reload()
 		}))
 		
         setupScreen()
@@ -173,17 +185,22 @@ final class CartViewController: UIViewController {
         calculationRows.append(contentsOf: [cartTotalRow, deliveryRow, promoDiscauntRow, separator, subtotalRow])
         aloeStackView.insertRows(calculationRows, after: promocodeView)
     }
-    
-    private func setupCheckoutRow() {
-        aloeStackView.addRow(proceedActionButton)
-        proceedActionButton.snp.makeConstraints { $0.height.equalTo(50) }
-        if let lastRow = aloeStackView.lastRow {
-            aloeStackView.setInset(forRow: lastRow, inset: UIEdgeInsets(top: 10, left: 45, bottom: 30, right: 45))
-        }
+	
+	private func setupCheckoutRow() {
+		if !userDefaultsService.isLoggedIn {
+			aloeStackView.addRow(signInButton)
+			signInButton.snp.makeConstraints { $0.height.equalTo(50) }
+		} else {
+			aloeStackView.addRow(proceedActionButton)
+			proceedActionButton.snp.makeConstraints { $0.height.equalTo(50) }
+			proceedActionButton.isEnabled = cartService.isValid
+		}
 		
-		proceedActionButton.isEnabled = cartService.isValid && userDefaultsService.isLoggedIn
-    }
-    
+		if let lastRow = aloeStackView.lastRow {
+			aloeStackView.setInset(forRow: lastRow, inset: UIEdgeInsets(top: 10, left: 45, bottom: 30, right: 45))
+		}
+	}
+	
 }
 
 // MARK: - Private

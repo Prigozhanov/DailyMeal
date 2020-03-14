@@ -21,6 +21,8 @@ protocol DeliveryLocationViewModel {
     
     func getAddressesList(string: String, completion: @escaping ([String]) -> Void)
     
+	var userAddressMeta: UserAddressMeta? { get set }
+	
     func saveAddressInfo()
 }
 
@@ -33,7 +35,7 @@ final class DeliveryLocationViewModelImplementation: DeliveryLocationViewModel {
     private let locationService: LocationService
     private let userDefaultsService: UserDefaultsService
     
-    private var userAddressMeta: UserAddressMeta?
+	var userAddressMeta: UserAddressMeta?
     
     private var lastGeoDataExistRequestUUID: String = ""
     
@@ -133,7 +135,9 @@ final class DeliveryLocationViewModelImplementation: DeliveryLocationViewModel {
                         regionId: addressExists.regionID,
 						streetId: addressExists.streetID,
 						addressLat: Double(addressExists.lat ?? ""),
-						addressLon: Double(addressExists.long ?? "")
+						addressLon: Double(addressExists.long ?? ""),
+						apartments: "",
+						floor: ""
                     )
                 }
             case let .failure(error):

@@ -71,14 +71,16 @@ public class UserDefaultsServiceImplementation: UserDefaultsService {
     }
     
     public func updateUserAddressMeta(_ info: UserAddressMeta?) {
-        setValueForKey(key: .addressName, value: info?.addressName as Any)
-        setValueForKey(key: .streetName, value: info?.streetName as Any)
-        setValueForKey(key: .areaId, value: info?.areaId as Any)
-        setValueForKey(key: .addressesId, value: info?.addressesId as Any)
-        setValueForKey(key: .regionId, value: info?.regionId as Any)
-        setValueForKey(key: .streetId, value: info?.streetId as Any)
-		setValueForKey(key: .addressLat, value: info?.addressLat as Any)
-		setValueForKey(key: .addressLon, value: info?.addressLon as Any)
+        setValueForKey(key: .addressName, value: info?.addressName)
+        setValueForKey(key: .streetName, value: info?.streetName)
+        setValueForKey(key: .areaId, value: info?.areaId)
+        setValueForKey(key: .addressesId, value: info?.addressesId)
+        setValueForKey(key: .regionId, value: info?.regionId)
+        setValueForKey(key: .streetId, value: info?.streetId)
+		setValueForKey(key: .addressLat, value: info?.addressLat)
+		setValueForKey(key: .addressLon, value: info?.addressLon)
+		setValueForKey(key: .apartments, value: info?.apartments )
+		setValueForKey(key: .floor, value: info?.floor)
 		
     }
     
@@ -99,6 +101,8 @@ public enum UserDefaultsKey: String, CaseIterable {
     streetId,
 	addressLat,
 	addressLon,
+	apartments,
+	floor,
 	lastOrderId,
 	lastOrderDate,
 	lastOrderDeliveryTimeSeconds,
