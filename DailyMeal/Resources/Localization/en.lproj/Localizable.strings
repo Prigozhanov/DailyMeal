@@ -1,3 +1,4 @@
+"common.error"                                    = "Error";
 
 /* Common */
 "common.confirm"                                  = "Confirm";
@@ -92,6 +93,8 @@
 "delivery_location.delivery_location"             = "Delivery location";
 "delivery_location.type_delivery_location"        = "Type delivery location";
 "delivery_location.address_confirmation"          = "Address confirmation";
+"delivery_location.wrong_address"                 = "Sorry, this address is out of delivery zone";
+"delivery_location.dont_deliver"                  = "Sorry, we don't deliver to %@";
 "delivery_location.do_you_want_to_choose_address" = "Do you want to choose %@ as your delivery address, please confirm if it's correct, and start choosing your meal.";
 "delivery_location.apartments"                    = "Apt. no (optional)";
 "delivery_location.floor"                         = "Floor no (optional)";

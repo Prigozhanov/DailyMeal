@@ -1,3 +1,4 @@
+"common.error"                                    = "Ошибка";
 
 /* Common */
 "common.confirm"                                  = "Подтвердить";
@@ -92,6 +93,8 @@
 "delivery_location.delivery_location"             = "Адрес доставки";
 "delivery_location.type_delivery_location"        = "Введите адрес доставки";
 "delivery_location.address_confirmation"          = "Подтверждение адреса";
+"delivery_location.wrong_address"                 = "Извините, этот адрес вне зоны доставки";
+"delivery_location.dont_deliver"                  = "Извините, мы не доставляем в %@";
 "delivery_location.do_you_want_to_choose_address" = "Вы хотите выбрать %@ в качестве вашего адреса доставки? Пожалуйста, подтвердите, если адрес указан верно.";
 "delivery_location.apartments"                    = "Квартира (опц.)";
 "delivery_location.floor"                         = "Этаж (опц.)";

@@ -103,6 +103,8 @@ internal enum L10n {
     internal static let confirm = L10n.tr("Localizable", "common.confirm")
     /// BYN
     internal static let currency = L10n.tr("Localizable", "common.currency")
+    /// Error
+    internal static let error = L10n.tr("Localizable", "common.error")
     /// km
     internal static let km = L10n.tr("Localizable", "common.km")
   }
@@ -118,10 +120,16 @@ internal enum L10n {
     internal static func doYouWantToChooseAddress(_ p1: String) -> String {
       return L10n.tr("Localizable", "delivery_location.do_you_want_to_choose_address", p1)
     }
+    /// Sorry, we don't deliver to %@
+    internal static func dontDeliver(_ p1: String) -> String {
+      return L10n.tr("Localizable", "delivery_location.dont_deliver", p1)
+    }
     /// Floor no (optional)
     internal static let floor = L10n.tr("Localizable", "delivery_location.floor")
     /// Type delivery location
     internal static let typeDeliveryLocation = L10n.tr("Localizable", "delivery_location.type_delivery_location")
+    /// Sorry, this address is out of delivery zone
+    internal static let wrongAddress = L10n.tr("Localizable", "delivery_location.wrong_address")
   }
 
   internal enum Greeting {

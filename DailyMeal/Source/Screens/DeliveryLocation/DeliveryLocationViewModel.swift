@@ -9,7 +9,7 @@ import Services
 
 // MARK: - View
 protocol DeliveryLocationView: class {
-    
+    func showErrorMessage(_ message: String)
 }
 
 // MARK: - ViewModel
@@ -97,6 +97,7 @@ final class DeliveryLocationViewModelImplementation: DeliveryLocationViewModel {
                     let geoObject = featureMember.geoObject else {
                         return
                 }
+				
                 if self?.lastGeoDataExistRequestUUID == uuid {
                     self?.requestGeodataExist(geoObject: geoObject, onSuccess: onSuccess, uuid: uuid)
                 }
@@ -141,7 +142,15 @@ final class DeliveryLocationViewModelImplementation: DeliveryLocationViewModel {
                     )
                 }
             case let .failure(error):
-                print(error)
+				logDebug(message: error.localizedDescription)
+				
+				if let administrativeAreaName = geoObject.metaDataProperty?.geocoderMetaData?.addressDetails?.country?.administrativeArea?.administrativeAreaName,
+					administrativeAreaName != "Minsk" {
+					self?.view?.showErrorMessage(Localizable.DeliveryLocation.dontDeliver(administrativeAreaName))
+					return
+				}
+				
+				self?.view?.showErrorMessage(Localizable.DeliveryLocation.wrongAddress)
             }
         }
     }

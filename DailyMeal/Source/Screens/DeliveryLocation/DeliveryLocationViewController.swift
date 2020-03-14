@@ -14,7 +14,7 @@ final class DeliveryLocationViewController: UIViewController, KeyboardObservable
     
     private var viewModel: DeliveryLocationViewModel
     
-    private var confirmationDiaglogIsVisible: Bool = false
+    private var alertDialogIsVisible: Bool = false
     
 	let bag = DisposeBag()
 	
@@ -151,7 +151,7 @@ final class DeliveryLocationViewController: UIViewController, KeyboardObservable
 			self?.addressDetailsView.item.address = address
 			self?.addressDetailsView.showDetailedView()
             }, onDismiss: { [weak self] in
-                self?.confirmationDiaglogIsVisible = false
+                self?.alertDialogIsVisible = false
         })
         vc.subtitleLabel.attributedText = Formatter.getHighlightedAttributtedString(
             string: Localizable.DeliveryLocation.doYouWantToChooseAddress(address),
@@ -159,8 +159,8 @@ final class DeliveryLocationViewController: UIViewController, KeyboardObservable
             font: FontFamily.smallMedium!,
             highlightingFont: FontFamily.Avenir.black.font(size: 12),
             highlightingColor: Colors.charcoal.color)
-        if confirmationDiaglogIsVisible != true {
-            confirmationDiaglogIsVisible = true
+        if alertDialogIsVisible == false {
+            alertDialogIsVisible = true
             show(vc, sender: nil)
         }
     }
@@ -169,7 +169,15 @@ final class DeliveryLocationViewController: UIViewController, KeyboardObservable
 
 // MARK: - DeliveryLocationView
 extension DeliveryLocationViewController: DeliveryLocationView {
-    
+	func showErrorMessage(_ message: String) {
+		let vc = AlertDiaglogViewController(title: Localizable.Common.error, subtitle: message, onDismiss: { [weak self] in
+			self?.alertDialogIsVisible = false
+		})
+		if alertDialogIsVisible == false {
+			alertDialogIsVisible = true
+			show(vc, sender: nil)
+		}
+	}
 }
 
 // MARK: - Private
