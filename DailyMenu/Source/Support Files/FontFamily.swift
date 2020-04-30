@@ -11,7 +11,6 @@ extension FontFamily {
         return Poppins.bold.font(size: 15)
     }
     
-    
     public static var light: UIFont? {
         return Poppins.light.font(size: 15)
     }
@@ -43,5 +42,9 @@ extension FontFamily {
     public static var medium: UIFont? {
         return Poppins.medium.font(size: 14)
     }
+	
+	public static var extraSmallMedium: UIFont? {
+		return Poppins.medium.font(size: 10)
+	}
     
 }

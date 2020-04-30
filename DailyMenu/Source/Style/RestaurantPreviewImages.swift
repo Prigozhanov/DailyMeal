@@ -7,7 +7,6 @@ import UIKit
 
 struct RestaurantPreviewImages {
     
-    
     static func getRestaurantPreviewByCategory(_ category: FoodCategory) -> UIImage {
         switch category {
         case .burger:

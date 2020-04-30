@@ -4,6 +4,7 @@
 //
 
 import CollectionKit
+import Extensions
 
 class CategoryFilterBar: UIView {
     
@@ -39,16 +40,17 @@ class CategoryFilterBar: UIView {
         (image: Images.FilterIcons.pastry.image, .pasta)
     ]
     
-    
     private lazy var categoriesDataSource = ArrayDataSource(data: categoryItems)
     
-    private lazy var categoriesViewSource = ClosureViewSource { [weak self] (view: FoodCategoryCell, data: (image: UIImage, category: FoodCategory), index: Int) in
+    private lazy var categoriesViewSource = ClosureViewSource { [weak self] (view: FoodCategoryCell, data: (image: UIImage, category: FoodCategory), _) in
         view.configure(
             with: FoodCategoryCell.Item(
                 image: data.image,
-                category: data.category,
-                subtitle: "\(self?.item.categoryRestaurantsCount(data.category) ?? 0) Restaurants",
+				category: data.category,
+				restaurantsCount: self?.item.categoryRestaurantsCount(data.category) ?? 0,
                 onSelectAction: { [weak self] category in
+					UISelectionFeedbackGenerator.impact()
+					view.tapAnimation()
                     self?.item.selectedCategory = category
                     self?.item.onSelectAction(category)
                     if category == nil {
@@ -59,7 +61,8 @@ class CategoryFilterBar: UIView {
                             .filter({ ($0 as! FoodCategoryCell).item?.category != category })
                             .forEach({ ($0 as! FoodCategoryCell).setState(.outOfFocus, animated: true) })
                     }
-            }))
+            })
+        )
         
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             if let selectedCategory = self?.item.selectedCategory {

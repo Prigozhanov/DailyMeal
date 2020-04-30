@@ -6,12 +6,12 @@
 import Foundation
 import Services
 
-//MARK: - View
+// MARK: - View
 protocol SettingsView: class {
     
 }
 
-//MARK: - ViewModel
+// MARK: - ViewModel
 protocol SettingsViewModel {
     
     var view: SettingsView? { get set }
@@ -25,7 +25,7 @@ protocol SettingsViewModel {
     func removeCreditCardInfo()
 }
 
-//MARK: - Implementation
+// MARK: - Implementation
 final class SettingsViewModelImplementation: SettingsViewModel {
     
     weak var view: SettingsView?
@@ -53,15 +53,11 @@ final class SettingsViewModelImplementation: SettingsViewModel {
     }
     
     var creditCardNumber: String {
-        get {
             return keychainService.getValueForItem(.creditCardNumber) ?? ""
-        }
     }
     
     var address: String {
-        get {
             return userDefaultsService.getValueForKey(key: .addressName) as? String ?? ""
-        }
     }
     
     init() {
@@ -80,5 +76,3 @@ final class SettingsViewModelImplementation: SettingsViewModel {
     }
     
 }
-
-

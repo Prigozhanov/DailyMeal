@@ -12,15 +12,10 @@ class RestaurantsHeaderView: UIView {
     private let item: Item
     
     private lazy var titleLabel: UILabel = {
-        let label = UILabel.makeText("\(item)What would you like to eat?")
+		let label = UILabel.makeText(item.appending(Localizable.Restaurants.whatWouldYouLikeToEat))
         label.numberOfLines = 3
-        label.font = FontFamily.Poppins.bold.font(size: 24)
+        label.font = FontFamily.Poppins.bold.font(size: 20)
         label.textColor = Colors.charcoal.color
-        addSubview(label)
-        label.snp.makeConstraints {
-            $0.leading.top.equalToSuperview().inset(Layout.largeMargin)
-            $0.trailing.equalToSuperview().inset(50)
-        }
         return label
     }()
     
@@ -51,21 +46,30 @@ class RestaurantsHeaderView: UIView {
         
         addSubviews([titleLabel, notificationButton, mapButton])
         titleLabel.snp.makeConstraints {
-            $0.leading.top.equalToSuperview().inset(Layout.largeMargin)
-            $0.trailing.equalToSuperview().inset(50)
+			$0.leading.top.bottom.equalToSuperview().inset(Layout.commonInset)
         }
 
+		mapButton.snp.makeConstraints {
+			$0.top.equalTo(titleLabel)
+			$0.leading.equalTo(titleLabel.snp.trailing)
+			$0.size.equalTo(24)
+			$0.bottom.lessThanOrEqualToSuperview()
+		}
+		
         notificationButton.snp.makeConstraints {
-            $0.trailing.top.equalToSuperview().inset(Layout.largeMargin)
+			$0.top.equalTo(mapButton)
+			$0.trailing.equalToSuperview().inset(Layout.commonInset)
+			$0.leading.equalTo(mapButton.snp.trailing).offset(Layout.largeMargin)
+			$0.size.equalTo(24)
+			$0.bottom.lessThanOrEqualToSuperview()
         }
     
-        mapButton.snp.makeConstraints {
-            $0.trailing.equalTo(notificationButton.snp.leading).offset(-Layout.largeMargin)
-            $0.centerY.equalTo(notificationButton)
-            $0.size.equalTo(24)
-        }
     }
     
     required init?(coder: NSCoder) { fatalError() }
     
+	override var intrinsicContentSize: CGSize {
+		return titleLabel.intrinsicContentSize
+	}
+
 }

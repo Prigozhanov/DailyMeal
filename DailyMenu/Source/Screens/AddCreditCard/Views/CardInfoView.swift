@@ -38,28 +38,8 @@ class CardInfoView: UIView {
                     }
                 }
                 return false
-        },
-            shouldBeginEditing: { (_) -> Bool in
-                true
-        },
-            didBeginEditing: { (_) in
-                
-        },
-            shouldEndEditing: { (_) -> Bool in
-                true
-        },
-            didEndEditing: { (_, _) in
-                
-        },
-            didChangeSelection: { (_) in
-                
-        },
-            shouldClear: { (_) -> Bool in
-                true
-        }) { [weak self] (_) -> Bool in
-            return true
-        }
-        textField.setKeyboardType(.numberPad)
+        })
+        textField.keyboardType = .numberPad
         return textField
     }()
     
@@ -79,28 +59,8 @@ class CardInfoView: UIView {
                     }
                 }
                 return false
-        },
-            shouldBeginEditing: { (_) -> Bool in
-                true
-        },
-            didBeginEditing: { (_) in
-                
-        },
-            shouldEndEditing: { (_) -> Bool in
-                true
-        },
-            didEndEditing: { (_, _) in
-                
-        },
-            didChangeSelection: { (_) in
-                
-        },
-            shouldClear: { (_) -> Bool in
-                true
-        }) { (_) -> Bool in
-            true
-        }
-        textField.setKeyboardType(.numberPad)
+        })
+        textField.keyboardType = .numberPad
         return textField
     }()
     
@@ -120,28 +80,8 @@ class CardInfoView: UIView {
                     }
                 }
                 return false
-        },
-            shouldBeginEditing: { (_) -> Bool in
-                true
-        },
-            didBeginEditing: { (_) in
-                
-        },
-            shouldEndEditing: { (_) -> Bool in
-                true
-        },
-            didEndEditing: { (_, _) in
-                
-        },
-            didChangeSelection: { (_) in
-                
-        },
-            shouldClear: { (_) -> Bool in
-                true
-        }) { (_) -> Bool in
-            true
-        }
-        textField.setKeyboardType(.numberPad)
+        })
+        textField.keyboardType = .numberPad
         return textField
     }()
     
@@ -150,7 +90,7 @@ class CardInfoView: UIView {
             placeholder: "CVV",
             shouldShowClearButton: false,
             textAlignment: .center,
-            shouldChangeCharacters: { [weak self] (textField, range, string) -> Bool in
+            shouldChangeCharacters: { [weak self] (textField, _, string) -> Bool in
                 if let text = textField.text {
                     if Formatter.CreditCard.shouldChange(string: text.appending(string), maxCharacters: 3) {
                         self?.details.cvv = text.appending(string)
@@ -158,35 +98,14 @@ class CardInfoView: UIView {
                     }
                 }
                 return false
-        },
-            shouldBeginEditing: { (_) -> Bool in
-                true
-        },
-            didBeginEditing: { (_) in
-                
-        },
-            shouldEndEditing: { (_) -> Bool in
-                true
-        },
-            didEndEditing: { (_, _) in
-                
-        },
-            didChangeSelection: { (_) in
-                
-        },
-            shouldClear: { (_) -> Bool in
-                true
-        }) { (_) -> Bool in
-            true
-        }
-        textField.setKeyboardType(.numberPad)
-        textField.setSecureEntry(true)
+        })
+        textField.keyboardType = .numberPad
+        textField.isSecureTextEntry = true
         return textField
     }()
     
     private lazy var saveCreditCardDetailsButton: UIButton = {
-        let button = UIButton.makeActionButton("Save Card details") { [weak self] view in
-            view.tapAnimation()
+        let button = ActionButton("Save Card details") { [weak self] _ in
             guard let self = self else { return }
             self.item(self.details)
         }
@@ -286,10 +205,6 @@ class CardInfoView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setupGradient() {
-        Style.addBlueGradient(saveCreditCardDetailsButton)
     }
     
 }

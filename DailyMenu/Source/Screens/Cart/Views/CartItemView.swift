@@ -12,7 +12,7 @@ class CartItemView: UIView {
     
     struct Item {
         let cartItem: CartItem
-        let onRemoveItem: (CartItemView) -> ()
+        let onRemoveItem: (CartItemView) -> Void
         let onChangeCount: IntClosure
     }
     
@@ -35,12 +35,12 @@ class CartItemView: UIView {
                 AppDelegate.shared.context.cartService.view?.reloadCalculationsRows()
             }))
         }),
-        sizeSource: { [weak self] (index: Int, data: Choice, collectionSize: CGSize) -> CGSize in
+        sizeSource: { [weak self] (_, data: Choice, _) -> CGSize in
             guard let self = self else { return .zero }
             return CGSize(
                 width: NSString(string: data.label)
                     .size(withAttributes: [
-                        NSAttributedString.Key.font : FontFamily.Poppins.regular.font(size: 11)!
+                        NSAttributedString.Key.font: FontFamily.Poppins.regular.font(size: 11)!
                     ])
                     .width + 20,
                 height: 15)

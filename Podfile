@@ -3,9 +3,11 @@
 platform :ios, '11.0'
 use_frameworks!
 
+pod 'SwiftLint'
 
 target 'DailyMenu' do
 
+ pod 'RxKeyboard'
  pod 'SwiftGen'
  pod 'TableKit'
  pod "CollectionKit"

@@ -55,6 +55,7 @@ class MapSearchInputView: UIView {
     
     private lazy var filterButton: UIButton = {
         let button = UIButton.makeImageButton(image: Images.Icons.filter.image) { [weak self] _ in
+			self?.textField.resignFirstResponder()
             self?.item.onFilterButtonTap?()
         }
         button.contentMode = .scaleAspectFit

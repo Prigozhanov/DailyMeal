@@ -24,7 +24,6 @@ class RadiusRow: UIView {
         
         slider.value = initialValue
      
-        
         slider.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         return slider
     }()
@@ -35,7 +34,7 @@ class RadiusRow: UIView {
         return label
     }()
     
-    private lazy var titleLabel = UILabel.makeSmallText("Radius")
+	private lazy var titleLabel = UILabel.makeSmallText(Localizable.RestaurantsMap.radius)
     
     init(item: Item) {
         self.item = item

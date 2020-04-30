@@ -11,6 +11,7 @@ extension UIView {
     }
 }
 
+// MARK: - Graphics
 extension UIView {
     
     func setRoundCorners(_ cornerRadius: CGFloat) {
@@ -37,9 +38,38 @@ extension UIView {
         layer.borderColor = color.cgColor
         layer.borderWidth = width
     }
+	
+	func addBadge(offset: CGPoint = CGPoint.zero, color: UIColor = UIColor.red) {
+		removeBadge()
+
+		let badge = CAShapeLayer()
+		let radius = CGFloat(4)
+		let location = CGPoint(x: frame.width - (radius + offset.x), y: (radius + offset.y))
+		badge.drawCircleAtLocation(location: location, radius: radius, color: color)
+		layer.addSublayer(badge)
+	}
+	
+	func removeBadge() {
+		layer.sublayers?.compactMap({ $0 as? CAShapeLayer }).first?.removeFromSuperlayer()
+	}
+	
+	func createDottedLine(from: CGPoint, to: CGPoint, width: CGFloat, color: UIColor) {
+		let shape = CAShapeLayer()
+		shape.strokeColor = color.cgColor
+		shape.lineWidth = width
+		shape.lineDashPattern = [4, 2]
+		let path = CGMutablePath()
+		let points = [from, to]
+		path.addLines(between: points)
+		shape.path = path
+		layer.insertSublayer(shape, at: 0)
+	}
+	
 }
 
+// MARK: - Factory
 extension UIView {
+	
     static func makeSeparator() -> UIView {
         let view = UIView()
         view.backgroundColor = Colors.lightGray.color
@@ -54,9 +84,12 @@ extension UIView {
         
         return view
     }
+	
 }
 
+// MARK: - Animations
 extension UIView {
+	
     func tapAnimation(completion: VoidClosure? = nil) {
         let animation = CABasicAnimation(keyPath: "transform.scale")
         animation.repeatCount = 1
@@ -75,6 +108,7 @@ extension UIView {
         animation.toValue = self.center.x - 5
         animation.autoreverses = true
         layer.add(animation, forKey: "postion.x")
+		UINotificationFeedbackGenerator.impact(.error)
     }
     
     func startRotating(duration: CFTimeInterval = 1, repeatCount: Float = Float.infinity, clockwise: Bool = true) {
@@ -92,6 +126,20 @@ extension UIView {
     
     func stopRotating() {
         layer.removeAnimation(forKey: "transform.rotation.z")
+    }
+    
+    func temporaryAppear(seconds: Double) {
+        isHidden = false
+        alpha = 0
+        UIView.animateKeyframes(withDuration: seconds, delay: 0, options: [], animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.01) { [weak self] in
+                self?.alpha = 1
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.9, relativeDuration: 0.1) { [weak self] in
+                self?.alpha = 0
+            }
+        }, completion: nil)
     }
     
 }

@@ -10,17 +10,17 @@ public class CartItem: Comparable, Equatable {
     var id: Int
     var product: Product
     var count: Int
+	var restId: Int
     
-    init(id: Int, product: Product, count: Int = 1) {
+	init(id: Int, product: Product, count: Int = 1, restId: Int) {
         self.id = id
         self.product = product
         self.count = count
+		self.restId = restId
     }
     
     var overallPrice: Double {
-        get {
-            product.overallPrice
-        }
+        product.overallPrice
     }
     
     public static func < (lhs: CartItem, rhs: CartItem) -> Bool {

@@ -17,7 +17,9 @@ final class OrderStatusViewController: UIViewController {
         return stack
     }()
     
-    private lazy var orderIdView = OrderIdView(id: "3123-EWQ")
+	private lazy var orderIdView = OrderIdView(id: viewModel.orderId ?? "")
+	
+	private let emptyStateLabel = UILabel.makeSmallText(Localizable.OrderStatus.noOrdersFound)
     
     init(viewModel: OrderStatusViewModel) {
         self.viewModel = viewModel
@@ -36,11 +38,15 @@ final class OrderStatusViewController: UIViewController {
         
         Style.addBlueCorner(self)
         
-        layoutScreen()
-        setupStackView()
+        setupScreen()
+		if let orderId = viewModel.orderId, !orderId.isEmpty {
+        	setupStackView()
+		} else {
+			setupEmptyView()
+		}
     }
     
-    private func layoutScreen() {
+    private func setupScreen() {
         let placeholderImageView = UIImageView(image: Images.Placeholders.orderPlaced.image)
         placeholderImageView.contentMode = .scaleAspectFit
         view.addSubview(placeholderImageView)
@@ -57,40 +63,46 @@ final class OrderStatusViewController: UIViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
         
-        Style.addTitle(title: "Order status", self)
+		Style.addTitle(title: Localizable.OrderStatus.orderStatus, self)
         Style.addBackButton(self) { [weak self] _ in
-            self?.navigationController?.popViewController(animated: true)
+			if let navigationController = self?.navigationController {
+            	navigationController.dismiss(animated: true, completion: nil)
+			} else {
+				self?.dismiss(animated: true, completion: nil)
+			}
         }
     }
     
     private func setupStackView() {
-        let orderConfirmedRow = OrderStateRow(title: "Order confirmed", time: "12:11", checked: true)
-        let prepearingFoodRow = OrderStateRow(title: "Preparing food", time: "12:11", checked: true)
-        let foodOnTheWayRow = OrderStateRow(title: "Food on the way", time: "12:11", checked: false)
-        let DeliveredToYouRow = OrderStateRow(title: "Delivered to you", time: "12:11", checked: false)
+		let orderConfirmedRow = OrderStateRow(title: Localizable.OrderStatus.orderConfirmed, time: viewModel.orderDate.toString(formatter: Date.timeFormatter), checked: true)
+		let deliveredToYouRow = OrderStateRow(
+			title: Localizable.OrderStatus.deliveredToYou,
+			time: viewModel.deliveredToYouStatus.time,
+			checked: viewModel.deliveredToYouStatus.done
+		)
+		
         stackView.addRow(orderIdView)
         stackView.addRow(orderConfirmedRow)
-        stackView.addRow(prepearingFoodRow)
-        stackView.addRow(foodOnTheWayRow)
-        stackView.addRow(DeliveredToYouRow)
+        stackView.addRow(deliveredToYouRow)
         
         stackView.showSeparator(forRow: orderIdView)
         stackView.showSeparator(forRow: orderConfirmedRow)
-        stackView.showSeparator(forRow: prepearingFoodRow)
-        stackView.showSeparator(forRow: foodOnTheWayRow)
-        stackView.showSeparator(forRow: DeliveredToYouRow)
+        stackView.showSeparator(forRow: deliveredToYouRow)
     }
+	
+	private func setupEmptyView() {
+		view.addSubview(emptyStateLabel)
+		emptyStateLabel.snp.makeConstraints { $0.center.equalToSuperview() }
+	}
     
 }
 
-//MARK: -  OrderStatusView
+// MARK: - OrderStatusView
 extension OrderStatusViewController: OrderStatusView {
     
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension OrderStatusViewController {
     
 }
-
-

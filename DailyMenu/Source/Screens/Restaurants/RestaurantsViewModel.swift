@@ -7,14 +7,14 @@ import Foundation
 import Networking
 import Services
 
-//MARK: - View
+// MARK: - View
 protocol RestaurantsView: class {
     func reloadScreen()
     func showLoadingIndicator()
     func hideLoadingIndicator()
 }
 
-//MARK: - ViewModel
+// MARK: - ViewModel
 protocol RestaurantsViewModel {
     
     var view: RestaurantsView? { get set }
@@ -45,7 +45,7 @@ protocol RestaurantsViewModel {
     
 }
 
-//MARK: - Implementation
+// MARK: - Implementation
 final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     
     let context: AppContext
@@ -73,9 +73,7 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     var categoryFilter: FoodCategory?
     
     var userName: String {
-        get {
-            userDefaultsService.getValueForKey(key: .name) as? String ?? ""
-        }
+        userDefaultsService.getValueForKey(key: .name) as? String ?? ""
     }
     
     var restaurantsChain: [Restaurant] {
@@ -98,7 +96,6 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     
     var filteredRestaurants: [Restaurant] {
         let restaurants = restaurantsChain.filter({
-            
             $0.chainLabel.containsCaseIgnoring(searchFilter)
         })
         var sizeToBeLoaded = pageSize * pageNumber
@@ -120,7 +117,7 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     func getRestaurantsFilteredByCategory(_ category: FoodCategory) -> [Restaurant] {
         restaurantsChain.filter({
             let restId = $0.id
-            if categories[restId]?.contains(where: { ($0.label?.containsCaseIgnoring(category.rawValue) ?? false) }) ?? false {
+            if categories[restId]?.contains(where: { ($0.label?.containsCaseIgnoring(category.compatibleValue) ?? false) }) ?? false {
                 return true
             }
             return false
@@ -140,7 +137,7 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
                 return
         }
         
-        let req = context.networkService.requestFactory.menu(cityId: areaId, addressId: addressId)
+		let req = context.networkService.requestFactory.menu(cityId: areaId, addressId: addressId, language: menuByLanguage)
         view?.showLoadingIndicator()
         context.networkService.send(request: req) { [weak self] result, _ in
             switch result {
@@ -170,12 +167,10 @@ final class RestaurantsViewModelImplementation: RestaurantsViewModel {
     }
     
     func loadCategory(restId: Int, onCompletion: @escaping (Result<SingleKeyResponseWrapper<[ProductCategory]>, NetworkClient.Error>) -> Void) {
-        let req = context.networkService.requestFactory.restaurantCategories(id: restId)
+		let req = context.networkService.requestFactory.restaurantCategories(id: restId, language: menuByLanguage)
         context.networkService.send(request: req) { result, _ in
             onCompletion(result)
         }
     }
     
 }
-
-

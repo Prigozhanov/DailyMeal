@@ -5,7 +5,7 @@
 
 import UIKit
 
-class ConfirmationDiagloViewController: UIViewController {
+class ConfirmationDiaglogViewController: UIViewController {
     
     private let dialogTitle: String
     private let dialogSubtitle: String
@@ -29,19 +29,14 @@ class ConfirmationDiagloViewController: UIViewController {
         return label
     }()
     
-    private lazy var confirmButton: UIButton = {
-        let button = UIButton.makeActionButton("Confirm") { [weak self] button in
-            button.tapAnimation()
-            self?.dismiss(animated: true, completion: { [weak self] in
-                self?.onConfirm()
-            })
-        }
-        return button
-    }()
-    
-   
+	private lazy var confirmButton = ActionButton(Localizable.Common.confirm) { [weak self] _ in
+		self?.dismiss(animated: true, completion: { [weak self] in
+			self?.onConfirm()
+		})
+	}
+	
     private lazy var cancelButton: UIButton = {
-        let button = UIButton.makeCommonButton("Cancel") { [weak self] button in
+		let button = UIButton.makeCommonButton(Localizable.Common.cancel) { [weak self] _ in
             self?.dismiss(animated: true, completion: nil)
         }
         button.setTitleColor(Colors.gray.color, for: .normal)
@@ -68,7 +63,6 @@ class ConfirmationDiagloViewController: UIViewController {
         
         view.backgroundColor = Colors.black.color.withAlphaComponent(0.2)
         
-        
         view.addSubview(cardView)
         cardView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(20)
@@ -94,11 +88,6 @@ class ConfirmationDiagloViewController: UIViewController {
             $0.height.equalTo(50)
             $0.trailing.bottom.leading.equalToSuperview().inset(Layout.commonInset)
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        Style.addBlueGradient(confirmButton)
     }
     
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {

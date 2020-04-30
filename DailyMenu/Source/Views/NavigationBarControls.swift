@@ -32,8 +32,8 @@ class NavigationBarControls: UIView {
         let notificationButton = UIButton.makeNotificationButton()
         addSubview(notificationButton)
         notificationButton.snp.makeConstraints {
-            $0.top.trailing.equalToSuperview().inset(Layout.largeMargin)
-            $0.size.equalTo(44)
+            $0.top.trailing.equalToSuperview()
+            $0.size.equalTo(60)
         }
         
         addSubview(titleLabel)
@@ -61,9 +61,13 @@ class NavigationBarControls: UIView {
         guard let vc = parentViewController else { return }
         backButton = UIButton.makeBackButton(vc)
         backButton?.tintColor = appearance == .light ? Colors.white.color : Colors.black.color
+		
         addSubview(backButton!)
+		
         backButton!.snp.makeConstraints {
-            $0.top.leading.equalToSuperview().inset(Layout.largeMargin)
+			$0.centerY.equalTo(titleLabel)
+            $0.leading.equalToSuperview()
+			$0.size.equalTo(60)
         }
         snp.makeConstraints {
             $0.height.equalTo(100)

@@ -1,0 +1,153 @@
+
+/* Common */
+"common.confirm"                                  = "Подтвердить";
+"common.cancel"                                   = "Отмена";
+"common.km"                                       = "км";
+"common.currency"                                 = "РУБ";
+
+/* Tabbar */
+"tabbar.cart"                                     = "Корзина";
+"tabbar.explore"                                  = "Рестораны";
+"tabbar.settings"                                 = "Настройки";
+
+/* Categories */
+"categories.burger"                               = "Бургер";
+"categories.chicken"                              = "Курица";
+"categories.desert"                               = "Десерт";
+"categories.fries"                                = "Картофель";
+"categories.hotdog"                               = "Хотдог";
+"categories.lobstar"                              = "Лобстер";
+"categories.pizza"                                = "Пицца";
+"categories.sandwich"                             = "Сэндвич";
+"categories.steak"                                = "Стейк";
+"categories.sushi"                                = "Суши";
+"categories.taco"                                 = "Тако";
+"categories.pasta"                                = "Паста";
+"categories.shaurma"                              = "Шаурма";
+"categories.unknown"                              = "Неизвестно";
+"categories.compatible.burger"                    = "Бургер";
+"categories.compatible.chicken"                   = "Курица";
+"categories.compatible.desert"                    = "Десерты";
+"categories.compatible.fries"                     = "Картофель";
+"categories.compatible.hotdog"                    = "Хотдог";
+"categories.compatible.lobstar"                   = "Лобстер";
+"categories.compatible.pizza"                     = "Пицца";
+"categories.compatible.sandwich"                  = "Сэндвич";
+"categories.compatible.steak"                     = "Стейк";
+"categories.compatible.sushi"                     = "Суши";
+"categories.compatible.taco"                      = "Тако";
+"categories.compatible.pasta"                     = "Паста";
+"categories.compatible.shaurma"                   = "Шаурма";
+"categories.compatible.unknown"                   = "Неизвестно";
+
+/* Restaurant info */
+"restaurant_info.closed"                          = "Закрыт";
+"restaurant_info.open"                            = "Открыт";
+"restaurant_info.min_order"                       = "Минимальный заказ";
+"restaurant_info.delivery_fee"                    = "Стоимость доставки";
+"restaurant_info.km_away"                         = "%@ от вас";
+"restaurant_info.minutes_delivery_time"           = "%d минут время доставки";
+
+/* Greeting */
+"greeting.login"                                  = "Войти";
+"greeting.signup"                                 = "Зарегистрироваться";
+"greeting.skip"                                   = "Пропустить";
+"greeting.incorrect_credentials"                  = "Неверная почта или пароль";
+"greeting.email"                                  = "Почта";
+"greeting.password"                               = "Пароль";
+"greeting.dont_have_account"                      = "Нет аккаунта?";
+
+/* Sign up */
+"signup.signup"                                   = "Регистрация";
+"signup.invalid_email_format"                     = "Неверный формат почты";
+"signup.invalid_phone_format"                     = "Неверный формат телефона";
+"signup.password_minimum_length_error"            = "Пароль должен быть не менее 6 символов";
+"signup.account_exists"                           = "Учетная запись с почтой %@ уже существует";
+"signup.error"                                    = "Ошибка, попробуйте снова";
+"signup.create_account"                           = "Созайте вашу учетную запись";
+"signup.will_send_code"                           = "Мы вышлем код на ваш номер. Может взиматься стандартная плата за передачу данных.";
+
+/* Phone verification */
+"phone_verification.enter_code_title"             = "Подтвердите ваш номер";
+"phone_verification.enter_code"                   = "Введите код подтверждения";
+"phone_verification.dont_get_the_code"            = "Не пришел код?";
+"phone_verification.code_is_sent_to_number"       = "Код подтверждения отправлен на ваш номер %@";
+"phone_verification.explore"                      = "Перейти к ресторанам";
+"phone_verification.phone_verified"               = "Ваш номер подтвержден";
+"phone_verification.phone_verified_subtitle"      = "Ваш номер подтвержден, вы можете приступить к выбору ресторана";
+
+/* [MAP] Restaurants map */
+"restaurants_map.nerby_restaurants"               = "Ближайшие рестораны";
+"restaurants_map.type_rest_name"                  = "Введите название ресторана";
+"restaurants_map.no_rest_found"                   = "Рестораны не найдены";
+"restaurants_map.filter_applied"                  = "Фильтр применен";
+"restaurants_map.filter"                          = "Фильтр";
+"restaurants_map.radius"                          = "Радиус";
+"restaurants_map.price_range"                     = "Диапазон цен";
+"restaurants_map.food_type"                       = "Категория";
+"restaurants_map.rating"                          = "Рейтинг";
+"restaurants_map.search"                          = "Поиск";
+
+/* [MAP] Delivery location */
+"delivery_location.delivery_location"             = "Адрес доставки";
+"delivery_location.type_delivery_location"        = "Введите адрес доставки";
+"delivery_location.address_confirmation"          = "Подтверждение адреса";
+"delivery_location.do_you_want_to_choose_address" = "Вы хотите выбрать %@ в качестве вашего адреса доставки? Пожалуйста, подтвердите, если адрес указан верно.";
+
+/* Settings */
+"settings.change"                                 = "Изменить";
+"settings.add"                                    = "Добавить";
+"settings.address"                                = "Адрес";
+"settings.name"                                   = "Имя";
+"settings.phone"                                  = "Телефон";
+"settings.credit_card"                            = "Кредитная карта";
+"settings.sign_out"                               = "Выйти";
+"settings.version"                                = "Версия";
+"settings.build"                                  = "Сборка";
+
+/* Restaurants */
+"restaurants.search"                              = "Поиск ресторанов";
+"restaurants.what_would_you_like_to_eat"          = "Что будете кушать?";
+"restaurants.hello"                               = "Здравсвуйте, %@. ";
+
+/* Product */
+"product.total"                                   = "Всего";
+"product.add_to_cart"                             = "Добавить в корзину";
+"product.restaurants_conflict"                    = "Конфликт ресторанов";
+"product.restaurants_conflict_message"            = "Вы пытаетесь добавить продукт из другого ресторана. Корзина будет очищена после добавления продукта из этого ресторана";
+
+/* Cart */
+"cart.promo"                                      = "Промокод";
+"cart.apply"                                      = "Применить";
+"cart.your_cart"                                  = "Ваша корзина";
+"cart.cart_is_empty"                              = "Корзина пуста";
+"cart.proceed_to_checkout"                        = "Перейти к оформлению";
+"cart.cart_total"                                 = "Стоимость";
+"cart.delivery"                                   = "Доставка";
+"cart.promo_discaunt"                             = "Скидка";
+"cart.subtotal"                                   = "Всего к оплате";
+
+/* OrderChecout */
+"order_checkout.you"                              = "Вы";
+"order_checkout.payment_method"                   = "Способ оплаты";
+"order_checkout.credit_card"                      = "Кредитная карта";
+"order_checkout.cash"                             = "Наличные";
+"order_checkout.submit_order"                     = "Заказать";
+"order_checkout.checkout"                         = "Оформление заказа";
+"order_checkout.delivery_time"                    = "Время доставки";
+"order_checkout.minutes"                          = "%d минут";
+
+/* OrderPlaced */
+"order_placed.view_order_status"                  = "Посмотреть статус заказа";
+"order_placed.your_order_placed"                  = "Ваш заказ был успешно принят";
+"order_placed.wait_for_courier"                   = "Ожидайте курьера в течении %d минут";
+"order_placed.order_placed_title"                 = "Заказ получен";
+
+/* OrderStatus */
+"order_status.your_order_id"                      = "Ваш номер заказа";
+"order_status.order_status"                       = "Статус заказа";
+"order_status.order_confirmed"                    = "Заказ подтвержден";
+"order_status.preparing_food"                     = "Заказ готовится";
+"order_status.food_on_the_way"                    = "Заказ в пути";
+"order_status.delivered_to_you"                   = "Заказ получен";
+"order_status.no_orders_found"                    = "Нет заказов";

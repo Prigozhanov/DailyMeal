@@ -5,10 +5,10 @@
 
 import UIKit
 
-fileprivate var pointer = NSObject()
+private var pointer = NSObject()
 
 extension UIButton {
-    func setActionHandler(controlEvents control :UIControl.Event, ForAction action: @escaping (UIButton) -> Void) {
+    func setActionHandler(controlEvents control: UIControl.Event, ForAction action: @escaping (UIButton) -> Void) {
         let actionWrapper = ActionWrapper(action)
         
         objc_setAssociatedObject(self, &pointer, actionWrapper, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -60,17 +60,11 @@ extension UIButton {
         return button
     }
     
-    static func makeActionButton(_ text: String, action: @escaping (UIButton) -> Void) -> UIButton {
-        let button = UIButton()
-        button.layer.cornerRadius = Layout.cornerRadius
-        button.titleLabel?.font = FontFamily.Poppins.medium.font(size: 14)
-        button.setTitle(text, for: .normal)
-        button.setActionHandler(controlEvents: .touchUpInside, ForAction: action)
-        return button
-    }
-    
     static func makeNotificationButton() -> UIButton {
-        let button = UIButton.makeCommonButton { _ in }
+        let button = UIButton.makeCommonButton { button in
+			let vc = OrderStatusViewController(viewModel: OrderStatusViewModelImplementation())
+			button.parentViewController?.present(vc, animated: true)
+		}
         button.setImage(Images.Icons.notification.image.withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = Colors.white.color
         return button

@@ -7,12 +7,13 @@ import Foundation
 import Services
 import Networking
 
-//MARK: - View
+// MARK: - View
 protocol CheckoutView: class {
-    
+    func onSuccessSubmit()
+	func onFailedSubmit()
 }
 
-//MARK: - ViewModel
+// MARK: - ViewModel
 protocol CheckoutViewModel {
     
     var view: CheckoutView? { get set }
@@ -20,11 +21,13 @@ protocol CheckoutViewModel {
     var paymentMethod: PaymentMethod { get set }
     
     var creditCard: CreditCard? { get }
+	
+	var restaurant: RestaurantData? { get }
     
     func checkoutOrder()
 }
 
-//MARK: - Implementation
+// MARK: - Implementation
 final class CheckoutViewModelImplementation: CheckoutViewModel {
     
     weak var view: CheckoutView?
@@ -36,12 +39,12 @@ final class CheckoutViewModelImplementation: CheckoutViewModel {
     var userDefaultsService: UserDefaultsService
     
     var creditCard: CreditCard? {
-        get {
-            keychainService.getCreditCardDetails()
-        }
+        keychainService.getCreditCardDetails()
     }
     
     var paymentMethod: PaymentMethod = .cash
+	
+	lazy var restaurant: RestaurantData? = cartService.restaurant
     
     init() {
         context = AppDelegate.shared.context
@@ -84,19 +87,19 @@ final class CheckoutViewModelImplementation: CheckoutViewModel {
         )
         
         let req = networkService.requestFactory.shoppingCart(shoppingCartRequest: requestObject)
-        
-        networkService.send(request: req) { (result, _) in
-            switch result {
-            case let .success(response):
-                print(response)
-            case let .failure(error):
-                logDebug(message: error.localizedDescription)
-            }
-        }
-        print(requestObject)
-        print(cartService.items)
+		userDefaultsService.setValueForKey(key: .lastOrderId, value: "TEST")
+		userDefaultsService.setValueForKey(key: .lastOrderDate, value: Date())
+		userDefaultsService.setValueForKey(key: .lastOrderDeliveryTimeSeconds, value: (restaurant?.orderDelayFirst ?? 0) * 60)
+		cartService.reload()
+		view?.onSuccessSubmit()
+//        networkService.send(request: req) { (result, _) in
+//            switch result {
+//            case let .success(response):
+//                print(response)
+//            case let .failure(error):
+//                logDebug(message: error.localizedDescription)
+//            }
+//        }
     }
     
 }
-
-

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>categories_restaurants_count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@rest_count@</string>
+		<key>rest_count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d ресторанов</string>
+			<key>one</key>
+			<string>%d ресторан</string>
+			<key>two</key>
+			<string>%d ресторана</string>
+			<key>few</key>
+			<string>%d ресторана</string>
+			<key>many</key>
+			<string>%d ресторанов</string>
+			<key>other</key>
+			<string>%d ресторана</string>
+		</dict>
+	</dict>
+	<key>items_count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@VARIABLE@</string>
+		<key>VARIABLE</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d позиций</string>
+			<key>one</key>
+			<string>%d позиция</string>
+			<key>two</key>
+			<string>%d позиции</string>
+			<key>few</key>
+			<string>%d позиции</string>
+			<key>many</key>
+			<string>%d позиций</string>
+			<key>other</key>
+			<string>%в позиции</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

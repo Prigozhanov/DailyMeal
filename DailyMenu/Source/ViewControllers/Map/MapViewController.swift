@@ -5,6 +5,7 @@
 
 import MapKit
 import Networking
+import Extensions
 
 class MapViewController: UIViewController {
     
@@ -23,6 +24,7 @@ class MapViewController: UIViewController {
         view.showsCompass = false
         view.delegate = self
         view.register(RestaurantAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+		view.register(UserAddressAnnotationView.self, forAnnotationViewWithReuseIdentifier: UserAddressAnnotationView.userAddressAnnotationReuseIdentifier)
         return view
     }()
     
@@ -67,6 +69,8 @@ class MapViewController: UIViewController {
                 $0.center.equalToSuperview()
             }
         }
+		
+		viewModel.updateUserLocation { _ in }
     }
     
     func moveCameraToUserLocation(fromDistance: Double? = nil) {
@@ -96,6 +100,12 @@ class MapViewController: UIViewController {
     func getCameraLocation() -> CLLocationCoordinate2D {
         return mapView.camera.centerCoordinate
     }
+	
+	private func calculateMidPoint(firstPoint: CLLocationCoordinate2D, secondPoint: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
+		let midPointLat = (firstPoint.latitude + firstPoint.latitude) / 2
+		let midPointLong = (firstPoint.longitude + secondPoint.longitude) / 2
+		return CLLocationCoordinate2D(latitude: midPointLat, longitude: midPointLong)
+	}
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.userIteractionStarted = true
@@ -108,7 +118,7 @@ class MapViewController: UIViewController {
 
 extension MapViewController {
     
-    func addRestaurants(_ restaurants: [Restaurant]) {
+    func addRestaurants(_ restaurants: [RestaurantData]) {
         mapView.addAnnotations(restaurants.map {
             RestaurantAnnotation(
                 restaurant: $0,
@@ -127,18 +137,75 @@ extension MapViewController {
         mapView.removeAnnotations(restaurantAnnotations)
     }
     
+	func selectRestaurant(_ id: Int) {
+		if let restaurantAnnotation = restaurantAnnotations.first(where: { $0.restaurant.id == id }) {
+			moveToCoordinates(lat: restaurantAnnotation.coordinate.latitude, lon: restaurantAnnotation.coordinate.longitude)
+			mapView.selectAnnotation(restaurantAnnotation, animated: true)
+			UISelectionFeedbackGenerator.impact()
+		}
+	}
+	
     func selectAnnotation(_ annotation: RestaurantAnnotation) {
         moveToCoordinates(lat: annotation.coordinate.latitude, lon: annotation.coordinate.longitude)
         mapView.selectAnnotation(annotation, animated: true)
     }
+	
+	func showUserAddressAnnotation() {
+		guard let userAddressLocation = viewModel.getUserAddressLocation() else {
+			return
+		}
+		let annotation = UserAddressAnnotation()
+		annotation.coordinate = userAddressLocation
+		mapView.addAnnotation(annotation)
+	}
     
+	func showRoute(restaurant: RestaurantData, completion: @escaping VoidClosure) {
+		guard let userAddressLocation = viewModel.getUserAddressLocation() else {
+			return
+		}
+		let userItem = MKMapItem(placemark: MKPlacemark(coordinate: userAddressLocation))
+		
+		let restItem = MKMapItem(
+			placemark: MKPlacemark(
+				coordinate: CLLocationCoordinate2D(
+					latitude: restaurant.latitude,
+					longitude: restaurant.longitude
+				)
+			)
+		)
+		
+		let routeRequest = MKDirections.Request()
+		routeRequest.source = userItem
+		routeRequest.destination = restItem
+		routeRequest.transportType = .automobile
+		
+		let directions = MKDirections(request: routeRequest)
+		directions.calculate { [weak self] response, error in
+			guard error == nil,
+				let route = response?.routes.first else {
+					return
+			}
+			guard let self = self else { return }
+			self.mapView.addOverlay(route.polyline, level: .aboveRoads)
+			self.mapView.setCamera(
+				MKMapCamera(
+					lookingAtCenter: restItem.placemark.coordinate.middleLocationWith(userAddressLocation),
+					fromDistance: route.distance + 2000,
+					pitch: 0,
+					heading: 0
+				), animated: false
+			)
+			completion()
+		}
+	}
+	
 }
 
 extension MapViewController {
     
     func addRadiusCircle(radius: Int) {
         let radius = CLLocationDistance(radius)
-        if let center = viewModel.getUserLocation() {
+        if let center = viewModel.getUserAddressLocation() {
             let circle = MKCircle(center: center,
                                   radius: radius)
             
@@ -160,6 +227,12 @@ extension MapViewController: MKMapViewDelegate {
         if let annotation = annotation as? MKUserLocation {
            return UserLocationAnnotationView(annotation: annotation, reuseIdentifier: "User")
         }
+		if let annotation = annotation as? UserAddressAnnotation {
+			return UserAddressAnnotationView(
+				annotation: annotation,
+				reuseIdentifier: UserAddressAnnotationView.userAddressAnnotationReuseIdentifier
+			)
+		}
         return nil
     }
     
@@ -181,7 +254,13 @@ extension MapViewController: MKMapViewDelegate {
             
             return circleRenderer
         }
-        return MKOverlayRenderer()
+		if let polylineOverlay = overlay as? MKPolyline {
+			let renderer = MKPolylineRenderer(overlay: polylineOverlay)
+			renderer.strokeColor = Colors.charcoal.color
+			renderer.lineWidth = 2
+			return renderer
+		}
+        return MKOverlayRenderer(overlay: overlay)
     }
     
 }

@@ -5,12 +5,12 @@
 import Foundation
 import Services
 
-//MARK: - View
+// MARK: - View
 protocol AddCreditCardView: class {
      func dismissController()
 }
 
-//MARK: - ViewModel
+// MARK: - ViewModel
 protocol AddCreditCardViewModel {
     
     var view: AddCreditCardView? { get set }
@@ -21,7 +21,7 @@ protocol AddCreditCardViewModel {
     
 }
 
-//MARK: - Implementation
+// MARK: - Implementation
 final class AddCreditCardViewModelImplementation: AddCreditCardViewModel {
     
     weak var view: AddCreditCardView?
@@ -60,5 +60,3 @@ final class AddCreditCardViewModelImplementation: AddCreditCardViewModel {
     }
     
 }
-
-

@@ -6,13 +6,14 @@
 import Foundation
 import Networking
 import Services
+import Extensions
 
-//MARK: - View
+// MARK: - View
 protocol GreetingView: class {
     func showAuthorizationError()
 }
 
-//MARK: - ViewModel
+// MARK: - ViewModel
 protocol GreetingViewModel {
     
     var view: GreetingView? { get set }
@@ -23,11 +24,12 @@ protocol GreetingViewModel {
     func performLogin(onSuccess: @escaping VoidClosure, onFailure: @escaping VoidClosure)
 }
 
-//MARK: - Implementation
+// MARK: - Implementation
 final class GreetingViewModelImplementation: GreetingViewModel {
     
     private let context: AppContext
     private let keychainService: KeychainService
+    private let userDefaultsService: UserDefaultsService
     
     weak var view: GreetingView?
     
@@ -37,7 +39,9 @@ final class GreetingViewModelImplementation: GreetingViewModel {
     init() {
         context = AppDelegate.shared.context
         keychainService = context.keychainSevice
-        email = keychainService.getValueForItem(.email) ?? ""
+        userDefaultsService = context.userDefaultsService
+        
+        email = userDefaultsService.getValueForKey(key: .email) as? String ?? ""
     }
     
     func performLogin(onSuccess: @escaping VoidClosure, onFailure: @escaping VoidClosure) {
@@ -47,11 +51,11 @@ final class GreetingViewModelImplementation: GreetingViewModel {
             LoadingIndicator.hide()
             switch result {
             case let .success(response):
-                self?.keychainService.setValueForItem(.email, self?.email ?? "")
+                self?.userDefaultsService.setValueForKey(key: .email, value: self?.email)
                 
-                if let user = response.member, let _ = response.token {
+                if let user = response.member {
                     self?.context.userDefaultsService.updateUserDetails(user: user)
-                    self?.context.networkService.fetchUserData(onSuccess: { (user) in
+                    self?.context.networkService.fetchUserData(onSuccess: { user in
                         if strongSelf.context.userDefaultsService.hasAddress {
                             NotificationCenter.default.post(name: .userLoggedIn, object: nil)
                         } else {
@@ -74,5 +78,3 @@ final class GreetingViewModelImplementation: GreetingViewModel {
     }
     
 }
-
-

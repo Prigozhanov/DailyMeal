@@ -95,7 +95,6 @@ public class NetworkServiceImplementation: NetworkService {
     
 }
 
-
 public extension NotificationDescriptor {
     
     static var userLoggedInDescriptor: NotificationDescriptor<Void> {

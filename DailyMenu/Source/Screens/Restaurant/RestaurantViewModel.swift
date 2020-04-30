@@ -7,17 +7,17 @@ import Foundation
 import Networking
 import Extensions
 
-//MARK: - View
+// MARK: - View
 protocol RestaurantView: class {
     func reloadItems()
 }
 
-//MARK: - ViewModel
+// MARK: - ViewModel
 protocol RestaurantViewModel {
     
     var view: RestaurantView? { get set }
     
-    var restaurant: Restaurant { get }
+    var restaurant: RestaurantData { get }
     
     var products: [Product] { get set }
     
@@ -27,20 +27,20 @@ protocol RestaurantViewModel {
     func loadInfo()
 }
 
-//MARK: - Implementation
+// MARK: - Implementation
 final class RestaurantViewModelImplementation: RestaurantViewModel {
     
     weak var view: RestaurantView?
     
     var context: AppContext
     
-    var restaurant: Restaurant
+    var restaurant: RestaurantData
     
     var products: [Product] = []
     
     var categories: [ProductCategory] = []
     
-    init(restaurant: Restaurant, categories: [ProductCategory]) {
+    init(restaurant: RestaurantData, categories: [ProductCategory]) {
         context = AppDelegate.shared.context
         self.restaurant = restaurant
         self.categories = categories
@@ -71,7 +71,7 @@ final class RestaurantViewModelImplementation: RestaurantViewModel {
     }
     
     func loadMenu(completion: @escaping VoidClosure) {
-        let req = context.networkService.requestFactory.restaurantMenu(id: restaurant.id)
+		let req = context.networkService.requestFactory.restaurantMenu(id: restaurant.id, language: menuByLanguage)
         context.networkService.send(request: req, completion: { [weak self] result, _ in
             switch result {
             case let .success(response):
@@ -80,15 +80,14 @@ final class RestaurantViewModelImplementation: RestaurantViewModel {
                 }
                 self?.products = products
             case let .failure(error):
-                print(error)
-                break // TODO
+                logDebug(message: error.localizedDescription)
             }
             completion()
         })
     }
     
     func loadCategories(completion: @escaping VoidClosure) {
-        let req = context.networkService.requestFactory.restaurantCategories(id: restaurant.id)
+		let req = context.networkService.requestFactory.restaurantCategories(id: restaurant.id, language: menuByLanguage)
         context.networkService.send(request: req, completion: { [weak self] result, _ in
             switch result {
             case let .success(response):
@@ -97,8 +96,7 @@ final class RestaurantViewModelImplementation: RestaurantViewModel {
                 } else {
                 }
             case let .failure(error):
-                print(error)
-                break // TODO
+                logDebug(message: error.localizedDescription)
             }
             completion()
         })

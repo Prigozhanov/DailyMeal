@@ -50,18 +50,17 @@ public class LocationServiceImplementation: NSObject, LocationService {
     
     public func stopUpdatingLocation() {
         locationManager.stopUpdatingLocation()
-        os_log("[LOCATION] %s", "Location manager started updating locations")
+        os_log("[LOCATION] %s", "Location manager stopped updating locations")
     }
     
     public func getAddressesListByString(string: String, completion: @escaping ([String]) -> Void) {
-        geocoder.geocodeAddressString(string) { (placemarks, error) in
+        geocoder.geocodeAddressString(string) { (placemarks, _) in
             let addresses = placemarks?.map({ "\($0.country ?? ""), \($0.name ?? "")" })
             completion(addresses ?? [])
         }
     }
     
 }
-
 
 extension LocationServiceImplementation: CLLocationManagerDelegate {
     

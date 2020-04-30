@@ -33,12 +33,12 @@ final class ${module_name}ViewController: UIViewController {
 
 }
 
-//MARK: -  ${module_name}View
+// MARK: - ${module_name}View
 extension ${module_name}ViewController: ${module_name}View {
 
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension ${module_name}ViewController {
 
 }
@@ -52,19 +52,19 @@ echo "//
 
 import Foundation
 
-//MARK: - View
+// MARK: - View
 protocol ${module_name}View: class {
 
 }
 
-//MARK: - ViewModel
+// MARK: - ViewModel
 protocol ${module_name}ViewModel {
 
 var view: ${module_name}View? { get set }
 
 }
 
-//MARK: - Implementation
+// MARK: - Implementation
 final class ${module_name}ViewModelImplementation: ${module_name}ViewModel {
 
   weak var view: ${module_name}View?

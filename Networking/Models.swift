@@ -44,7 +44,7 @@ public struct ResponseWrapper<WrappedData: Codable>: Codable {
 }
 
 // MARK: - User
-//TODO: some fields are missing in this structure, see menu.by response to add them then
+// TODO: some fields are missing in this structure, see menu.by response to add them then
 public struct User: Codable {
     public let id: Int
     public let fullname, name, lastname, companyName: String
@@ -78,13 +78,14 @@ public struct User: Codable {
 // MARK: - VerifyToken
 public struct LoginResponse: Codable {
     public let member: User?
+    public let model: User?
     public let success: Bool?
     public let message, jwtToken: String?
     public let token: String?
     public let responseCode: Int?
     
     enum CodingKeys: String, CodingKey {
-        case member, success, message
+        case member, model, success, message
         case jwtToken = "JWTToken"
         case token, responseCode
     }
@@ -149,8 +150,7 @@ public struct AllKitchenCategory: Codable {
 }
 
 public enum TypeEnum: String, Codable {
-    case restaurant = "restaurant"
-    case shop = "shop"
+    case restaurant, shop
 }
 
 // MARK: - Kitchen
@@ -254,8 +254,7 @@ public struct AltWorkHour: Codable {
 }
 
 public enum Status: String, Codable {
-    case close = "close"
-    case statusOpen = "open"
+    case close, open
 }
 
 public enum StatusLabel: String, Codable {
@@ -263,7 +262,6 @@ public enum StatusLabel: String, Codable {
     case mFullTime = "M_FULL_TIME"
     case mOpen = "M_OPEN"
 }
-
 
 public struct ProductCategory: Codable {
     public let id: Int?
@@ -347,7 +345,7 @@ public struct Product: Codable {
     
     public mutating func removeAllChoices() {
         let localOptions = options
-        localOptions?.enumerated().forEach({ index, item in
+        localOptions?.enumerated().forEach({ index, _ in
             self.options?[index].choices = []
         })
     }
@@ -414,7 +412,6 @@ public struct Choice: Codable {
     }
 }
 
-
 // MARK: - GeodataIsExists
 // Menu.by checks is current address exist and returns consistent app data
 public struct GeodataIsExists: Codable {
@@ -428,7 +425,7 @@ public struct GeodataIsExists: Codable {
         self.isAddressExists = isAddressExists
     }
     
-    func encoded() throws -> [String : Any]? {
+    func encoded() throws -> [String: Any]? {
         let jsonData = try JSONEncoder().encode(self)
         let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: Any]
         return json
@@ -568,7 +565,7 @@ public struct ShoppingCartRequest: Codable {
         self.usebonus = usebonus
     }
     
-    func encoded() -> [String : Any] {
+    func encoded() -> [String: Any] {
         let jsonData = try! JSONEncoder().encode(self)
         let json = try! JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: Any]
         return json
@@ -712,4 +709,8 @@ public struct UserInfo: Codable {
     public init(details: String?) {
         self.details = details
     }
+}
+
+public enum Language: String {
+	case ru = "6", en = "7"
 }

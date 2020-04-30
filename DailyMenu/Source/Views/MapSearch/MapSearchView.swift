@@ -12,7 +12,7 @@ class MapSearchView: UIView {
         let results: [String]
         let onSelectItem: (String, MapSearchView?) -> Void
         let onLocationButtonTap: VoidClosure
-        var onFilterButtonTap: VoidClosure? = nil
+        var onFilterButtonTap: VoidClosure?
         let shouldChangeCharacters: (String, MapSearchView?) -> Void
     }
     

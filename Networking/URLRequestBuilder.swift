@@ -9,12 +9,12 @@ import os.log
 class URLRequestBuilder<Response: Codable> {
     private let request: Request<Response>
     private let urlString: String
-    
+
     init(request: Request<Response>) {
         self.request = request
         self.urlString = request.baseUrlString + request.path
     }
-    
+
     var urlRequest: URLRequest {
         guard let url = URL(string: self.urlString) else {
             fatalError("\(urlString) is invalid url")

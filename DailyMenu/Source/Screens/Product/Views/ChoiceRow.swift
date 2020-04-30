@@ -82,7 +82,6 @@ class ChoiceRow: UIView {
         item.onSelectChoice(item)
     }
     
-    
     required init?(coder: NSCoder) { fatalError() }
     
 }

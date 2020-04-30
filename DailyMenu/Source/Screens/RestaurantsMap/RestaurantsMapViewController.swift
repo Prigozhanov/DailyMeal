@@ -5,14 +5,19 @@
 
 import UIKit
 import Networking
+import RxSwift
 
-final class RestaurantsMapViewController: UIViewController {
-    
+final class RestaurantsMapViewController: UIViewController, KeyboardObservable {
+	
     private var viewModel: RestaurantsMapViewModel
+	
+	var bag = DisposeBag()
+	
+	var observableConstraints: [ObservableConstraint] = []
     
     private lazy var mapHeaderView: MapHeaderView = {
         let view = MapHeaderView(
-            title: "Nearby restaurants",
+            title: Localizable.RestaurantsMap.nerbyRestaurants,
             shouldShowBackButton: true,
             shouldShowNotificationsButton: true
         )
@@ -29,14 +34,16 @@ final class RestaurantsMapViewController: UIViewController {
     private lazy var searchView: MapSearchView = {
         let view = MapSearchView(
             item: MapSearchView.Item(
-                placeholder: "Type restaurant name",
+				placeholder: Localizable.RestaurantsMap.typeRestName,
                 results: [],
                 onSelectItem: { [weak self] (string, view) in
-                    if let annotation = self?
+                    if let restId = self?
                         .mapController
                         .restaurantAnnotations
-                        .first(where: { $0.restaurant.chainLabel == string }) {
-                        self?.mapController.selectAnnotation(annotation)
+						.first(where: { $0.restaurant.chainLabel == string })?
+						.restaurant
+						.id {
+						self?.mapController.selectRestaurant(restId)
                     }
                 },
                 onLocationButtonTap: { [weak self] in
@@ -64,28 +71,15 @@ final class RestaurantsMapViewController: UIViewController {
         },
             onTapAction: { [weak self] in
                 self?.showFilterConfigurationView()
-        }))
-    
-    private lazy var filteredRestaurantsPreview = FilteredRestaurantsPreview(
-        items: self.viewModel.filteredRestaurants.map { rest in
-            FilteredRestaurantsPreviewCell.Item(
-                title: rest.chainLabel,
-                rating: Double(rest.rate) ?? 0,
-                imageSrc: rest.src,
-                categories: self.viewModel.categories[rest.id]?
-                    .compactMap({ FoodCategory.fromProductCategory(category: $0) }) ?? [],
-                minOrderPrice: String(rest.minAmountOrder)) { [weak self] in
-                    let vc = RestaurantViewController(
-                        viewModel: RestaurantViewModelImplementation(
-                            restaurant: rest,
-                            categories: []
-                        )
-                    )
-                    self?.navigationController?.pushViewController(vc, animated: true)
-            }
-        }
-    )
-    
+		}))
+	
+	private lazy var filteredRestaurantsPreview = FilteredRestaurantsPreview(
+		item: { [weak self] restId in
+			guard let self = self else { return }
+			self.mapController.selectRestaurant(restId)
+		}
+	)
+	
     init(viewModel: RestaurantsMapViewModel) {
         self.viewModel = viewModel
         
@@ -98,11 +92,17 @@ final class RestaurantsMapViewController: UIViewController {
         super.viewDidLoad()
         
         viewModel.view = self
-        
-        viewModel.loadRestaurants()
+		
         addChild(mapController)
-        view.addSubview(mapController.mapView)
-        mapController.mapView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        view.addSubview(mapController.view)
+        mapController.view.snp.makeConstraints {
+			$0.top.leading.trailing.equalToSuperview()
+			observableConstraints.append(
+				ObservableConstraint(
+					constraint: $0.bottom.equalToSuperview().constraint,
+					inset: 0)
+			)
+		}
         
         view.addSubview(mapHeaderView)
         mapHeaderView.snp.makeConstraints {
@@ -113,20 +113,41 @@ final class RestaurantsMapViewController: UIViewController {
         view.addSubview(searchView)
         searchView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(Layout.largeMargin)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(50)
+			observableConstraints.append(
+				ObservableConstraint(
+					constraint: $0.bottom.equalTo(view.safeAreaLayoutGuide).constraint,
+					inset: 50)
+			)
         }
-        
+
         mapController.moveCameraToUserLocation(fromDistance: 15000)
+		mapController.showUserAddressAnnotation()
+		
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         mapHeaderView.setupGradient()
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		startObserveKeyboard()
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		LoadingIndicator.show(self)
+		viewModel.loadRestaurants {
+			UINotificationFeedbackGenerator.impact(.success)
+			LoadingIndicator.hide()
+		}
+	}
     
 }
 
-//MARK: -  RestaurantsMapView
+// MARK: - RestaurantsMapView
 extension RestaurantsMapViewController: RestaurantsMapView {
     
     func reloadScreen() {
@@ -146,20 +167,31 @@ extension RestaurantsMapViewController: RestaurantsMapView {
                 $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(Layout.commonInset)
                 $0.leading.trailing.equalToSuperview()
                 $0.height.equalTo(150)
-            }
-            
+			}
+			
             filterAppliedView.snp.makeConstraints {
                 $0.top.equalTo(mapHeaderView.snp.bottom)
                 $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(Layout.commonInset)
                 $0.height.equalTo(50)
             }
             
-            filteredRestaurantsPreview.configure(items: viewModel.filteredRestaurants.map {
-                makeRestaurantsPreviewItem(restaurant: $0)
-            })
-            
-            mapController.addRestaurants(viewModel.filteredRestaurants)
-            mapController.addRadiusCircle(radius: (viewModel.filterViewModel?.radius ?? 0) * 1000)
+			LoadingIndicator.show(self)
+			viewModel.filterRestaurants {
+				DispatchQueue.main.async {
+					UINotificationFeedbackGenerator.impact(.success)
+					LoadingIndicator.hide()
+					self.filteredRestaurantsPreview.configure(cellItems: self.viewModel.filteredRestaurants.map {
+						self.makeRestaurantsPreviewItem(restaurant: $0)
+					})
+					
+					self.mapController.addRestaurants(self.viewModel.filteredRestaurants)
+					self.mapController.addRadiusCircle(radius: (self.viewModel.filterViewModel?.radius ?? 0) * 1000)
+					if let restId = self.viewModel.filteredRestaurants.first?.id {
+						self.mapController.selectRestaurant(restId)
+					}
+				}
+			}
+			
         } else {
             searchView.isHidden = false
             mapController.addRestaurants(viewModel.restaurants)
@@ -168,11 +200,12 @@ extension RestaurantsMapViewController: RestaurantsMapView {
     
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension RestaurantsMapViewController {
     
     func makeRestaurantsPreviewItem(restaurant: Restaurant) -> FilteredRestaurantsPreviewCell.Item {
         FilteredRestaurantsPreviewCell.Item(
+			id: restaurant.id,
             title: restaurant.chainLabel,
             rating: Double(restaurant.rate) ?? 0,
             imageSrc: restaurant.src,
@@ -214,5 +247,3 @@ private extension RestaurantsMapViewController {
     }
 
 }
-
-

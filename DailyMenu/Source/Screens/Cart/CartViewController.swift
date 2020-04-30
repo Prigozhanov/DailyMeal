@@ -4,10 +4,14 @@
 //
 
 import AloeStackView
+import Extensions
+import Services
 
 final class CartViewController: UIViewController {
     
-    private var cartSerivce: CartService = AppDelegate.shared.context.cartService
+    private var cartService: CartService = AppDelegate.shared.context.cartService
+	
+	private var notificationTokens: [Token] = []
     
     private var aloeStackView: AloeStackView = {
         let stack = AloeStackView()
@@ -20,7 +24,7 @@ final class CartViewController: UIViewController {
     
     private lazy var titleRow: UIView = {
         let view = UIView()
-        let title = UILabel.makeText("Your Food Cart")
+		let title = UILabel.makeText(Localizable.Cart.yourCart)
         title.font = FontFamily.Poppins.bold.font(size: 18)
         view.addSubview(title)
         title.snp.makeConstraints {
@@ -31,7 +35,7 @@ final class CartViewController: UIViewController {
     }()
     
     private lazy var emptyCartRow: UILabel = {
-        let label = UILabel.makeText("Cart is empty")
+		let label = UILabel.makeText(Localizable.Cart.cartIsEmpty)
         label.font = FontFamily.smallMedium
         label.textColor = Colors.gray.color
         label.textAlignment = .center
@@ -40,34 +44,37 @@ final class CartViewController: UIViewController {
     
     private var itemRows: [CartItemView] = []
     
-    private lazy var promocodeView = CartPromocodeView { _ in 
-        //TODO
+    private lazy var promocodeView = CartPromocodeView { _ in  // TODO
     }
     
     private var calculationRows: [UIView] = []
     
-    private lazy var proceedActionButton = UIButton.makeActionButton("Proceed to Checkout") { [weak self] button in
-        let vm = CheckoutViewModelImplementation()
-        let vc = CheckoutViewController(viewModel: vm)
-        let navigation = UINavigationController(rootViewController: vc)
-        navigation.setNavigationBarHidden(true, animated: false)
-        navigation.modalPresentationStyle = .overCurrentContext
-        button.tapAnimation()
-        UIApplication.topViewController?.show(navigation, sender: nil)
-    }
+	private lazy var proceedActionButton = ActionButton(Localizable.Cart.proceedToCheckout) { _ in
+		let vm = CheckoutViewModelImplementation()
+		let vc = CheckoutViewController(viewModel: vm)
+		let navigation = UINavigationController(rootViewController: vc)
+		navigation.setNavigationBarHidden(true, animated: false)
+		navigation.modalPresentationStyle = .overCurrentContext
+		UIApplication.topViewController?.show(navigation, sender: nil)
+	}
     
     private lazy var separator = UIView.makeSeparator()
     
     init() {
         super.init(nibName: nil, bundle: nil)
         
-        cartSerivce.view = self
+        cartService.view = self
     }
     
     required init?(coder aDecoder: NSCoder) { fatalError() }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+		
+		notificationTokens.append(Token.make(descriptor: .cartDidReloadDescriptor, using: { [weak self] _ in
+			self?.reloadScreen()
+		}))
+		
         setupScreen()
         reloadScreen()
         
@@ -80,24 +87,17 @@ final class CartViewController: UIViewController {
         super.viewWillAppear(animated)
         reloadScreen()
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        Style.addBlueGradient(proceedActionButton)
-        promocodeView.setupGradient()
-    }
-    
+	
     private func setupScreen() {
         Style.addBlueCorner(self)
-        
+		
         view.backgroundColor = Colors.commonBackground.color
         navigationController?.setNavigationBarHidden(true, animated: false)
         
         view.addSubview(aloeStackView)
         aloeStackView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+			$0.bottom.top.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
@@ -109,7 +109,7 @@ final class CartViewController: UIViewController {
         setupItemsRows()
         setupPromoRow()
         setupCalculationsRows()
-        setupCheckoutRow()
+		setupCheckoutRow()
     }
     
     private func setupTitleRow() {
@@ -119,27 +119,34 @@ final class CartViewController: UIViewController {
     private func setupEmptyCartRow() {
         aloeStackView.addRow(emptyCartRow)
         aloeStackView.setInset(forRow: emptyCartRow, inset: UIEdgeInsets(top: 50, left: 0, bottom: 50, right: 0))
-        if !cartSerivce.items.isEmpty {
+        if !cartService.items.isEmpty {
             aloeStackView.hideRow(emptyCartRow)
-        }
+		} else {
+			tabBarController?.mainTabBar?.setBadgeVisible(false, at: 0)
+		}
     }
     
     private func setupItemsRows() {
-        itemRows = cartSerivce.items.values.map({ item -> CartItemView in
+        itemRows = cartService.items.values.map({ item -> CartItemView in
             CartItemView(item: CartItemView.Item(
                 cartItem: item,
                 onRemoveItem: { [weak self] (itemView) in
-                    self?.cartSerivce.removeItem(item: item)
-                    self?.reloadCalculationsRows()
-                    self?.aloeStackView.removeRow(itemView, animated: true)
-                    if let self = self, self.cartSerivce.items.isEmpty {
+					guard let self = self else { return }
+                    self.cartService.removeItem(item: item)
+                    self.aloeStackView.removeRow(itemView, animated: true)
+                    if self.cartService.items.isEmpty {
                         self.aloeStackView.showRow(self.emptyCartRow, animated: true)
+						self.tabBarController?.mainTabBar?.setBadgeVisible(false, at: 0)
+						self.cartService.restaurant = nil
                     }
-                    
+					self.reloadCalculationsRows()
+					self.proceedActionButton.isEnabled = self.cartService.isValid
                 },
                 onChangeCount: { [weak self] value in
+					guard let self = self else { return }
                     item.count = value
-                    self?.reloadCalculationsRows()
+                    self.reloadCalculationsRows()
+					self.proceedActionButton.isEnabled = self.cartService.isValid
             })
             )
         })
@@ -154,13 +161,12 @@ final class CartViewController: UIViewController {
     }
     
     private func setupCalculationsRows() {
-        let cartTotalRow = CartTitleValueView(item: CartTitleValueView.Item(title: "Cart total", value: Formatter.Currency.toString(cartSerivce.cartTotal)))
-        let taxRow = CartTitleValueView(item: CartTitleValueView.Item(title: "Tax", value: Formatter.Currency.toString(cartSerivce.tax)))
-        let deliveryRow = CartTitleValueView(item: CartTitleValueView.Item(title: "Delivery", value: Formatter.Currency.toString(cartSerivce.deliveryPrice)))
-        let promoDiscauntRow = CartTitleValueView(item: CartTitleValueView.Item(title: "Promo discaunt", value: Formatter.Currency.toString(cartSerivce.promoDiscount)))
-        let subtotalRow = CartTitleValueView(item: CartTitleValueView.Item(title: "Subtotal", value: Formatter.Currency.toString(cartSerivce.subtotal), preferesLargeValueLabel: true))
+		let cartTotalRow = CartTitleValueView(item: CartTitleValueView.Item(title: Localizable.Cart.cartTotal, value: Formatter.Currency.toString(cartService.cartTotal)))
+		let deliveryRow = CartTitleValueView(item: CartTitleValueView.Item(title: Localizable.Cart.delivery, value: Formatter.Currency.toString(cartService.deliveryPrice)))
+		let promoDiscauntRow = CartTitleValueView(item: CartTitleValueView.Item(title: Localizable.Cart.promoDiscaunt, value: Formatter.Currency.toString(cartService.promoDiscount)))
+		let subtotalRow = CartTitleValueView(item: CartTitleValueView.Item(title: Localizable.Cart.subtotal, value: Formatter.Currency.toString(cartService.subtotal), preferesLargeValueLabel: true))
         
-        calculationRows.append(contentsOf: [cartTotalRow, taxRow, deliveryRow, promoDiscauntRow, separator, subtotalRow])
+        calculationRows.append(contentsOf: [cartTotalRow, deliveryRow, promoDiscauntRow, separator, subtotalRow])
         aloeStackView.insertRows(calculationRows, after: promocodeView)
     }
     
@@ -170,11 +176,13 @@ final class CartViewController: UIViewController {
         if let lastRow = aloeStackView.lastRow {
             aloeStackView.setInset(forRow: lastRow, inset: UIEdgeInsets(top: 10, left: 45, bottom: 30, right: 45))
         }
+		
+		proceedActionButton.isEnabled = cartService.isValid
     }
     
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension CartViewController {
     
 }
@@ -188,4 +196,3 @@ extension CartViewController: CartView {
     }
     
 }
-

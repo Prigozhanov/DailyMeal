@@ -16,76 +16,36 @@ final class GreetingViewController: UIViewController {
     
     private lazy var emailField: TextField = {
         let textField = TextField(
-            placeholder: "E-mail",
-            image: Images.Icons.envelope.image,
-            shouldChangeCharacters: { (textField, _, _) -> Bool in
-                true
-        },
-            shouldBeginEditing: { (_) -> Bool in
-                true
-        },
-            didBeginEditing: { (_) in
-                
-        },
-            shouldEndEditing: { (_) -> Bool in
-                true
-        },
-            didEndEditing: { (_, _) in
-                
-        },
-            didChangeSelection: { (_) in
-                
-        },
-            shouldClear: { (_) -> Bool in
-                true
-        }) { textField -> Bool in
+			placeholder: Localizable.Greeting.email,
+            image: Images.Icons.envelope.image) { textField -> Bool in
             textField.resignFirstResponder()
             return true
         }
-        textField.setKeyboardType(.emailAddress)
+        textField.keyboardType = .emailAddress
+        textField.autocapitalizationType = .none
         return textField
     }()
     
     private lazy var passwordField: TextField = {
         let textField = TextField(
-            placeholder: "Password",
-            image: Images.Icons.password.image,
-            shouldChangeCharacters: { (_, _, _) -> Bool in
-                true
-        },
-            shouldBeginEditing: { (_) -> Bool in
-                true
-        },
-            didBeginEditing: { (_) in
-                
-        },
-            shouldEndEditing: { (_) -> Bool in
-                true
-        },
-            didEndEditing: { (_, _) in
-                
-        },
-            didChangeSelection: { (_) in
-                
-        },
-            shouldClear: { (_) -> Bool in
-                true
-        }) { textField -> Bool in
+			placeholder: Localizable.Greeting.password,
+            image: Images.Icons.password.image) { textField -> Bool in
             textField.resignFirstResponder()
             return true
         }
-        textField.setSecureEntry(true)
+        textField.isSecureTextEntry = true
         return textField
     }()
     
-    private lazy var signInButton = UIButton.makeActionButton("Sign in") { [weak self] button in
+	private lazy var signInButton = ActionButton(Localizable.Greeting.login) { [weak self] button in
         self?.viewModel.email = self?.emailField.text ?? ""
         self?.viewModel.password = self?.passwordField.text ?? ""
         LoadingIndicator.show(self)
         self?.viewModel.performLogin(onSuccess: {
-            button.tapAnimation()
+			UINotificationFeedbackGenerator.impact(.success)
             self?.dismiss(animated: true, completion: nil)
         }, onFailure: {
+			UINotificationFeedbackGenerator.impact(.error)
             button.shakeAnimation()
             self?.passwordField.text = ""
             self?.showAuthorizationError()
@@ -95,21 +55,21 @@ final class GreetingViewController: UIViewController {
     private lazy var signUpRow: UIView = {
         let view = UIView()
         
-        let dontHaveAccountLabel = UILabel.makeMediumText("Don't have an account?")
+		let dontHaveAccountLabel = UILabel.makeMediumText(Localizable.Greeting.dontHaveAccount)
         view.addSubview(dontHaveAccountLabel)
         dontHaveAccountLabel.snp.makeConstraints {
             $0.leading.top.bottom.equalTo(view)
         }
         
-        
         let signUpButton = UIButton.makeCustomButton(
-            title: "Sign up",
+			title: Localizable.Greeting.signup,
             titleColor: Colors.blue.color,
             cornerRadius: 5,
             font: FontFamily.semibold
-        ) { [weak self] button in
+        ) { [weak self] _ in
             self?.signUpViewController = UINavigationController(rootViewController:
-                SendPhoneVerificationViewController(viewModel: PhoneVerificationViewModelImplementation()))
+                SignUpViewController(viewModel: SignUpViewModelImplementation())
+            )
             if let vc = self?.signUpViewController {
                 self?.show(vc, sender: nil)
             }
@@ -124,7 +84,7 @@ final class GreetingViewController: UIViewController {
     }()
     
     private lazy var skipButton = UIButton.makeCustomButton(
-        title: "Skip >",
+		title: NSLocalizedString(Localizable.Greeting.skip, comment: ""), // TODO arrow
         titleColor: Colors.gray.color,
         font: FontFamily.light) { [weak self] _ in
             self?.dismiss(animated: true, completion: {
@@ -133,7 +93,7 @@ final class GreetingViewController: UIViewController {
     }
     
     private lazy var authorizationErrorLabel: UILabel = {
-        let label = UILabel.makeText("Incorrect email or password")
+		let label = UILabel.makeText(Localizable.Greeting.incorrectCredentials)
         label.textColor = Colors.red.color
         label.isHidden = true
         return label
@@ -199,23 +159,18 @@ final class GreetingViewController: UIViewController {
             $0.bottom.equalTo(emailField.snp.top).inset(-20)
             $0.centerX.equalToSuperview()
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        Style.addBlueGradient(signInButton)
-    }
+	}
     
 }
 
-//MARK: -  GreetingView
+// MARK: - GreetingView
 extension GreetingViewController: GreetingView {
     func showAuthorizationError() {
-        authorizationErrorLabel.isHidden = false
+        authorizationErrorLabel.temporaryAppear(seconds: 5)
     }
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension GreetingViewController {
     
 }
@@ -223,14 +178,13 @@ private extension GreetingViewController {
 extension NotificationDescriptor {
     
     static var userSignedUpDescriptor: NotificationDescriptor<Void> {
-            return NotificationDescriptor<Void>(name: .userSignedUp) { notification in
+            return NotificationDescriptor<Void>(name: .userSignedUp) { _ in
         }
     }
     
     static var userInvalidAddress: NotificationDescriptor<Void> {
-            return NotificationDescriptor<Void>(name: .userInvalidAddress) { notification in
+            return NotificationDescriptor<Void>(name: .userInvalidAddress) { _ in
         }
     }
     
 }
-

@@ -16,7 +16,7 @@ class RestaurantsFilterHeader: UIView {
     var isExpanded = true
     
     private var headerLabel: UILabel = {
-        let label = UILabel.makeText("Filter")
+		let label = UILabel.makeText(Localizable.RestaurantsMap.filter)
         label.font = FontFamily.medium
         return label
     }()
@@ -52,7 +52,5 @@ class RestaurantsFilterHeader: UIView {
     }
     
     required init?(coder: NSCoder) { fatalError() }
-    
-    
     
 }

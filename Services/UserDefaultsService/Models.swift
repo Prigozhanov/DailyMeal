@@ -13,14 +13,18 @@ public struct UserAddressMeta {
     public var addressesId: Int?
     public var regionId: Int?
     public var streetId: Int?
+	public var addressLat: Double?
+	public var addressLon: Double?
     
-    public init(addressName: String?, streetName: String?, areaId: Int?, addressesId: Int?, regionId: Int?, streetId: Int?) {
+	public init(addressName: String?, streetName: String?, areaId: Int?, addressesId: Int?, regionId: Int?, streetId: Int?, addressLat: Double?, addressLon: Double?) {
         self.addressName = addressName
         self.streetName = streetName
         self.areaId = areaId
         self.addressesId = addressesId
         self.regionId = regionId
         self.streetId = streetId
+		self.addressLat = addressLat
+		self.addressLon = addressLon
     }
     
 }

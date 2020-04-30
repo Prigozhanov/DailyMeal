@@ -101,7 +101,6 @@ class TextField: UIView {
         
         addSubviews([leftImageView, textField, clearButton])
         
-        
         textField.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(leftInset).priority(.high)
             $0.trailing.equalToSuperview().inset(4).priority(.high)
@@ -173,21 +172,54 @@ extension TextField: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return shouldReturn?(textField) ?? true
     }
-    
+ 
 }
 
 extension TextField {
     
-    func setKeyboardType(_ type: UIKeyboardType) {
-        textField.keyboardType = type
+    var keyboardType: UIKeyboardType {
+        get {
+            textField.keyboardType
+        }
+        set {
+            textField.keyboardType = newValue
+        }
     }
     
-    func setSecureEntry(_ secure: Bool) {
-        textField.isSecureTextEntry = secure
+    var isSecureTextEntry: Bool {
+        get {
+            textField.isSecureTextEntry
+        }
+        set {
+            textField.isSecureTextEntry = newValue
+        }
     }
     
-    func setFont(_ font: UIFont?) {
-        textField.font = font
+    var font: UIFont? {
+        get {
+            textField.font
+        }
+        set {
+            textField.font = newValue
+        }
+    }
+    
+    var autocorrectionType: UITextAutocorrectionType {
+        get {
+            textField.autocorrectionType
+        }
+        set {
+            textField.autocorrectionType = newValue
+        }
+    }
+    
+    var autocapitalizationType: UITextAutocapitalizationType {
+        get {
+            textField.autocapitalizationType
+        }
+        set {
+            textField.autocapitalizationType = newValue
+        }
     }
     
 }

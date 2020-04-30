@@ -14,15 +14,16 @@ enum Formatter {
                                                 highlightingColor: UIColor? = nil) -> NSAttributedString {
         let range = (string as NSString).range(of: keyWord, options: [.caseInsensitive])
         let attrString = NSMutableAttributedString(
-            string: string, attributes: [.font : font]
+            string: string, attributes: [.font: font]
         )
-        attrString.addAttributes([.font : highlightingFont], range: range)
+        attrString.addAttributes([.font: highlightingFont], range: range)
         if let highlightingColor = highlightingColor {
             attrString.addAttributes([.foregroundColor: highlightingColor], range: range)
         }
         return attrString
     }
     
+    // MARK: - Currency
     enum Currency {
         static func toString(_ string: String) -> String {
             guard let value = fromString(string) else {
@@ -35,14 +36,14 @@ enum Formatter {
             guard let value = value else {
                 return "Error"
             }
-            return value < 0 ? String(format: "- BYN %.2f", abs(value)) : String(format: "BYN %.2f", value)
+			return value < 0 ? String(format: "- \(Localizable.Common.currency) %.2f", abs(value)) : String(format: "\(Localizable.Common.currency) %.2f", value)
         }
         
         static func toString(_ value: Int?) -> String {
             guard let value = value else {
                 return "Error"
             }
-            return value < 0 ? "- BYN \(abs(value))" : "BYN \(value)"
+            return value < 0 ? "- \(Localizable.Common.currency) \(abs(value))" : "\(Localizable.Common.currency) \(value)"
         }
         
         static func fromString(_ string: String?) -> Double? {
@@ -53,12 +54,14 @@ enum Formatter {
         }
     }
     
+    // MARK: - Distance
     enum Distance {
         static func toString(_ value: Double) -> String {
-            return String(format: "%.1f km", value)
+			return String(format: "%.1f \(Localizable.Common.km)", value)
         }
     }
     
+    // MARK: - CreditCard
     enum CreditCard {
         static func hiddenNumber(string: String?) -> String? {
             if let string = string, string.count == 16 {
@@ -73,6 +76,7 @@ enum Formatter {
         }
     }
     
+    // MARK: - PhoneNumber
     enum PhoneNumber {
         static func formattedString(_ string: String?) -> String? {
             guard let string = string, !string.contains("+") else {
@@ -88,6 +92,29 @@ enum Formatter {
             return string.count < maxCharacters + 1 && string.isNumber
         }
         
+        static func isValid(string: String) -> Bool {
+            return string.starts(with: "+") &&
+                CharacterSet.decimalDigits.isSuperset(of: CharacterSet(
+                    charactersIn: string.replacingOccurrences(of: "+", with: "")
+                ))
+        }
+        
+    }
+    
+    enum Email {
+        static func isValid(string: String) -> Bool {
+            guard CharacterSet
+                .alphanumerics
+                .union(CharacterSet(charactersIn: "-.@"))
+                .isSuperset(of: CharacterSet(charactersIn: string)) else {
+                    return false
+            }
+            
+            guard string.contains("@"), string.split(separator: "@")[1].contains(".") else {
+                return false
+            }
+            
+            return true
+        }
     }
 }
-

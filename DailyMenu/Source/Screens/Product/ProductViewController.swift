@@ -54,7 +54,7 @@ final class ProductViewController: UIViewController {
     private lazy var sliderView = SliderView(title: "Spicy Level", sliderValues: ["Regular", "Spicy", "Naga"]) // TODO
     
     private var totalLabel: UILabel = {
-        let label = UILabel.makeSmallText("Total")
+		let label = UILabel.makeSmallText(Localizable.Product.total)
         label.textAlignment = .center
         return label
     }()
@@ -67,12 +67,24 @@ final class ProductViewController: UIViewController {
         label.text = Formatter.Currency.toString(viewModel.product.overallPrice * Double(viewModel.count))
         return label
     }()
-    
-    private lazy var addToCartButton = UIButton.makeActionButton("Add to Cart") { [weak self] view in
-        guard let self = self else { return }
-        let item = CartItem(id: self.viewModel.product.id, product: self.viewModel.product, count: self.viewModel.count)
-        self.viewModel.cartService.addItem(item: item)
-        view.tapAnimation()
+
+	private lazy var addToCartButton = ActionButton(Localizable.Product.addToCart) { [weak self] _ in
+		guard let self = self else { return }
+		self.tabBarController?.mainTabBar?.setBadgeVisible(true, at: 0)
+		self.viewModel.addToCart {
+			let vc = ConfirmationDiaglogViewController(
+				title: Localizable.Product.restaurantsConflict,
+				subtitle: Localizable.Product.restaurantsConflictMessage,
+				onConfirm: { [weak self] in
+					self?.viewModel.reloadCart()
+					self?.viewModel.addToCart {}
+					UINotificationFeedbackGenerator.impact(.success)
+					self?.navigationController?.popViewController(animated: true)
+			})
+			UINotificationFeedbackGenerator.impact(.warning)
+			self.present(vc, animated: true)
+		}
+		UINotificationFeedbackGenerator.impact(.success)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -95,11 +107,6 @@ final class ProductViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Style.addBlackGradient(navigationBarBackground)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        Style.addBlueGradient(addToCartButton)
     }
     
     private func setupScreen() {
@@ -169,17 +176,14 @@ final class ProductViewController: UIViewController {
     }
 }
 
-//MARK: -  ProductView
+// MARK: - ProductView
 extension ProductViewController: ProductView {
     func updateTotalValue() {
         totalValueLabel.text = Formatter.Currency.toString(viewModel.product.overallPrice * Double(viewModel.count))
     }
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension ProductViewController {
     
 }
-
-
-

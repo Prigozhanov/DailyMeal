@@ -14,6 +14,7 @@ public final class NetworkClient {
         case serverSideError
         case missingData
         case unauthorized
+        case unprocessable
     }
     
     private let sessionQueue: OperationQueue
@@ -34,7 +35,7 @@ public final class NetworkClient {
         
         os_log("[NETWORK] [REQUEST] %s", urlRequest.debugDescription)
         os_log("[NETWORK] [REQUEST] [BODY] %s", String(describing: String(data: urlRequest.httpBody ?? Data(), encoding: .utf8)))
-        os_log("[NETWORK] [REQUEST] [HEADERS] %s",String(describing: urlRequest.allHTTPHeaderFields))
+        os_log("[NETWORK] [REQUEST] [HEADERS] %s", String(describing: urlRequest.allHTTPHeaderFields))
         
         let task = session.dataTask(with: urlRequest) { (data, response, error) in
             let uuid = UUID().uuidString
@@ -71,6 +72,8 @@ public final class NetworkClient {
                 }
             case 403:
                 failureClosure(Error.unauthorized)
+            case 422:
+                failureClosure(Error.unprocessable)
             case 500:
                 failureClosure(Error.serverSideError)
             default:

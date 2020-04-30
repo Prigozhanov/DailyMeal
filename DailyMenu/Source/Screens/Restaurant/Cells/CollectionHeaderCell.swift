@@ -13,6 +13,7 @@ class CollectionHeaderCell: UIView {
         public let distance: String
         public let orderDelay: String
         public let minOrderPrice: String
+		public let rating: Double
         public let imageURL: String
     }
     
@@ -45,12 +46,19 @@ class CollectionHeaderCell: UIView {
         return label
     }()
     
-    let restaurantLogo: UIImageView = {
-        let view = UIImageView(image: Images.restaurantLogoPlaceholder.image)
+    private let restaurantLogo: UIImageView = {
+        let view = UIImageView()
         view.contentMode = .scaleAspectFit
         return view
     }()
-    
+	
+	private lazy var ratingView = RatingView(
+		item: RatingView.Item(
+			value: item?.rating ?? 0,
+			maxValue: 5
+		)
+	)
+	
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setup()
@@ -91,13 +99,12 @@ class CollectionHeaderCell: UIView {
             $0.top.leading.equalToSuperview()
         }
         
-        let restaurantRating = UIImageView(image: Images.ratePlaceholder.image)
-        restaurantInfoView.addSubview(restaurantRating)
-        restaurantRating.snp.makeConstraints {
+        restaurantInfoView.addSubview(ratingView)
+        ratingView.snp.makeConstraints {
             $0.leading.equalToSuperview()
             $0.top.equalTo(restaurantNameLabel.snp.bottom).offset(Layout.largeMargin)
+			$0.height.equalTo(10)
         }
-        
         
         cardView.contentView.addSubview(minOrderValueLabel)
         minOrderValueLabel.snp.makeConstraints {
@@ -105,7 +112,7 @@ class CollectionHeaderCell: UIView {
             $0.leading.equalTo(restaurantInfoView.snp.trailing)
         }
         
-        let minOrderLabel = UILabel.makeExtraSmallText("Min order")
+		let minOrderLabel = UILabel.makeExtraSmallText(Localizable.RestaurantInfo.minOrder)
         cardView.contentView.addSubview(minOrderLabel)
         minOrderLabel.snp.makeConstraints {
             $0.top.equalTo(minOrderValueLabel.snp.bottom)
@@ -162,6 +169,7 @@ class CollectionHeaderCell: UIView {
         if let url = URL(string: item.imageURL) {
             restaurantLogo.kf.setImage(with: url)
         }
+		ratingView.value = item.rating
         
     }
     

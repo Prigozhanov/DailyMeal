@@ -5,11 +5,16 @@
 
 import AloeStackView
 import SnapKit
+import RxSwift
 
-class RestaurantsFilterViewController: UIViewController {
-
+class RestaurantsFilterViewController: UIViewController, KeyboardObservable {
+	
     var viewModel: RestaurantFilterViewModel
-    
+	
+	var bag = DisposeBag()
+	
+	var observableConstraints: [ObservableConstraint] = []
+	
     private var stackView: AloeStackView = {
         let stack = AloeStackView()
         stack.separatorHeight = 0
@@ -54,7 +59,7 @@ class RestaurantsFilterViewController: UIViewController {
     
     private lazy var filterSearchView = FilterSearchView(
         item: FilterSearchView.Item(
-            placeholder: "Type restaurant name",
+			placeholder: Localizable.RestaurantsMap.typeRestName,
             onSearchAction: { [weak self] searchString in
                 self?.viewModel.restaurantName = searchString
                 self?.dismiss(animated: true) { [weak self] in
@@ -77,10 +82,14 @@ class RestaurantsFilterViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = Colors.black.color.withAlphaComponent(0.2)
-        
         view.addSubview(filterSearchView)
         filterSearchView.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(100)
+			observableConstraints.append(
+				ObservableConstraint(
+					constraint: $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(70).constraint,
+					inset: 100
+				)
+			)
             $0.leading.trailing.equalToSuperview().inset(Layout.commonInset)
             $0.height.equalTo(65)
         }
@@ -103,10 +112,10 @@ class RestaurantsFilterViewController: UIViewController {
         stackView.addRows([restaurantsFilterHeader, restaurantsFilterControls])
 
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        filterSearchView.setupGradient()
-    }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		startObserveKeyboard()
+	}
     
 }

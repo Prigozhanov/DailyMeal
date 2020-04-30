@@ -20,16 +20,13 @@ class FilterSearchView: UIView {
         textField.textColor = Colors.charcoal.color
         textField.placeholder = item.placeholder
         textField.font = FontFamily.regular
+		textField.delegate = self
         return textField
     }()
     
-    private lazy var searchActionButton: UIButton = {
-        let button = UIButton.makeActionButton("Search") { [weak self] button in
-            button.tapAnimation()
-            self?.item.onSearchAction(self?.textField.text ?? "")
-        }
-        return button
-    }()
+	private lazy var searchActionButton = ActionButton(Localizable.RestaurantsMap.search) { [weak self] _ in
+		self?.item.onSearchAction(self?.textField.text ?? "")
+	}
     
     init(item: Item) {
         self.item = item
@@ -59,16 +56,13 @@ class FilterSearchView: UIView {
     }
     
     required init?(coder: NSCoder) { fatalError() }
-    
-    func setupGradient() {
-        Style.addBlueGradient(searchActionButton)
-    }
-    
+
 }
 
 extension FilterSearchView: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		textField.resignFirstResponder()
         return true
     }
     

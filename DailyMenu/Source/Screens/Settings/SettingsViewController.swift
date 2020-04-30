@@ -19,6 +19,19 @@ final class SettingsViewController: UIViewController {
         stack.separatorHeight = 0
         return stack
     }()
+	
+	private let headerView: UIView = {
+		let view = UIView()
+		let imageView = UIImageView(image: Images.Placeholders.dailyLogo.image)
+		
+		view.addSubview(imageView)
+		imageView.snp.makeConstraints {
+			$0.top.equalTo(view.safeAreaLayoutGuide)
+			$0.leading.trailing.bottom.equalToSuperview()
+		}
+		imageView.contentMode = .scaleAspectFit
+		return view
+	}()
     
     init(viewModel: SettingsViewModel) {
         self.viewModel = viewModel
@@ -41,12 +54,18 @@ final class SettingsViewController: UIViewController {
             self?.reloadRows()
         }))
         
-        view.addSubview(stackView)
-        stackView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(100)
-            $0.leading.trailing.bottom.equalToSuperview().inset(Layout.commonInset)
-        }
+        view.addSubviews([headerView, stackView])
+		
+		headerView.snp.makeConstraints {
+			$0.top.leading.trailing.equalToSuperview()
+			$0.height.equalTo(150)
+		}
         
+		stackView.snp.makeConstraints {
+			$0.top.equalTo(headerView.snp.bottom)
+			$0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+		}
+		
         reloadRows()
         
         view.addGestureRecognizer(BlockTap(action: { [weak self] _ in
@@ -54,33 +73,31 @@ final class SettingsViewController: UIViewController {
         }))
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        stackView.getAllRows().forEach({ ($0 as? EditableTextFieldView)?.setupGradient() })
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadRows()
     }
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		Style.addBlueGradient(headerView)
+	}
     
     func reloadRows() {
         stackView.removeAllRows()
-        
         let addressField: EditableTextFieldView = EditableTextFieldView(
             item: EditableTextFieldView.Item(
-                title: "Address",
+				title: Localizable.Settings.address,
                 text: viewModel.address,
                 type: .address,
-                didEndEdititng: { string in
+                didEndEdititng: { _ in
                     
             })
         )
         
-        
         let nameField: EditableTextFieldView = EditableTextFieldView(
             item: EditableTextFieldView.Item(
-                title: "Name",
+				title: Localizable.Settings.name,
                 text: viewModel.userName,
                 type: .standard,
                 didEndEdititng: { [weak self] name in
@@ -88,10 +105,9 @@ final class SettingsViewController: UIViewController {
             })
         )
         
-        
         let phoneField: EditableTextFieldView = EditableTextFieldView(
             item: EditableTextFieldView.Item(
-                title: "Phone",
+				title: Localizable.Settings.phone,
                 text: viewModel.phone,
                 type: .phone,
                 didEndEdititng: { [weak self] phone in
@@ -101,7 +117,7 @@ final class SettingsViewController: UIViewController {
         
         let creditCardField: EditableTextFieldView = EditableTextFieldView(
             item: EditableTextFieldView.Item(
-                title: "Credit Card",
+				title: Localizable.Settings.creditCard,
                 text: Formatter.CreditCard.hiddenNumber(string: viewModel.creditCardNumber) ?? "",
                 type: .creditCard,
                 didEndEdititng: { _ in })
@@ -111,16 +127,16 @@ final class SettingsViewController: UIViewController {
         
         // App info
         
-        let signOutButton = UIButton.makeCommonButton("Sign out") { [weak self] _ in
+		let signOutButton = UIButton.makeCommonButton(Localizable.Settings.signOut) { [weak self] _ in
             NotificationCenter.default.post(Notification(name: .userLoggedOut))
             self?.viewModel.clearUserInfo()
         }
         signOutButton.setTitleColor(Colors.red.color, for: .normal)
         signOutButton.titleLabel?.font = FontFamily.regular
         
-        let appInfoLabel = UILabel.makeSmallText("Daily Menu. Version \(Bundle.versionNumber)")
+		let appInfoLabel = UILabel.makeSmallText("Daily Menu. \(Localizable.Settings.version) \(Bundle.versionNumber)")
         #if DEBUG
-        appInfoLabel.text = "Daily Menu Version \(Bundle.versionNumber). Build \(Bundle.buildNumber)"
+		appInfoLabel.text = "Daily Menu \(Localizable.Settings.version) \(Bundle.versionNumber). \(Localizable.Settings.build) \(Bundle.buildNumber)"
         #endif
         appInfoLabel.textColor = Colors.gray.color
         appInfoLabel.textAlignment = .center
@@ -131,14 +147,12 @@ final class SettingsViewController: UIViewController {
     
 }
 
-//MARK: -  SettingsView
+// MARK: - SettingsView
 extension SettingsViewController: SettingsView {
     
 }
 
-//MARK: -  Private
+// MARK: - Private
 private extension SettingsViewController {
     
 }
-
-

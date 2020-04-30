@@ -8,7 +8,6 @@ import Extensions
 
 class RatingView: UIView {
     
-    
     struct Item {
         var value: Double
         let maxValue: Double
@@ -44,18 +43,18 @@ class RatingView: UIView {
         stackView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
-        viewsFillData.forEach { _ in 
-            let starImage = UIImageView(image: Images.Icons.starFull.image)
-            starImage.tintColor = Colors.lightGray.color
-            starImage.contentMode = .scaleAspectFit
-            starImage.snp.makeConstraints {
-                $0.width.equalTo(starImage.snp.height)
-            }
-            stackView.addArrangedSubview(starImage)
-        }
-        
-        updateValue(value)
+		
+		viewsFillData.forEach { _ in
+			let starImage = UIImageView(image: Images.Icons.starFull.image)
+			starImage.tintColor = Colors.lightGray.color
+			starImage.contentMode = .scaleAspectFit
+			starImage.snp.makeConstraints {
+				$0.width.equalTo(starImage.snp.height)
+			}
+			stackView.addArrangedSubview(starImage)
+		}
+		
+		updateValue(value)
     }
     
     required init?(coder: NSCoder) { fatalError() }

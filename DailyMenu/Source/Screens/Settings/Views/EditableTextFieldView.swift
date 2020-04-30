@@ -34,8 +34,7 @@ class EditableTextFieldView: UIView {
     }()
     
     lazy var changeButton: UIButton = {
-        let button = UIButton.makeActionButton("Change") { [weak self] button in
-            button.tapAnimation()
+		let button = ActionButton(Localizable.Settings.change) { [weak self] _ in
             self?.textField.becomeFirstResponder()
         }
         button.titleLabel?.font = FontFamily.Poppins.light.font(size: 13)
@@ -46,7 +45,7 @@ class EditableTextFieldView: UIView {
         self.item = item
         
         super.init(frame: .zero)
-        
+		
         let textFieldContainer = UIView()
         textFieldContainer.backgroundColor = Colors.white.color
         textFieldContainer.setRoundCorners(Layout.cornerRadius)
@@ -88,7 +87,7 @@ class EditableTextFieldView: UIView {
         case .phone:
             textField.keyboardType = .phonePad
         case .creditCard:
-            let buttonLabelText = (textField.text ?? "").isEmpty ? "Add" : "Change"
+			let buttonLabelText = (textField.text ?? "").isEmpty ? Localizable.Settings.add : Localizable.Settings.change
             textField.keyboardType = .numberPad
             changeButton.setTitle(buttonLabelText, for: .normal)
             changeButton.setActionHandler(controlEvents: .touchUpInside) { [weak self] button in
@@ -112,10 +111,6 @@ class EditableTextFieldView: UIView {
             
             break
         }
-    }
-    
-    func setupGradient() {
-        Style.addBlueGradient(changeButton)
     }
     
     override func resignFirstResponder() -> Bool {

@@ -15,13 +15,12 @@ class CartPromocodeView: UIView {
     
     private lazy var textField: UITextField = {
         let field = UITextField()
-        field.placeholder = "Promo Code"
+		field.placeholder = Localizable.Cart.promo
         field.delegate = self
         return field
     }()
     
-    private lazy var applyButton = UIButton.makeActionButton("Apply") { [weak self] button in
-        button.tapAnimation()
+	private lazy var applyButton = ActionButton(Localizable.Cart.apply) { [weak self] _ in
         self?.item(self?.promoCode)
     }
     
@@ -54,10 +53,7 @@ class CartPromocodeView: UIView {
             $0.width.equalTo(116)
         }
         
-    }
-    
-    public func setupGradient() {
-        Style.addBlueGradient(applyButton)
+		applyButton.isEnabled = false // temporary
     }
     
     @discardableResult
@@ -67,7 +63,7 @@ class CartPromocodeView: UIView {
     
 }
 
-extension CartPromocodeView : UITextFieldDelegate {
+extension CartPromocodeView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

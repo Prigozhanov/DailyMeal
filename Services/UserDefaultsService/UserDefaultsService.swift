@@ -19,7 +19,7 @@ public protocol UserDefaultsService {
     
     var hasAddress: Bool { get }
     
-    func setValueForKey(key: UserDefaultsKey, value: Any)
+    func setValueForKey(key: UserDefaultsKey, value: Any?)
     
     func getValueForKey(key: UserDefaultsKey) -> Any?
     
@@ -49,7 +49,7 @@ public class UserDefaultsServiceImplementation: UserDefaultsService {
         userDefaults = UserDefaults.standard
     }
     
-    public func setValueForKey(key: UserDefaultsKey, value: Any) {
+    public func setValueForKey(key: UserDefaultsKey, value: Any?) {
         userDefaults.set(value, forKey: key.rawValue)
     }
     
@@ -77,6 +77,9 @@ public class UserDefaultsServiceImplementation: UserDefaultsService {
         setValueForKey(key: .addressesId, value: info?.addressesId as Any)
         setValueForKey(key: .regionId, value: info?.regionId as Any)
         setValueForKey(key: .streetId, value: info?.streetId as Any)
+		setValueForKey(key: .addressLat, value: info?.addressLat as Any)
+		setValueForKey(key: .addressLon, value: info?.addressLon as Any)
+		
     }
     
 }
@@ -93,7 +96,12 @@ public enum UserDefaultsKey: String, CaseIterable {
     areaId,
     addressesId,
     regionId,
-    streetId
+    streetId,
+	addressLat,
+	addressLon,
+	lastOrderId,
+	lastOrderDate,
+	lastOrderDeliveryTimeSeconds
 }
 
 public enum PaymentMethod: Int {

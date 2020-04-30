@@ -3,7 +3,6 @@
 //  Copyright © 2020 epam. All rights reserved.
 //
 
-
 import UIKit
 
 class CardView: UIView {

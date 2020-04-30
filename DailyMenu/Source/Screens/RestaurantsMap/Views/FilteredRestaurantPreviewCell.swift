@@ -8,6 +8,7 @@ import AloeStackView
 class FilteredRestaurantsPreviewCell: UICollectionViewCell {
     
     struct Item {
+		let id: Int
         let title: String
         let rating: Double
         let imageSrc: String
@@ -58,7 +59,7 @@ class FilteredRestaurantsPreviewCell: UICollectionViewCell {
         let view = UIView()
         view.addSubview(minOrderLabel)
         
-        let descritionLabel = UILabel.makeExtraSmallText("Min order")
+		let descritionLabel = UILabel.makeExtraSmallText(Localizable.RestaurantInfo.minOrder)
         view.addSubview(descritionLabel)
         
         minOrderLabel.snp.makeConstraints {
@@ -147,40 +148,38 @@ class FilteredRestaurantsPreviewCell: UICollectionViewCell {
         }
     }
     
-    private class StackCategoryView: UIView {
+}
+
+private class StackCategoryView: UIView {
+    
+    typealias Item = FoodCategory
+    
+    private let item: FoodCategory
+    
+    private lazy var label: UILabel = {
+        let label = UILabel.makeExtraSmallText(item.humanReadableValue)
+        return label
+    }()
+    
+    init(item: Item) {
+        self.item = item
+        super.init(frame: CGRect(x: 0, y: 0, width: 50, height: 20))
         
-        typealias Item = FoodCategory
+        backgroundColor = Colors.lightGray.color
         
-        private let item: FoodCategory
+        setRoundCorners(4)
         
-        private lazy var label: UILabel = {
-            let label = UILabel.makeExtraSmallText(item.humanReadableValue)
-            return label
-        }()
-        
-        init(item: Item) {
-            self.item = item
-            super.init(frame: CGRect(x: 0, y: 0, width: 50, height: 20))
-            
-            backgroundColor = Colors.lightGray.color
-            
-            setRoundCorners(4)
-            
-            addSubview(label)
-            label.snp.makeConstraints {
-                $0.center.equalToSuperview()
-            }
-            
-            snp.makeConstraints {
-                $0.width.equalTo(50).priority(.required)
-                $0.height.equalTo(20)
-            }
+        addSubview(label)
+        label.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
         
-        required init?(coder: NSCoder) { fatalError() }
-        
-        
-        
+        snp.makeConstraints {
+            $0.width.equalTo(50).priority(.required)
+            $0.height.equalTo(20)
+        }
     }
+    
+    required init?(coder: NSCoder) { fatalError() }
     
 }

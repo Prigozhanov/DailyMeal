@@ -54,5 +54,4 @@ class MapResultsTableView: UITableView {
     
     required init?(coder: NSCoder) { fatalError() }
     
-    
 }

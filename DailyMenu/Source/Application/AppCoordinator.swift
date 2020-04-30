@@ -11,7 +11,7 @@ class AppCoordinator {
     
     let window: UIWindow
     
-    private let tabBarController: UITabBarController = UITabBarController()
+    private let tabBarController: UITabBarController = DailyTabBarController()
     
     private var notificationTokens: [Token]
     
@@ -41,9 +41,9 @@ class AppCoordinator {
             } else {
                 NotificationCenter.default.post(name: .userInvalidAddress, object: nil)
             }
-        }) { [weak self] in
-            self?.showGreeting()
-        }
+            }, onFailure: { [weak self] in
+                self?.showGreeting()
+        })
         
         notificationTokens.append(Token.make(descriptor: .userLoggedOutDescriptor, using: { [weak self] _ in
             self?.showGreeting()
@@ -61,7 +61,7 @@ class AppCoordinator {
 private extension AppCoordinator {
     
     func configureRootViewController() {
-//        let vc = RestaurantsMapViewController(viewModel: RestaurantsMapViewModelImplementation())
+//         let vc = SignUpViewController(viewModel: SignUpViewModelImplementation())
 //        let nav = UINavigationController(rootViewController: vc)
 //        nav.isNavigationBarHidden = true
 //         tabBarController.viewControllers = [nav]
@@ -79,7 +79,7 @@ private extension AppCoordinator {
         let vc = RestaurantsViewController(viewModel: vm)
         vc.tabBarItem.image = Images.tabExploreInactive.image.withRenderingMode(.alwaysOriginal)
         vc.tabBarItem.selectedImage = Images.tabExploreActive.image.withRenderingMode(.alwaysOriginal)
-        vc.tabBarItem.title = "Explore"
+		vc.tabBarItem.title = Localizable.Tabbar.explore
         return NavigationController(rootViewController: vc)
     }
     
@@ -88,7 +88,7 @@ private extension AppCoordinator {
         let vc = SettingsViewController(viewModel: vm)
         vc.tabBarItem.image = Images.tabSettingsInactive.image.withRenderingMode(.alwaysOriginal)
         vc.tabBarItem.selectedImage = Images.tabSettingsActive.image.withRenderingMode(.alwaysOriginal)
-        vc.tabBarItem.title = "Settings"
+		vc.tabBarItem.title = Localizable.Tabbar.settings
         return NavigationController(rootViewController: vc)
     }
     
@@ -96,7 +96,7 @@ private extension AppCoordinator {
         let vc = CartViewController()
         vc.tabBarItem.image = Images.tabCartInactive.image.withRenderingMode(.alwaysOriginal)
         vc.tabBarItem.selectedImage = Images.tabCartActive.image.withRenderingMode(.alwaysOriginal)
-        vc.tabBarItem.title = "Cart"
+		vc.tabBarItem.title = Localizable.Tabbar.cart
         return NavigationController(rootViewController: vc)
     }
     

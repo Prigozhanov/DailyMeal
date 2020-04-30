@@ -340,9 +340,7 @@ public struct SubAdministrativeArea: Codable {
 }
 
 public enum Precision: String, Codable {
-    case exact = "exact"
-    case other = "other"
-    case street = "street"
+    case exact, other, street
 }
 
 // MARK: - Point
@@ -384,7 +382,6 @@ public struct GeocoderResponseMetaData: Codable {
         self.found = found
     }
 }
-
 
 ///----------------------------------------///
 ///------- MENU BY GEODATA REQUEST --------///
@@ -442,4 +439,3 @@ public struct MenuV2Point: Codable {
         self.pos = pos
     }
 }
-
